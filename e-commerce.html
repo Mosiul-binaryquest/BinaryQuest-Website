@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BinaryQuest | Ecommerce Solution - Complete Online Store Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #050B14;
+            color: #eef5ff;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background: rgba(5, 11, 20, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(0, 255, 170, 0.1);
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #FFFFFF 0%, #00FFAA 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #b0c4de;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: #00FFAA;
+        }
+
+        /* Dropdown Menu */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background: rgba(10, 20, 30, 0.95);
+            backdrop-filter: blur(10px);
+            min-width: 200px;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 255, 170, 0.2);
+            z-index: 1;
+            top: 100%;
+            left: 0;
+        }
+
+        .dropdown-content a {
+            color: #b0c4de;
+            padding: 12px 20px;
+            display: block;
+            font-size: 14px;
+        }
+
+        .dropdown-content a:hover {
+            background: rgba(0, 255, 170, 0.1);
+            color: #00FFAA;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .btn-outline {
+            border: 1px solid #00FFAA;
+            background: transparent;
+            padding: 10px 24px;
+            border-radius: 40px;
+            color: #00FFAA;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-outline:hover {
+            background: #00FFAA;
+            color: #050B14;
+            box-shadow: 0 0 15px #00FFAA;
+        }
+
+        .btn-solid {
+            background: #00FFAA;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 40px;
+            font-weight: 700;
+            color: #050B14;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 16px;
+        }
+
+        .btn-solid:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 255, 170, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid rgba(0, 255, 170, 0.5);
+            padding: 14px 32px;
+            border-radius: 40px;
+            font-weight: 600;
+            color: #00FFAA;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 255, 170, 0.1);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 80px 0 60px;
+            background: radial-gradient(circle at 30% 50%, rgba(0, 255, 170, 0.08), transparent);
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero-text h1 {
+            font-size: 52px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #00FFAA, #00CC88);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero-text p {
+            font-size: 18px;
+            color: #b0c4de;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 40px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item h3 {
+            font-size: 32px;
+            color: #00FFAA;
+        }
+
+        .hero-image {
+            flex: 1;
+            background: linear-gradient(135deg, rgba(0, 255, 170, 0.1), rgba(0, 100, 50, 0.2));
+            border-radius: 30px;
+            padding: 40px;
+            text-align: center;
+            border: 1px solid rgba(0, 255, 170, 0.2);
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            border-radius: 20px;
+        }
+
+        /* Section Title */
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            font-weight: 700;
+            margin: 60px 0 20px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #b0c4de;
+            margin-bottom: 50px;
+            font-size: 18px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin: 60px 0;
+        }
+
+        .stat-card {
+            background: rgba(10, 20, 30, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            border: 1px solid rgba(0, 255, 170, 0.1);
+            transition: 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: #00FFAA;
+        }
+
+        .stat-number {
+            font-size: 42px;
+            font-weight: 800;
+            color: #00FFAA;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .feature-card {
+            background: rgba(10, 20, 30, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(0, 255, 170, 0.1);
+            transition: 0.3s;
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: #00FFAA;
+            background: rgba(0, 255, 170, 0.05);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(0, 255, 170, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 32px;
+            color: #00FFAA;
+        }
+
+        .feature-card h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+
+        .feature-card p {
+            color: #b0c4de;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        /* Product Showcase / Demo Store */
+        .showcase-section {
+            background: linear-gradient(135deg, #0a1420, #061020);
+            border-radius: 30px;
+            padding: 50px;
+            margin: 60px 0;
+            border: 1px solid rgba(0, 255, 170, 0.2);
+        }
+
+        .showcase-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: rgba(5, 11, 20, 0.8);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 255, 170, 0.1);
+            transition: 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            border-color: #00FFAA;
+        }
+
+        .product-image {
+            height: 200px;
+            background: linear-gradient(135deg, #1a2a3a, #0a1520);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            color: #00FFAA;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .product-price {
+            color: #00FFAA;
+            font-size: 20px;
+            font-weight: 700;
+            margin: 10px 0;
+        }
+
+        .product-rating {
+            color: #FFD700;
+            margin-bottom: 10px;
+        }
+
+        .btn-add {
+            width: 100%;
+            padding: 10px;
+            background: rgba(0, 255, 170, 0.1);
+            border: 1px solid rgba(0, 255, 170, 0.3);
+            border-radius: 10px;
+            color: #00FFAA;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-add:hover {
+            background: #00FFAA;
+            color: #050B14;
+        }
+
+        /* Ecommerce Features */
+        .ecom-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+            text-align: center;
+        }
+
+        .ecom-feature {
+            padding: 20px;
+        }
+
+        .ecom-feature i {
+            font-size: 40px;
+            color: #00FFAA;
+            margin-bottom: 15px;
+        }
+
+        /* Pricing Grid */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .pricing-card {
+            background: rgba(10, 20, 30, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            border: 1px solid rgba(0, 255, 170, 0.1);
+            transition: 0.3s;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            border-color: #00FFAA;
+        }
+
+        .pricing-card.featured {
+            border-color: #00FFAA;
+            background: rgba(0, 255, 170, 0.05);
+        }
+
+        .pricing-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .pricing-price {
+            font-size: 48px;
+            font-weight: 800;
+            color: #00FFAA;
+            margin-bottom: 20px;
+        }
+
+        .pricing-price span {
+            font-size: 16px;
+            color: #b0c4de;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin: 30px 0;
+        }
+
+        .pricing-features li {
+            padding: 10px 0;
+            color: #b0c4de;
+            border-bottom: 1px solid rgba(0, 255, 170, 0.1);
+        }
+
+        /* Testimonials */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .testimonial-card {
+            background: rgba(10, 20, 30, 0.6);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(0, 255, 170, 0.1);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            color: #b0c4de;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 255, 170, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #0a1420, #061020);
+            border-radius: 30px;
+            padding: 60px;
+            text-align: center;
+            margin: 60px 0;
+            border: 1px solid rgba(0, 255, 170, 0.2);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+            }
+            
+            .hero-text h1 {
+                font-size: 36px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            nav {
+                padding: 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav-links {
+                gap: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">BINARY<span>QUEST</span></div>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li class="dropdown">
+                <a href="#" class="active">Products ▾</a>
+                <div class="dropdown-content">
+                    <a href="#">ERP System</a>
+                    <a href="#">SCM Solution</a>
+                    <a href="#">CRM Platform</a>
+                    <a href="#">HRMS Software</a>
+                    <a href="#" style="color:#00FFAA;">Ecommerce Solution</a>
+                </div>
+            </li>
+            <li><a href="#">Solutions</a></li>
+            <li><a href="#">AI Agents</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+        <button class="btn-outline" onclick="alert('📞 Start Your Store')">Launch Store →</button>
+    </nav>
+
+    <div class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Complete <span class="gradient-text">Ecommerce Solution</span> for Your Online Store</h1>
+                    <p>Launch, manage, and scale your online business with our all-in-one ecommerce platform. Beautiful storefronts, powerful backend, and seamless payment integration.</p>
+                    <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                        <button class="btn-solid" onclick="scrollToDemo()">Start Free Trial →</button>
+                        <button class="btn-secondary">View Demo Store</button>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <h3>50K+</h3>
+                            <p>Active Stores</p>
+                        </div>
+                        <div class="stat-item">
+                            <h3>$2B+</h3>
+                            <p>GMV Processed</p>
+                        </div>
+                        <div class="stat-item">
+                            <h3>99.9%</h3>
+                            <p>Uptime</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <i class="fas fa-shopping-cart" style="font-size: 80px;"></i>
+                    <i class="fas fa-chart-line" style="font-size: 60px; margin-top: 20px; display: inline-block; margin-left: 20px;"></i>
+                    <i class="fas fa-credit-card" style="font-size: 60px; margin-top: 20px; display: inline-block; margin-left: 20px;"></i>
+                    <p style="margin-top: 20px;">Sell Anything, Anywhere</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">500+</div>
+                <div class="stat-label">Integrations</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">100+</div>
+                <div class="stat-label">Payment Gateways</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Support</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">50+</div>
+                <div class="stat-label">Free Themes</div>
+            </div>
+        </div>
+
+        <!-- Key Features -->
+        <h2 class="section-title">Powerful <span class="gradient-text">Ecommerce Features</span></h2>
+        <p class="section-subtitle">Everything you need to build a successful online store</p>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-palette"></i></div>
+                <h3>Beautiful Storefronts</h3>
+                <p>50+ professional themes, drag-and-drop builder, and fully customizable designs.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-credit-card"></i></div>
+                <h3>Payment Integration</h3>
+                <p>100+ payment gateways including bKash, Nagad, PayPal, Stripe, and more.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-truck"></i></div>
+                <h3>Shipping Management</h3>
+                <p>Real-time shipping rates, tracking, and automated fulfillment workflows.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                <h3>Analytics & Reports</h3>
+                <p>Sales insights, customer behavior, inventory reports, and ROI tracking.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-search"></i></div>
+                <h3>SEO Optimized</h3>
+                <p>Built-in SEO tools, sitemaps, meta tags, and Google Analytics integration.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-mobile-alt"></i></div>
+                <h3>Mobile Ready</h3>
+                <p>Responsive designs and dedicated mobile apps for iOS and Android.</p>
+            </div>
+        </div>
+
+        <!-- Product Showcase / Demo Store -->
+        <div class="showcase-section">
+            <div class="showcase-header">
+                <h2 style="font-size: 28px;">Featured <span class="gradient-text">Products</span> from Demo Store</h2>
+                <p style="color: #b0c4de; margin-top: 10px;">See how your products will look on our platform</p>
+            </div>
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-title">Smartphone X Pro</div>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <div class="product-price">$699.00</div>
+                        <button class="btn-add" onclick="alert('Added to cart!')">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <i class="fas fa-headphones"></i>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-title">Wireless Headphones</div>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <div class="product-price">$129.00</div>
+                        <button class="btn-add" onclick="alert('Added to cart!')">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <i class="fas fa-laptop"></i>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-title">UltraBook Laptop</div>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <div class="product-price">$1,299.00</div>
+                        <button class="btn-add" onclick="alert('Added to cart!')">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-title">Smart Watch</div>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <div class="product-price">$249.00</div>
+                        <button class="btn-add" onclick="alert('Added to cart!')">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ecommerce Additional Features -->
+        <h2 class="section-title">Why Choose <span class="gradient-text">Our Ecommerce Platform</span></h2>
+        <div class="ecom-features">
+            <div class="ecom-feature">
+                <i class="fas fa-bolt"></i>
+                <h3>Lightning Fast</h3>
+                <p>99.9% uptime with blazing fast loading speeds</p>
+            </div>
+            <div class="ecom-feature">
+                <i class="fas fa-shield-alt"></i>
+                <h3>Secure Checkout</h3>
+                <p>PCI compliant with SSL encryption</p>
+            </div>
+            <div class="ecom-feature">
+                <i class="fas fa-box-open"></i>
+                <h3>Inventory Management</h3>
+                <p>Real-time stock tracking and alerts</p>
+            </div>
+            <div class="ecom-feature">
+                <i class="fas fa-headset"></i>
+                <h3>24/7 Support</h3>
+                <p>Dedicated support team</p>
+            </div>
+        </div>
+
+        <!-- Pricing Plans -->
+        <h2 class="section-title">Simple <span class="gradient-text">Pricing</span> Plans</h2>
+        <p class="section-subtitle">Choose the perfect plan for your business size</p>
+
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <div class="pricing-title">Basic</div>
+                <div class="pricing-price">$29<span>/month</span></div>
+                <ul class="pricing-features">
+                    <li>Up to 500 Products</li>
+                    <li>Basic Analytics</li>
+                    <li>Email Support</li>
+                    <li>Free SSL Certificate</li>
+                    <li>Mobile Responsive</li>
+                </ul>
+                <button class="btn-outline" style="width:100%;" onclick="alert('Start Basic Plan')">Get Started</button>
+            </div>
+            <div class="pricing-card featured">
+                <div class="pricing-title">Professional</div>
+                <div class="pricing-price">$79<span>/month</span></div>
+                <ul class="pricing-features">
+                    <li>Unlimited Products</li>
+                    <li>Advanced Analytics</li>
+                    <li>Priority Support</li>
+                    <li>Abandoned Cart Recovery</li>
+                    <li>SEO Tools Included</li>
+                    <li>100+ Payment Gateways</li>
+                </ul>
+                <button class="btn-solid" style="width:100%;" onclick="alert('Start Professional Plan')">Get Started</button>
+            </div>
+            <div class="pricing-card">
+                <div class="pricing-title">Enterprise</div>
+                <div class="pricing-price">Custom</div>
+                <ul class="pricing-features">
+                    <li>Custom Development</li>
+                    <li>Dedicated Account Manager</li>
+                    <li>API Access</li>
+                    <li>Custom Integrations</li>
+                    <li>SLA Guarantee</li>
+                </ul>
+                <button class="btn-outline" style="width:100%;" onclick="alert('Contact Sales')">Contact Sales</button>
+            </div>
+        </div>
+
+        <!-- Testimonials -->
+        <h2 class="section-title">What Our <span class="gradient-text">Merchants Say</span></h2>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="testimonial-text">
+                    "BinaryQuest Ecommerce transformed our online business. Sales increased by 200% within 3 months of launching!"
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-avatar"><i class="fas fa-user-tie"></i></div>
+                    <div>
+                        <strong>Sarah Johnson</strong><br>
+                        <small>FashionHub, USA</small>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-text">
+                    "The platform is incredibly easy to use. We launched our store in just 2 days and started receiving orders immediately."
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-avatar"><i class="fas fa-user"></i></div>
+                    <div>
+                        <strong>Rafiqul Islam</strong><br>
+                        <small>TechGadgets BD, Dhaka</small>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-text">
+                    "Best decision we made for our business. The payment integration with bKash and Nagad helped us reach local customers."
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-avatar"><i class="fas fa-user"></i></div>
+                    <div>
+                        <strong>Nusrat Jahan</strong><br>
+                        <small>OrganicBazaar, Bangladesh</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="cta-section">
+            <h2 style="font-size: 32px; margin-bottom: 20px;">Ready to Launch Your <span class="gradient-text">Online Store</span>?</h2>
+            <p style="color: #b0c4de; margin-bottom: 30px;">Start your 14-day free trial. No credit card required.</p>
+            <div class="cta-buttons">
+                <button class="btn-solid" onclick="alert('🎉 Start your 14-day free trial!')">Start Free Trial →</button>
+                <button class="btn-outline" onclick="alert('📞 Schedule a demo with our ecommerce expert')">Schedule Demo</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function scrollToDemo() {
+            document.querySelector('.cta-section').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

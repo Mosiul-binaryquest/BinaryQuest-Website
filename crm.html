@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BinaryQuest | Customer Relationship Management (CRM)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #050B14;
+            color: #eef5ff;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background: rgba(5, 11, 20, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(0, 255, 170, 0.1);
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #FFFFFF 0%, #00FFAA 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #b0c4de;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: #00FFAA;
+        }
+
+        .btn-outline {
+            border: 1px solid #00FFAA;
+            background: transparent;
+            padding: 10px 24px;
+            border-radius: 40px;
+            color: #00FFAA;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-outline:hover {
+            background: #00FFAA;
+            color: #050B14;
+            box-shadow: 0 0 15px #00FFAA;
+        }
+
+        .btn-solid {
+            background: #00FFAA;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 40px;
+            font-weight: 700;
+            color: #050B14;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-solid:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 255, 170, 0.3);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 80px 0 60px;
+            background: radial-gradient(circle at 70% 30%, rgba(0, 255, 170, 0.08), transparent);
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero-text h1 {
+            font-size: 52px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #00FFAA, #00CC88);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero-text p {
+            font-size: 18px;
+            color: #b0c4de;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 40px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item h3 {
+            font-size: 32px;
+            color: #00FFAA;
+        }
+
+        .hero-image {
+            flex: 1;
+            background: linear-gradient(135deg, rgba(0, 255, 170, 0.1), rgba(0, 100, 50, 0.2));
+            border-radius: 30px;
+            padding: 40px;
+            text-align: center;
+            border: 1px solid rgba(0, 255, 170, 0.2);
+        }
+
+        .hero-image i {
+            font-size: 100px;
+            color: #00FFAA;
+            opacity: 0.8;
+        }
+
+        .customer-avatars {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .avatar {
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 255, 170, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: #00FFAA;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin: 60px 0;
+        }
+
+        .stat-card {
+            background: rgba(10, 20, 30, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            border: 1px solid rgba(0, 255, 170, 0.1);
+            transition: 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: #00FFAA;
+        }
+
+        .stat-number {
+            font-size: 42px;
+            font-weight: 800;
+            color: #00FFAA;
+        }
+
+        /* Section Title */
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            font-weight: 700;
+            margin: 60px 0 20px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #b0c4de;
+            margin-bottom: 50px;
+            font-size: 18px;
+        }
+
+        /* CRM Modules */
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .module-card {
+            background: rgba(10, 20, 30, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(0, 255, 170, 0.1);
+            transition: 0.3s;
+        }
+
+        .module-card:hover {
+            transform: translateY(-8px);
+            border-color: #00FFAA;
+            background: rgba(0, 255, 170, 0.05);
+        }
+
+        .module-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(0, 255, 170, 0.1);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 28px;
+            color: #00FFAA;
+        }
+
+        .module-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        .module-card p {
+            color: #b0c4de;
+            line-height: 1.6;
+        }
+
+        /* Sales Pipeline */
+        .pipeline-container {
+            background: linear-gradient(135deg, #0a1420, #061020);
+            border-radius: 30px;
+            padding: 40px;
+            margin: 60px 0;
+        }
+
+        .pipeline-stages {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            overflow-x: auto;
+            padding: 20px 0;
+        }
+
+        .pipeline-stage {
+            flex: 1;
+            min-width: 200px;
+            background: rgba(5, 11, 20, 0.6);
+            border-radius: 20px;
+            padding: 20px;
+            border: 1px solid rgba(0, 255, 170, 0.1);
+        }
+
+        .stage-header {
+            text-align: center;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #00FFAA;
+            margin-bottom: 15px;
+        }
+
+        .stage-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: #00FFAA;
+        }
+
+        .deal-card {
+            background: rgba(0, 255, 170, 0.05);
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .deal-card:hover {
+            background: rgba(0, 255, 170, 0.15);
+        }
+
+        .deal-name {
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .deal-value {
+            font-size: 12px;
+            color: #00FFAA;
+        }
+
+        /* Dashboard Preview */
+        .dashboard-preview {
+            background: linear-gradient(135deg, #0a1420, #061020);
+            border-radius: 30px;
+            padding: 40px;
+            margin: 60px 0;
+            border: 1px solid rgba(0, 255, 170, 0.2);
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .dashboard-tabs {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 8px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 255, 170, 0.2);
+            border-radius: 20px;
+            color: #b0c4de;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .tab-btn.active, .tab-btn:hover {
+            background: #00FFAA;
+            color: #050B14;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .chart-card {
+            background: rgba(5, 11, 20, 0.6);
+            border-radius: 20px;
+            padding: 20px;
+        }
+
+        canvas {
+            max-height: 250px;
+            width: 100%;
+        }
+
+        /* Recent Activities */
+        .activities-list {
+            max-height: 250px;
+            overflow-y: auto;
+        }
+
+        .activity-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px;
+            border-bottom: 1px solid rgba(0, 255, 170, 0.1);
+        }
+
+        .activity-icon {
+            width: 35px;
+            height: 35px;
+            background: rgba(0, 255, 170, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        /* Benefits */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .benefit-card {
+            text-align: center;
+            padding: 30px;
+            background: rgba(10, 20, 30, 0.4);
+            border-radius: 20px;
+        }
+
+        .benefit-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(0, 255, 170, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 30px;
+            color: #00FFAA;
+        }
+
+        /* Testimonials */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .testimonial-card {
+            background: rgba(10, 20, 30, 0.6);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(0, 255, 170, 0.1);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            color: #b0c4de;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 255, 170, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        /* CTA */
+        .cta-section {
+            background: linear-gradient(135deg, #0a1420, #061020);
+            border-radius: 30px;
+            padding: 60px;
+            text-align: center;
+            margin: 60px 0;
+            border: 1px solid rgba(0, 255, 170, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+            }
+            
+            .hero-text h1 {
+                font-size: 36px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .pipeline-stages {
+                flex-direction: column;
+            }
+            
+            nav {
+                padding: 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav-links {
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">BINARY<span>QUEST</span></div>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Solutions</a></li>
+            <li><a href="#">ERP</a></li>
+            <li><a href="#">SCM</a></li>
+            <li><a href="#" class="active">CRM</a></li>
+            <li><a href="#">AI Agents</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+        <button class="btn-outline" onclick="alert('📞 Schedule CRM Demo')">Get Demo →</button>
+    </nav>
+
+    <div class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Transform <span class="gradient-text">Customer Relationships</span> with AI-Powered CRM</h1>
+                    <p>Build stronger customer relationships, automate sales processes, and gain actionable insights with our intelligent CRM solution. Turn leads into loyal customers.</p>
+                    <button class="btn-solid" onclick="scrollToDemo()">Start Free Trial →</button>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <h3>47%</h3>
+                            <p>Sales Increase</p>
+                        </div>
+                        <div class="stat-item">
+                            <h3>35%</h3>
+                            <p>Faster Response</p>
+                        </div>
+                        <div class="stat-item">
+                            <h3>10K+</h3>
+                            <p>Happy Customers</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <i class="fas fa-handshake"></i>
+                    <div class="customer-avatars">
+                        <div class="avatar"><i class="fas fa-user"></i></div>
+                        <div class="avatar"><i class="fas fa-user-tie"></i></div>
+                        <div class="avatar"><i class="fas fa-user-plus"></i></div>
+                        <div class="avatar"><i class="fas fa-user-graduate"></i></div>
+                    </div>
+                    <p style="margin-top: 20px;">Build Lasting Customer Relationships</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">98%</div>
+                <div class="stat-label">Customer Satisfaction</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">3x</div>
+                <div class="stat-label">Lead Conversion</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">50%</div>
+                <div class="stat-label">Sales Productivity</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">AI Support</div>
+            </div>
+        </div>
+
+        <!-- CRM Modules -->
+        <h2 class="section-title">Complete <span class="gradient-text">CRM Modules</span></h2>
+        <p class="section-subtitle">Everything you need to manage customer relationships effectively</p>
+
+        <div class="modules-grid">
+            <div class="module-card">
+                <div class="module-icon"><i class="fas fa-chart-line"></i></div>
+                <h3>Sales Management</h3>
+                <p>Pipeline tracking, lead scoring, opportunity management, and sales forecasting with AI-powered insights.</p>
+            </div>
+            <div class="module-card">
+                <div class="module-icon"><i class="fas fa-headset"></i></div>
+                <h3>Support Ticketing</h3>
+                <p>Omnichannel customer support, automated ticket routing, SLA management, and knowledge base integration.</p>
+            </div>
+            <div class="module-card">
+                <div class="module-icon"><i class="fas fa-bullhorn"></i></div>
+                <h3>Marketing Automation</h3>
+                <p>Email campaigns, lead nurturing, segmentation, and ROI tracking with multi-channel marketing tools.</p>
+            </div>
+            <div class="module-card">
+                <div class="module-icon"><i class="fas fa-chart-pie"></i></div>
+                <h3>Analytics & Reports</h3>
+                <p>Custom dashboards, sales reports, customer insights, and predictive analytics for data-driven decisions.</p>
+            </div>
+            <div class="module-card">
+                <div class="module-icon"><i class="fas fa-mobile-alt"></i></div>
+                <h3>Mobile CRM</h3>
+                <p>Access customer data on the go with iOS and Android mobile apps. Real-time updates anywhere.</p>
+            </div>
+            <div class="module-card">
+                <div class="module-icon"><i class="fas fa-plug"></i></div>
+                <h3>Integrations</h3>
+                <p>Connect with email, calendar, social media, and 500+ business apps via Zapier and API.</p>
+            </div>
+        </div>
+
+        <!-- Sales Pipeline -->
+        <div class="pipeline-container">
+            <h2 style="text-align: center; margin-bottom: 30px;">Sales <span class="gradient-text">Pipeline</span></h2>
+            <div class="pipeline-stages">
+                <div class="pipeline-stage">
+                    <div class="stage-header">
+                        <h4>Lead</h4>
+                        <div class="stage-value">128</div>
+                    </div>
+                    <div class="deal-card">
+                        <div class="deal-name">TechCorp Solutions</div>
+                        <div class="deal-value">$25,000</div>
+                    </div>
+                    <div class="deal-card">
+                        <div class="deal-name">Innovate Ltd</div>
+                        <div class="deal-value">$18,500</div>
+                    </div>
+                </div>
+                <div class="pipeline-stage">
+                    <div class="stage-header">
+                        <h4>Qualified</h4>
+                        <div class="stage-value">64</div>
+                    </div>
+                    <div class="deal-card">
+                        <div class="deal-name">Global Enterprises</div>
+                        <div class="deal-value">$85,000</div>
+                    </div>
+                    <div class="deal-card">
+                        <div class="deal-name">Future Systems</div>
+                        <div class="deal-value">$42,000</div>
+                    </div>
+                </div>
+                <div class="pipeline-stage">
+                    <div class="stage-header">
+                        <h4>Proposal</h4>
+                        <div class="stage-value">32</div>
+                    </div>
+                    <div class="deal-card">
+                        <div class="deal-name">MegaCorp Inc</div>
+                        <div class="deal-value">$150,000</div>
+                    </div>
+                    <div class="deal-card">
+                        <div class="deal-name">Startup Hub</div>
+                        <div class="deal-value">$35,000</div>
+                    </div>
+                </div>
+                <div class="pipeline-stage">
+                    <div class="stage-header">
+                        <h4>Negotiation</h4>
+                        <div class="stage-value">18</div>
+                    </div>
+                    <div class="deal-card">
+                        <div class="deal-name">Enterprise Group</div>
+                        <div class="deal-value">$220,000</div>
+                    </div>
+                    <div class="deal-card">
+                        <div class="deal-name">Digital Solutions</div>
+                        <div class="deal-value">$95,000</div>
+                    </div>
+                </div>
+                <div class="pipeline-stage">
+                    <div class="stage-header">
+                        <h4>Won</h4>
+                        <div class="stage-value">24</div>
+                    </div>
+                    <div class="deal-card">
+                        <div class="deal-name">BinaryCorp</div>
+                        <div class="deal-value">$310,000</div>
+                    </div>
+                    <div class="deal-card">
+                        <div class="deal-name">Tech Innovators</div>
+                        <div class="deal-value">$128,000</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Live CRM Dashboard Preview -->
+        <div class="dashboard-preview">
+            <div class="dashboard-header">
+                <h3><i class="fas fa-chart-simple"></i> CRM Analytics Dashboard</h3>
+                <div class="dashboard-tabs">
+                    <button class="tab-btn active" onclick="switchTab('overview')">Overview</button>
+                    <button class="tab-btn" onclick="switchTab('sales')">Sales</button>
+                    <button class="tab-btn" onclick="switchTab('support')">Support</button>
+                </div>
+            </div>
+            
+            <div id="overviewTab">
+                <div class="dashboard-grid">
+                    <div class="chart-card">
+                        <h4>Revenue Trend</h4>
+                        <canvas id="revenueTrendChart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h4>Lead Sources</h4>
+                        <canvas id="leadSourcesChart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h4>Customer Health Score</h4>
+                        <canvas id="healthScoreChart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h4>Recent Activities</h4>
+                        <div class="activities-list">
+                            <div class="activity-item">
+                                <div class="activity-icon"><i class="fas fa-phone"></i></div>
+                                <div><strong>Call completed</strong><br><small>with John from TechCorp</small></div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon"><i class="fas fa-envelope"></i></div>
+                                <div><strong>Email sent</strong><br><small>Proposal to Global Enterprises</small></div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon"><i class="fas fa-check-circle"></i></div>
+                                <div><strong>Deal won</strong><br><small>$310,000 - BinaryCorp</small></div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon"><i class="fas fa-ticket-alt"></i></div>
+                                <div><strong>Ticket resolved</strong><br><small>Technical support issue #1245</small></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="salesTab" style="display: none;">
+                <div class="dashboard-grid">
+                    <div class="chart-card">
+                        <h4>Sales by Region</h4>
+                        <canvas id="salesRegionChart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h4>Monthly Targets</h4>
+                        <canvas id="targetChart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h4>Top Performers</h4>
+                        <div style="color:#b0c4de;">
+                            <p><i class="fas fa-trophy" style="color:#FFD700;"></i> Sarah Johnson - $1.2M</p>
+                            <p><i class="fas fa-medal" style="color:#C0C0C0;"></i> Michael Chen - $980K</p>
+                            <p><i class="fas fa-medal" style="color:#CD7F32;"></i> David Kumar - $875K</p>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <h4>Win Rate by Stage</h4>
+                        <canvas id="winRateChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="supportTab" style="display: none;">
+                <div class="dashboard-grid">
+                    <div class="chart-card">
+                        <h4>Ticket Volume</h4>
+                        <canvas id="ticketVolumeChart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h4>Customer Satisfaction</h4>
+                        <canvas id="csatChart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h4>Avg Response Time</h4>
+                        <canvas id="responseTimeChart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h4>Top Issues</h4>
+                        <div style="color:#b0c4de;">
+                            <p>🔧 Login Issues (24%)</p>
+                            <p>🔧 API Integration (18%)</p>
+                            <p>🔧 Billing Questions (15%)</p>
+                            <p>🔧 Feature Requests (12%)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Benefits -->
+        <h2 class="section-title">Why Choose <span class="gradient-text">BinaryQuest CRM</span></h2>
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <div class="benefit-icon"><i class="fas fa-brain"></i></div>
+                <h3>AI-Powered Insights</h3>
+                <p>Predictive lead scoring and intelligent recommendations to close deals faster.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon"><i class="fas fa-chart-line"></i></div>
+                <h3>Real-time Analytics</h3>
+                <p>Custom dashboards and reports for data-driven decision making.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                <h3>Cloud-Based</h3>
+                <p>Access anywhere, anytime. Automatic updates and backups.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon"><i class="fas fa-shield-alt"></i></div>
+                <h3>Enterprise Security</h3>
+                <p>Bank-grade encryption and role-based access control.</p>
+            </div>
+        </div>
+
+        <!-- Testimonials -->
+        <h2 class="section-title">What Our <span class="gradient-text">Customers Say</span></h2>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="testimonial-text">
+                    "BinaryQuest CRM transformed our sales process. We've seen a 45% increase in lead conversion within just 3 months!"
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-avatar"><i class="fas fa-user-tie"></i></div>
+                    <div>
+                        <strong>Sarah Johnson</strong><br>
+                        <small>Sales Director, TechCorp</small>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-text">
+                    "The AI-powered insights helped us identify our best opportunities. Customer satisfaction is at an all-time high!"
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-avatar"><i class="fas fa-user"></i></div>
+                    <div>
+                        <strong>Michael Chen</strong><br>
+                        <small>CEO, Innovate Solutions</small>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-text">
+                    "Support ticket resolution time dropped by 60%. Our team loves the intuitive interface and mobile app!"
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-avatar"><i class="fas fa-user"></i></div>
+                    <div>
+                        <strong>David Kumar</strong><br>
+                        <small>Operations Manager, GlobalTech</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="cta-section">
+            <h2 style="font-size: 32px; margin-bottom: 20px;">Ready to Transform Your Customer Relationships?</h2>
+            <p style="color: #b0c4de; margin-bottom: 30px;">Join 10,000+ businesses using BinaryQuest CRM to grow faster.</p>
+            <button class="btn-solid" onclick="alert('📅 Demo scheduled! Our CRM expert will contact you.')">Schedule Free Demo →</button>
+        </div>
+    </div>
+
+    <script>
+        let revenueTrendChart, leadSourcesChart, healthScoreChart, salesRegionChart, targetChart, winRateChart, ticketVolumeChart, csatChart, responseTimeChart;
+
+        function initCharts() {
+            // Revenue Trend Chart
+            const revenueCtx = document.getElementById('revenueTrendChart').getContext('2d');
+            revenueTrendChart = new Chart(revenueCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                    datasets: [{
+                        label: 'Revenue ($K)',
+                        data: [320, 380, 450, 520, 610, 750],
+                        borderColor: '#00FFAA',
+                        backgroundColor: 'rgba(0, 255, 170, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { labels: { color: '#b0c4de' } } },
+                    scales: { y: { ticks: { color: '#b0c4de' } }, x: { ticks: { color: '#b0c4de' } } }
+                }
+            });
+
+            // Lead Sources Chart
+            const leadsCtx = document.getElementById('leadSourcesChart').getContext('2d');
+            leadSourcesChart = new Chart(leadsCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Website', 'Referrals', 'Social Media', 'Email', 'Events'],
+                    datasets: [{ data: [35, 25, 20, 12, 8], backgroundColor: ['#00FFAA', '#00CC88', '#009966', '#006644', '#003322'] }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { labels: { color: '#b0c4de' } } }
+                }
+            });
+
+            // Customer Health Score
+            const healthCtx = document.getElementById('healthScoreChart').getContext('2d');
+            healthScoreChart = new Chart(healthCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['High', 'Medium', 'Low', 'At Risk'],
+                    datasets: [{ label: 'Customers', data: [245, 380, 120, 45], backgroundColor: '#00FFAA' }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { labels: { color: '#b0c4de' } } },
+                    scales: { y: { ticks: { color: '#b0c4de' } }, x: { ticks: { color: '#b0c4de' } } }
+                }
+            });
+
+            // Sales by Region
+            const regionCtx = document.getElementById('salesRegionChart').getContext('2d');
+            salesRegionChart = new Chart(regionCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['North America', 'Europe', 'Asia', 'Australia', 'Middle East'],
+                    datasets: [{ label: 'Sales ($M)', data: [12.5, 9.8, 15.2, 5.4, 3.8], backgroundColor: '#00FFAA' }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { labels: { color: '#b0c4de' } } },
+                    scales: { y: { ticks: { color: '#b0c4de' } }, x: { ticks: { color: '#b0c4de' } } }
+                }
+            });
+
+            // Target Chart
+            const targetCtx = document.getElementById('targetChart').getContext('2d');
+            targetChart = new Chart(targetCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+                    datasets: [
+                        { label: 'Target', data: [100, 100, 100, 100], borderColor: '#FF6B6B', borderDash: [5, 5] },
+                        { label: 'Actual', data: [85, 92, 108, 115], borderColor: '#00FFAA' }
+                    ]
+                },
+                options: {

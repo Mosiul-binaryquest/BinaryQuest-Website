@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test BinaryQuest Regions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #0a0a2a;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            text-align: center;
+            background: rgba(255,255,255,0.1);
+            padding: 40px;
+            border-radius: 20px;
+        }
+        h1 { margin-bottom: 30px; }
+        .region-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        button {
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        button:hover { transform: scale(1.05); }
+        .asia-btn { background: #00FFAA; color: #050B14; }
+        .europe-btn { background: #2c3e66; color: white; }
+        .americas-btn { background: linear-gradient(135deg, #ff6b6b, #4e54c8); color: white; }
+        .australia-btn { background: #d4a373; color: white; }
+        .info {
+            background: rgba(0,0,0,0.5);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+        a {
+            color: #00FFAA;
+            text-decoration: none;
+        }
+        .current-url {
+            background: rgba(0,0,0,0.3);
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            word-break: break-all;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 BinaryQuest Region Testing Tool</h1>
+        <p>Click any button to test different regional UIs</p>
+        
+        <div class="region-buttons">
+            <button class="asia-btn" onclick="testRegion('asia')">🌏 Asia (Cyber Dark)</button>
+            <button class="europe-btn" onclick="testRegion('europe')">🇪🇺 Europe (Glassmorphism)</button>
+            <button class="americas-btn" onclick="testRegion('americas')">🌎 Americas (Vibrant)</button>
+            <button class="australia-btn" onclick="testRegion('australia')">🇦🇺 Australia (Warm Nature)</button>
+        </div>
+        
+        <div class="info">
+            <p><strong>How to use:</strong></p>
+            <p>1. Make sure <code>index.html</code> is in the same folder</p>
+            <p>2. Click any button above to open the website with that region</p>
+            <p>3. The URL parameter method keeps working even after refresh</p>
+        </div>
+        
+        <div class="current-url" id="urlDisplay">
+            Current file location: <span id="filePath">Loading...</span>
+        </div>
+    </div>
+    
+    <script>
+        function testRegion(region) {
+            // Get the current directory path
+            const currentPath = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
+            // Open index.html with region parameter
+            window.location.href = `${currentPath}index.html?region=${region}`;
+        }
+        
+        // Display current file path
+        document.getElementById('filePath').innerText = window.location.href.replace('test.html', 'index.html');
+    </script>
+</body>
+</html>

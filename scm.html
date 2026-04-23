@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BinaryQuest | Supply Chain Management Solutions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #050B14;
+            color: #eef5ff;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background: rgba(5, 11, 20, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(0, 255, 170, 0.1);
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #FFFFFF 0%, #00FFAA 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #b0c4de;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: #00FFAA;
+        }
+
+        .btn-outline {
+            border: 1px solid #00FFAA;
+            background: transparent;
+            padding: 10px 24px;
+            border-radius: 40px;
+            color: #00FFAA;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-outline:hover {
+            background: #00FFAA;
+            color: #050B14;
+            box-shadow: 0 0 15px #00FFAA;
+        }
+
+        .btn-solid {
+            background: #00FFAA;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 40px;
+            font-weight: 700;
+            color: #050B14;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-solid:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 255, 170, 0.3);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 80px 0 60px;
+            background: radial-gradient(circle at 30% 50%, rgba(0, 255, 170, 0.08), transparent);
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero-text h1 {
+            font-size: 52px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #00FFAA, #00CC88);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero-text p {
+            font-size: 18px;
+            color: #b0c4de;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 40px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item h3 {
+            font-size: 32px;
+            color: #00FFAA;
+        }
+
+        .hero-image {
+            flex: 1;
+            background: linear-gradient(135deg, rgba(0, 255, 170, 0.1), rgba(0, 100, 50, 0.2));
+            border-radius: 30px;
+            padding: 40px;
+            text-align: center;
+            border: 1px solid rgba(0, 255, 170, 0.2);
+        }
+
+        .hero-image i {
+            font-size: 120px;
+            color: #00FFAA;
+            opacity: 0.8;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin: 60px 0;
+        }
+
+        .stat-card {
+            background: rgba(10, 20, 30, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            border: 1px solid rgba(0, 255, 170, 0.1);
+            transition: 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: #00FFAA;
+        }
+
+        .stat-number {
+            font-size: 42px;
+            font-weight: 800;
+            color: #00FFAA;
+        }
+
+        /* Section Title */
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            font-weight: 700;
+            margin: 60px 0 20px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #b0c4de;
+            margin-bottom: 50px;
+            font-size: 18px;
+        }
+
+        /* SCM Modules */
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .module-card {
+            background: rgba(10, 20, 30, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(0, 255, 170, 0.1);
+            transition: 0.3s;
+        }
+
+        .module-card:hover {
+            transform: translateY(-8px);
+            border-color: #00FFAA;
+            background: rgba(0, 255, 170, 0.05);
+        }
+
+        .module-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(0, 255, 170, 0.1);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 28px;
+            color: #00FFAA;
+        }
+
+        .module-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        .module-card p {
+            color: #b0c4de;
+            line-height: 1.6;
+        }
+
+        /* Dashboard Preview */
+        .dashboard-preview {
+            background: linear-gradient(135deg, #0a1420, #061020);
+            border-radius: 30px;
+            padding: 40px;
+            margin: 60px 0;
+            border: 1px solid rgba(0, 255, 170, 0.2);
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .dashboard-tabs {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 8px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 255, 170, 0.2);
+            border-radius: 20px;
+            color: #b0c4de;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .tab-btn.active, .tab-btn:hover {
+            background: #00FFAA;
+            color: #050B14;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .chart-card {
+            background: rgba(5, 11, 20, 0.6);
+            border-radius: 20px;
+            padding: 20px;
+        }
+
+        canvas {
+            max-height: 250px;
+            width: 100%;
+        }
+
+        /* Supply Chain Flow */
+        .flow-container {
+            background: linear-gradient(135deg, #0a1420, #061020);
+            border-radius: 30px;
+            padding: 40px;
+            margin: 60px 0;
+        }
+
+        .flow-steps {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .flow-step {
+            flex: 1;
+            text-align: center;
+            min-width: 150px;
+        }
+
+        .flow-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(0, 255, 170, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 30px;
+            color: #00FFAA;
+        }
+
+        .flow-arrow {
+            font-size: 30px;
+            color: #00FFAA;
+        }
+
+        /* Benefits */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .benefit-card {
+            text-align: center;
+            padding: 30px;
+            background: rgba(10, 20, 30, 0.4);
+            border-radius: 20px;
+        }
+
+        .benefit-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(0, 255, 170, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 30px;
+            color: #00FFAA;
+        }
+
+        /* CTA */
+        .cta-section {
+            background: linear-gradient(135deg, #0a1420, #061020);
+            border-radius: 30px;
+            padding: 60px;
+            text-align: center;
+            margin: 60px 0;
+            border: 1px solid rgba(0, 255, 170, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+            }
+            
+            .hero-text h1 {
+                font-size: 36px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .flow-steps {
+                flex-direction: column;
+            }
+            
+            .flow-arrow {
+                transform: rotate(90deg);
+            }
+            
+            nav {
+                padding: 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav-links {
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">BINARY<span>QUEST</span></div>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Solutions</a></li>
+            <li><a href="#">ERP</a></li>
+            <li><a href="#" class="active">SCM</a></li>
+            <li><a href="#">AI Agents</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+        <button class="btn-outline" onclick="alert('📞 Schedule SCM Consultation')">Get Demo →</button>
+    </nav>
+
+    <div class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Intelligent <span class="gradient-text">Supply Chain</span> Management</h1>
+                    <p>Transform your supply chain with AI-powered visibility, predictive analytics, and end-to-end automation. Reduce costs, eliminate delays, and optimize every step of your logistics network.</p>
+                    <button class="btn-solid" onclick="scrollToDemo()">Explore Solutions →</button>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <h3>99.5%</h3>
+                            <p>On-Time Delivery</p>
+                        </div>
+                        <div class="stat-item">
+                            <h3>35%</h3>
+                            <p>Cost Reduction</p>
+                        </div>
+                        <div class="stat-item">
+                            <h3>50K+</h3>
+                            <p>Orders Processed</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <i class="fas fa-globe-asia"></i>
+                    <i class="fas fa-truck" style="font-size: 80px; margin-top: 20px;"></i>
+                    <i class="fas fa-chart-line" style="font-size: 60px; margin-top: 20px;"></i>
+                    <p style="margin-top: 20px;">End-to-End Supply Chain Visibility</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">98%</div>
+                <div class="stat-label">Inventory Accuracy</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">40%</div>
+                <div class="stat-label">Faster Fulfillment</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">30%</div>
+                <div class="stat-label">Reduced Waste</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Real-time Tracking</div>
+            </div>
+        </div>
+
+        <!-- SCM Modules -->
+        <h2 class="section-title">Complete <span class="gradient-text">SCM Modules</span></h2>
+        <p class="section-subtitle">Everything you need to optimize your supply chain operations</p>
+
+        <div class="modules-grid">
+            <div class="module-card">
+                <div class="module-icon"><i class="fas fa-shopping-cart"></i></div>
+                <h3>Procurement Management</h3>
+                <p>Automated purchase orders, supplier management, and strategic sourcing with AI-powered vendor recommendations.</p>
+            </div>
+            <div class="module-card">
+                <div class="module-icon"><i class="fas fa-boxes"></i></div>
+                <h3>Inventory Control</h3>
+                <p>Real-time stock tracking, demand forecasting, automated reordering, and multi-location inventory management.</p>
+            </div>
+            <div class="module-card">
+                <div class="module-icon"><i class="fas fa-warehouse"></i></div>
+                <h3>Warehouse Management</h3>
+                <p>Optimized putaway, picking, packing, and shipping with barcode/RFID integration and warehouse analytics.</p>
+            </div>
+            <div class="module-card">
+                <div class="module-icon"><i class="fas fa-truck"></i></div>
+                <h3>Logistics & Distribution</h3>
+                <p>Route optimization, carrier management, freight auditing, and real-time shipment tracking across multiple carriers.</p>
+            </div>
+            <div class="module-card">
+                <div class="module-icon"><i class="fas fa-chart-line"></i></div>
+                <h3>Demand Forecasting</h3>
+                <p>AI/ML powered demand prediction, seasonal trend analysis, and safety stock optimization to prevent stockouts.</p>
+            </div>
+            <div class="module-card">
+                <div class="module-icon"><i class="fas fa-handshake"></i></div>
+                <h3>Supplier Portal</h3>
+                <p>Self-service portal for suppliers to manage orders, submit invoices, and track performance metrics.</p>
+            </div>
+        </div>
+
+        <!-- Live SCM Dashboard Preview -->
+        <div class="dashboard-preview">
+            <div class="dashboard-header">
+                <h3><i class="fas fa-chart-simple"></i> Live SCM Dashboard</h3>
+                <div class="dashboard-tabs">
+                    <button class="tab-btn active" onclick="switchTab('overview')">Overview</button>
+                    <button class="tab-btn" onclick="switchTab('inventory')">Inventory</button>
+                    <button class="tab-btn" onclick="switchTab('logistics')">Logistics</button>
+                </div>
+            </div>
+            
+            <div id="overviewTab">
+                <div class="dashboard-grid">
+                    <div class="chart-card">
+                        <h4>Supply Chain Performance</h4>
+                        <canvas id="performanceChart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h4>Order Fulfillment Rate</h4>
+                        <canvas id="fulfillmentChart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h4>Key Metrics</h4>
+                        <div style="display: grid; grid-template-columns: repeat(2,1fr); gap: 15px;">
+                            <div style="background:rgba(0,255,170,0.05); padding:15px; border-radius:15px; text-align:center;">
+                                <div style="font-size:28px; color:#00FFAA;">98.5%</div>
+                                <div style="font-size:12px;">Order Accuracy</div>
+                            </div>
+                            <div style="background:rgba(0,255,170,0.05); padding:15px; border-radius:15px; text-align:center;">
+                                <div style="font-size:28px; color:#00FFAA;">2.4d</div>
+                                <div style="font-size:12px;">Avg. Delivery Time</div>
+                            </div>
+                            <div style="background:rgba(0,255,170,0.05); padding:15px; border-radius:15px; text-align:center;">
+                                <div style="font-size:28px; color:#00FFAA;">$1.2M</div>
+                                <div style="font-size:12px;">Cost Savings</div>
+                            </div>
+                            <div style="background:rgba(0,255,170,0.05); padding:15px; border-radius:15px; text-align:center;">
+                                <div style="font-size:28px; color:#00FFAA;">15,234</div>
+                                <div style="font-size:12px;">Active Orders</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <h4>Recent Shipments</h4>
+                        <div style="color:#b0c4de; font-size:14px;">
+                            <p><i class="fas fa-check-circle" style="color:#00FFAA;"></i> Shipment #SC-2401 - Delivered</p>
+                            <p><i class="fas fa-truck" style="color:#00FFAA;"></i> Shipment #SC-2402 - In Transit</p>
+                            <p><i class="fas fa-box" style="color:#00FFAA;"></i> Shipment #SC-2403 - Processing</p>
+                            <p><i class="fas fa-clock" style="color:#FFA500;"></i> Shipment #SC-2404 - Dispatched</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="inventoryTab" style="display: none;">
+                <div class="dashboard-grid">
+                    <div class="chart-card">
+                        <h4>Inventory Turnover</h4>
+                        <canvas id="inventoryTurnoverChart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h4>Stock Levels by Category</h4>
+                        <canvas id="stockLevelsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="logisticsTab" style="display: none;">
+                <div class="dashboard-grid">
+                    <div class="chart-card">
+                        <h4>Delivery Performance by Region</h4>
+                        <canvas id="deliveryRegionChart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h4>Carrier Performance</h4>
+                        <canvas id="carrierChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Supply Chain Flow -->
+        <div class="flow-container">
+            <h2 style="text-align: center; margin-bottom: 40px;">End-to-End <span class="gradient-text">Supply Chain Flow</span></h2>
+            <div class="flow-steps">
+                <div class="flow-step">
+                    <div class="flow-icon"><i class="fas fa-industry"></i></div>
+                    <h4>Supplier</h4>
+                    <p style="font-size: 12px;">Raw Materials</p>
+                </div>
+                <div class="flow-arrow"><i class="fas fa-arrow-right"></i></div>
+                <div class="flow-step">
+                    <div class="flow-icon"><i class="fas fa-warehouse"></i></div>
+                    <h4>Warehouse</h4>
+                    <p style="font-size: 12px;">Storage & Sorting</p>
+                </div>
+                <div class="flow-arrow"><i class="fas fa-arrow-right"></i></div>
+                <div class="flow-step">
+                    <div class="flow-icon"><i class="fas fa-microchip"></i></div>
+                    <h4>Production</h4>
+                    <p style="font-size: 12px;">Manufacturing</p>
+                </div>
+                <div class="flow-arrow"><i class="fas fa-arrow-right"></i></div>
+                <div class="flow-step">
+                    <div class="flow-icon"><i class="fas fa-truck"></i></div>
+                    <h4>Distribution</h4>
+                    <p style="font-size: 12px;">Logistics</p>
+                </div>
+                <div class="flow-arrow"><i class="fas fa-arrow-right"></i></div>
+                <div class="flow-step">
+                    <div class="flow-icon"><i class="fas fa-home"></i></div>
+                    <h4>Customer</h4>
+                    <p style="font-size: 12px;">Delivery</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Benefits -->
+        <h2 class="section-title">Why Choose <span class="gradient-text">BinaryQuest SCM</span></h2>
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <div class="benefit-icon"><i class="fas fa-brain"></i></div>
+                <h3>AI-Powered Insights</h3>
+                <p>Predictive analytics and machine learning for demand forecasting and risk management.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon"><i class="fas fa-eye"></i></div>
+                <h3>Real-time Visibility</h3>
+                <p>End-to-end tracking from supplier to customer with live dashboards and alerts.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon"><i class="fas fa-chart-line"></i></div>
+                <h3>Cost Optimization</h3>
+                <p>Reduce logistics costs by 30% with route optimization and carrier selection.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon"><i class="fas fa-shield-alt"></i></div>
+                <h3>Risk Management</h3>
+                <p>Identify and mitigate supply chain disruptions with proactive alerts.</p>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="cta-section">
+            <h2 style="font-size: 32px; margin-bottom: 20px;">Ready to Optimize Your Supply Chain?</h2>
+            <p style="color: #b0c4de; margin-bottom: 30px;">Schedule a free consultation with our SCM experts.</p>
+            <button class="btn-solid" onclick="alert('📅 Consultation scheduled! Our team will contact you.')">Schedule Consultation →</button>
+        </div>
+    </div>
+
+    <script>
+        let performanceChart, fulfillmentChart, inventoryTurnoverChart, stockLevelsChart, deliveryRegionChart, carrierChart;
+
+        function initCharts() {
+            // Performance Chart
+            const perfCtx = document.getElementById('performanceChart').getContext('2d');
+            performanceChart = new Chart(perfCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+                    datasets: [
+                        { label: 'On-Time Delivery (%)', data: [94, 96, 97, 98.5], borderColor: '#00FFAA', tension: 0.4 },
+                        { label: 'Order Accuracy (%)', data: [95, 96.5, 97.5, 98.5], borderColor: '#FF6B6B', tension: 0.4 }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { labels: { color: '#b0c4de' } } },
+                    scales: { y: { ticks: { color: '#b0c4de' } }, x: { ticks: { color: '#b0c4de' } } }
+                }
+            });
+
+            // Fulfillment Chart
+            const fulCtx = document.getElementById('fulfillmentChart').getContext('2d');
+            fulfillmentChart = new Chart(fulCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['On Time', 'Delayed', 'Early'],
+                    datasets: [{ data: [85, 10, 5], backgroundColor: ['#00FFAA', '#FF6B6B', '#FFC107'] }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { labels: { color: '#b0c4de' } } }
+                }
+            });
+
+            // Inventory Turnover
+            const invCtx = document.getElementById('inventoryTurnoverChart').getContext('2d');
+            inventoryTurnoverChart = new Chart(invCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Electronics', 'Clothing', 'Food', 'Furniture', 'Auto Parts'],
+                    datasets: [{ label: 'Turnover Ratio', data: [8.5, 6.2, 12.3, 4.8, 5.9], backgroundColor: '#00FFAA' }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { labels: { color: '#b0c4de' } } },
+                    scales: { y: { ticks: { color: '#b0c4de' } }, x: { ticks: { color: '#b0c4de' } } }
+                }
+            });
+
+            // Stock Levels
+            const stockCtx = document.getElementById('stockLevelsChart').getContext('2d');
+            stockLevelsChart = new Chart(stockCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                    datasets: [
+                        { label: 'Stock Level', data: [850, 920, 880, 950, 1020, 1100], borderColor: '#00FFAA', fill: true },
+                        { label: 'Reorder Point', data: [600, 600, 600, 600, 600, 600], borderColor: '#FF6B6B', borderDash: [5, 5] }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { labels: { color: '#b0c4de' } } },
+                    scales: { y: { ticks: { color: '#b0c4de' } }, x: { ticks: { color: '#b0c4de' } } }
+                }
+            });
+
+            // Delivery by Region
+            const regionCtx = document.getElementById('deliveryRegionChart').getContext('2d');
+            deliveryRegionChart = new Chart(regionCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['North', 'South', 'East', 'West', 'Central'],
+                    datasets: [{ label: 'Delivery Time (days)', data: [2.1, 3.5, 2.8, 4.2, 2.5], backgroundColor: '#00FFAA' }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { labels: { color: '#b0c4de' } } },
+                    scales: { y: { ticks: { color: '#b0c4de' } }, x: { ticks: { color: '#b0c4de' } } }
+                }
+            });
+
+            // Carrier Performance
+            const carrierCtx = document.getElementById('carrierChart').getContext('2d');
+            carrierChart = new Chart(carrierCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['Speed', 'Cost', 'Reliability', 'Tracking', 'Support'],
+                    datasets: [
+                        { label: 'Carrier A', data: [4.5, 4, 4.8, 4.2, 4], borderColor: '#00FFAA', backgroundColor: 'rgba(0,255,170,0.2)' },
+                        { label: 'Carrier B', data: [4, 4.5, 4.2, 4.5, 4.3], borderColor: '#FF6B6B', backgroundColor: 'rgba(255,107,107,0.2)' }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { labels: { color: '#b0c4de' } } },
+                    scales: { r: { ticks: { color: '#b0c4de' }, grid: { color: 'rgba(255,255,255,0.1)' } } }
+                }
+            });
+        }
+
+        function switchTab(tab) {
+            document.getElementById('overviewTab').style.display = 'none';
+            document.getElementById('inventoryTab').style.display = 'none';
+            document.getElementById('logisticsTab').style.display = 'none';
+            
+            if (tab === 'overview') document.getElementById('overviewTab').style.display = 'block';
+            if (tab === 'inventory') document.getElementById('inventoryTab').style.display = 'block';
+            if (tab === 'logistics') document.getElementById('logisticsTab').style.display = 'block';
+            
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        function scrollToDemo() {
+            document.querySelector('.cta-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        window.addEventListener('load', initCharts);
+    </script>
+</body>
+</html>

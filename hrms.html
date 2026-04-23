@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BinaryQuest | HRMS - Human Resource Management System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #050B14;
+            color: #eef5ff;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background: rgba(5, 11, 20, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(0, 255, 170, 0.1);
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #FFFFFF 0%, #00FFAA 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #b0c4de;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: #00FFAA;
+        }
+
+        /* Dropdown Menu */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background: rgba(10, 20, 30, 0.95);
+            backdrop-filter: blur(10px);
+            min-width: 200px;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 255, 170, 0.2);
+            z-index: 1;
+            top: 100%;
+            left: 0;
+        }
+
+        .dropdown-content a {
+            color: #b0c4de;
+            padding: 12px 20px;
+            display: block;
+            font-size: 14px;
+        }
+
+        .dropdown-content a:hover {
+            background: rgba(0, 255, 170, 0.1);
+            color: #00FFAA;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .btn-outline {
+            border: 1px solid #00FFAA;
+            background: transparent;
+            padding: 10px 24px;
+            border-radius: 40px;
+            color: #00FFAA;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-outline:hover {
+            background: #00FFAA;
+            color: #050B14;
+            box-shadow: 0 0 15px #00FFAA;
+        }
+
+        .btn-solid {
+            background: #00FFAA;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 40px;
+            font-weight: 700;
+            color: #050B14;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 16px;
+        }
+
+        .btn-solid:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 255, 170, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid rgba(0, 255, 170, 0.5);
+            padding: 14px 32px;
+            border-radius: 40px;
+            font-weight: 600;
+            color: #00FFAA;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 255, 170, 0.1);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 80px 0 60px;
+            background: radial-gradient(circle at 30% 50%, rgba(0, 255, 170, 0.08), transparent);
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero-text h1 {
+            font-size: 52px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #00FFAA, #00CC88);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero-text p {
+            font-size: 18px;
+            color: #b0c4de;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 40px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item h3 {
+            font-size: 32px;
+            color: #00FFAA;
+        }
+
+        .hero-image {
+            flex: 1;
+            background: linear-gradient(135deg, rgba(0, 255, 170, 0.1), rgba(0, 100, 50, 0.2));
+            border-radius: 30px;
+            padding: 40px;
+            text-align: center;
+            border: 1px solid rgba(0, 255, 170, 0.2);
+        }
+
+        .hero-image i {
+            font-size: 80px;
+            color: #00FFAA;
+            opacity: 0.8;
+        }
+
+        /* Section Title */
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            font-weight: 700;
+            margin: 60px 0 20px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #b0c4de;
+            margin-bottom: 50px;
+            font-size: 18px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Features Grid - 14 Features */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .feature-card {
+            background: rgba(10, 20, 30, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(0, 255, 170, 0.1);
+            transition: 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: #00FFAA;
+            background: rgba(0, 255, 170, 0.05);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(0, 255, 170, 0.1);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 28px;
+            color: #00FFAA;
+        }
+
+        .feature-card h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+
+        .feature-card p {
+            color: #b0c4de;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin: 60px 0;
+        }
+
+        .stat-card {
+            background: rgba(10, 20, 30, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            border: 1px solid rgba(0, 255, 170, 0.1);
+            transition: 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: #00FFAA;
+        }
+
+        .stat-number {
+            font-size: 42px;
+            font-weight: 800;
+            color: #00FFAA;
+        }
+
+        /* Benefits Section */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .benefit-card {
+            text-align: center;
+            padding: 30px;
+            background: rgba(10, 20, 30, 0.4);
+            border-radius: 20px;
+        }
+
+        .benefit-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(0, 255, 170, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 30px;
+            color: #00FFAA;
+        }
+
+        /* Pricing Section */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .pricing-card {
+            background: rgba(10, 20, 30, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            border: 1px solid rgba(0, 255, 170, 0.1);
+            transition: 0.3s;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            border-color: #00FFAA;
+        }
+
+        .pricing-card.featured {
+            border-color: #00FFAA;
+            background: rgba(0, 255, 170, 0.05);
+        }
+
+        .pricing-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .pricing-price {
+            font-size: 48px;
+            font-weight: 800;
+            color: #00FFAA;
+            margin-bottom: 20px;
+        }
+
+        .pricing-price span {
+            font-size: 16px;
+            color: #b0c4de;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin: 30px 0;
+        }
+
+        .pricing-features li {
+            padding: 10px 0;
+            color: #b0c4de;
+            border-bottom: 1px solid rgba(0, 255, 170, 0.1);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #0a1420, #061020);
+            border-radius: 30px;
+            padding: 60px;
+            text-align: center;
+            margin: 60px 0;
+            border: 1px solid rgba(0, 255, 170, 0.2);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+            }
+            
+            .hero-text h1 {
+                font-size: 36px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            nav {
+                padding: 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav-links {
+                gap: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">BINARY<span>QUEST</span></div>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li class="dropdown">
+                <a href="#" class="active">Products ▾</a>
+                <div class="dropdown-content">
+                    <a href="#">ERP System</a>
+                    <a href="#">SCM Solution</a>
+                    <a href="#">CRM Platform</a>
+                    <a href="#" style="color:#00FFAA;">HRMS Software</a>
+                </div>
+            </li>
+            <li><a href="#">Solutions</a></li>
+            <li><a href="#">AI Agents</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+        <button class="btn-outline" onclick="alert('📞 Request Demo')">Request Demo →</button>
+    </nav>
+
+    <div class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Human Resource <span class="gradient-text">Management System</span></h1>
+                    <p>HRMS software is the best solution for managing the human capital of any organization. With powerful time-saving features, streamline your HR operations from recruitment to retirement.</p>
+                    <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                        <button class="btn-solid" onclick="scrollToDemo()">Start Free Trial →</button>
+                        <button class="btn-secondary">Watch Demo</button>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <h3>10K+</h3>
+                            <p>Active Users</p>
+                        </div>
+                        <div class="stat-item">
+                            <h3>500+</h3>
+                            <p>Companies</p>
+                        </div>
+                        <div class="stat-item">
+                            <h3>99%</h3>
+                            <p>Satisfaction Rate</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <i class="fas fa-users"></i>
+                    <i class="fas fa-chart-line" style="font-size: 60px; margin-top: 20px;"></i>
+                    <p style="margin-top: 20px;">Complete HR Management Solution</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">60%</div>
+                <div class="stat-label">Time Saved on HR Tasks</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">40%</div>
+                <div class="stat-label">Reduced HR Costs</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Paperless Operations</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Employee Self-Service</div>
+            </div>
+        </div>
+
+        <!-- Key Features Section - 14 Features -->
+        <h2 class="section-title">Key <span class="gradient-text">Features</span> of HRMS Software</h2>
+        <p class="section-subtitle">HRMS software is the best solution for managing the human capital of any organization. Here are the powerful time-saving features:</p>
+
+        <div class="features-grid">
+            <!-- 1. Attendance Form & Log -->
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-clock"></i></div>
+                <h3>Attendance Form & Log</h3>
+                <p>Real-time attendance tracking with biometric integration, geo-fencing, and automated timesheet generation.</p>
+            </div>
+
+            <!-- 2. Department Management -->
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-building"></i></div>
+                <h3>Department Management</h3>
+                <p>Organize your workforce with hierarchical department structures, role definitions, and reporting lines.</p>
+            </div>
+
+            <!-- 3. Performance Appraisal Record -->
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                <h3>Performance Appraisal Record</h3>
+                <p>360-degree reviews, KPI tracking, goal setting, and automated performance evaluation reports.</p>
+            </div>
+
+            <!-- 4. Record Of Leave Application -->
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-calendar-alt"></i></div>
+                <h3>Record Of Leave Application</h3>
+                <p>Online leave requests, automated approval workflows, leave balance tracking, and calendar integration.</p>
+            </div>
+
+            <!-- 5. Notice Board For Employees -->
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-bullhorn"></i></div>
+                <h3>Notice Board For Employees</h3>
+                <p>Centralized announcement system with push notifications, email alerts, and important document sharing.</p>
+            </div>
+
+            <!-- 6. Year-wise Award System -->
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-trophy"></i></div>
+                <h3>Year-wise Award System</h3>
+                <p>Employee recognition programs, annual awards, achievement tracking, and digital certificates.</p>
+            </div>
+
+            <!-- 7. Power Pack Recruitment Tool -->
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-user-plus"></i></div>
+                <h3>Power Pack Recruitment Tool</h3>
+                <p>Applicant tracking, resume parsing, interview scheduling, onboarding workflows, and candidate database.</p>
+            </div>
+
+            <!-- 8. Rules Setup -->
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-gavel"></i></div>
+                <h3>Rules Setup</h3>
+                <p>Customizable company policies, attendance rules, leave policies, and automated compliance checks.</p>
+            </div>
+
+            <!-- 9. Point Setting -->
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-star"></i></div>
+                <h3>Point Setting</h3>
+                <p>Gamified reward system, performance points, redeemable benefits, and employee engagement tracking.</p>
+            </div>
+
+            <!-- 10. Mobile App Setting -->
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-mobile-alt"></i></div>
+                <h3>Mobile App Setting</h3>
+                <p>Fully responsive mobile app with push notifications, geo-attendance, and employee self-service portal.</p>
+            </div>
+
+            <!-- 11. Employee Salary Management -->
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-file-invoice-dollar"></i></div>
+                <h3>Employee Salary Management</h3>
+                <p>Automated payroll processing, tax calculations, salary slips, bank integration, and compliance reporting.</p>
+            </div>
+
+            <!-- 12. Project Management -->
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-project-diagram"></i></div>
+                <h3>Project Management</h3>
+                <p>Task assignment, time tracking, milestone tracking, resource allocation, and project profitability reports.</p>
+            </div>
+        </div>
+
+        <!-- Benefits Section -->
+        <h2 class="section-title">Why Choose <span class="gradient-text">BinaryQuest HRMS</span></h2>
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <div class="benefit-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                <h3>Cloud-Based Solution</h3>
+                <p>Access from anywhere, anytime. Automatic updates and secure data backup.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon"><i class="fas fa-shield-alt"></i></div>
+                <h3>Enterprise Security</h3>
+                <p>Bank-grade encryption, role-based access, and regular security audits.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon"><i class="fas fa-headset"></i></div>
+                <h3>24/7 Support</h3>
+                <p>Dedicated support team available round the clock for your assistance.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon"><i class="fas fa-chart-line"></i></div>
+                <h3>Analytics & Reports</h3>
+                <p>Customizable dashboards and real-time HR analytics for data-driven decisions.</p>
+            </div>
+        </div>
+
+        <!-- Pricing Section -->
+        <h2 class="section-title">Simple <span class="gradient-text">Pricing</span> Plans</h2>
+        <p class="section-subtitle">Choose the perfect plan for your organization's needs</p>
+
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <div class="pricing-title">Starter</div>
+                <div class="pricing-price">$49<span>/month</span></div>
+                <ul class="pricing-features">
+                    <li>Up to 50 Employees</li>
+                    <li>Core HR Features</li>
+                    <li>Attendance Management</li>
+                    <li>Leave Management</li>
+                    <li>Email Support</li>
+                </ul>
+                <button class="btn-outline" style="width:100%;" onclick="alert('Start Starter Plan')">Get Started</button>
+            </div>
+            <div class="pricing-card featured">
+                <div class="pricing-title">Professional</div>
+                <div class="pricing-price">$99<span>/month</span></div>
+                <ul class="pricing-features">
+                    <li>Up to 200 Employees</li>
+                    <li>All Features Included</li>
+                    <li>Recruitment Tool</li>
+                    <li>Performance Management</li>
+                    <li>Priority Support</li>
+                    <li>Mobile App Access</li>
+                </ul>
+                <button class="btn-solid" style="width:100%;" onclick="alert('Start Professional Plan')">Get Started</button>
+            </div>
+            <div class="pricing-card">
+                <div class="pricing-title">Enterprise</div>
+                <div class="pricing-price">Custom</div>
+                <ul class="pricing-features">
+                    <li>Unlimited Employees</li>
+                    <li>All Features + Custom</li>
+                    <li>Dedicated Account Manager</li>
+                    <li>Custom Integrations</li>
+                    <li>24/7 Phone Support</li>
+                    <li>On-premise Option</li>
+                </ul>
+                <button class="btn-outline" style="width:100%;" onclick="alert('Contact Sales')">Contact Sales</button>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="cta-section">
+            <h2 style="font-size: 32px; margin-bottom: 20px;">Ready to Transform Your <span class="gradient-text">HR Operations</span>?</h2>
+            <p style="color: #b0c4de; margin-bottom: 30px;">Join 500+ companies using BinaryQuest HRMS to manage their workforce efficiently.</p>
+            <div class="cta-buttons">
+                <button class="btn-solid" onclick="alert('📅 Demo scheduled! Our HRMS expert will contact you.')">Schedule Free Demo →</button>
+                <button class="btn-outline" onclick="alert('📧 Send email to sales@binaryquest.com')">Contact Sales</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function scrollToDemo() {
+            document.querySelector('.cta-section').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

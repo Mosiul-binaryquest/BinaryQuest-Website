@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BinaryQuest | Payroll Management System - Automated Payroll Solutions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #050B14;
+            color: #eef5ff;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background: rgba(5, 11, 20, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(0, 255, 170, 0.1);
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #FFFFFF 0%, #00FFAA 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #b0c4de;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: #00FFAA;
+        }
+
+        /* Dropdown Menu */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background: rgba(10, 20, 30, 0.95);
+            backdrop-filter: blur(10px);
+            min-width: 200px;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 255, 170, 0.2);
+            z-index: 1;
+            top: 100%;
+            left: 0;
+        }
+
+        .dropdown-content a {
+            color: #b0c4de;
+            padding: 12px 20px;
+            display: block;
+            font-size: 14px;
+        }
+
+        .dropdown-content a:hover {
+            background: rgba(0, 255, 170, 0.1);
+            color: #00FFAA;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .btn-outline {
+            border: 1px solid #00FFAA;
+            background: transparent;
+            padding: 10px 24px;
+            border-radius: 40px;
+            color: #00FFAA;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-outline:hover {
+            background: #00FFAA;
+            color: #050B14;
+            box-shadow: 0 0 15px #00FFAA;
+        }
+
+        .btn-solid {
+            background: #00FFAA;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 40px;
+            font-weight: 700;
+            color: #050B14;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 16px;
+        }
+
+        .btn-solid:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 255, 170, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid rgba(0, 255, 170, 0.5);
+            padding: 14px 32px;
+            border-radius: 40px;
+            font-weight: 600;
+            color: #00FFAA;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 255, 170, 0.1);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 80px 0 60px;
+            background: radial-gradient(circle at 30% 50%, rgba(0, 255, 170, 0.08), transparent);
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero-text h1 {
+            font-size: 52px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #00FFAA, #00CC88);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero-text p {
+            font-size: 18px;
+            color: #b0c4de;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 40px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item h3 {
+            font-size: 32px;
+            color: #00FFAA;
+        }
+
+        .hero-image {
+            flex: 1;
+            background: linear-gradient(135deg, rgba(0, 255, 170, 0.1), rgba(0, 100, 50, 0.2));
+            border-radius: 30px;
+            padding: 40px;
+            text-align: center;
+            border: 1px solid rgba(0, 255, 170, 0.2);
+        }
+
+        .hero-image i {
+            font-size: 80px;
+            color: #00FFAA;
+            opacity: 0.8;
+        }
+
+        /* Section Title */
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            font-weight: 700;
+            margin: 60px 0 20px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #b0c4de;
+            margin-bottom: 50px;
+            font-size: 18px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin: 60px 0;
+        }
+
+        .stat-card {
+            background: rgba(10, 20, 30, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            border: 1px solid rgba(0, 255, 170, 0.1);
+            transition: 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: #00FFAA;
+        }
+
+        .stat-number {
+            font-size: 42px;
+            font-weight: 800;
+            color: #00FFAA;
+        }
+
+        /* Companies Section - Success Stories */
+        .companies-section {
+            margin: 60px 0;
+        }
+
+        .companies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .company-card {
+            background: linear-gradient(135deg, #0a1420, #061020);
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 255, 170, 0.15);
+            transition: 0.3s;
+        }
+
+        .company-card:hover {
+            transform: translateY(-5px);
+            border-color: #00FFAA;
+            box-shadow: 0 15px 35px rgba(0, 255, 170, 0.1);
+        }
+
+        .company-header {
+            padding: 25px;
+            background: rgba(0, 255, 170, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            border-bottom: 1px solid rgba(0, 255, 170, 0.1);
+        }
+
+        .company-logo {
+            width: 60px;
+            height: 60px;
+            background: rgba(0, 255, 170, 0.15);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            color: #00FFAA;
+        }
+
+        .company-info h3 {
+            font-size: 22px;
+            margin-bottom: 5px;
+        }
+
+        .company-industry {
+            font-size: 13px;
+            color: #00FFAA;
+        }
+
+        .company-details {
+            padding: 25px;
+        }
+
+        .company-stats {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(0, 255, 170, 0.1);
+        }
+
+        .company-stat {
+            flex: 1;
+            text-align: center;
+        }
+
+        .company-stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: #00FFAA;
+        }
+
+        .company-stat-label {
+            font-size: 11px;
+            color: #b0c4de;
+        }
+
+        .company-description {
+            color: #b0c4de;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .company-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .tech-tag {
+            padding: 5px 12px;
+            background: rgba(0, 255, 170, 0.1);
+            border-radius: 20px;
+            font-size: 11px;
+            color: #00FFAA;
+        }
+
+        .testimonial {
+            background: rgba(0, 255, 170, 0.05);
+            padding: 15px;
+            border-radius: 12px;
+            margin-top: 15px;
+            font-style: italic;
+            font-size: 13px;
+            color: #c0d4e8;
+            border-left: 3px solid #00FFAA;
+        }
+
+        .testimonial-author {
+            margin-top: 10px;
+            font-size: 12px;
+            color: #00FFAA;
+            font-style: normal;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .feature-card {
+            background: rgba(10, 20, 30, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(0, 255, 170, 0.1);
+            transition: 0.3s;
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: #00FFAA;
+            background: rgba(0, 255, 170, 0.05);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(0, 255, 170, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 32px;
+            color: #00FFAA;
+        }
+
+        .feature-card h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+
+        .feature-card p {
+            color: #b0c4de;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        /* Dashboard Preview */
+        .dashboard-preview {
+            background: linear-gradient(135deg, #0a1420, #061020);
+            border-radius: 30px;
+            padding: 40px;
+            margin: 60px 0;
+            border: 1px solid rgba(0, 255, 170, 0.2);
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .chart-card {
+            background: rgba(5, 11, 20, 0.6);
+            border-radius: 20px;
+            padding: 20px;
+        }
+
+        canvas {
+            max-height: 250px;
+            width: 100%;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #0a1420, #061020);
+            border-radius: 30px;
+            padding: 60px;
+            text-align: center;
+            margin: 60px 0;
+            border: 1px solid rgba(0, 255, 170, 0.2);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+            }
+            
+            .hero-text h1 {
+                font-size: 36px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            nav {
+                padding: 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav-links {
+                gap: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .companies-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">BINARY<span>QUEST</span></div>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li class="dropdown">
+                <a href="#" class="active">Products ▾</a>
+                <div class="dropdown-content">
+                    <a href="#">ERP System</a>
+                    <a href="#">SCM Solution</a>
+                    <a href="#">CRM Platform</a>
+                    <a href="#">HRMS Software</a>
+                    <a href="#">Ecommerce Solution</a>
+                    <a href="#" style="color:#00FFAA;">Payroll Management</a>
+                </div>
+            </li>
+            <li><a href="#">Solutions</a></li>
+            <li><a href="#">AI Agents</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+        <button class="btn-outline" onclick="alert('📞 Schedule Payroll Demo')">Schedule Demo →</button>
+    </nav>
+
+    <div class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Automated <span class="gradient-text">Payroll Management</span> System</h1>
+                    <p>Streamline your payroll processing, ensure tax compliance, and pay your employees accurately and on time. Trusted by 100+ companies across Bangladesh and globally.</p>
+                    <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                        <button class="btn-solid" onclick="scrollToDemo()">Get a Quote →</button>
+                        <button class="btn-secondary">Watch Demo</button>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <h3>100+</h3>
+                            <p>Companies Served</p>
+                        </div>
+                        <div class="stat-item">
+                            <h3>50K+</h3>
+                            <p>Employees Processed</p>
+                        </div>
+                        <div class="stat-item">
+                            <h3>99.9%</h3>
+                            <p>Accuracy Rate</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <i class="fas fa-file-invoice-dollar"></i>
+                    <i class="fas fa-calculator" style="font-size: 60px; margin-top: 20px; display: inline-block; margin-left: 20px;"></i>
+                    <i class="fas fa-chart-line" style="font-size: 60px; margin-top: 20px; display: inline-block; margin-left: 20px;"></i>
+                    <p style="margin-top: 20px;">Accurate. Compliant. Automated.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">98%</div>
+                <div class="stat-label">Faster Processing</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Tax Compliance</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">60%</div>
+                <div class="stat-label">Cost Reduction</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Employee Portal</div>
+            </div>
+        </div>
+
+        <!-- Successful Implementations - Companies Section -->
+        <h2 class="section-title">Successful <span class="gradient-text">Payroll Implementations</span></h2>
+        <p class="section-subtitle">We've helped these companies streamline their payroll operations</p>
+
+        <div class="companies-section">
+            <div class="companies-grid">
+                <!-- Company 1 -->
+                <div class="company-card">
+                    <div class="company-header">
+                        <div class="company-logo"><i class="fas fa-chart-line"></i></div>
+                        <div class="company-info">
+                            <h3>TechMahi Group</h3>
+                            <div class="company-industry">IT & Software</div>
+                        </div>
+                    </div>
+                    <div class="company-details">
+                        <div class="company-stats">
+                            <div class="company-stat">
+                                <div class="company-stat-value">500+</div>
+                                <div class="company-stat-label">Employees</div>
+                            </div>
+                            <div class="company-stat">
+                                <div class="company-stat-value">3</div>
+                                <div class="company-stat-label">Countries</div>
+                            </div>
+                            <div class="company-stat">
+                                <div class="company-stat-value">85%</div>
+                                <div class="company-stat-label">Time Saved</div>
+                            </div>
+                        </div>
+                        <div class="company-description">
+                            Automated payroll for 500+ employees across Bangladesh, USA, and UAE. Integrated with local tax authorities for seamless compliance.
+                        </div>
+                        <div class="company-tech">
+                            <span class="tech-tag">Multi-Currency</span>
+                            <span class="tech-tag">Tax Compliance</span>
+                            <span class="tech-tag">Bank Integration</span>
+                        </div>
+                        <div class="testimonial">
+                            "BinaryQuest's payroll system reduced our processing time from 2 weeks to 2 days. Absolutely game-changing!"
+                            <div class="testimonial-author">— Mahmud Hasan, CFO</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Company 2 -->
+                <div class="company-card">
+                    <div class="company-header">
+                        <div class="company-logo"><i class="fas fa-hospital-user"></i></div>
+                        <div class="company-info">
+                            <h3>United Healthcare</h3>
+                            <div class="company-industry">Healthcare</div>
+                        </div>
+                    </div>
+                    <div class="company-details">
+                        <div class="company-stats">
+                            <div class="company-stat">
+                                <div class="company-stat-value">1,200+</div>
+                                <div class="company-stat-label">Employees</div>
+                            </div>
+                            <div class="company-stat">
+                                <div class="company-stat-value">8</div>
+                                <div class="company-stat-label">Locations</div>
+                            </div>
+                            <div class="company-stat">
+                                <div class="company-stat-value">99.9%</div>
+                                <div class="company-stat-label">Accuracy</div>
+                            </div>
+                        </div>
+                        <div class="company-description">
+                            Implemented automated payroll for 1,200+ healthcare staff across 8 hospitals. Handles shift differentials, overtime, and benefits.
+                        </div>
+                        <div class="company-tech">
+                            <span class="tech-tag">Shift Management</span>
+                            <span class="tech-tag">Benefits Integration</span>
+                            <span class="tech-tag">Compliance</span>
+                        </div>
+                        <div class="testimonial">
+                            "The shift-based payroll calculation is flawless. Our employees love the self-service portal."
+                            <div class="testimonial-author">— Dr. Sarah Khan, HR Director</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Company 3 -->
+                <div class="company-card">
+                    <div class="company-header">
+                        <div class="company-logo"><i class="fas fa-tshirt"></i></div>
+                        <div class="company-info">
+                            <h3>Fashion Express Ltd</h3>
+                            <div class="company-industry">Retail & Manufacturing</div>
+                        </div>
+                    </div>
+                    <div class="company-details">
+                        <div class="company-stats">
+                            <div class="company-stat">
+                                <div class="company-stat-value">3,500+</div>
+                                <div class="company-stat-label">Employees</div>
+                            </div>
+                            <div class="company-stat">
+                                <div class="company-stat-value">5</div>
+                                <div class="company-stat-label">Factories</div>
+                            </div>
+                            <div class="company-stat">
+                                <div class="company-stat-value">95%</div>
+                                <div class="company-stat-label">Efficiency Gain</div>
+                            </div>
+                        </div>
+                        <div class="company-description">
+                            Large-scale payroll implementation for 3,500+ factory workers. Integrated with biometric attendance and piece-rate calculation.
+                        </div>
+                        <div class="company-tech">
+                            <span class="tech-tag">Biometric Integration</span>
+                            <span class="tech-tag">Piece-Rate</span>
+                            <span class="tech-tag">Labor Law Compliance</span>
+                        </div>
+                        <div class="testimonial">
+                            "Managing payroll for 3,500 workers used to take weeks. Now it's done in 3 days. Incredible!"
+                            <div class="testimonial-author">— Rashed Karim, Plant Manager</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Company 4 -->
+                <div class="company-card">
+                    <div class="company-header">
+                        <div class="company-logo"><i class="fas fa-university"></i></div>
+                        <div class="company-info">
+                            <h3>Prime Bank Ltd</h3>
+                            <div class="company-industry">Banking & Finance</div>
+                        </div>
+                    </div>
+                    <div class="company-details">
+                        <div class="company-stats">
+                            <div class="company-stat">
+                                <div class="company-stat-value">2,800+</div>
+                                <div class="company-stat-label">Employees</div>
+                            </div>
+                            <div class="company-stat">
+                                <div class="company-stat-value">120+</div>
+                                <div class="company-stat-label">Branches</div>
+                            </div>
+                            <div class="company-stat">
+                                <div class="company-stat-value">100%</div>
+                                <div class="company-stat-label">Compliance</div>
+                            </div>
+                        </div>
+                        <div class="company-description">
+                            Enterprise-grade payroll solution for one of Bangladesh's leading banks. Handles complex tax structures and regulatory reporting.
+                        </div>
+                        <div class="company-tech">
+                            <span class="tech-tag">Bank-Grade Security</span>
+                            <span class="tech-tag">Tax Reporting</span>
+                            <span class="tech-tag">Audit Trail</span>
+                        </div>
+                        <div class="testimonial">
+                            "Security and compliance were our top priorities. BinaryQuest delivered beyond expectations."
+                            <div class="testimonial-author">— Farzana Ahmed, COO</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Company 5 -->
+                <div class="company-card">
+                    <div class="company-header">
+                        <div class="company-logo"><i class="fas fa-globe"></i></div>
+                        <div class="company-info">
+                            <h3>Global Outsourcing Inc</h3>
+                            <div class="company-industry">BPO / Outsourcing</div>
+                        </div>
+                    </div>
+                    <div class="company-details">
+                        <div class="company-stats">
+                            <div class="company-stat">
+                                <div class="company-stat-value">850+</div>
+                                <div class="company-stat-label">Employees</div>
+                            </div>
+                            <div class="company-stat">
+                                <div class="company-stat-value">4</div>
+                                <div class="company-stat-label">Time Zones</div>
+                            </div>
+                            <div class="company-stat">
+                                <div class="company-stat-value">70%</div>
+                                <div class="company-stat-label">Cost Savings</div>
+                            </div>
+                        </div>
+                        <div class="company-description">
+                            Multi-country payroll management for remote teams across Asia, Europe, and North America. Handles multiple currencies and tax jurisdictions.
+                        </div>
+                        <div class="company-tech">
+                            <span class="tech-tag">Multi-Currency</span>
+                            <span class="tech-tag">Remote Team</span>
+                            <span class="tech-tag">Global Compliance</span>
+                        </div>
+                        <div class="testimonial">
+                            "Managing payroll across 4 countries was a nightmare. Now it's seamless and automated."
+                            <div class="testimonial-author">— David Wilson, CEO</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Company 6 -->
+                <div class="company-card">
+                    <div class="company-header">
+                        <div class="company-logo"><i class="fas fa-school"></i></div>
+                        <div class="company-info">
+                            <h3>British International School</h3>
+                            <div class="company-industry">Education</div>
+                        </div>
+                    </div>
+                    <div class="company-details">
+                        <div class="company-stats">
+                            <div class="company-stat">
+                                <div class="company-stat-value">350+</div>
+                                <div class="company-stat-label">Staff</div>
+                            </div>
+                            <div class="company-stat">
+                                <div class="company-stat-value">2</div>
+                                <div class="company-stat-label">Campuses</div>
+                            </div>
+                            <div class="company-stat">
+                                <div class="company-stat-value">100%</div>
+                                <div class="company-stat-label">On-Time Payroll</div>
+                            </div>
+                        </div>
+                        <div class="company-description">
+                            Complete payroll automation for teaching and administrative staff. Handles salary scales, deductions, and annual increments.
+                        </div>
+                        <div class="company-tech">
+                            <span class="tech-tag">Salary Scales</span>
+                            <span class="tech-tag">Auto-Increments</span>
+                            <span class="tech-tag">Tax Deductions</span>
+                        </div>
+                        <div class="testimonial">
+                            "Teachers love the online payslip portal. No more printing and distributing paper slips!"
+                            <div class="testimonial-author">— John Mitchell, Principal</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Payroll Features -->
+        <h2 class="section-title">Powerful <span class="gradient-text">Payroll Features</span></h2>
+        <p class="section-subtitle">Everything you need to manage payroll efficiently</p>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-calculator"></i></div>
+                <h3>Auto Salary Calculation</h3>
+                <p>Automatic calculation of basic pay, allowances, deductions, and net salary based on attendance and leave data.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-file-invoice"></i></div>
+                <h3>Digital Payslips</h3>
+                <p>Generate and email professional payslips automatically. Employees can access past payslips anytime.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-building"></i></div>
+                <h3>Tax Compliance</h3>
+                <p>Automatic tax calculation for Bangladesh (TDS, VAT) and international tax jurisdictions.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-university"></i></div>
+                <h3>Bank Integration</h3>
+                <p>Direct salary transfers to employee bank accounts with automated reconciliation.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                <h3>Real-Time Reports</h3>
+                <p>Generate payroll summaries, tax reports, and department-wise cost analysis instantly.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-clock"></i></div>
+                <h3>Attendance Integration</h3>
+                <p>Seamless integration with biometric devices and attendance systems for accurate payroll.</p>
+            </div>
+        </div>
+
+        <!-- Payroll Dashboard Preview -->
+        <div class="dashboard-preview">
+            <div class="dashboard-header">
+                <h3><i class="fas fa-chart-simple"></i> Payroll Analytics Dashboard</h3>
+            </div>
+            <div class="dashboard-grid">
+                <div class="chart-card">
+                    <h4>Monthly Payroll Cost</h4>
+                    <canvas id="payrollCostChart"></canvas>
+                </div>
+                <div class="chart-card">
+                    <h4>Department-wise Distribution</h4>
+                    <canvas id="departmentPayrollChart"></canvas>
+                </div>
+                <div class="chart-card">
+                    <h4>Salary vs Allowances</h4>
+                    <canvas id="salaryBreakdownChart"></canvas>
+                </div>
+                <div class="chart-card">
+                    <h4>Recent Payroll Activity</h4>
+                    <div style="color:#b0c4de; font-size:14px;">
+                        <p><i class="fas fa-check-circle" style="color:#00FFAA;"></i> April 2024 payroll processed - 1,250 employees</p>
+                        <p><i class="fas fa-check-circle" style="color:#00FFAA;"></i> Tax reports generated for Q1 2024</p>
+                        <p><i class="fas fa-check-circle" style="color:#00FFAA;"></i> Salary disbursement completed - Mar 31</p>
+                        <p><i class="fas fa-clock" style="color:#FFA500;"></i> Next payroll run: April 30, 2024</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="cta-section">
+            <h2 style="font-size: 32px; margin-bottom: 20px;">Ready to Automate Your <span class="gradient-text">Payroll Process</span>?</h2>
+            <p style="color: #b0c4de; margin-bottom: 30px;">Join 100+ companies that trust BinaryQuest for accurate, compliant, and efficient payroll management.</p>
+            <div class="cta-buttons">
+                <button class="btn-solid" onclick="alert('📞 Get a personalized quote for your company')">Get a Quote →</button>
+                <button class="btn-outline" onclick="alert('📅 Schedule a live demo with our payroll expert')">Schedule Demo</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Charts
+        let payrollCostChart, departmentPayrollChart, salaryBreakdownChart;
+
+        function initCharts() {
+            // Payroll Cost Chart
+            const costCtx = document.getElementById('payrollCostChart').getContext('2d');
+            payrollCostChart = new Chart(costCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                    datasets: [{
+                        label: 'Payroll Cost ($K)',
+                        data: [245, 258, 262, 275, 280, 295],
+                        borderColor: '#00FFAA',
+                        backgroundColor: 'rgba(0, 255, 170, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { labels: { color: '#b0c4de' } } },
+                    scales: { y: { ticks: { color: '#b0c4de' } }, x: { ticks: { color: '#b0c4de' } } }
+                }
+            });
+
+            // Department Payroll Distribution
+            const deptCtx = document.getElementById('departmentPayrollChart').getContext('2d');
+            departmentPayrollChart = new Chart(deptCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Engineering', 'Sales', 'Operations', 'HR', 'Finance', 'Marketing'],
+                    datasets: [{ 
+                        data: [185, 95, 75, 45, 55, 40],
+                        backgroundColor: ['#00FFAA', '#00CC88', '#009966', '#00AA77', '#008855', '#006644']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { labels: { color: '#b0c4de' } } }
+                }
+            });
+
+            // Salary Breakdown
+            const salaryCtx = document.getElementById('salaryBreakdownChart').getContext('2d');
+            salaryBreakdownChart = new Chart(salaryCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Basic', 'HRA', 'DA', 'Bonus', 'Deductions', 'Net Pay'],
+                    datasets: [{
+                        label: 'Amount ($)',
+                        data: [3500, 1200, 500, 400, -350, 5250],
+                        backgroundColor: ['#00FFAA', '#00CC88', '#009966', '#00AA77', '#FF6B6B', '#00FFAA']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { labels: { color: '#b0c4de' } } },
+                    scales: { y: { ticks: { color: '#b0c4de' } }, x: { ticks: { color: '#b0c4de' } } }
+                }
+            });
+        }
+
+        function scrollToDemo() {
+            document.querySelector('.cta-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        window.addEventListener('load', initCharts);
+    </script>
+</body>
+</html>

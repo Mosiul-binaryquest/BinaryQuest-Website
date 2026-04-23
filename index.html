@@ -1,0 +1,559 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>BinaryQuest | AI Agents & Automation</title>
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            transition: all 0.3s ease;
+        }
+
+        /* Loading Overlay */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #050B14;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(0,255,170,0.2);
+            border-top-color: #00FFAA;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* ============================================
+           REGION: ASIA (Dark Cyber Theme - Default)
+           ============================================ */
+        body.region-asia {
+            background-color: #050B14;
+            color: #eef5ff;
+        }
+        body.region-asia .region-specific-bg {
+            background: radial-gradient(circle at 20% 50%, rgba(0,255,170,0.05) 0%, transparent 50%);
+        }
+        body.region-asia .glow-text {
+            text-shadow: 0 0 10px rgba(0, 255, 170, 0.3);
+        }
+        body.region-asia .btn-solid {
+            background: #00FFAA;
+            color: #050B14;
+        }
+        body.region-asia .btn-outline {
+            border-color: #00FFAA;
+            color: #00FFAA;
+        }
+
+        /* ============================================
+           REGION: EUROPE (Minimalist Glassmorphism)
+           ============================================ */
+        body.region-europe {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9edf2 100%);
+            color: #1a2a3a;
+        }
+        body.region-europe .region-specific-bg {
+            background: rgba(255,255,255,0.4);
+            backdrop-filter: blur(10px);
+        }
+        body.region-europe .service-card {
+            background: rgba(255,255,255,0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0,0,0,0.05);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.05);
+        }
+        body.region-europe .btn-solid {
+            background: #2c3e66;
+            color: white;
+        }
+        body.region-europe .btn-outline {
+            border-color: #2c3e66;
+            color: #2c3e66;
+        }
+        body.region-europe .logo {
+            background: linear-gradient(135deg, #1a2a3a, #2c3e66);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* ============================================
+           REGION: AMERICAS (Vibrant Startup Style)
+           ============================================ */
+        body.region-americas {
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: #ffffff;
+        }
+        body.region-americas .region-specific-bg {
+            background: radial-gradient(circle at 80% 20%, rgba(255,107,107,0.15), rgba(78,84,200,0.1));
+        }
+        body.region-americas .service-card {
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+        body.region-americas .btn-solid {
+            background: linear-gradient(135deg, #ff6b6b, #4e54c8);
+            color: white;
+        }
+        body.region-americas .btn-outline {
+            border-color: #ff6b6b;
+            color: #ff6b6b;
+        }
+        body.region-americas .glow-text {
+            background: linear-gradient(135deg, #ff6b6b, #4e54c8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* ============================================
+           REGION: AUSTRALIA (Warm Nature Inspired)
+           ============================================ */
+        body.region-australia {
+            background: linear-gradient(135deg, #fdf6e3 0%, #e8d5b5 100%);
+            color: #5c4033;
+        }
+        body.region-australia .region-specific-bg {
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.05"><path fill="%23d4a373" d="M50,10 L60,40 L90,40 L65,60 L75,90 L50,70 L25,90 L35,60 L10,40 L40,40 Z"/></svg>') repeat;
+        }
+        body.region-australia .service-card {
+            background: rgba(255,248,225,0.85);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(212,163,115,0.3);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+        }
+        body.region-australia .btn-solid {
+            background: #d4a373;
+            color: white;
+        }
+        body.region-australia .btn-outline {
+            border-color: #d4a373;
+            color: #d4a373;
+        }
+        body.region-australia .logo {
+            color: #8b5a2b;
+        }
+
+        /* Shared Components */
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 30px;
+            position: relative;
+            z-index: 2;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 0;
+            flex-wrap: wrap;
+        }
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+        body.region-asia .nav-links a { color: #b0c4de; }
+        body.region-europe .nav-links a { color: #2c3e66; }
+        body.region-americas .nav-links a { color: rgba(255,255,255,0.8); }
+        body.region-australia .nav-links a { color: #8b5a2b; }
+        
+        .nav-links a:hover { opacity: 0.7; }
+        
+        .btn-outline, .btn-solid {
+            padding: 10px 24px;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            border: 2px solid;
+            background: transparent;
+        }
+        .btn-solid { border: none; }
+        .btn-outline:hover, .btn-solid:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .hero {
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+            padding: 40px 0;
+        }
+        .hero-left { flex: 1; }
+        .hero-badge {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 40px;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        body.region-asia .hero-badge { background: rgba(0,255,170,0.1); color: #00FFAA; }
+        body.region-europe .hero-badge { background: rgba(44,62,102,0.1); color: #2c3e66; }
+        body.region-americas .hero-badge { background: rgba(255,107,107,0.2); color: #ff6b6b; }
+        body.region-australia .hero-badge { background: rgba(212,163,115,0.2); color: #d4a373; }
+        
+        .hero-left h1 { font-size: 58px; font-weight: 800; line-height: 1.2; margin-bottom: 20px; }
+        .hero-left p { font-size: 18px; margin: 25px 0; opacity: 0.8; max-width: 550px; }
+        .hero-stats { display: flex; gap: 40px; margin-top: 40px; flex-wrap: wrap; }
+        .stat h3 { font-size: 28px; font-weight: 700; }
+        
+        .hero-right {
+            flex: 1;
+            border-radius: 30px;
+            padding: 30px;
+        }
+        body.region-asia .hero-right { background: rgba(10,20,30,0.6); backdrop-filter: blur(12px); border: 1px solid rgba(0,255,170,0.2); }
+        body.region-europe .hero-right { background: rgba(255,255,255,0.6); backdrop-filter: blur(12px); border: 1px solid rgba(0,0,0,0.05); }
+        body.region-americas .hero-right { background: rgba(255,255,255,0.08); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.15); }
+        body.region-australia .hero-right { background: rgba(255,248,225,0.7); backdrop-filter: blur(12px); border: 1px solid rgba(212,163,115,0.3); }
+        
+        .section-title { text-align: center; font-size: 42px; font-weight: 700; margin: 80px 0 20px; }
+        .section-sub { text-align: center; margin-bottom: 50px; opacity: 0.7; }
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+        .service-card {
+            border-radius: 24px;
+            padding: 30px;
+            transition: all 0.3s ease;
+        }
+        .service-card:hover { transform: translateY(-8px); }
+        .service-icon { font-size: 42px; margin-bottom: 20px; }
+        .service-card h3 { font-size: 24px; margin-bottom: 15px; }
+        
+        .cta-section {
+            border-radius: 40px;
+            padding: 60px 40px;
+            text-align: center;
+            margin: 60px 0;
+        }
+        body.region-asia .cta-section { background: linear-gradient(145deg, #0A1420, #03070f); border: 1px solid #00FFAA30; }
+        body.region-europe .cta-section { background: white; box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
+        body.region-americas .cta-section { background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); }
+        body.region-australia .cta-section { background: rgba(255,248,225,0.9); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        
+        .cta-buttons { display: flex; gap: 20px; justify-content: center; margin-top: 30px; flex-wrap: wrap; }
+        footer { text-align: center; padding: 40px 0; border-top: 1px solid; opacity: 0.6; }
+        
+        .region-indicator {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            z-index: 1000;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            pointer-events: none;
+        }
+        
+        @media (max-width: 768px) {
+            .container { padding: 0 20px; }
+            .hero-left h1 { font-size: 38px; }
+            .nav-links { gap: 20px; margin-top: 15px; }
+            .section-title { font-size: 32px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <div class="region-indicator" id="regionIndicator">Detecting region...</div>
+
+    <div class="container">
+        <nav>
+            <div class="logo">BINARY<span>QUEST</span></div>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Solutions</a></li>
+                <li><a href="#">AI Agents</a></li>
+                <li><a href="#">Case Studies</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+            <button class="btn-outline" id="contactBtn">Start a Project →</button>
+        </nav>
+
+        <div class="hero">
+            <div class="hero-left">
+                <div class="hero-badge">
+                    <i class="fas fa-microchip"></i> Powering the Future with AI
+                </div>
+                <h1>
+                    Automate. Innovate. <br>
+                    <span class="glow-text">Scale with AI Agents</span>
+                </h1>
+                <p id="taglineText">BinaryQuest delivers enterprise-grade automation, intelligent AI agents, and future-ready software solutions for global businesses.</p>
+                <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                    <button class="btn-solid">Explore Solutions →</button>
+                    <button class="btn-outline">Watch Demo</button>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat"><h3>95%</h3><p>Faster Automation</p></div>
+                    <div class="stat"><h3>24/7</h3><p>AI Agent Uptime</p></div>
+                    <div class="stat"><h3>50+</h3><p>Enterprise Clients</p></div>
+                </div>
+            </div>
+            <div class="hero-right">
+                <div class="terminal-window" style="font-family: monospace;">
+                    <div class="terminal-line" id="terminalLine1">>_ initializing BinaryQuest core...</div>
+                    <div class="terminal-line" id="terminalLine2">>_ Loading AI Agent modules: [SUCCESS]</div>
+                    <div class="terminal-line" id="terminalLine3">>_ Connecting to automation engine...</div>
+                    <div class="terminal-line" id="terminalLine4" style="font-weight: bold;">>_ Status: READY to deploy</div>
+                    <div class="terminal-line">$ request --data "build AI solution"</div>
+                    <div class="terminal-line" style="color: #00FFAA;" id="terminalResponse">> Response: Let's transform your workflow.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-title">Core <span class="glow-text">Intelligence</span></div>
+        <div class="section-sub">What makes BinaryQuest the best fit for modern enterprises</div>
+
+        <div class="card-grid" id="servicesGrid">
+            <!-- Services will be dynamically populated based on region -->
+        </div>
+
+        <div class="cta-section">
+            <h2 id="ctaTitle">Ready to <span class="glow-text">Automate</span> Your Success?</h2>
+            <p id="ctaSubtext" style="max-width: 600px; margin: 0 auto;">Join the leading companies that trust BinaryQuest for AI-driven transformation.</p>
+            <div class="cta-buttons">
+                <button class="btn-solid" id="ctaMainBtn">Discuss Your Project →</button>
+                <button class="btn-outline" id="ctaMailBtn"> <i class="far fa-envelope"></i> contact@binaryquest.com</button>
+            </div>
+        </div>
+
+        <footer>
+            <p id="footerText">© 2025 BinaryQuest — Redefining Automation Globally. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Region-specific content configuration
+        const regionConfigs = {
+            asia: {
+                tagline: "BinaryQuest delivers enterprise-grade automation, intelligent AI agents, and future-ready software solutions for businesses in Asia and beyond.",
+                terminalResponse: "> Response: Let's transform your Asian market workflow.",
+                services: [
+                    { icon: "fa-robot", title: "Autonomous AI Agents", desc: "Custom AI agents that learn, decide, and execute tasks. 24/7 autonomous operations tailored for Asian enterprises." },
+                    { icon: "fa-chalkboard-user", title: "Workflow Automation", desc: "End-to-end process automation using RPA. Reduce human error by 99%." },
+                    { icon: "fa-brain", title: "LLM Integration", desc: "Harness GPT, Gemini, and open-source LLMs tailored for Bengali and Asian languages." },
+                    { icon: "fa-code-branch", title: "Modern Dev Stack", desc: ".NET 8, Python, React, Cloud-Native — scalable and secure." },
+                    { icon: "fa-chart-line", title: "Predictive Analytics", desc: "Machine learning models that forecast trends for Asian markets." },
+                    { icon: "fa-shield-alt", title: "AI Security", desc: "Enterprise-grade security ensuring compliance and data privacy." }
+                ],
+                ctaTitle: "Ready to Automate Your Success?",
+                ctaSubtext: "Join leading Asian companies that trust BinaryQuest for AI-driven transformation.",
+                footer: "© 2025 BinaryQuest — Redefining Automation in Asia. All rights reserved."
+            },
+            europe: {
+                tagline: "BinaryQuest delivers GDPR-compliant automation, ethical AI agents, and enterprise-grade software solutions for European businesses.",
+                terminalResponse: "> Response: Your EU-compliant solution is ready.",
+                services: [
+                    { icon: "fa-shield-alt", title: "GDPR-Compliant AI", desc: "Fully compliant AI agents respecting European data privacy laws." },
+                    { icon: "fa-robot", title: "Enterprise Automation", desc: "Scalable automation for manufacturing, finance, and logistics." },
+                    { icon: "fa-brain", title: "Ethical AI", desc: "Transparent, explainable AI models for regulated industries." },
+                    { icon: "fa-code-branch", title: "Microservices Architecture", desc: "Modern, cloud-native solutions for European enterprises." },
+                    { icon: "fa-chart-line", title: "Business Intelligence", desc: "Data-driven insights for competitive advantage." },
+                    { icon: "fa-handshake", title: "Strategic Consulting", desc: "End-to-end digital transformation guidance." }
+                ],
+                ctaTitle: "Future-Proof Your European Business",
+                ctaSubtext: "Join innovative European companies leveraging BinaryQuest's AI solutions.",
+                footer: "© 2025 BinaryQuest — Empowering European Innovation. All rights reserved."
+            },
+            americas: {
+                tagline: "BinaryQuest delivers cutting-edge AI agents, hyper-automation, and next-gen software for ambitious American businesses ready to scale.",
+                terminalResponse: "> Response: Let's disrupt your industry together. 🚀",
+                services: [
+                    { icon: "fa-rocket", title: "Hyper-Automation", desc: "Scale fast with AI-powered automation solutions." },
+                    { icon: "fa-robot", title: "Intelligent Agents", desc: "AI that works 24/7 to grow your business." },
+                    { icon: "fa-cloud-upload-alt", title: "Cloud-Native Dev", desc: "AWS, Azure, GCP — we build for the cloud." },
+                    { icon: "fa-chart-line", title: "Real-Time Analytics", desc: "Instant insights for instant decisions." },
+                    { icon: "fa-code", title: "Full-Stack Excellence", desc: "React, .NET, Python — modern tech stack." },
+                    { icon: "fa-users", title: "Team Augmentation", desc: "Build your dream engineering team with us." }
+                ],
+                ctaTitle: "Ready to Disrupt Your Market?",
+                ctaSubtext: "Join American innovators who are scaling with BinaryQuest's AI solutions.",
+                footer: "© 2025 BinaryQuest — Built for American Ambition. All rights reserved."
+            },
+            australia: {
+                tagline: "BinaryQuest delivers sustainable automation, intelligent AI agents, and future-ready software for Australian and New Zealand businesses.",
+                terminalResponse: "> Response: Let's build something amazing for ANZ.",
+                services: [
+                    { icon: "fa-leaf", title: "Sustainable Automation", desc: "Eco-friendly, efficient automation solutions." },
+                    { icon: "fa-robot", title: "Smart AI Agents", desc: "Intelligent agents for local business needs." },
+                    { icon: "fa-chart-line", title: "Local Market Analytics", desc: "Insights tailored for ANZ markets." },
+                    { icon: "fa-code-branch", title: "Modern Development", desc: "Latest tech stack for scalable solutions." },
+                    { icon: "fa-hand-peace", title: "Partnership Approach", desc: "We grow together with our clients." },
+                    { icon: "fa-clock", title: "24/7 Support", desc: "Round-the-clock assistance for peace of mind." }
+                ],
+                ctaTitle: "Transform Your ANZ Business",
+                ctaSubtext: "Join forward-thinking Australian companies leveraging BinaryQuest's AI expertise.",
+                footer: "© 2025 BinaryQuest — Innovating Down Under. All rights reserved."
+            }
+        };
+
+        // Detect region using IP Geolocation API
+        async function detectRegion() {
+            try {
+                // Using free IP geolocation API (ipapi.co)
+                const response = await fetch('https://ipapi.co/json/');
+                const data = await response.json();
+                
+                const countryCode = data.country_code;
+                const continentCode = data.continent_code;
+                
+                console.log('Detected:', { countryCode, continentCode });
+                
+                // Determine region based on continent or specific countries
+                if (continentCode === 'AS') return 'asia';
+                if (continentCode === 'EU') return 'europe';
+                if (continentCode === 'NA' || continentCode === 'SA') return 'americas';
+                if (continentCode === 'OC' || countryCode === 'AU' || countryCode === 'NZ') return 'australia';
+                
+                // Default to Asia (or adjust as needed)
+                return 'asia';
+            } catch (error) {
+                console.error('Geolocation failed:', error);
+                return 'asia'; // Fallback to Asia theme
+            }
+        }
+
+        // Apply region-specific styles and content
+        function applyRegion(region) {
+            const body = document.body;
+            const regionNames = {
+                asia: 'Asia 🌏',
+                europe: 'Europe 🇪🇺',
+                americas: 'Americas 🌎',
+                australia: 'Australia/New Zealand 🌏'
+            };
+            
+            // Remove existing region classes
+            body.classList.remove('region-asia', 'region-europe', 'region-americas', 'region-australia');
+            // Add new region class
+            body.classList.add(`region-${region}`);
+            
+            // Update region indicator
+            document.getElementById('regionIndicator').innerHTML = `📍 Serving: ${regionNames[region]}`;
+            
+            // Get config for this region
+            const config = regionConfigs[region];
+            
+            // Update dynamic content
+            document.getElementById('taglineText').innerText = config.tagline;
+            document.getElementById('terminalResponse').innerHTML = config.terminalResponse;
+            document.getElementById('ctaTitle').innerHTML = config.ctaTitle;
+            document.getElementById('ctaSubtext').innerHTML = config.ctaSubtext;
+            document.getElementById('footerText').innerHTML = config.footer;
+            
+            // Update services grid
+            const servicesGrid = document.getElementById('servicesGrid');
+            servicesGrid.innerHTML = '';
+            config.services.forEach(service => {
+                const card = document.createElement('div');
+                card.className = 'service-card';
+                card.innerHTML = `
+                    <div class="service-icon"><i class="fas ${service.icon}"></i></div>
+                    <h3>${service.title}</h3>
+                    <p>${service.desc}</p>
+                `;
+                servicesGrid.appendChild(card);
+            });
+            
+            // Update terminal lines for variety based on region
+            const terminalLines = {
+                asia: ['>_ initializing BinaryQuest core for Asia...', '>_ Loading AI Agent modules: [SUCCESS]', '>_ Connecting to regional automation engine...'],
+                europe: ['>_ Starting BinaryQuest EU instance...', '>_ GDPR compliance check: PASSED', '>_ Enterprise security protocols active...'],
+                americas: ['>_ Booting BinaryQuest Americas...', '>_ Loading hyper-automation modules: [READY]', '>_ Scaling for growth...'],
+                australia: ['>_ Initializing BinaryQuest ANZ...', '>_ Loading local intelligence...', '>_ Automation engine ready...']
+            };
+            
+            const lines = terminalLines[region];
+            if (lines) {
+                document.getElementById('terminalLine1').innerHTML = lines[0];
+                document.getElementById('terminalLine2').innerHTML = lines[1];
+                document.getElementById('terminalLine3').innerHTML = lines[2];
+            }
+        }
+
+        // Initialize the application
+        async function init() {
+            const region = await detectRegion();
+            applyRegion(region);
+            
+            // Hide loading overlay
+            setTimeout(() => {
+                const overlay = document.getElementById('loadingOverlay');
+                overlay.style.opacity = '0';
+                setTimeout(() => {
+                    overlay.style.display = 'none';
+                }, 500);
+            }, 800);
+        }
+        
+        // Button event listeners
+        document.getElementById('contactBtn')?.addEventListener('click', () => {
+            alert("📧 Reach out to us: hello@binaryquest.com | Let's automate your business!");
+        });
+        document.getElementById('ctaMainBtn')?.addEventListener('click', () => {
+            alert("🚀 Get a free consultation for AI Agents & Automation from BinaryQuest.");
+        });
+        document.getElementById('ctaMailBtn')?.addEventListener('click', () => {
+            window.location.href = "mailto:contact@binaryquest.com";
+        });
+        
+        // Start the app
+        init();
+    </script>
+</body>
+</html>
