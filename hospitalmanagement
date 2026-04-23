@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BinaryQuest | Hospital Management System - Padma Diagnostic Centre Ltd</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #050B14; color: #eef5ff; overflow-x: hidden; }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 50px; background: rgba(5, 11, 20, 0.95); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100; border-bottom: 1px solid rgba(0, 255, 170, 0.1); }
+        .logo { font-size: 28px; font-weight: 800; background: linear-gradient(135deg, #FFFFFF 0%, #00FFAA 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .nav-links { display: flex; gap: 40px; list-style: none; }
+        .nav-links a { text-decoration: none; color: #b0c4de; font-weight: 500; transition: 0.3s; }
+        .nav-links a:hover, .nav-links a.active { color: #00FFAA; }
+        .dropdown { position: relative; display: inline-block; }
+        .dropdown-content { display: none; position: absolute; background: rgba(10, 20, 30, 0.95); backdrop-filter: blur(10px); min-width: 220px; border-radius: 12px; border: 1px solid rgba(0, 255, 170, 0.2); z-index: 1; top: 100%; left: 0; }
+        .dropdown-content a { color: #b0c4de; padding: 12px 20px; display: block; font-size: 14px; }
+        .dropdown-content a:hover { background: rgba(0, 255, 170, 0.1); color: #00FFAA; }
+        .dropdown:hover .dropdown-content { display: block; }
+        .btn-outline { border: 1px solid #00FFAA; background: transparent; padding: 10px 24px; border-radius: 40px; color: #00FFAA; font-weight: 600; cursor: pointer; transition: 0.3s; }
+        .btn-outline:hover { background: #00FFAA; color: #050B14; box-shadow: 0 0 15px #00FFAA; }
+        .btn-solid { background: #00FFAA; border: none; padding: 14px 32px; border-radius: 40px; font-weight: 700; color: #050B14; cursor: pointer; transition: 0.3s; font-size: 16px; }
+        .btn-solid:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0, 255, 170, 0.3); }
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 30px; }
+        .hero { padding: 80px 0 60px; background: radial-gradient(circle at 30% 50%, rgba(0, 255, 170, 0.08), transparent); }
+        .hero-content { display: flex; align-items: center; gap: 50px; flex-wrap: wrap; }
+        .hero-text { flex: 1; }
+        .hero-text h1 { font-size: 52px; font-weight: 800; margin-bottom: 20px; line-height: 1.2; }
+        .gradient-text { background: linear-gradient(135deg, #00FFAA, #00CC88); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .hero-text p { font-size: 18px; color: #b0c4de; margin-bottom: 30px; line-height: 1.6; }
+        .hero-stats { display: flex; gap: 40px; margin-top: 30px; flex-wrap: wrap; }
+        .stat-item h3 { font-size: 32px; color: #00FFAA; }
+        .hero-image { flex: 1; background: linear-gradient(135deg, rgba(0, 255, 170, 0.1), rgba(0, 100, 50, 0.2)); border-radius: 30px; padding: 40px; text-align: center; border: 1px solid rgba(0, 255, 170, 0.2); }
+        .hero-image i { font-size: 80px; color: #00FFAA; opacity: 0.8; }
+        .section-title { text-align: center; font-size: 36px; font-weight: 700; margin: 60px 0 20px; }
+        .section-subtitle { text-align: center; color: #b0c4de; margin-bottom: 50px; font-size: 18px; max-width: 700px; margin-left: auto; margin-right: auto; }
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; margin: 60px 0; }
+        .stat-card { background: rgba(10, 20, 30, 0.6); backdrop-filter: blur(10px); border-radius: 20px; padding: 30px; text-align: center; border: 1px solid rgba(0, 255, 170, 0.1); transition: 0.3s; }
+        .stat-card:hover { transform: translateY(-5px); border-color: #00FFAA; }
+        .stat-number { font-size: 42px; font-weight: 800; color: #00FFAA; }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin: 50px 0; }
+        .feature-card { background: rgba(10, 20, 30, 0.6); backdrop-filter: blur(10px); border-radius: 20px; padding: 30px; border: 1px solid rgba(0, 255, 170, 0.1); transition: 0.3s; }
+        .feature-card:hover { transform: translateY(-5px); border-color: #00FFAA; background: rgba(0, 255, 170, 0.05); }
+        .feature-icon { width: 60px; height: 60px; background: rgba(0, 255, 170, 0.1); border-radius: 15px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; font-size: 28px; color: #00FFAA; }
+        .feature-card h3 { font-size: 20px; margin-bottom: 12px; }
+        .feature-card p { color: #b0c4de; line-height: 1.5; font-size: 14px; }
+        .client-spotlight { background: linear-gradient(135deg, #0a1420, #061020); border-radius: 30px; padding: 50px; margin: 60px 0; border: 2px solid #00FFAA; position: relative; overflow: hidden; }
+        .client-spotlight::before { content: ''; position: absolute; top: -50%; right: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(0, 255, 170, 0.05), transparent); pointer-events: none; }
+        .client-header { display: flex; align-items: center; gap: 30px; margin-bottom: 30px; flex-wrap: wrap; }
+        .client-logo { width: 100px; height: 100px; background: rgba(0, 255, 170, 0.15); border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 50px; color: #00FFAA; border: 1px solid rgba(0, 255, 170, 0.3); }
+        .client-title h3 { font-size: 32px; color: #00FFAA; }
+        .client-title p { font-size: 16px; color: #b0c4de; }
+        .client-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin: 30px 0; }
+        .client-stat { text-align: center; padding: 20px; background: rgba(0, 255, 170, 0.05); border-radius: 20px; }
+        .client-stat-value { font-size: 36px; font-weight: 800; color: #00FFAA; }
+        .client-stat-label { font-size: 14px; color: #b0c4de; }
+        .testimonial-large { font-size: 20px; font-style: italic; color: #eef5ff; padding: 30px; background: rgba(0, 0, 0, 0.3); border-radius: 20px; margin-top: 20px; border-left: 4px solid #00FFAA; }
+        .badge { display: inline-block; background: #00FFAA; color: #050B14; padding: 5px 15px; border-radius: 30px; font-size: 12px; font-weight: 700; margin-bottom: 15px; }
+        .cta-section { background: linear-gradient(135deg, #0a1420, #061020); border-radius: 30px; padding: 60px; text-align: center; margin: 60px 0; border: 1px solid rgba(0, 255, 170, 0.2); }
+        @media (max-width: 768px) {
+            .container { padding: 0 20px; }
+            .hero-text h1 { font-size: 36px; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .client-stats { grid-template-columns: 1fr; }
+            .client-header { flex-direction: column; text-align: center; }
+            nav { padding: 20px; flex-direction: column; gap: 15px; }
+            .nav-links { gap: 20px; flex-wrap: wrap; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">BINARY<span>QUEST</span></div>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li class="dropdown">
+                <a href="#" class="active">Products ▾</a>
+                <div class="dropdown-content">
+                    <a href="#">Production Management</a>
+                    <a href="#">Document Management</a>
+                    <a href="#">School Management</a>
+                    <a href="#" style="color:#00FFAA;">Hospital Management</a>
+                    <a href="#">ERP System</a>
+                    <a href="#">HRMS Software</a>
+                </div>
+            </li>
+            <li><a href="#">Solutions</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+        <button class="btn-outline" onclick="alert('📞 Schedule Hospital Demo')">Request Demo →</button>
+    </nav>
+
+    <div class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <div class="badge">⭐ Featured Client: 5+ Years Partnership</div>
+                    <h1>Hospital <span class="gradient-text">Management System</span></h1>
+                    <p>Complete digital solution for hospitals, clinics, and diagnostic centers. Streamline patient care, billing, inventory, and medical records.</p>
+                    <button class="btn-solid" onclick="scrollToDemo()">Start Free Trial →</button>
+                    <div class="hero-stats">
+                        <div class="stat-item"><h3>30+</h3><p>Hospitals Deployed</p></div>
+                        <div class="stat-item"><h3>500K+</h3><p>Patients Served</p></div>
+                        <div class="stat-item"><h3>99%</h3><p>Patient Satisfaction</p></div>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <i class="fas fa-hospital-user"></i>
+                    <i class="fas fa-stethoscope" style="font-size: 60px; margin-left: 20px;"></i>
+                    <i class="fas fa-chart-line" style="font-size: 60px; margin-left: 20px;"></i>
+                    <p style="margin-top: 20px;">Quality Care Through Technology</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="stats-grid">
+            <div class="stat-card"><div class="stat-number">60%</div><div class="stat-label">Faster Patient Check-in</div></div>
+            <div class="stat-card"><div class="stat-number">100%</div><div class="stat-label">Digital Records</div></div>
+            <div class="stat-card"><div class="stat-number">24/7</div><div class="stat-label">Patient Portal</div></div>
+            <div class="stat-card"><div class="stat-number">ISO</div><div class="stat-label">Certified Compliance</div></div>
+        </div>
+
+        <!-- CLIENT SPOTLIGHT: Padma Diagnostic Centre Ltd -->
+        <div class="client-spotlight">
+            <div class="client-header">
+                <div class="client-logo"><i class="fas fa-heartbeat"></i></div>
+                <div class="client-title">
+                    <h3>Padma Diagnostic Centre Ltd</h3>
+                    <p>⭐ Long-Term Technology Partner Since 2020</p>
+                </div>
+            </div>
+            <div class="client-stats">
+                <div class="client-stat"><div class="client-stat-value">150K+</div><div class="client-stat-label">Patients Annually</div></div>
+                <div class="client-stat"><div class="client-stat-value">50+</div><div class="client-stat-label">Doctors & Specialists</div></div>
+                <div class="client-stat"><div class="client-stat-value">98%</div><div class="client-stat-label">Patient Satisfaction</div></div>
+            </div>
+            <div class="testimonial-large">
+                <i class="fas fa-quote-left" style="color: #00FFAA; margin-right: 10px;"></i>
+                "BinaryQuest has been our trusted technology partner for over 5 years. Their Hospital Management System transformed our operations – from patient registration to billing and diagnostics reporting. We've seen a 60% reduction in wait times and complete digital transformation of our medical records. The team at BinaryQuest understands healthcare like no other."
+                <div style="margin-top: 20px; font-style: normal;">
+                    <strong>— Dr. Md. Rafiqul Islam</strong><br>
+                    <span style="font-size: 14px; color: #00FFAA;">Managing Director, Padma Diagnostic Centre Ltd</span>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">Complete <span class="gradient-text">Hospital Management Features</span></h2>
+        <div class="features-grid">
+            <div class="feature-card"><div class="feature-icon"><i class="fas fa-user-md"></i></div><h3>Patient Management</h3><p>Centralized patient records, registration history, appointment scheduling, and medical history tracking.</p></div>
+            <div class="feature-card"><div class="feature-icon"><i class="fas fa-calendar-check"></i></div><h3>Appointment Scheduling</h3><p>Online booking, doctor availability management, automated reminders, and waitlist management.</p></div>
+            <div class="feature-card"><div class="feature-icon"><i class="fas fa-file-medical"></i></div><h3>Electronic Medical Records (EMR)</h3><p>Secure digital patient records, prescription management, lab results integration, and historical data access.</p></div>
+            <div class="feature-card"><div class="feature-icon"><i class="fas fa-flask"></i></div><h3>Laboratory & Diagnostics</h3><p>Test ordering, sample tracking, result entry, automated report generation, and integration with diagnostic equipment.</p></div>
+            <div class="feature-card"><div class="feature-icon"><i class="fas fa-capsules"></i></div><h3>Pharmacy Management</h3><p>Inventory tracking, prescription fulfillment, expiry date alerts, and automated reordering.</p></div>
+            <div class="feature-card"><div class="feature-icon"><i class="fas fa-file-invoice-dollar"></i></div><h3>Billing & Insurance</h3><p>Automated invoice generation, insurance claim processing, payment tracking, and financial reporting.</p></div>
+            <div class="feature-card"><div class="feature-icon"><i class="fas fa-warehouse"></i></div><h3>Inventory Management</h3><p>Medical supplies tracking, purchase orders, vendor management, and stock level alerts.</p></div>
+            <div class="feature-card"><div class="feature-icon"><i class="fas fa-chart-pie"></i></div><h3>Analytics & Reporting</h3><p>Real-time dashboards, patient demographics, revenue analysis, and operational KPIs.</p></div>
+        </div>
+
+        <h2 class="section-title">Other <span class="gradient-text">Healthcare Clients</span></h2>
+        <div class="stats-grid">
+            <div class="stat-card"><div class="stat-number">15+</div><div class="stat-label">Partner Hospitals</div></div>
+            <div class="stat-card"><div class="stat-number">25+</div><div class="stat-label">Diagnostic Centers</div></div>
+            <div class="stat-card"><div class="stat-number">500+</div><div class="stat-label">Healthcare Professionals</div></div>
+            <div class="stat-card"><div class="stat-number">10+</div><div class="stat-label">Clinics</div></div>
+        </div>
+
+        <div class="cta-section" id="cta">
+            <h2 style="font-size: 32px; margin-bottom: 20px;">Ready to Transform Your <span class="gradient-text">Healthcare Facility</span>?</h2>
+            <p style="color: #b0c4de; margin-bottom: 30px;">Join Padma Diagnostic Centre Ltd and 30+ healthcare providers using BinaryQuest HMS.</p>
+            <button class="btn-solid" onclick="alert('📞 Get a personalized hospital management demo')">Request Demo →</button>
+        </div>
+    </div>
+    <script>function scrollToDemo() { document.getElementById('cta').scrollIntoView({ behavior: 'smooth' }); }</script>
+</body>
+</html>
