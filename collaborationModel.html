@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>BinaryQuest – Collaboration Models | Engage, Build, Scale</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #ffffff;
+      color: #1a2c3e;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #0f2b3d;
+      color: white;
+      font-weight: 600;
+      padding: 12px 28px;
+      border-radius: 40px;
+      text-decoration: none;
+      transition: 0.25s;
+      border: none;
+    }
+    .btn-primary:hover {
+      background: #1f4d6b;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+    }
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: transparent;
+      border: 1px solid #0f2b3d;
+      color: #0f2b3d;
+      font-weight: 500;
+      padding: 10px 24px;
+      border-radius: 40px;
+      text-decoration: none;
+      transition: 0.2s;
+    }
+    .btn-outline:hover {
+      background: #eef3fa;
+      border-color: #1f4d6b;
+    }
+
+    .navbar {
+      padding: 20px 0;
+      border-bottom: 1px solid #eef2f8;
+      position: sticky;
+      top: 0;
+      background: white;
+      z-index: 100;
+    }
+    .nav-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: linear-gradient(130deg, #0f2b3d, #2a6f8f);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 500;
+      color: #2c475c;
+    }
+    .nav-links a.active, .nav-links a:hover {
+      color: #0f2b3d;
+      font-weight: 600;
+    }
+
+    .hero {
+      padding: 70px 0 60px;
+      background: linear-gradient(100deg, #f4f9fe 0%, #ffffff 80%);
+    }
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 20px;
+      color: #0a1c2c;
+    }
+    .hero p {
+      font-size: 1.1rem;
+      color: #415f77;
+      max-width: 680px;
+      margin-bottom: 32px;
+    }
+
+    .section {
+      padding: 80px 0;
+    }
+    .section-sm {
+      padding: 56px 0;
+    }
+    .section-title {
+      text-align: center;
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: #0a1c2c;
+    }
+    .section-sub {
+      text-align: center;
+      color: #5c7a94;
+      max-width: 720px;
+      margin: 0 auto 48px;
+      font-size: 1.05rem;
+    }
+
+    .model-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 32px;
+      margin-top: 20px;
+    }
+    .model-card {
+      background: #ffffff;
+      border-radius: 32px;
+      padding: 32px 28px;
+      border: 1px solid #eef2f8;
+      transition: all 0.25s;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.02);
+    }
+    .model-card:hover {
+      transform: translateY(-6px);
+      border-color: #cddfe9;
+      box-shadow: 0 24px 32px -16px rgba(0,0,0,0.1);
+    }
+    .model-icon {
+      font-size: 2.8rem;
+      margin-bottom: 20px;
+    }
+    .model-card h3 {
+      font-size: 1.7rem;
+      margin-bottom: 12px;
+    }
+    .model-badge {
+      display: inline-block;
+      background: #eef3fa;
+      padding: 4px 12px;
+      border-radius: 30px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: #0f2b3d;
+    }
+    .feature-list {
+      list-style: none;
+      margin: 20px 0 24px;
+    }
+    .feature-list li {
+      margin-bottom: 12px;
+      padding-left: 24px;
+      position: relative;
+    }
+    .feature-list li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: #2a6f8f;
+      font-weight: 700;
+    }
+
+    .comp-table-wrapper {
+      background: #f8fbfe;
+      border-radius: 32px;
+      padding: 32px 24px;
+      margin-top: 20px;
+      overflow-x: auto;
+    }
+    .comp-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 640px;
+    }
+    .comp-table th {
+      text-align: left;
+      padding: 16px 12px;
+      background: #eef3fa;
+      font-weight: 700;
+      color: #0a1c2c;
+    }
+    .comp-table td {
+      padding: 14px 12px;
+      border-bottom: 1px solid #e2ecf3;
+    }
+
+    .stats-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 24px;
+      text-align: center;
+      margin-top: 40px;
+    }
+    .stat-item {
+      flex: 1;
+      background: white;
+      border-radius: 28px;
+      padding: 24px 16px;
+      border: 1px solid #eef2f8;
+    }
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #0f2b3d;
+    }
+
+    .cta-box {
+      background: linear-gradient(130deg, #eef4fa, #ffffff);
+      border-radius: 48px;
+      padding: 56px 32px;
+      text-align: center;
+    }
+    .footer {
+      background: #0a1c2c;
+      color: #bcd0df;
+      padding: 48px 0 28px;
+      margin-top: 40px;
+    }
+    @media (max-width: 780px) {
+      .hero h1 { font-size: 2.2rem; }
+      .nav-links { gap: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="container nav-flex">
+    <div class="logo">BinaryQuest</div>
+    <div class="nav-links">
+      <a href="#">Home</a>
+      <a href="#" class="active">Collaboration Models</a>
+      <a href="#">Services</a>
+      <a href="#">Clients</a>
+      <a href="#">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container">
+    <span style="background:#e0edf5; padding:4px 14px; border-radius:40px; font-size:0.75rem; font-weight:700;">✦ partnership that works for you</span>
+    <h1>Collaboration models designed <br> for clarity, agility & shared success</h1>
+    <p>Whether you need a dedicated team, expert guidance, or end‑to‑end product delivery — we adapt to your goals, budget, and culture.</p>
+    <div>
+      <a href="#" class="btn-primary">Talk to our team →</a>
+      <a href="#" class="btn-outline" style="margin-left: 16px;">Explore engagement options</a>
+    </div>
+  </div>
+</section>
+
+<!-- Three core collaboration models -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">Choose the right engagement model</h2>
+    <p class="section-sub">From staff augmentation to product incubation — we meet you where you are.</p>
+    <div class="model-grid">
+      
+      <!-- Dedicated Team -->
+      <div class="model-card">
+        <div class="model-icon">👥</div>
+        <div class="model-badge">SCALABLE & LONG‑TERM</div>
+        <h3>Dedicated Team</h3>
+        <p>Build a remote, hand‑picked squad that works as an extension of your internal organisation.</p>
+        <ul class="feature-list">
+          <li>Full ownership of roadmap & daily stand‑ups</li>
+          <li>Transparent time tracking, weekly demos</li>
+          <li>Seamless integration with your tools (Jira, Slack, GitHub)</li>
+          <li>Replace / scale team members on demand</li>
+          <li>Ideal for long‑term product development & legacy maintenance</li>
+        </ul>
+        <a href="#" class="btn-outline" style="margin-top: 8px;">Hire a dedicated team →</a>
+      </div>
+
+      <!-- Time & Material -->
+      <div class="model-card">
+        <div class="model-icon">⏱️💰</div>
+        <div class="model-badge">FLEXIBLE & ITERATIVE</div>
+        <h3>Time & Material</h3>
+        <p>Ideal for evolving requirements, MVPs, or long‑term partnerships where scope may change.</p>
+        <ul class="feature-list">
+          <li>Pay only for actual hours worked</li>
+          <li>Rapid feature prioritisation & changes</li>
+          <li>Full transparency with timesheets & billing</li>
+          <li>No lock‑in, pause or stop anytime</li>
+          <li>Best for startups, R&D, and innovation sprints</li>
+        </ul>
+        <a href="#" class="btn-outline" style="margin-top: 8px;">Start agile engagement →</a>
+      </div>
+
+      <!-- Fixed Price / Project Based -->
+      <div class="model-card">
+        <div class="model-icon">📋✅</div>
+        <div class="model-badge">PREDICTABLE & SCOPE‑DRIVEN</div>
+        <h3>Fixed Price</h3>
+        <p>Well‑defined requirements, clear milestones, and firm budget – perfect for specific deliverables.</p>
+        <ul class="feature-list">
+          <li>Defined scope, timeline & cost</li>
+          <li>Milestone‑based payments & sign‑offs</li>
+          <li>Risk managed by BinaryQuest</li>
+          <li>Ideal for integrations, migrations, prototypes</li>
+          <li>Guaranteed delivery date & budget certainty</li>
+        </ul>
+        <a href="#" class="btn-outline" style="margin-top: 8px;">Request a quote →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Comparison table -->
+<section class="section-sm" style="background: #fafdff;">
+  <div class="container">
+    <h2 class="section-title">How to choose the right model</h2>
+    <div class="comp-table-wrapper">
+      <table class="comp-table">
+        <thead><tr><th>Criteria</th><th>Dedicated Team</th><th>Time & Material</th><th>Fixed Price</th></tr></thead>
+        <tbody>
+          <tr><td>🎯 Best for</td><td>Long‑term product development</td><td>MVPs, startups, evolving specs</td><td>Well‑defined projects</td></tr>
+          <tr><td>💰 Budget predictability</td><td>Monthly operational cost</td><td>Flexible, changes allowed</td><td>Fixed total price</td></tr>
+          <tr><td>🔄 Scope changes</td><td>Easy, team adapts</td><td>Very flexible</td><td>Requires change order</td></tr>
+          <tr><td>👥 Client control</td><td>High – daily collaboration</td><td>High – backlog prioritisation</td><td>Medium – milestone reviews</td></tr>
+          <tr><td>⚡ Ramp‑up time</td><td>1–2 weeks</td><td>Immediate</td><td>After discovery phase</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- Additional collaboration models -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">Beyond development: strategic collaboration</h2>
+    <div class="model-grid">
+      <div class="model-card">
+        <div class="model-icon">🧠</div>
+        <h3>Technology advisory</h3>
+        <p>Architecture review, cloud strategy, legacy modernisation, and technology stack selection. Outcome‑focused workshops with C‑level alignment.</p>
+        <ul class="feature-list"><li>Technical due diligence</li><li>Cloud cost optimisation</li><li>AI/ML readiness assessment</li></ul>
+      </div>
+      <div class="model-card">
+        <div class="model-icon">🚀</div>
+        <h3>Product incubation</h3>
+        <p>From idea to MVP: we help validate, design, build, and launch your digital product. Equity/revenue‑share options available for early‑stage startups.</p>
+        <ul class="feature-list"><li>Lean validation & prototyping</li><li>Investor‑ready pitch & metrics</li><li>Post‑launch iteration & scaling</li></ul>
+      </div>
+      <div class="model-card">
+        <div class="model-icon">🤝</div>
+        <h3>Co‑managed teams</h3>
+        <p>We supply senior engineers/architects who work under your project management. Full IP ownership remains yours. Blended on‑shore/offshore model.</p>
+        <ul class="feature-list"><li>Flexible team composition</li><li>Knowledge transfer & documentation</li><li>24/5 support coverage</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Why BinaryQuest -->
+<section class="section-sm" style="background: #f8fbfe;">
+  <div class="container">
+    <div class="stats-row">
+      <div class="stat-item"><div class="stat-number">98%</div><p>client retention rate</p></div>
+      <div class="stat-item"><div class="stat-number">150+</div><p>successful collaborations</p></div>
+      <div class="stat-item"><div class="stat-number">4.9/5</div><p>avg. client satisfaction</p></div>
+      <div class="stat-item"><div class="stat-number">24h</div><p>typical response time</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Trust & Security -->
+<section class="section-sm">
+  <div class="container">
+    <div style="display: flex; flex-wrap: wrap; gap: 32px; justify-content: space-between; text-align: center;">
+      <div><span style="font-size:2rem;">🔒</span><br/><strong>Full IP ownership</strong><br/>You own every line of code.</div>
+      <div><span style="font-size:2rem;">🤝</span><br/><strong>NDA & protection</strong><br/>Mutual NDAs and modern security practices.</div>
+      <div><span style="font-size:2rem;">🌍</span><br/><strong>Global delivery</strong><br/>On‑shore, near‑shore, dedicated centres.</div>
+      <div><span style="font-size:2rem;">📈</span><br/><strong>Transparent reporting</strong><br/>Weekly dashboards, real‑time progress.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section">
+  <div class="container cta-box">
+    <h2 style="font-size: 1.9rem; margin-bottom: 16px;">Ready to build together?</h2>
+    <p style="margin-bottom: 32px; max-width: 600px; margin-left: auto; margin-right: auto;">Tell us about your idea, and we’ll recommend the collaboration model that fits best.</p>
+    <div>
+      <a href="#" class="btn-primary">Schedule a free consultation →</a>
+      <a href="#" class="btn-outline" style="margin-left: 16px;">See how we work</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 32px;">
+      <div><strong>BinaryQuest</strong><br/>Collaboration without complexity</div>
+      <div>© 2025 BinaryQuest. All rights reserved.<br/>partner@binaryquest.com</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

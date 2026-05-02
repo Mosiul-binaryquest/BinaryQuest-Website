@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>BinaryQuest - Cloud Transformation</title>
+  <!-- Google Fonts & Simple CSS Reset -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #ffffff;
+      color: #1f2937;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* buttons */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background-color: #0f3b5c;
+      color: white;
+      font-weight: 600;
+      padding: 12px 28px;
+      border-radius: 40px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      border: none;
+      cursor: pointer;
+      font-size: 0.95rem;
+    }
+    .btn-primary:hover {
+      background-color: #1e5a7d;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      border: 1px solid #0f3b5c;
+      color: #0f3b5c;
+      font-weight: 600;
+      padding: 10px 24px;
+      border-radius: 40px;
+      text-decoration: none;
+      transition: 0.2s;
+    }
+    .btn-outline:hover {
+      background: #eef4ff;
+      border-color: #1e5a7d;
+    }
+
+    /* header / nav */
+    .navbar {
+      padding: 20px 0;
+      border-bottom: 1px solid #eef2f6;
+      position: sticky;
+      top: 0;
+      background: white;
+      z-index: 100;
+    }
+    .nav-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #0f3b5c, #2c6e9e);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: #2c3e50;
+      font-weight: 500;
+      transition: 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active {
+      color: #0f3b5c;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 80px 0 64px;
+      background: linear-gradient(120deg, #f0f9ff 0%, #ffffff 70%);
+    }
+    .hero-grid {
+      display: flex;
+      align-items: center;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+    .hero-content {
+      flex: 1;
+    }
+    .hero-badge {
+      background: #e9f0f5;
+      color: #0f3b5c;
+      padding: 4px 12px;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      display: inline-block;
+      margin-bottom: 20px;
+    }
+    .hero-content h1 {
+      font-size: 3.2rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 20px;
+      color: #0a2540;
+    }
+    .hero-content p {
+      font-size: 1.1rem;
+      color: #4b5563;
+      margin-bottom: 32px;
+      max-width: 540px;
+    }
+    .hero-stats {
+      flex: 0.8;
+      background: white;
+      border-radius: 32px;
+      padding: 28px;
+      box-shadow: 0 20px 35px -10px rgba(0,0,0,0.05);
+      border: 1px solid #eef2f6;
+    }
+
+    /* section style */
+    .section {
+      padding: 80px 0;
+    }
+    .section-sm {
+      padding: 60px 0;
+    }
+    .section-title {
+      text-align: center;
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: #0a2540;
+    }
+    .section-sub {
+      text-align: center;
+      color: #5b6e8c;
+      max-width: 680px;
+      margin: 0 auto 48px;
+      font-size: 1.1rem;
+    }
+
+    /* cards grid */
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
+      gap: 32px;
+    }
+    .card {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 32px 28px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.02);
+      border: 1px solid #edf2f7;
+      transition: all 0.25s;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 30px -12px rgba(0,0,0,0.1);
+      border-color: #cddfe7;
+    }
+    .card-icon {
+      width: 52px;
+      height: 52px;
+      background: #eef2ff;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+    .card h3 {
+      font-size: 1.4rem;
+      margin-bottom: 12px;
+    }
+    .card p {
+      color: #4b5563;
+      margin-bottom: 20px;
+    }
+
+    /* approach steps */
+    .steps {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      justify-content: center;
+      margin-top: 32px;
+    }
+    .step-item {
+      background: #f9fbfd;
+      border-radius: 28px;
+      padding: 28px 24px;
+      flex: 1;
+      min-width: 220px;
+      text-align: center;
+      border-bottom: 3px solid #0f3b5c;
+    }
+    .step-number {
+      display: inline-block;
+      background: #0f3b5c10;
+      color: #0f3b5c;
+      font-weight: 800;
+      padding: 6px 14px;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      margin-bottom: 20px;
+    }
+
+    /* journey timeline */
+    .journey-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+      gap: 24px;
+      margin-top: 32px;
+    }
+    .journey-card {
+      background: white;
+      border-radius: 20px;
+      padding: 24px;
+      border: 1px solid #eef2f6;
+      text-align: center;
+    }
+    .journey-icon {
+      font-size: 2rem;
+      margin-bottom: 12px;
+    }
+
+    /* platforms */
+    .platform-badge {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 32px;
+      margin-top: 24px;
+    }
+    .platform-badge span {
+      font-weight: 600;
+      background: #f8fafc;
+      padding: 8px 24px;
+      border-radius: 60px;
+      border: 1px solid #e2e8f0;
+    }
+
+    /* footer */
+    .footer {
+      background: #0a1927;
+      color: #cbd5e6;
+      padding: 48px 0 32px;
+      margin-top: 40px;
+    }
+    .footer a {
+      color: #cbd5e6;
+      text-decoration: none;
+    }
+    @media (max-width: 800px) {
+      .hero-content h1 { font-size: 2.4rem; }
+      .nav-links { gap: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="navbar">
+  <div class="container nav-flex">
+    <div class="logo">BinaryQuest</div>
+    <div class="nav-links">
+      <a href="#">Home</a>
+      <a href="#" class="active">Cloud Transformation</a>
+      <a href="#">Services</a>
+      <a href="#">Success Stories</a>
+      <a href="#">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-content">
+      <span class="hero-badge">✦ Future-ready cloud solutions</span>
+      <h1>Cloud Transformation<br> that drives business agility</h1>
+      <p>BinaryQuest strategizes and builds next‑gen cloud solutions, helping organizations accelerate digital transformation, reduce costs, and innovate faster.</p>
+      <a href="#" class="btn-primary">Start your journey →</a>
+    </div>
+    <div class="hero-stats">
+      <p style="font-weight: 600; margin-bottom: 16px;">📊 Enterprise‑centric approach</p>
+      <ul style="list-style: none; margin-bottom: 24px;">
+        <li style="margin-bottom: 12px;">✓ 98% client retention</li>
+        <li style="margin-bottom: 12px;">✓ 150+ cloud migrations</li>
+        <li style="margin-bottom: 12px;">✓ 24/7 managed cloud ops</li>
+      </ul>
+      <a href="#" class="btn-outline" style="margin-top: 8px;">Talk to a cloud architect →</a>
+    </div>
+  </div>
+</section>
+
+<!-- Challenges / Why BinaryQuest -->
+<section class="section">
+  <div class="container">
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-icon">⚙️</div>
+        <h3>Cloud strategy & readiness</h3>
+        <p>Assess current landscape, define KPIs, and create a practical cloud adoption roadmap tailored to your industry and culture.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🚀</div>
+        <h3>Migration & modernization</h3>
+        <p>Lift & shift, replatform, or fully re-architect legacy apps to maximize cloud elasticity, security & cost efficiency.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔐</div>
+        <h3>Cloud-native & DevOps</h3>
+        <p>Build microservices, containerized applications, and implement CI/CD pipelines to speed up time‑to‑market.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Your cloud transformation partner (approach + services) -->
+<section class="section" style="background-color: #fafcff;">
+  <div class="container">
+    <h2 class="section-title">Your cloud transformation partner</h2>
+    <p class="section-sub">BinaryQuest enables you to reduce hosting costs, improve reliability, and meet user needs faster.</p>
+    <div style="display: flex; flex-wrap: wrap; gap: 30px; margin-top: 20px;">
+      <div style="flex: 1; min-width: 240px;">
+        <h3 style="margin-bottom: 16px;">🎯 The right mix of people</h3>
+        <p>We assemble cross‑functional teams of industry experts and cloud engineers who work side‑by‑side with your staff, transferring skills and ensuring sustainable transformation.</p>
+      </div>
+      <div style="flex: 1; min-width: 240px;">
+        <h3 style="margin-bottom: 16px;">🧩 Solution delivery excellence</h3>
+        <p>Proven artifacts, roadmaps and implementation frameworks to minimize risk, optimize costs and accelerate outcomes.</p>
+      </div>
+      <div style="flex: 1; min-width: 240px;">
+        <h3 style="margin-bottom: 16px;">☁️ Holistic cloud services</h3>
+        <p>From strategy advisory to migration, cloud-native development and managed services – one partner for the entire journey.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Our Cloud Services (detailed) -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">Cloud services we deliver</h2>
+    <p class="section-sub">End‑to‑end expertise across AWS, Azure, GCP and hybrid environments</p>
+    <div class="grid-3">
+      <div class="card"><h3>📘 Define an effective cloud strategy</h3><p>Assess existing infrastructure, map dependencies, and create a business‑driven transformation roadmap.</p></div>
+      <div class="card"><h3>⬆️ Migrate existing custom applications</h3><p>Remediate, migrate and validate applications to ensure zero disruption and full functionality.</p></div>
+      <div class="card"><h3>🆕 Develop new cloud‑native apps</h3><p>Microservices, serverless, container orchestration – modern architectures built for scale.</p></div>
+      <div class="card"><h3>🛠️ Manage cloud infrastructure</h3><p>24/7 monitoring, cost optimization, security & compliance (HIPAA, PCI‑DSS, ISO).</p></div>
+      <div class="card"><h3>🔄 Apply DevOps successfully</h3><p>Unified CI/CD, infrastructure‑as‑code, and automated testing environments.</p></div>
+      <div class="card"><h3>⚡ Data & analytics modernization</h3><p>Cloud data warehouses, real‑time pipelines and AI/ML readiness.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Our Approach (custom steps) -->
+<section class="section" style="background: #f9fefb;">
+  <div class="container">
+    <h2 class="section-title">Our approach – built for outcomes</h2>
+    <div class="steps">
+      <div class="step-item"><div class="step-number">1. Customized consulting</div><p>Align cloud strategy with your unique business goals, operating model and culture.</p></div>
+      <div class="step-item"><div class="step-number">2. Collaborative teams</div><p>Dedicated cloud architects + your internal champions – knowledge transfer included.</p></div>
+      <div class="step-item"><div class="step-number">3. Delivery excellence</div><p>Agile methodology, automated tooling and continuous risk management.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Cloud transformation journey timeline -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">Your cloud transformation journey</h2>
+    <div class="journey-grid">
+      <div class="journey-card"><div class="journey-icon">🧭</div><h3>Strategy & Planning</h3><p>Discover, assess, roadmap, governance</p></div>
+      <div class="journey-card"><div class="journey-icon">🎨</div><h3>Design</h3><p>Target architecture, deployment model, cloud provider selection</p></div>
+      <div class="journey-card"><div class="journey-icon">⚙️</div><h3>Development / Migration</h3><p>Build new or migrate existing apps, data & integrations</p></div>
+      <div class="journey-card"><div class="journey-icon">🚀</div><h3>Deployment & Optimize</h3><p>Go‑live, monitoring, FinOps, continuous improvement</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Platforms and success stories (condensed) -->
+<section class="section-sm">
+  <div class="container">
+    <h2 class="section-title">Delivering solutions on leading cloud platforms</h2>
+    <div class="platform-badge">
+      <span>AWS</span><span>Microsoft Azure</span><span>Google Cloud</span><span>Kubernetes</span><span>Docker</span><span>Terraform</span>
+    </div>
+  </div>
+</section>
+
+<!-- Success Stories (3 cards, same style as techlogix) -->
+<section class="section" style="background-color: #fafcff;">
+  <div class="container">
+    <h2 class="section-title">Success stories</h2>
+    <p class="section-sub">Real-world impact across industries</p>
+    <div class="grid-3">
+      <div class="card"><h3>🏛️ Campus on Cloud</h3><p>Cloud‑based student lifecycle management system with self‑service admissions, enrollment, grading and analytics – increased efficiency by 45%.</p><a href="#" style="color:#0f3b5c; font-weight:500; margin-top:16px; display:inline-block;">Read more →</a></div>
+      <div class="card"><h3>🏥 HealthCloud</h3><p>Patient‑centric EHR and hospital management platform (web + mobile) integrated with labs and pharmacy systems via HL7, serving 50+ clinics.</p><a href="#" style="color:#0f3b5c; font-weight:500; margin-top:16px; display:inline-block;">Read more →</a></div>
+      <div class="card"><h3>📊 TMX Sales Distribution</h3><p>Cloud platform for secondary sales: mobile apps for field agents, real‑time dashboards and route optimization – boosted agent productivity by 30%.</p><a href="#" style="color:#0f3b5c; font-weight:500; margin-top:16px; display:inline-block;">Read more →</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- Final CTA -->
+<section class="section" style="padding: 60px 0 80px;">
+  <div class="container" style="background: linear-gradient(120deg, #eef4fa, #ffffff); border-radius: 48px; padding: 56px 32px; text-align: center;">
+    <h2 style="font-size: 1.9rem; margin-bottom: 16px;">Ready to transform your business with cloud?</h2>
+    <p style="margin-bottom: 32px; max-width: 600px; margin-left: auto; margin-right: auto;">Let’s discuss your cloud roadmap and build a tailored strategy.</p>
+    <a href="#" class="btn-primary" style="background: #0f3b5c;">Get in touch →</a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 32px;">
+      <div><strong>BinaryQuest</strong><br>Cloud Transformation & Digital Engineering</div>
+      <div>© 2025 BinaryQuest. All rights reserved.<br>hello@binaryquest.com</div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

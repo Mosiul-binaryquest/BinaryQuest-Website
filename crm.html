@@ -970,3 +970,83 @@
                     ]
                 },
                 options: {
+                    responsive: true,
+                    plugins: { legend: { labels: { color: '#b0c4de' } } },
+                    scales: { y: { ticks: { color: '#b0c4de' } }, x: { ticks: { color: '#b0c4de' } } }
+                }
+            });
+
+            // Win Rate Chart
+            const winRateCtx = document.getElementById('winRateChart').getContext('2d');
+            winRateChart = new Chart(winRateCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Qualified', 'Proposal', 'Negotiation', 'Closed'],
+                    datasets: [{ label: 'Win Rate (%)', data: [72, 55, 68, 82], backgroundColor: '#00FFAA' }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { labels: { color: '#b0c4de' } } },
+                    scales: { y: { ticks: { color: '#b0c4de' } }, x: { ticks: { color: '#b0c4de' } } }
+                }
+            });
+
+            // Ticket Volume Chart
+            const ticketCtx = document.getElementById('ticketVolumeChart').getContext('2d');
+            ticketVolumeChart = new Chart(ticketCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
+                    datasets: [{ label: 'Tickets', data: [42, 38, 55, 30, 25], backgroundColor: '#00FFAA' }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { labels: { color: '#b0c4de' } } },
+                    scales: { y: { ticks: { color: '#b0c4de' } }, x: { ticks: { color: '#b0c4de' } } }
+                }
+            });
+
+            // CSAT Chart
+            const csatCtx = document.getElementById('csatChart').getContext('2d');
+            csatChart = new Chart(csatCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Satisfied', 'Neutral', 'Dissatisfied'],
+                    datasets: [{ data: [78, 15, 7], backgroundColor: ['#00FFAA', '#FFD700', '#FF6B6B'] }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { labels: { color: '#b0c4de' } } }
+                }
+            });
+
+            // Response Time Chart
+            const responseCtx = document.getElementById('responseTimeChart').getContext('2d');
+            responseTimeChart = new Chart(responseCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                    datasets: [{ label: 'Avg Response (hrs)', data: [4.2, 3.8, 3.1, 2.7, 2.3, 1.9], borderColor: '#00FFAA', tension: 0.4 }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { labels: { color: '#b0c4de' } } },
+                    scales: { y: { ticks: { color: '#b0c4de' } }, x: { ticks: { color: '#b0c4de' } } }
+                }
+            });
+        }
+
+        function switchTab(tab) {
+            document.getElementById('overviewTab').style.display = 'none';
+            document.getElementById('salesTab').style.display = 'none';
+            document.getElementById('supportTab').style.display = 'none';
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+
+            document.getElementById(tab + 'Tab').style.display = 'block';
+            event.target.classList.add('active');
+        }
+
+        window.addEventListener('load', initCharts);
+    </script>
+</body>
+</html>

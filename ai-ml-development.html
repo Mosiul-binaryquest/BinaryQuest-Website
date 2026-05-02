@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>AI/ML Development Service | Bangladesh Software Solution</title>
+    <!-- Google Fonts & simple reset -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f9fafc;
+            color: #1a1f2e;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* header / nav placeholder */
+        .site-header {
+            background: #0a0c15;
+            color: white;
+            padding: 20px 0;
+            border-bottom: 1px solid #1e293b;
+        }
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+            background: linear-gradient(135deg, #ffffff, #94a3b8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            font-weight: 500;
+        }
+        .nav-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+        .nav-links a:hover {
+            color: white;
+        }
+        .btn-outline-light {
+            border: 1px solid #334155;
+            padding: 8px 18px;
+            border-radius: 40px;
+            background: transparent;
+            color: white;
+            font-weight: 500;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+        .btn-outline-light:hover {
+            background: #1e293b;
+            border-color: #5b6e8c;
+        }
+
+        /* Buttons */
+        .btn-primary {
+            background: #2266f0;
+            color: white;
+            padding: 12px 28px;
+            border-radius: 40px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.2s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        .btn-primary:hover {
+            background: #0f54d0;
+            transform: translateY(-2px);
+        }
+        .btn-outline-dark {
+            border: 1px solid #cbd5e1;
+            background: transparent;
+            padding: 10px 24px;
+            border-radius: 40px;
+            font-weight: 500;
+            text-decoration: none;
+            color: #1e293b;
+            transition: 0.2s;
+        }
+        .btn-outline-dark:hover {
+            background: #f1f5f9;
+            border-color: #2266f0;
+        }
+
+        /* sections */
+        .hero {
+            padding: 80px 0 64px;
+            background: linear-gradient(135deg, #f0f4fe 0%, #ffffff 100%);
+        }
+        .hero-grid {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 48px;
+            justify-content: space-between;
+        }
+        .hero-content {
+            flex: 1;
+        }
+        .badge {
+            background: #e0e7ff;
+            color: #2266f0;
+            padding: 6px 14px;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 24px;
+        }
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            margin-bottom: 20px;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            color: #334155;
+            max-width: 550px;
+            margin-bottom: 32px;
+        }
+        .hero-stats {
+            display: flex;
+            gap: 32px;
+            margin-top: 32px;
+        }
+        .stat span {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #0f172a;
+        }
+
+        /* section common */
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 56px;
+            letter-spacing: -0.01em;
+        }
+        .section-sub {
+            text-align: center;
+            color: #475569;
+            max-width: 700px;
+            margin: -32px auto 56px;
+        }
+
+        /* services grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 32px;
+            margin: 48px 0;
+        }
+        .service-card {
+            background: white;
+            border-radius: 28px;
+            padding: 32px 28px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.02), 0 2px 4px rgba(0,0,0,0.03);
+            transition: all 0.25s ease;
+            border: 1px solid #eef2f8;
+        }
+        .service-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.1);
+            border-color: #cddcfd;
+        }
+        .service-icon {
+            font-size: 2.4rem;
+            margin-bottom: 20px;
+        }
+        .service-card h3 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 14px;
+        }
+        .service-card p {
+            color: #475569;
+            margin-bottom: 20px;
+        }
+        .service-card ul {
+            padding-left: 20px;
+            color: #334155;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .tech-slider {
+            background: white;
+            border-radius: 48px;
+            padding: 36px 24px;
+            margin: 48px 0;
+            border: 1px solid #e2e8f0;
+            text-align: center;
+        }
+        .tech-logos {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 36px;
+            margin-top: 24px;
+            font-weight: 600;
+            color: #1e293b;
+        }
+        .tech-logos span {
+            background: #f8fafc;
+            padding: 8px 22px;
+            border-radius: 60px;
+            font-size: 1rem;
+            font-weight: 500;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+
+        /* case studies */
+        .case-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+            margin: 40px 0;
+        }
+        .case-card {
+            background: white;
+            border-radius: 28px;
+            overflow: hidden;
+            border: 1px solid #eef2f8;
+            transition: 0.2s;
+        }
+        .case-card:hover {
+            border-color: #cddafc;
+        }
+        .case-content {
+            padding: 28px;
+        }
+        .case-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+            color: #2266f0;
+            margin-bottom: 12px;
+        }
+        .case-card h4 {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+        }
+        .case-card p {
+            color: #475569;
+            margin-bottom: 16px;
+        }
+        .highlights {
+            font-size: 0.9rem;
+            border-top: 1px solid #edf2f7;
+            margin-top: 16px;
+            padding-top: 16px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .highlights span {
+            background: #f1f5f9;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 0.75rem;
+        }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 32px;
+            margin: 56px 0;
+        }
+        .why-item {
+            text-align: center;
+            padding: 20px;
+        }
+        .why-item h4 {
+            font-size: 1.5rem;
+            margin: 20px 0 12px;
+        }
+        .cta-section {
+            background: #0a0c15;
+            color: white;
+            border-radius: 48px;
+            padding: 64px 48px;
+            text-align: center;
+            margin: 64px 0;
+        }
+        .cta-section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+        }
+        .cta-section .btn-primary {
+            background: #3b82f6;
+            margin-top: 24px;
+        }
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid #e2e8f0;
+            color: #475569;
+            font-size: 0.85rem;
+        }
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .section-title { font-size: 1.8rem; }
+            .container { padding: 0 20px; }
+            .cta-section { padding: 40px 24px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- header -->
+    <header class="site-header">
+        <div class="container header-inner">
+            <div class="logo">Bangladesh Software Solution</div>
+            <div class="nav-links">
+                <a href="#">Home</a>
+                <a href="#">Services</a>
+                <a href="#">Case Studies</a>
+                <a href="#">Contact</a>
+            </div>
+            <a href="#" class="btn-outline-light">Get in touch</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero section -->
+        <section class="hero">
+            <div class="container hero-grid">
+                <div class="hero-content">
+                    <div class="badge">AI/ML Development Service 2026</div>
+                    <h1>Transform Your Business with <span style="color:#2266f0;">Enterprise AI Solutions</span></h1>
+                    <p>Our AI/ML Development services help businesses unlock measurable ROI through predictive analytics, intelligent automation, and custom AI solutions trusted by 50+ companies worldwide.</p>
+                    <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                        <a href="#" class="btn-primary">Start your AI journey →</a>
+                        <a href="#" class="btn-outline-dark">Book consultation</a>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat"><span>50+</span><br>Companies Trusted</div>
+                        <div class="stat"><span>98%</span><br>Client Retention</div>
+                        <div class="stat"><span>24/7</span><br>AI Support</div>
+                    </div>
+                </div>
+                <div style="flex: 0.8; min-width: 240px; text-align:center;">
+                    <div style="background:linear-gradient(145deg, #eef2ff, #ffffff); border-radius: 38px; padding: 20px;">
+                        <span style="font-size: 5rem;">⚡🤖</span>
+                        <p style="margin-top: 12px;">Intelligent automation<br>Zero-compromise security</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- what services we're offering -->
+        <div class="container">
+            <h2 class="section-title" style="margin-top: 64px;">What Services <br>We're Offering</h2>
+            <p class="section-sub">Comprehensive AI solutions designed to automate workflows, reduce costs, and unlock new revenue streams. From concept to deployment, we’re your AI partner.</p>
+            
+            <div class="services-grid">
+                <div class="service-card"><div class="service-icon">🧠📊</div><h3>Machine Learning Solutions</h3><p>Predict outcomes, detect anomalies, and automate decisions.</p><ul><li>Predictive analytics & churn prediction</li><li>Fraud detection in real-time</li><li>Recommendation engines</li></ul></div>
+                <div class="service-card"><div class="service-icon">🗣️📄</div><h3>Natural Language Processing</h3><p>Conversational AI, sentiment analysis & document intelligence.</p><ul><li>Custom chatbots & support automation</li><li>Sentiment analysis for feedback</li><li>Automated document extraction</li></ul></div>
+                <div class="service-card"><div class="service-icon">👁️🔍</div><h3>Computer Vision</h3><p>See what matters: quality inspection & real-time detection.</p><ul><li>Defect detection for manufacturing</li><li>Object tracking & counting</li><li>Medical image diagnosis</li></ul></div>
+                <div class="service-card"><div class="service-icon">📈📉</div><h3>Data Analytics & BI</h3><p>Actionable dashboards, real-time KPIs & customer insights.</p><ul><li>Interactive dashboards</li><li>Advanced trend analysis</li><li>Segmentation & behavior analytics</li></ul></div>
+                <div class="service-card"><div class="service-icon">⚙️🧩</div><h3>Custom AI Development</h3><p>From strategy to deployment, tailor-made AI for your unique needs.</p><ul><li>AI strategy consulting on your data</li><li>Custom model training & APIs</li><li>Cloud deployment & maintenance</li></ul></div>
+                <div class="service-card"><div class="service-icon">🗃️🔄</div><h3>Data & ETL Engineering</h3><p>Enterprise data pipelines that power AI at scale.</p><ul><li>Automated ETL pipelines</li><li>Data lake / warehouse design</li><li>Real-time streaming (Kafka, Spark)</li></ul></div>
+            </div>
+
+            <!-- technologies -->
+            <div class="tech-slider">
+                <h3 style="font-size: 1.8rem; margin-bottom: 0.5rem;">Technologies We Work With</h3>
+                <p style="color:#334155;">Industry-leading tools & frameworks</p>
+                <div class="tech-logos">
+                    <span>TensorFlow</span><span>PyTorch</span><span>Python</span><span>OpenAI</span><span>AWS</span><span>Google Cloud</span><span>Azure</span><span>Apache Spark</span>
+                    <span>Kafka</span><span>Airflow</span><span>Snowflake</span><span>MongoDB</span><span>PostgreSQL</span><span>Docker</span><span>Kubernetes</span><span>OpenCV</span>
+                </div>
+            </div>
+
+            <!-- case studies -->
+            <h2 class="section-title" style="margin-top: 48px;">Case Studies</h2>
+            <div class="case-grid">
+                <div class="case-card"><div class="case-content"><div class="case-label">AI/ML · RAG System</div><h4>From Document Chaos to Instant Answers</h4><p>Secure RAG system for internal knowledge: natural language access, role‑based control, and fast AI answers.</p><div class="highlights"><span>RAG + Qdrant</span><span>Docling</span><span>Role‑based security</span><span>Low‑infra optimized</span></div></div></div>
+                <div class="case-card"><div class="case-content"><div class="case-label">COMPUTER VISION · MANUFACTURING</div><h4>Caravan Quality Control Automation</h4><p>One‑stop automated inspection with ArUco markers, edge processing and real‑time feedback. 75% reduction in inspection time, zero structural rework.</p><div class="highlights"><span>PWA + Edge AI</span><span>ArUco tracking</span><span>3D pose estimation</span><span>Hardware cost savings</span></div></div></div>
+            </div>
+
+            <!-- why choose us -->
+            <h2 class="section-title" style="margin-top: 64px;">Why Bangladesh Software Solution is The Right Choice for You</h2>
+            <div class="why-grid">
+                <div class="why-item"><div style="font-size: 2.6rem;">🤝</div><h4>AI-Ready Teams</h4><p>Elite AI talent with 10+ years hands‑on TensorFlow, PyTorch & enterprise ML.</p></div>
+                <div class="why-item"><div style="font-size: 2.6rem;">🔁</div><h4>End-to-End AI Ownership</h4><p>From data strategy to deployment & continuous optimization – manage entire AI lifecycle.</p></div>
+                <div class="why-item"><div style="font-size: 2.6rem;">🏭</div><h4>Industry-Validated Impact</h4><p>Healthcare, finance, e‑commerce, manufacturing – delivering measurable ROI.</p></div>
+                <div class="why-item"><div style="font-size: 2.6rem;">🔒</div><h4>Uncompromising Enterprise Security</h4><p>Bank‑grade encryption, SOC2 compliance, secure cloud infrastructure by default.</p></div>
+            </div>
+
+            <!-- CTA -->
+            <div class="cta-section">
+                <h2>Ready to Build Your AI Advantage?</h2>
+                <p style="font-size: 1.2rem; max-width: 500px; margin: 0 auto;">Book a free 30‑minute consultation with our AI experts. Discover how custom AI solutions can reduce costs, automate workflows, and drive growth for your business.</p>
+                <a href="#" class="btn-primary" style="background:#3b82f6;">Book Consultation →</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2026 Bangladesh Software Solution — AI/ML Development Excellence. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

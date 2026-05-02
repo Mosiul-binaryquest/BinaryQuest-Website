@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>BinaryQuest – MVP Cost Estimator | Build Smarter</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
+            background: #f6f8fc;
+            color: #0a1c2f;
+            line-height: 1.5;
+        }
+
+        /* container */
+        .container {
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 1.5rem 1.8rem;
+        }
+
+        /* header style */
+        .brand {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #e2edf7;
+            padding-bottom: 1rem;
+        }
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #0b2b5c, #1e6fdf);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.3px;
+        }
+        .logo p {
+            font-size: 0.85rem;
+            color: #4a627a;
+        }
+        .badge-header {
+            background: #eef3fc;
+            padding: 0.4rem 1rem;
+            border-radius: 60px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #1e6fdf;
+        }
+
+        /* two-column layout */
+        .estimator-grid {
+            display: grid;
+            grid-template-columns: 1fr 0.9fr;
+            gap: 2rem;
+            margin: 2rem 0 2rem;
+        }
+
+        /* left panel: feature selectors */
+        .panel {
+            background: white;
+            border-radius: 32px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.05);
+            padding: 1.6rem 1.8rem;
+            transition: all 0.2s;
+            border: 1px solid #eef2f8;
+        }
+        .panel h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+        .panel-sub {
+            color: #54708f;
+            font-size: 0.85rem;
+            margin-bottom: 1.8rem;
+            border-left: 3px solid #1e6fdf;
+            padding-left: 0.8rem;
+        }
+
+        .selector-group {
+            margin-bottom: 2rem;
+        }
+        .selector-label {
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            font-size: 1rem;
+            display: flex;
+            justify-content: space-between;
+        }
+        .radio-group, .team-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .radio-card {
+            background: #f9fbfe;
+            border: 1.5px solid #e2edf7;
+            border-radius: 40px;
+            padding: 0.5rem 1.2rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        input[type="radio"] {
+            accent-color: #1e6fdf;
+            margin-right: 4px;
+        }
+        .radio-card.selected, .radio-card:has(input:checked) {
+            background: #eef3fc;
+            border-color: #1e6fdf;
+            color: #0f3b6f;
+        }
+
+        /* features accordion style */
+        .feature-category {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #eef2fa;
+            padding-bottom: 0.8rem;
+        }
+        .category-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin: 1rem 0 0.75rem;
+            background: #fafcff;
+            padding: 0.2rem 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .feature-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            padding: 0.65rem 0;
+            border-bottom: 1px dashed #edf2f7;
+        }
+        .feature-info {
+            flex: 2;
+        }
+        .feature-name {
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+        .feature-desc {
+            font-size: 0.7rem;
+            color: #5f7d9c;
+        }
+        .feature-hours {
+            font-size: 0.7rem;
+            font-family: monospace;
+            background: #f0f4fa;
+            padding: 0.2rem 0.5rem;
+            border-radius: 18px;
+            font-weight: 500;
+        }
+        .toggle-switch {
+            width: 44px;
+            height: 24px;
+            background: #cbdde9;
+            border-radius: 40px;
+            display: inline-block;
+            position: relative;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .toggle-switch.active {
+            background: #1e6fdf;
+        }
+        .toggle-switch::after {
+            content: '';
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 2px;
+            left: 3px;
+            transition: 0.2s;
+        }
+        .toggle-switch.active::after {
+            left: 21px;
+        }
+        input.hidden-toggle {
+            display: none;
+        }
+
+        /* right panel summary */
+        .summary-card {
+            background: white;
+            border-radius: 32px;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+            padding: 1.8rem;
+            position: sticky;
+            top: 1.5rem;
+            border: 1px solid #eef2fa;
+        }
+        .cost-big {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #0f3b6f;
+            line-height: 1;
+        }
+        .cost-range {
+            font-size: 0.9rem;
+            color: #4a688a;
+            margin-top: 0.4rem;
+        }
+        .timeline-block {
+            background: #f0f6fe;
+            border-radius: 24px;
+            padding: 1rem;
+            margin: 1.5rem 0;
+        }
+        .feature-summary-list {
+            font-size: 0.85rem;
+            max-height: 200px;
+            overflow-y: auto;
+            margin: 1rem 0;
+            padding-right: 0.5rem;
+        }
+        .selected-badge {
+            background: #e9f0f9;
+            border-radius: 20px;
+            padding: 0.2rem 0.6rem;
+            font-size: 0.7rem;
+            font-weight: 500;
+            display: inline-block;
+            margin: 0.2rem 0.2rem;
+        }
+        .btn-primary {
+            background: #0f3b6f;
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 1rem;
+            font-weight: 700;
+            border-radius: 48px;
+            font-size: 1rem;
+            margin-top: 1.2rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .btn-primary:hover {
+            background: #1e6fdf;
+            transform: scale(0.98);
+        }
+        .footnote {
+            font-size: 0.7rem;
+            text-align: center;
+            margin-top: 1.2rem;
+            color: #6580a0;
+        }
+        hr {
+            margin: 1rem 0;
+            border-color: #ecf3f9;
+        }
+        @media (max-width: 850px) {
+            .estimator-grid { grid-template-columns: 1fr; }
+            .container { padding: 1rem; }
+        }
+        .small-note {
+            font-size: 0.7rem;
+            color: #6c8dae;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="brand">
+        <div class="logo">
+            <h1>⚡ BinaryQuest</h1>
+            <p>mvp cost estimator · build smarter, launch faster</p>
+        </div>
+        <div class="badge-header">📊 real-time estimate · 2026</div>
+    </div>
+
+    <div class="estimator-grid">
+        <!-- LEFT Panel: Inputs -->
+        <div class="panel">
+            <h2>🎯 MVP Builder</h2>
+            <div class="panel-sub">Select platform, team & features — get instant cost + timeline</div>
+
+            <!-- Platform -->
+            <div class="selector-group">
+                <div class="selector-label">📱 1. Platform</div>
+                <div class="radio-group" id="platformGroup">
+                    <label class="radio-card"><input type="radio" name="platform" value="web" checked> 🌐 Web App only</label>
+                    <label class="radio-card"><input type="radio" name="platform" value="ios"> 🍎 iOS + Web</label>
+                    <label class="radio-card"><input type="radio" name="platform" value="android"> 🤖 Android + Web</label>
+                    <label class="radio-card"><input type="radio" name="platform" value="both"> 📱📲 Both native + Web</label>
+                </div>
+                <div class="small-note">*Web only is most cost-effective, native apps add complexity.</div>
+            </div>
+
+            <!-- Design Complexity -->
+            <div class="selector-group">
+                <div class="selector-label">🎨 2. Design Complexity</div>
+                <div class="radio-group" id="designGroup">
+                    <label class="radio-card"><input type="radio" name="design" value="basic" checked> Basic / Boilerplate</label>
+                    <label class="radio-card"><input type="radio" name="design" value="custom"> Custom UI / advanced</label>
+                    <label class="radio-card"><input type="radio" name="design" value="polished"> High-end / animations</label>
+                </div>
+            </div>
+
+            <!-- Development Team -->
+            <div class="selector-group">
+                <div class="selector-label">🧑‍💻 3. Development Team</div>
+                <div class="radio-group" id="teamGroup">
+                    <label class="radio-card"><input type="radio" name="team" value="freelance" checked> Freelance ($35-55/hr)</label>
+                    <label class="radio-card"><input type="radio" name="team" value="mid"> Mid-tier Agency ($65-95/hr)</label>
+                    <label class="radio-card"><input type="radio" name="team" value="premium"> US/EU Premium ($120-200/hr)</label>
+                </div>
+            </div>
+
+            <!-- Features library -->
+            <div class="selector-label" style="margin-top: 0.5rem;">🧩 4. Features (toggle to include)</div>
+            <div id="featuresContainer"></div>
+        </div>
+
+        <!-- RIGHT Panel: Summary & Estimate -->
+        <div class="summary-card">
+            <div style="display: flex; justify-content: space-between;">
+                <span style="font-weight: 600;">💰 Estimated Total Cost</span>
+                <span style="font-size:0.75rem;">(USD)</span>
+            </div>
+            <div class="cost-big" id="totalCost">$0</div>
+            <div class="cost-range" id="costRange">Range: $0 - $0</div>
+            <div class="timeline-block">
+                <div>⏱️ Estimated Timeline</div>
+                <strong id="timelineText">—</strong> development weeks
+                <div class="small-note" id="hourDetail">0 total dev hours</div>
+            </div>
+            <div><strong>✔️ Selected features (<span id="featureCount">0</span>)</strong></div>
+            <div class="feature-summary-list" id="featureSummary"></div>
+            <button class="btn-primary" id="consultBtn">📞 Book Free Consultation →</button>
+            <div class="footnote">*Estimate based on hours × rate + team & complexity multipliers. Actual cost may vary.</div>
+        </div>
+    </div>
+    <div style="background: #eef3fa; border-radius: 28px; padding: 1.2rem 1.8rem; margin: 1rem 0 2rem; font-size: 0.85rem;">
+        ⚡ <strong>What affects MVP cost?</strong> Features, platform, team location, hidden costs (testing, PM, deployment). Start with a PWA for mobile-friendly web app to reduce budget.
+    </div>
+</div>
+
+<script>
+    // ---------- FEATURE DATABASE (hours estimation) --------
+    const featuresDB = [
+        { id: "auth_email", category: "Authentication", name: "Email/password login", desc: "Signup, login, password reset", hours: 12 },
+        { id: "auth_oauth", category: "Authentication", name: "Social OAuth", desc: "Google, Github, Facebook", hours: 8 },
+        { id: "auth_2fa", category: "Authentication", name: "2FA (SMS/authenticator)", desc: "Extra security layer", hours: 18 },
+        { id: "auth_profiles", category: "Authentication", name: "User profiles & settings", desc: "Avatars, edit profile", hours: 14 },
+        { id: "auth_roles", category: "Authentication", name: "Roles & permissions", desc: "Admin, user, custom roles", hours: 22 },
+        { id: "payments_stripe", category: "Payments", name: "Stripe checkout", desc: "One-time purchases", hours: 18 },
+        { id: "payments_subscriptions", category: "Payments", name: "Recurring billing", desc: "Plans, subscriptions", hours: 36 },
+        { id: "payments_split", category: "Payments", name: "Split payments", desc: "Seller payouts, marketplace", hours: 60 },
+        { id: "core_dashboard", category: "Core", name: "Dashboard / overview", desc: "Stats, activity feed", hours: 20 },
+        { id: "core_crud", category: "Core", name: "CRUD (1 resource)", desc: "Create, read, update, delete", hours: 12 },
+        { id: "core_multi_crud", category: "Core", name: "Multiple resources", desc: "Relationships, complex data", hours: 32 },
+        { id: "core_search", category: "Core", name: "Search & filters", desc: "Full-text search, sorting", hours: 14 },
+        { id: "core_upload", category: "Core", name: "File/image upload", desc: "Storage, cloud", hours: 14 },
+        { id: "comm_email", category: "Communication", name: "Transactional emails", desc: "Welcome, reset password", hours: 10 },
+        { id: "comm_newsletter", category: "Communication", name: "Newsletter campaigns", desc: "Email templates, sending", hours: 28 },
+        { id: "comm_notifications", category: "Communication", name: "Real-time notifications", desc: "In-app, push", hours: 22 },
+        { id: "comm_chat", category: "Communication", name: "Live chat support", desc: "User-to-user / support chat", hours: 56 },
+        { id: "admin_user_mgmt", category: "Admin", name: "User & content moderation", desc: "Admin panel basics", hours: 28 },
+        { id: "admin_analytics", category: "Admin", name: "Usage tracking", desc: "Stats dashboard", hours: 16 },
+        { id: "admin_exports", category: "Admin", name: "Exports & reports", desc: "CSV/PDF, custom reports", hours: 28 },
+        { id: "integrations_api", category: "Integrations", name: "REST/GraphQL API", desc: "For third-party devs", hours: 42 },
+        { id: "integrations_webhooks", category: "Integrations", name: "Webhooks / events", desc: "External services", hours: 14 },
+        { id: "integrations_zapier", category: "Integrations", name: "Zapier / Slack etc", desc: "per integration", hours: 14 },
+        { id: "ai_single", category: "AI", name: "Single AI feature", desc: "chatbot, recommendations", hours: 28 },
+        { id: "ai_multiple", category: "AI", name: "Multiple AI / custom models", desc: "advanced intelligence", hours: 70 }
+    ];
+
+    // group by category
+    const grouped = {};
+    featuresDB.forEach(f => { if (!grouped[f.category]) grouped[f.category] = []; grouped[f.category].push(f); });
+
+    let selectedFeatures = new Set();   // store feature ids
+
+    // multiplier factors
+    const platformMultiplier = { web: 1.0, ios: 1.45, android: 1.45, both: 1.85 };
+    const designMultiplier = { basic: 1.0, custom: 1.25, polished: 1.5 };
+    const teamHourly = { freelance: 45, mid: 80, premium: 160 }; // avg rates
+
+    // UI References
+    const totalSpan = document.getElementById("totalCost");
+    const rangeSpan = document.getElementById("costRange");
+    const timelineSpan = document.getElementById("timelineText");
+    const hourDetailSpan = document.getElementById("hourDetail");
+    const featureCountSpan = document.getElementById("featureCount");
+    const featureSummaryDiv = document.getElementById("featureSummary");
+
+    function getSelectedPlatform() { return document.querySelector('input[name="platform"]:checked')?.value || "web"; }
+    function getSelectedDesign() { return document.querySelector('input[name="design"]:checked')?.value || "basic"; }
+    function getSelectedTeam() { return document.querySelector('input[name="team"]:checked')?.value || "mid"; }
+
+    function computeHours() {
+        let totalHours = 0;
+        for (let fid of selectedFeatures) {
+            const feat = featuresDB.find(f => f.id === fid);
+            if (feat) totalHours += feat.hours;
+        }
+        // base overhead: always add authentication/empty? minimum 20h for project setup
+        if (totalHours === 0) totalHours = 8;
+        return totalHours;
+    }
+
+    function computeCostAndTimeline() {
+        let hours = computeHours();
+        const platform = getSelectedPlatform();
+        const design = getSelectedDesign();
+        const teamType = getSelectedTeam();
+
+        const platformFactor = platformMultiplier[platform] || 1;
+        const designFactor = designMultiplier[design] || 1;
+        const hourlyRate = teamHourly[teamType] || 80;
+
+        let adjustedHours = Math.round(hours * platformFactor * designFactor);
+        // add 5-10% testing/management buffer
+        adjustedHours = Math.ceil(adjustedHours * 1.08);
+        const totalCost = adjustedHours * hourlyRate;
+        const minCost = Math.round(totalCost * 0.85);
+        const maxCost = Math.round(totalCost * 1.2);
+
+        // timeline weeks: ~35-45 hrs per week roughly
+        let weeks = Math.max(1, Math.ceil(adjustedHours / 38));
+        let weeksText = `${weeks} week${weeks > 1 ? 's' : ''}`;
+        if (adjustedHours > 140) weeksText = `${weeks} weeks (${Math.floor(adjustedHours/40)} wk+)`;
+
+        return { totalCost: Math.round(totalCost), minRange: minCost, maxRange: maxCost, adjustedHours, weeksText, hoursRaw: adjustedHours };
+    }
+
+    function updateEstimates() {
+        const { totalCost, minRange, maxRange, adjustedHours, weeksText } = computeCostAndTimeline();
+        totalSpan.innerText = `$${totalCost.toLocaleString()}`;
+        rangeSpan.innerText = `Range: $${minRange.toLocaleString()} - $${maxRange.toLocaleString()}`;
+        timelineSpan.innerText = weeksText;
+        hourDetailSpan.innerText = `${adjustedHours} estimated dev hours (incl. complexity buffer)`;
+        featureCountSpan.innerText = selectedFeatures.size;
+        // display summary list
+        let summaryHtml = '';
+        if (selectedFeatures.size === 0) summaryHtml = '<span class="small-note">No features selected — add some to see cost impact.</span>';
+        else {
+            for (let fid of selectedFeatures) {
+                const feat = featuresDB.find(f => f.id === fid);
+                if (feat) summaryHtml += `<span class="selected-badge">${feat.name} (${feat.hours}h)</span> `;
+            }
+        }
+        featureSummaryDiv.innerHTML = summaryHtml;
+    }
+
+    // render feature toggles
+    function renderFeatures() {
+        const container = document.getElementById("featuresContainer");
+        container.innerHTML = "";
+        for (let [category, items] of Object.entries(grouped)) {
+            const catDiv = document.createElement("div");
+            catDiv.className = "feature-category";
+            const titleSpan = document.createElement("div");
+            titleSpan.className = "category-title";
+            titleSpan.innerHTML = `<span>📂 ${category}</span>`;
+            catDiv.appendChild(titleSpan);
+            items.forEach(feat => {
+                const row = document.createElement("div");
+                row.className = "feature-item";
+                row.innerHTML = `
+                    <div class="feature-info">
+                        <div class="feature-name">${feat.name}</div>
+                        <div class="feature-desc">${feat.desc}</div>
+                    </div>
+                    <div class="feature-hours">~${feat.hours} hrs</div>
+                    <div class="toggle-switch" data-id="${feat.id}"></div>
+                `;
+                catDiv.appendChild(row);
+            });
+            container.appendChild(catDiv);
+        }
+
+        // attach toggle events
+        document.querySelectorAll('.toggle-switch').forEach(toggle => {
+            const fid = toggle.getAttribute('data-id');
+            if (selectedFeatures.has(fid)) toggle.classList.add('active');
+            toggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const id = toggle.getAttribute('data-id');
+                if (selectedFeatures.has(id)) {
+                    selectedFeatures.delete(id);
+                    toggle.classList.remove('active');
+                } else {
+                    selectedFeatures.add(id);
+                    toggle.classList.add('active');
+                }
+                updateEstimates();
+            });
+        });
+    }
+
+    // event listeners for radio changes
+    function bindRadioListeners() {
+        const radios = document.querySelectorAll('input[type="radio"]');
+        radios.forEach(radio => {
+            radio.addEventListener('change', () => updateEstimates());
+        });
+    }
+
+    // pre-set some features as example? I'll leave none pre-selected so user explores, but add hint.
+    function initDefaultSelected() {
+        // optional: select basic core features to show example? but better 0, but useful to suggest one: core_crud maybe
+        // but we can leave empty but user-friendly - I'll add small note and preselected "core_crud" + "auth_email" as common MVP baseline.
+        if(selectedFeatures.size === 0){
+            selectedFeatures.add("auth_email");
+            selectedFeatures.add("core_crud");
+            // also add dashboard nice to have
+            selectedFeatures.add("core_dashboard");
+        }
+        renderFeatures();  // re-render after setting
+        updateEstimates();
+    }
+
+    // consultation button
+    document.getElementById("consultBtn").addEventListener("click", () => {
+        alert("📅 Book a free consultation: schedule a call with BinaryQuest experts to refine your MVP scope & get accurate quote.");
+        // you can replace with actual Calendly link
+    });
+
+    // start everything
+    renderFeatures();
+    bindRadioListeners();
+    initDefaultSelected();  // set some sensible MVP must-haves
+    updateEstimates();
+</script>
+</body>
+</html>

@@ -1,101 +1,349 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Test BinaryQuest Regions</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Padma Diagnostic Centre | Hospital ERP Software by Binary Quest</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #0a0a2a;
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
+        * {
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            box-sizing: border-box;
         }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: #f5f9ff;
+            color: #0a2540;
+            line-height: 1.4;
+        }
+
         .container {
-            text-align: center;
-            background: rgba(255,255,255,0.1);
-            padding: 40px;
-            border-radius: 20px;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 32px;
         }
-        h1 { margin-bottom: 30px; }
-        .region-buttons {
+
+        /* header / navigation */
+        .site-header {
+            background: white;
+            border-bottom: 1px solid #e6edf4;
+            padding: 18px 0;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: rgba(255,255,255,0.96);
+            backdrop-filter: blur(6px);
+        }
+        .header-inner {
             display: flex;
-            gap: 15px;
+            justify-content: space-between;
+            align-items: center;
             flex-wrap: wrap;
-            justify-content: center;
-            margin-bottom: 30px;
+            gap: 20px;
         }
-        button {
-            padding: 12px 24px;
-            font-size: 16px;
-            font-weight: bold;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-        button:hover { transform: scale(1.05); }
-        .asia-btn { background: #00FFAA; color: #050B14; }
-        .europe-btn { background: #2c3e66; color: white; }
-        .americas-btn { background: linear-gradient(135deg, #ff6b6b, #4e54c8); color: white; }
-        .australia-btn { background: #d4a373; color: white; }
-        .info {
-            background: rgba(0,0,0,0.5);
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 20px;
-            font-size: 14px;
-        }
-        a {
-            color: #00FFAA;
+        .logo a {
+            font-size: 1.65rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #0b3b5f, #1f8bad);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
             text-decoration: none;
+            letter-spacing: -0.3px;
         }
-        .current-url {
-            background: rgba(0,0,0,0.3);
-            padding: 10px;
-            border-radius: 5px;
-            font-family: monospace;
-            word-break: break-all;
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            font-weight: 500;
+        }
+        .nav-links a {
+            color: #1a4b6e;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: 0.2s;
+        }
+        .nav-links a:hover {
+            color: #1f8bad;
+        }
+        .btn-outline {
+            border: 1px solid #c9deef;
+            padding: 6px 20px;
+            border-radius: 32px;
+            font-weight: 500;
+            text-decoration: none;
+            color: #1a4b6e;
+        }
+        .btn-outline:hover {
+            background: #eef5fc;
+            border-color: #1f8bad;
+        }
+
+        /* hero case section */
+        .case-hero {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 48px;
+            align-items: center;
+            margin: 56px 0 48px;
+        }
+        .hero-text {
+            flex: 1.2;
+        }
+        .badge {
+            display: inline-block;
+            background: #e7f0fa;
+            color: #1f6e8c;
+            padding: 4px 16px;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        .hero-text h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            color: #0a2e48;
+            margin-bottom: 20px;
+        }
+        .hero-text .highlight {
+            color: #1f8bad;
+            border-bottom: 3px solid #9ac9df;
+        }
+        .productivity-metric {
+            background: linear-gradient(145deg, #e3f2f5, white);
+            border-radius: 32px;
+            padding: 20px 28px;
+            display: inline-flex;
+            align-items: center;
+            gap: 24px;
+            margin: 32px 0 24px;
+            flex-wrap: wrap;
+            border: 1px solid #cbdfec;
+        }
+        .metric-number {
+            font-size: 3.2rem;
+            font-weight: 800;
+            color: #1b7a63;
+            line-height: 1;
+        }
+        .metric-text {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        .hero-image {
+            flex: 0.9;
+            background: #eaf1f9;
+            border-radius: 36px;
+            overflow: hidden;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.1);
+            border: 1px solid #ffffff40;
+        }
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+            transition: 0.3s;
+        }
+        .image-caption {
+            text-align: center;
+            font-size: 0.7rem;
+            color: #5f7f9c;
+            padding: 8px;
+            background: #fefefe;
+        }
+
+        /* stats row */
+        .stats-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 24px;
+            background: white;
+            border-radius: 48px;
+            padding: 32px 40px;
+            margin: 40px 0;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.02);
+            border: 1px solid #e8f0f6;
+        }
+        .stat-item {
+            text-align: center;
+            flex: 1;
+        }
+        .stat-number {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #1f6e8c;
+        }
+
+        /* features grid */
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 56px 0 28px;
+            letter-spacing: -0.3px;
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 28px;
+            margin: 32px 0 40px;
+        }
+        .feature-card {
+            background: white;
+            border-radius: 28px;
+            padding: 28px;
+            transition: 0.25s;
+            border: 1px solid #e4edf5;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: #cae0ed;
+            box-shadow: 0 20px 25px -12px rgba(0,0,0,0.08);
+        }
+        .feature-icon {
+            font-size: 2.2rem;
+            margin-bottom: 18px;
+        }
+        .feature-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        .testimonial {
+            background: #eef4fa;
+            border-radius: 32px;
+            padding: 36px 40px;
+            margin: 56px 0;
+            text-align: center;
+        }
+        .testimonial p {
+            font-size: 1.3rem;
+            font-style: italic;
+            max-width: 750px;
+            margin: 0 auto;
+            color: #1e3e5c;
+        }
+        .btn-primary {
+            background: #1f6e8c;
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.2s;
+        }
+        .btn-primary:hover {
+            background: #0b5b77;
+            transform: scale(0.97);
+        }
+        footer {
+            text-align: center;
+            padding: 48px 0 36px;
+            border-top: 1px solid #dfecf3;
+            color: #48708e;
+            margin-top: 32px;
+        }
+        @media (max-width: 780px) {
+            .container { padding: 0 20px; }
+            .case-hero { flex-direction: column; }
+            .hero-text h1 { font-size: 2.2rem; }
+            .stats-row { flex-direction: column; align-items: center; }
         }
     </style>
 </head>
 <body>
+<header class="site-header">
+    <div class="container header-inner">
+        <div class="logo"><a href="#">Binary Quest</a></div>
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="#">Portfolio</a>
+            <a href="#">Services</a>
+            <a href="#">Insights</a>
+            <a href="#">Contact</a>
+        </div>
+        <a href="#" class="btn-outline">Talk to us →</a>
+    </div>
+</header>
+
+<main>
     <div class="container">
-        <h1>🎨 BinaryQuest Region Testing Tool</h1>
-        <p>Click any button to test different regional UIs</p>
-        
-        <div class="region-buttons">
-            <button class="asia-btn" onclick="testRegion('asia')">🌏 Asia (Cyber Dark)</button>
-            <button class="europe-btn" onclick="testRegion('europe')">🇪🇺 Europe (Glassmorphism)</button>
-            <button class="americas-btn" onclick="testRegion('americas')">🌎 Americas (Vibrant)</button>
-            <button class="australia-btn" onclick="testRegion('australia')">🇦🇺 Australia (Warm Nature)</button>
+        <!-- hero + case study -->
+        <div class="case-hero">
+            <div class="hero-text">
+                <div class="badge">🏥 Case study · Healthcare ERP</div>
+                <h1>Padma Diagnostic Centre<br> <span class="highlight">Hospital Management ERP</span></h1>
+                <p style="font-size: 1.1rem; color:#2c577c; margin-bottom: 1rem;">Complete digital transformation: fully integrated hospital & patient management system (HPMS) powering a 100+ bed diagnostic facility.</p>
+                <div class="productivity-metric">
+                    <div class="metric-number">↑ 40%</div>
+                    <div class="metric-text">Productivity increase <br> across clinical & admin workflows</div>
+                </div>
+                <p style="color:#2c6285;">✅ Reduced patient wait time · ✅ Paperless OPD & IPD · ✅ Real-time analytics dashboard</p>
+            </div>
+            <div class="hero-image">
+                <!-- local image placeholder: you can replace "padma-center.jpg" with actual image path -->
+                <img src="https://placehold.co/600x450/DAEAF5/2C6285?text=Padma+Diagnostic+Centre+Building" alt="Padma Diagnostic Centre - Main Facility" style="width:100%;">
+                <div class="image-caption">📸 Padma Diagnostic Centre, Bangladesh — main facility (representative)</div>
+            </div>
         </div>
-        
-        <div class="info">
-            <p><strong>How to use:</strong></p>
-            <p>1. Make sure <code>index.html</code> is in the same folder</p>
-            <p>2. Click any button above to open the website with that region</p>
-            <p>3. The URL parameter method keeps working even after refresh</p>
+
+        <!-- stats row: impact -->
+        <div class="stats-row">
+            <div class="stat-item"><div class="stat-number">40%</div><div>faster patient registration</div></div>
+            <div class="stat-item"><div class="stat-number">10k+</div><div>patients / month processed</div></div>
+            <div class="stat-item"><div class="stat-number">98%</div><div>billing accuracy improvement</div></div>
+            <div class="stat-item"><div class="stat-number">24/7</div><div>real-time access for clinicians</div></div>
         </div>
-        
-        <div class="current-url" id="urlDisplay">
-            Current file location: <span id="filePath">Loading...</span>
+
+        <!-- ERP features highlight -->
+        <h2 class="section-title">⚕️ End-to-end hospital ERP software</h2>
+        <div class="features-grid">
+            <div class="feature-card"><div class="feature-icon">📋</div><h3>Patient Management</h3><p>Centralized OPD, IPD, emergency registration with unique health ID & historical medical records.</p></div>
+            <div class="feature-card"><div class="feature-icon">🧪</div><h3>Lab & Diagnostics</h3><p>Integrated lab tests, radiology, sample tracking, and automated report generation.</p></div>
+            <div class="feature-card"><div class="feature-icon">💊</div><h3>Pharmacy & Inventory</h3><p>Stock management, expiry tracking, and integrated billing with prescription validation.</p></div>
+            <div class="feature-card"><div class="feature-icon">💰</div><h3>Billing & Finance</h3><p>Insurance claims, package creation, cash/card/online payments, and GL integration.</p></div>
+            <div class="feature-card"><div class="feature-icon">👨‍⚕️</div><h3>Doctor Portal</h3><p>Web + mobile app for clinicians: e-prescription, appointments, lab result access.</p></div>
+            <div class="feature-card"><div class="feature-icon">📊</div><h3>Analytics & BI</h3><p>Real-time KPIs: revenue, department wise occupancy, test turn around time dashboards.</p></div>
+        </div>
+
+        <!-- tech stack + 40% boost emphasis -->
+        <div style="background: linear-gradient(115deg, #ffffff 0%, #f1f8fe 100%); border-radius: 44px; padding: 36px 32px; margin: 32px 0;">
+            <div style="display: flex; flex-wrap: wrap; gap: 32px; align-items: center; justify-content: space-between;">
+                <div><h3 style="font-size: 1.8rem;">🔧 Built on modern stack</h3><p style="margin-top: 6px;">.NET Core, Angular, Xamarin mobile apps, SQL Server, hosted on Azure.<br>Seamless integration with existing HIS systems.</p></div>
+                <div><span style="background: #1d5a77; color: white; padding: 12px 24px; border-radius: 64px; font-weight: 700;">📈 40% productivity gain validated</span></div>
+            </div>
+        </div>
+
+        <!-- testimonial / quote -->
+        <div class="testimonial">
+            <p>“The ERP software from Binary Quest transformed our diagnostic operations. We have seen a <strong>40% increase in overall productivity</strong> — from patient intake to reporting. The mobile apps for doctors reduced discharge time drastically.”</p>
+            <p style="margin-top: 20px; font-weight: 600;">— Dr. Sayeed Hossain, Medical Superintendent, Padma Diagnostic Centre</p>
+        </div>
+
+        <!-- CTA section -->
+        <div style="text-align: center; margin: 48px 0 64px;">
+            <a href="#" class="btn-primary">📞 Request demo →</a>
+            <p style="margin-top: 18px; font-size: 0.8rem;">Book a free consultation to see how we digitize your hospital</p>
         </div>
     </div>
-    
-    <script>
-        function testRegion(region) {
-            // Get the current directory path
-            const currentPath = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
-            // Open index.html with region parameter
-            window.location.href = `${currentPath}index.html?region=${region}`;
-        }
-        
-        // Display current file path
-        document.getElementById('filePath').innerText = window.location.href.replace('test.html', 'index.html');
-    </script>
+</main>
+
+<footer>
+    <div class="container">
+        <p>© 2025 Binary Quest — delivering enterprise ERP for healthcare & diagnostics. Padma Diagnostic Centre case study.</p>
+    </div>
+</footer>
 </body>
 </html>

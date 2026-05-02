@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>BinaryQuest – Custom Software Development</title>
+  <!-- Google Font & simple reset -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #ffffff;
+      color: #1a2c3e;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Buttons */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #0f2b3d;
+      color: white;
+      font-weight: 600;
+      padding: 12px 28px;
+      border-radius: 40px;
+      text-decoration: none;
+      transition: 0.25s;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-primary:hover {
+      background: #1f4d6b;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+    }
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: transparent;
+      border: 1px solid #0f2b3d;
+      color: #0f2b3d;
+      font-weight: 500;
+      padding: 10px 24px;
+      border-radius: 40px;
+      text-decoration: none;
+      transition: 0.2s;
+    }
+    .btn-outline:hover {
+      background: #eef3fa;
+      border-color: #1f4d6b;
+    }
+
+    /* Header */
+    .navbar {
+      padding: 20px 0;
+      border-bottom: 1px solid #eef2f8;
+      position: sticky;
+      top: 0;
+      background: white;
+      z-index: 100;
+    }
+    .nav-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: linear-gradient(130deg, #0f2b3d, #2a6f8f);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 500;
+      color: #2c475c;
+    }
+    .nav-links a.active, .nav-links a:hover {
+      color: #0f2b3d;
+      font-weight: 600;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 80px 0 70px;
+      background: linear-gradient(100deg, #f6fafd 0%, #ffffff 70%);
+    }
+    .hero-grid {
+      display: flex;
+      align-items: center;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+    .hero-content {
+      flex: 1.2;
+    }
+    .hero-badge {
+      background: #e0edf5;
+      color: #0f2b3d;
+      padding: 4px 14px;
+      border-radius: 30px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      display: inline-block;
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 20px;
+      color: #0a1c2c;
+    }
+    .hero p {
+      font-size: 1.1rem;
+      color: #415f77;
+      margin-bottom: 32px;
+      max-width: 560px;
+    }
+    .hero-stats {
+      flex: 0.8;
+      background: white;
+      border-radius: 32px;
+      padding: 28px;
+      box-shadow: 0 20px 35px -8px rgba(0,0,0,0.05);
+      border: 1px solid #e5ecf3;
+    }
+
+    /* sections */
+    .section {
+      padding: 80px 0;
+    }
+    .section-sm {
+      padding: 56px 0;
+    }
+    .section-title {
+      text-align: center;
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: #0a1c2c;
+    }
+    .section-sub {
+      text-align: center;
+      color: #5c7a94;
+      max-width: 720px;
+      margin: 0 auto 48px;
+      font-size: 1.05rem;
+    }
+
+    /* Cards grid */
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      gap: 32px;
+    }
+    .card {
+      background: #ffffff;
+      border-radius: 28px;
+      padding: 32px 28px;
+      border: 1px solid #eef2f8;
+      transition: all 0.25s;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.02);
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: #cddfe9;
+      box-shadow: 0 20px 28px -12px rgba(0,0,0,0.08);
+    }
+    .card-icon {
+      font-size: 2.4rem;
+      margin-bottom: 20px;
+    }
+    .card h3 {
+      font-size: 1.4rem;
+      margin-bottom: 12px;
+    }
+
+    /* comparison table */
+    .compare-table {
+      background: #f8fbfe;
+      border-radius: 32px;
+      padding: 32px 24px;
+      margin-top: 18px;
+    }
+    .compare-row {
+      display: flex;
+      border-bottom: 1px solid #e2ecf3;
+      padding: 18px 8px;
+    }
+    .compare-row:last-child {
+      border: none;
+    }
+    .compare-label {
+      flex: 1;
+      font-weight: 700;
+      color: #0f2b3d;
+    }
+    .compare-custom, .compare-off {
+      flex: 2;
+      color: #2c4e6e;
+    }
+
+    /* benefits list with icons */
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 28px;
+      margin-top: 24px;
+    }
+    .benefit-item {
+      background: white;
+      border-radius: 24px;
+      padding: 24px;
+      border: 1px solid #eef2fa;
+    }
+
+    /* use cases */
+    .usecase-card {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.02);
+      border: 1px solid #eef2f8;
+    }
+
+    /* best practices list */
+    .practices {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      margin-top: 32px;
+    }
+    .practice-tag {
+      background: #eef3fa;
+      padding: 10px 22px;
+      border-radius: 40px;
+      font-weight: 500;
+      color: #0f2b3d;
+    }
+
+    /* Footer */
+    .footer {
+      background: #0a1c2c;
+      color: #bcd0df;
+      padding: 48px 0 28px;
+      margin-top: 40px;
+    }
+    .footer a {
+      color: #bcd0df;
+      text-decoration: none;
+    }
+    @media (max-width: 780px) {
+      .hero h1 { font-size: 2.2rem; }
+      .nav-links { gap: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<nav class="navbar">
+  <div class="container nav-flex">
+    <div class="logo">BinaryQuest</div>
+    <div class="nav-links">
+      <a href="#">Home</a>
+      <a href="#" class="active">Custom Software</a>
+      <a href="#">Solutions</a>
+      <a href="#">Success stories</a>
+      <a href="#">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-content">
+      <span class="hero-badge">✧ Tailored. Scalable. Future-proof.</span>
+      <h1>Custom software development that fits your business perfectly</h1>
+      <p>Build secure, high‑performance solutions aligned with your workflows, data, and growth goals — not the other way around.</p>
+      <a href="#" class="btn-primary">Start a conversation →</a>
+    </div>
+    <div class="hero-stats">
+      <p style="font-weight: 700; margin-bottom: 16px;">Why BinaryQuest?</p>
+      <ul style="list-style: none; margin-bottom: 20px;">
+        <li style="margin-bottom: 12px;">✓ 100% data ownership & control</li>
+        <li style="margin-bottom: 12px;">✓ 2x faster time‑to‑market with modern stacks</li>
+        <li style="margin-bottom: 12px;">✓ Dedicated support & maintenance</li>
+      </ul>
+      <a href="#" class="btn-outline">Explore use cases →</a>
+    </div>
+  </div>
+</section>
+
+<!-- Custom vs Off‑the‑shelf (comparison) -->
+<section class="section-sm">
+  <div class="container">
+    <h2 class="section-title">Custom‑built vs. off‑the‑shelf</h2>
+    <p class="section-sub">Make the right choice for your unique processes, security, and long‑term vision.</p>
+    <div class="compare-table">
+      <div class="compare-row">
+        <div class="compare-label">Tailored to workflows</div>
+        <div class="compare-custom">✅ Fully aligned with existing processes</div>
+        <div class="compare-off">❌ Generic, forces you to adapt</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-label">Data control & security</div>
+        <div class="compare-custom">Complete ownership, encryption, private cloud</div>
+        <div class="compare-off">Shared infrastructure, limited security</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-label">Scalability</div>
+        <div class="compare-custom">Evolves with your business</div>
+        <div class="compare-off">Rigid, often requires costly upgrades</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-label">Long‑term cost</div>
+        <div class="compare-custom">Higher upfront, lower TCO over 3–5 years</div>
+        <div class="compare-off">Low entry, but recurring licences & hidden fees</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-label">Compliance (HIPAA, GDPR, PCI)</div>
+        <div class="compare-custom">Tailored controls, audit‑ready</div>
+        <div class="compare-off">Uncertain, shared responsibility gap</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Benefits of custom software (8 core advantages) -->
+<section class="section" style="background: #fafdff;">
+  <div class="container">
+    <h2 class="section-title">Why enterprises choose custom software</h2>
+    <div class="benefits-grid">
+      <div class="benefit-item"><span class="card-icon">🔐</span><h3>Complete data control</h3><p>Private cloud, encryption, and granular access policies – your data stays yours.</p></div>
+      <div class="benefit-item"><span class="card-icon">⚙️</span><h3>Seamless automation</h3><p>Automate complex workflows, integrate with ERPs/CRMs, and reduce manual overhead.</p></div>
+      <div class="benefit-item"><span class="card-icon">📊</span><h3>Regulatory compliance</h3><p>Built‑in controls for HIPAA, SOC2, PCI‑DSS, GDPR – ready for any audit.</p></div>
+      <div class="benefit-item"><span class="card-icon">🛠️</span><h3>Ongoing support</h3><p>Dedicated team, proactive monitoring, and updates without disrupting operations.</p></div>
+      <div class="benefit-item"><span class="card-icon">📈</span><h3>Cost effectiveness</h3><p>No licensing fees, pay only for what you need, and optimise over time.</p></div>
+      <div class="benefit-item"><span class="card-icon">🧩</span><h3>Personalisation & UX</h3><p>Interface and logic built around your users, boosting adoption and productivity.</p></div>
+      <div class="benefit-item"><span class="card-icon">⏱️</span><h3>Pre-planned updates</h3><p>Deploy changes on your timeline, test thoroughly, and avoid forced downtime.</p></div>
+      <div class="benefit-item"><span class="card-icon">🏆</span><h3>Competitive edge</h3><p>Unique features, AI integration, and agility to outpace competitors.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Use cases (industry‑specific) -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">Custom software in action</h2>
+    <p class="section-sub">Built for finance, healthcare, manufacturing, logistics, and beyond.</p>
+    <div class="grid-3">
+      <div class="usecase-card"><span class="card-icon">🏦</span><h3>Financial management systems</h3><p>Secure payment gateways, risk engines, and real‑time reporting tailored to your institution.</p></div>
+      <div class="usecase-card"><span class="card-icon">🏥</span><h3>Healthcare & EHR</h3><p>HIPAA‑compliant patient portals, telemedicine, and lab integration (HL7/FHIR).</p></div>
+      <div class="usecase-card"><span class="card-icon">🏭</span><h3>Manufacturing & supply chain</h3><p>Inventory optimisation, predictive maintenance, and shop floor control.</p></div>
+      <div class="usecase-card"><span class="card-icon">📚</span><h3>Education / EdTech</h3><p>Learning management, student analytics, and admission automation.</p></div>
+      <div class="usecase-card"><span class="card-icon">🛒</span><h3>E‑commerce & distribution</h3><p>Headless commerce, B2B portals, and multi‑vendor marketplaces.</p></div>
+      <div class="usecase-card"><span class="card-icon">📊</span><h3>Enterprise resource planning</h3><p>Custom ERPs connecting HR, finance, inventory, and CRM in one unified platform.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Best practices + development approach -->
+<section class="section" style="background-color: #fafdff;">
+  <div class="container">
+    <h2 class="section-title">Our development best practices</h2>
+    <div class="practices">
+      <span class="practice-tag">DRY principle</span>
+      <span class="practice-tag">Staging & production env.</span>
+      <span class="practice-tag">Design before coding</span>
+      <span class="practice-tag">Version control (Git)</span>
+      <span class="practice-tag">Continuous integration / CD</span>
+      <span class="practice-tag">Security‑by‑design</span>
+    </div>
+    <div style="display: flex; gap: 28px; flex-wrap: wrap; margin-top: 48px;">
+      <div style="flex:1; min-width: 240px;"><h3>🔍 Discovery & strategy</h3><p>We align with your stakeholders, map existing IT landscape, and define a pragmatic roadmap.</p></div>
+      <div style="flex:1; min-width: 240px;"><h3>🧱 Modern architecture</h3><p>Microservices, event‑driven design, or modular monolith – we select what fits your scale.</p></div>
+      <div style="flex:1; min-width: 240px;"><h3>⚡ Agile delivery</h3><p>Iterative sprints, transparent progress, and early user feedback loops.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA / decision guide -->
+<section class="section-sm">
+  <div class="container" style="background: linear-gradient(120deg, #eef4fa, #ffffff); border-radius: 48px; padding: 48px 32px; text-align: center;">
+    <h2 style="font-size: 1.9rem; margin-bottom: 16px;">Ready to build software that grows with you?</h2>
+    <p style="margin-bottom: 32px; max-width: 600px; margin-left: auto; margin-right: auto;">Let’s discuss your idea, whether it's a complex ERP, AI-powered tool, or industry‑specific platform.</p>
+    <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+      <a href="#" class="btn-primary">Request a free consultation →</a>
+      <a href="#" class="btn-outline">Browse success stories</a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 32px;">
+      <div><strong>BinaryQuest</strong><br>Custom software & digital transformation</div>
+      <div>© 2025 BinaryQuest. All rights reserved.<br>hello@binaryquest.com</div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Portfolio — Binary Quest | AI, Enterprise, Odoo, Shopify</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: #fafcff;
+            color: #0b1f33;
+            line-height: 1.4;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 28px;
+        }
+
+        /* header / nav */
+        .site-header {
+            background: #ffffff;
+            border-bottom: 1px solid #eef2f8;
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(6px);
+        }
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .logo a {
+            font-size: 1.7rem;
+            font-weight: 800;
+            letter-spacing: -0.3px;
+            background: linear-gradient(135deg, #0f2b4d, #1f6392);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-decoration: none;
+        }
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            font-weight: 500;
+        }
+        .nav-links a {
+            color: #1e3a5f;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: 0.2s;
+        }
+        .nav-links a.active,
+        .nav-links a:hover {
+            color: #1f7bae;
+            border-bottom: 2px solid #1f7bae;
+            padding-bottom: 4px;
+        }
+        .btn-outline {
+            border: 1px solid #cbdde9;
+            padding: 6px 18px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            color: #1e3a5f;
+        }
+        .btn-outline:hover {
+            background: #eef3fc;
+            border-color: #1f7bae;
+        }
+
+        /* hero / portfolio header */
+        .portfolio-hero {
+            padding: 48px 0 24px;
+            text-align: center;
+        }
+        .portfolio-hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(145deg, #0c2e4e, #22668d);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.02em;
+        }
+        .portfolio-hero p {
+            font-size: 1.2rem;
+            color: #2c4c6e;
+            max-width: 680px;
+            margin: 16px auto 0;
+        }
+        .stats-badge {
+            background: #eaf3fa;
+            display: inline-block;
+            padding: 6px 20px;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #1f6e93;
+            margin-bottom: 20px;
+        }
+
+        /* filters */
+        .filters-bar {
+            background: white;
+            border-radius: 60px;
+            padding: 12px 24px;
+            margin: 32px 0 40px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.02), 0 1px 0 #e2edf7;
+            border: 1px solid #eef2fa;
+        }
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .filter-label {
+            font-weight: 600;
+            font-size: 0.8rem;
+            color: #2c5a7a;
+        }
+        .filter-btn {
+            background: #f3f7fc;
+            border: none;
+            padding: 6px 16px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+            color: #1a405e;
+        }
+        .filter-btn.active, .filter-btn:hover {
+            background: #1f7bae;
+            color: white;
+        }
+        .reset-btn {
+            background: transparent;
+            border: 1px solid #cbdde9;
+            color: #2c5a7a;
+        }
+        .project-count {
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-left: 12px;
+            background: #eef2f8;
+            padding: 4px 12px;
+            border-radius: 40px;
+        }
+
+        /* projects grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 28px;
+            margin: 32px 0 64px;
+        }
+        .project-card {
+            background: white;
+            border-radius: 28px;
+            overflow: hidden;
+            transition: all 0.25s;
+            border: 1px solid #e9f0f5;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+        }
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: #cde3f0;
+            box-shadow: 0 20px 28px -12px rgba(0,0,0,0.12);
+        }
+        .card-content {
+            padding: 1.6rem;
+        }
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 14px;
+        }
+        .tag {
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 40px;
+            background: #eef3fc;
+            color: #1f6e93;
+        }
+        .tag.ai { background: #e0f0fd; color: #0066a0; }
+        .tag.enterprise { background: #e5ecf5; color: #1d4e6e; }
+        .tag.shopify { background: #e9f2ea; color: #2b6e3c; }
+        .tag.odoo { background: #f0eef9; color: #5b3e8b; }
+        .project-title {
+            font-size: 1.45rem;
+            font-weight: 700;
+            margin: 8px 0 8px;
+            letter-spacing: -0.2px;
+            color: #0b2f48;
+        }
+        .project-desc {
+            color: #2c577c;
+            font-size: 0.85rem;
+            line-height: 1.45;
+            margin: 12px 0 16px;
+        }
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: #3f6e91;
+            border-top: 1px solid #edf3f9;
+            padding-top: 12px;
+        }
+        .tech-stack span {
+            background: #f6fafe;
+            padding: 4px 10px;
+            border-radius: 20px;
+        }
+        .location {
+            font-size: 0.7rem;
+            font-weight: 500;
+            margin-top: 12px;
+            color: #7396b2;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 0 32px;
+            border-top: 1px solid #e2edf7;
+            color: #53728e;
+            font-size: 0.85rem;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 720px) {
+            .container { padding: 0 20px; }
+            .projects-grid { grid-template-columns: 1fr; }
+            .filters-bar { border-radius: 28px; flex-direction: column; align-items: stretch; }
+            .filter-group { justify-content: space-between; }
+        }
+    </style>
+</head>
+<body>
+<header class="site-header">
+    <div class="container header-inner">
+        <div class="logo"><a href="#">Binary Quest</a></div>
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="#" class="active">Portfolio</a>
+            <a href="#">Services</a>
+            <a href="#">Insights</a>
+            <a href="#">Contact</a>
+        </div>
+        <a href="#" class="btn-outline">Let's talk →</a>
+    </div>
+</header>
+
+<main>
+    <div class="container">
+        <div class="portfolio-hero">
+            <div class="stats-badge">⚡ 31 selected projects · 7 countries</div>
+            <h1>Portfolio</h1>
+            <p>AI, custom enterprise software, Odoo ERP, and Shopify — delivered to customers worldwide</p>
+        </div>
+
+        <!-- filter section -->
+        <div class="filters-bar" id="filterBar">
+            <div class="filter-group">
+                <span class="filter-label">Solution:</span>
+                <button data-filter="all" class="filter-btn active">All</button>
+                <button data-filter="AI" class="filter-btn">AI</button>
+                <button data-filter="Enterprise" class="filter-btn">Enterprise</button>
+                <button data-filter="Shopify" class="filter-btn">Shopify</button>
+                <button data-filter="Odoo" class="filter-btn">Odoo</button>
+            </div>
+            <div class="filter-group">
+                <span class="filter-label">Region:</span>
+                <button data-region="all" class="filter-btn active">All</button>
+                <button data-region="Australia" class="filter-btn">Australia</button>
+                <button data-region="New Zealand" class="filter-btn">New Zealand</button>
+                <button data-region="Bangladesh" class="filter-btn">Bangladesh</button>
+                <button data-region="UAE" class="filter-btn">UAE</button>
+                <button data-region="Others" class="filter-btn">Others</button>
+            </div>
+            <div class="filter-group">
+                <span class="filter-label">Industry:</span>
+                <button data-industry="all" class="filter-btn active">All</button>
+                <button data-industry="Automotive" class="filter-btn">Automotive</button>
+                <button data-industry="Manufacturing" class="filter-btn">Manufacturing</button>
+                <button data-industry="Healthcare" class="filter-btn">Healthcare</button>
+                <button data-industry="Retail" class="filter-btn">Retail</button>
+            </div>
+            <button id="resetFilters" class="filter-btn reset-btn">⟳ Reset filters</button>
+        </div>
+
+        <div id="projectsContainer" class="projects-grid"></div>
+        <div id="noProjectsMsg" style="text-align:center; padding: 48px; display:none;">🤝 No matching projects. Try adjusting filters.</div>
+    </div>
+</main>
+
+<footer>
+    <div class="container">
+        <p>© 2025 Binary Quest — AI, Enterprise & E‑commerce solutions. Built with purpose.</p>
+    </div>
+</footer>
+
+<script>
+    // ----- PROJECT DATA (direct from portfolio) -----
+    const projectsData = [
+        { name: "ABC Photosigns", country: "New Zealand", industry: "Signage & Print", solution: "AI", description: "AI-assisted ticketing and IT infrastructure management that classifies, prioritises, and routes internal support requests automatically.", tech: ["AI", "Private GPULM Studio", "Vector DB", ".NET"], region: "New Zealand" },
+        { name: "Right2Drive", country: "Australia", industry: "Automotive (accident replacement)", solution: "AI", description: "AI-enhanced CRM and modern headless marketing site. Sales agents get next-best-action prompts and auto-summarised case notes.", tech: ["Next.js", "Headless CMS", "Python/FastAPI", "vLLM"], region: "Australia" },
+        { name: "Binary Quest — internal", country: "Bangladesh", industry: "R&D", solution: "AI", description: "Private GPU infrastructure for on-prem LLM inference, RAG, and fine-tuning. LM Studio, vLLM, Ollama, Vector DBs, Docker/Kubernetes.", tech: ["NVIDIA GPU", "vLLM", "Ollama", "Vector DB", "Kubernetes"], region: "Bangladesh" },
+        { name: "GUD Holdings Limited", country: "Australia", industry: "Automotive aftermarket", solution: "Enterprise", description: "Long-running engagement since 2017 — trademark management, internal portals, and line-of-business apps on the bqStart framework.", tech: ["ASP.NET", "SQL Server", "Azure", "bqStart"], region: "Australia" },
+        { name: "Ryco Group", country: "Australia", industry: "Automotive aftermarket", solution: "Enterprise", description: "8+ years of offshore development — web, mobile, and Pronto ERP integrations for AU and NZ operations.", tech: [".NET Core", "Next.js", "Flutter", "Pronto ERP"], region: "Australia" },
+        { name: "Valve Services", country: "Australia", industry: "Industrial services", solution: "Enterprise", description: "Service management platform and field engineer mobile app.", tech: [".NET", "SQL Server", "Xamarin"], region: "Australia" },
+        { name: "Australian Billboard Connections", country: "Australia", industry: "Out-of-home advertising", solution: "Enterprise", description: "Booking, inventory, and campaign management across web and mobile, replacing spreadsheet workflow.", tech: ["ASP.NET Core", "Angular", "Java", "Flutter"], region: "Australia" },
+        { name: "IODM Connect", country: "Australia", industry: "Fintech (receivables)", solution: "Enterprise", description: "Offshore development of AWS-hosted microservices platform for automated accounts receivable.", tech: [".NET", "AWS", "Microservices"], region: "Australia" },
+        { name: "Padma Diagnostic Centre", country: "Bangladesh", industry: "Healthcare", solution: "Enterprise", description: "Hospital and Patient Management System (HPMS) with web and mobile apps for patients and clinicians.", tech: [".NET", ".NET Core", "Angular", "Xamarin"], region: "Bangladesh" },
+        { name: "United Pharma", country: "Bangladesh", industry: "Pharmacy / e-commerce", solution: "Enterprise", description: "Wellbeing consumer e-commerce storefront and back-office integration.", tech: [".NET", "Angular"], region: "Bangladesh" },
+        { name: "Australian Clutch Services", country: "Australia", industry: "Automotive aftermarket", solution: "Shopify", description: "Shopify storefront with a custom AutoInfo API plugin for instant vehicle-specific parts lookup.", tech: ["Shopify", "Custom plugin", "AutoInfo API"], region: "Australia" },
+        { name: "AA Gasket Pty Ltd", country: "Australia", industry: "Automotive aftermarket", solution: "Shopify", description: "Shopify storefront integrated with PIS (Product Information System).", tech: ["Shopify", "PIS integration"], region: "Australia" },
+        { name: "Graphic Details", country: "New Zealand", industry: "Retail / creative", solution: "Shopify", description: "E-commerce build and ongoing digital-marketing support.", tech: ["Shopify"], region: "New Zealand" },
+        { name: "Redmin Industries", country: "Bangladesh", industry: "Manufacturing", solution: "Odoo", description: "Full-suite Odoo 16 Enterprise rollout — Sales, Inventory, Manufacturing, HR, Finance.", tech: ["Odoo 16 EE"], region: "Bangladesh" },
+        { name: "ABM Group (Green Dot, Waterbirds)", country: "Bangladesh", industry: "Conglomerate", solution: "Odoo", description: "Multi-company Odoo implementation across three sister concerns.", tech: ["Odoo EE"], region: "Bangladesh" },
+        { name: "Olila Glass", country: "Bangladesh", industry: "Manufacturing", solution: "Odoo", description: "Odoo HRM implementation for a large glass manufacturer.", tech: ["Odoo HR"], region: "Bangladesh" },
+        { name: "Catalyst", country: "Bangladesh", industry: "Trading", solution: "Odoo", description: "Inventory, Sales, Purchase, and Accounting on Odoo.", tech: ["Odoo"], region: "Bangladesh" },
+        { name: "Mela", country: "Bangladesh", industry: "Retail", solution: "Odoo", description: "Odoo PoS, Purchase, and Accounting rollout.", tech: ["Odoo PoS"], region: "Bangladesh" },
+        { name: "Sindabad.com", country: "Bangladesh", industry: "B2B e-commerce", solution: "Odoo", description: "Migration from Odoo 8 to Odoo 14 Enterprise with data integrity across millions of records.", tech: ["Odoo 14 EE", "Migration"], region: "Bangladesh" },
+        { name: "Samuda Chemical (SCCL)", country: "Bangladesh", industry: "Chemicals", solution: "Odoo", description: "Sales, Warehouse Management, Manufacturing, Purchase, and Accounting on Odoo.", tech: ["Odoo"], region: "Bangladesh" },
+        { name: "EMK Center", country: "Bangladesh", industry: "Cultural / Non-profit", solution: "Odoo", description: "Member, Event, Fixed Assets, Store, HR, and Access Control on single Odoo platform.", tech: ["Odoo"], region: "Bangladesh" },
+        { name: "Pebbles", country: "Bangladesh", industry: "Retail", solution: "Odoo", description: "OpenERP implementation covering SCM, POS, HR, and Finance.", tech: ["OpenERP"], region: "Bangladesh" },
+        { name: "Priyo Pharmacy", country: "Bangladesh", industry: "Pharmacy retail", solution: "Odoo", description: "Odoo retail stack for a multi-branch pharmacy chain.", tech: ["Odoo"], region: "Bangladesh" },
+        { name: "Lakhsma Sweaters", country: "Bangladesh", industry: "Apparel manufacturing", solution: "Odoo", description: "Odoo HR, production, and finance for a 2,000+ workforce garments manufacturer.", tech: ["Odoo HR", "Odoo Manufacturing"], region: "Bangladesh" },
+        { name: "Suremade Window Fashion", country: "Australia", industry: "Manufacturing (window furnishings)", solution: "Odoo", description: "Odoo rollout covering both B2B and B2C operations for a Melbourne manufacturer.", tech: ["Odoo"], region: "Australia" },
+        { name: "SteelX", country: "UAE", industry: "Steel manufacturing", solution: "Odoo", description: "End-to-end Odoo rollout — Sales, Inventory, MRP, HR, Services, and Finance to replace manual workflow.", tech: ["Odoo"], region: "UAE" },
+        { name: "OZLINX Solutions", country: "Australia", industry: "Telco retail", solution: "Odoo", description: "OpenERP CRM replacing spreadsheet-based sales tracking across AU and UAE operations.", tech: ["OpenERP CRM"], region: "Australia" },
+        { name: "NAWAT Technology Est.", country: "Saudi Arabia", industry: "Process automation", solution: "Odoo", description: "OpenERP HR and project-management rollout delivered as a SaaS model.", tech: ["OpenERP HR", "SaaS"], region: "Others" },
+        { name: "DiaLab International", country: "Austria", industry: "Medical diagnostics", solution: "Odoo", description: "Odoo Finance and Odoo Service for accounting, invoicing, timesheet, and field service.", tech: ["Odoo Finance", "Odoo Service"], region: "Others" },
+        { name: "Trade Me", country: "New Zealand", industry: "Online auction / classifieds", solution: "Odoo", description: "Custom Trade Me API integration into OpenERP — categories, bidding, Buy Now, delivery, Q&A for 5M-member marketplace.", tech: ["OpenERP", "Trade Me API"], region: "New Zealand" },
+        { name: "Tradevine", country: "New Zealand", industry: "Multichannel e-commerce", solution: "Odoo", description: "Tradevine API integration into OpenERP — inventory, purchase orders, sales orders, and Shopify/Trade Me listings.", tech: ["OpenERP", "Tradevine API", "Shopify"], region: "New Zealand" }
+    ];
+
+    let currentFilter = { solution: "all", region: "all", industry: "all" };
+
+    // render cards
+    function renderProjects() {
+        const container = document.getElementById("projectsContainer");
+        const noMsg = document.getElementById("noProjectsMsg");
+        let filtered = [...projectsData];
+
+        if (currentFilter.solution !== "all") {
+            filtered = filtered.filter(p => p.solution === currentFilter.solution);
+        }
+        if (currentFilter.region !== "all") {
+            if (currentFilter.region === "Others") {
+                filtered = filtered.filter(p => !["Australia","New Zealand","Bangladesh","UAE"].includes(p.region));
+            } else {
+                filtered = filtered.filter(p => p.region === currentFilter.region);
+            }
+        }
+        if (currentFilter.industry !== "all") {
+            filtered = filtered.filter(p => p.industry.toLowerCase().includes(currentFilter.industry.toLowerCase()));
+        }
+
+        if (filtered.length === 0) {
+            container.innerHTML = "";
+            noMsg.style.display = "block";
+            return;
+        }
+        noMsg.style.display = "none";
+        container.innerHTML = filtered.map(proj => {
+            let solutionTagClass = "tag";
+            if (proj.solution === "AI") solutionTagClass += " ai";
+            else if (proj.solution === "Enterprise") solutionTagClass += " enterprise";
+            else if (proj.solution === "Shopify") solutionTagClass += " shopify";
+            else if (proj.solution === "Odoo") solutionTagClass += " odoo";
+            const industryShort = proj.industry.split(' ')[0];
+            return `
+                <div class="project-card">
+                    <div class="card-content">
+                        <div class="project-tags">
+                            <span class="${solutionTagClass}">${proj.solution}</span>
+                            <span class="tag">${industryShort}</span>
+                        </div>
+                        <h3 class="project-title">${proj.name}</h3>
+                        <p class="project-desc">${proj.description.substring(0, 120)}${proj.description.length > 120 ? '…' : ''}</p>
+                        <div class="tech-stack">
+                            ${proj.tech.slice(0, 4).map(t => `<span>${t}</span>`).join('')}
+                        </div>
+                        <div class="location">📍 ${proj.country} · ${proj.industry}</div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    function updateActiveButtons() {
+        document.querySelectorAll('[data-filter]').forEach(btn => {
+            const val = btn.getAttribute('data-filter');
+            const type = btn.hasAttribute('data-region') ? 'region' : (btn.hasAttribute('data-industry') ? 'industry' : 'solution');
+            if (type === 'solution' && currentFilter.solution === val) btn.classList.add('active');
+            else if (type === 'region' && currentFilter.region === val) btn.classList.add('active');
+            else if (type === 'industry' && currentFilter.industry === val) btn.classList.add('active');
+            else btn.classList.remove('active');
+        });
+        const allRegion = document.querySelector('[data-region="all"]');
+        if (allRegion && currentFilter.region === "all") allRegion.classList.add('active');
+        const allInd = document.querySelector('[data-industry="all"]');
+        if (allInd && currentFilter.industry === "all") allInd.classList.add('active');
+    }
+
+    function attachFilterEvents() {
+        document.querySelectorAll('[data-filter]').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const val = btn.getAttribute('data-filter');
+                if (btn.hasAttribute('data-region')) {
+                    currentFilter.region = val;
+                } else if (btn.hasAttribute('data-industry')) {
+                    currentFilter.industry = val;
+                } else {
+                    currentFilter.solution = val;
+                }
+                updateActiveButtons();
+                renderProjects();
+            });
+        });
+        document.getElementById("resetFilters").addEventListener('click', () => {
+            currentFilter = { solution: "all", region: "all", industry: "all" };
+            updateActiveButtons();
+            renderProjects();
+        });
+    }
+
+    renderProjects();
+    attachFilterEvents();
+</script>
+</body>
+</html>
