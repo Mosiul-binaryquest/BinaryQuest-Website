@@ -3,598 +3,814 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>BinaryQuest – MVP Cost Estimator | Build Smarter</title>
+    <title>BinaryQuest – Software MVP Cost Estimator 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --blue: #1e6fdf; --blue2: #0f3b6f; --cyan: #06b6d4;
+            --green: #10b981; --bg: #f4f7fc; --white: #fff;
+            --border: #e2edf7; --text: #54708f; --dark: #0a1c2f;
         }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--dark); line-height: 1.5; }
 
-        body {
-            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
-            background: #f6f8fc;
-            color: #0a1c2f;
-            line-height: 1.5;
-        }
+        /* ── TOP NAV ── */
+        .topnav { background: var(--blue2); color: #fff; padding: 14px 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+        .topnav .logo { font-size: 1.3rem; font-weight: 900; letter-spacing: -.02em; }
+        .topnav .logo span { color: #60a5fa; }
+        .topnav nav { display: flex; gap: 20px; font-size: .85rem; font-weight: 500; }
+        .topnav nav a { color: rgba(255,255,255,.75); text-decoration: none; transition: color .2s; }
+        .topnav nav a:hover { color: #fff; }
+        .topnav .cta-btn { background: #1e6fdf; color: #fff; padding: 8px 20px; border-radius: 40px; font-size: .85rem; font-weight: 700; text-decoration: none; }
 
-        /* container */
-        .container {
-            max-width: 1320px;
-            margin: 0 auto;
-            padding: 1.5rem 1.8rem;
-        }
+        /* ── HERO BANNER ── */
+        .hero-banner { background: linear-gradient(135deg, #0b2b5c 0%, #1e5a9e 60%, #0e3d70 100%); color: #fff; padding: 48px 24px 36px; text-align: center; }
+        .hero-banner h1 { font-size: clamp(1.8rem,4vw,2.8rem); font-weight: 900; letter-spacing: -.03em; margin-bottom: 10px; }
+        .hero-banner h1 span { background: linear-gradient(90deg,#60a5fa,#34d399); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .hero-banner p { font-size: 1rem; color: rgba(255,255,255,.8); max-width: 560px; margin: 0 auto 24px; }
+        .hero-pills { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+        .hero-pill { background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2); border-radius: 40px; padding: 5px 14px; font-size: .78rem; font-weight: 600; color: #e0f2fe; }
 
-        /* header style */
-        .brand {
-            display: flex;
-            align-items: baseline;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-            border-bottom: 2px solid #e2edf7;
-            padding-bottom: 1rem;
-        }
-        .logo h1 {
-            font-size: 1.8rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #0b2b5c, #1e6fdf);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            letter-spacing: -0.3px;
-        }
-        .logo p {
-            font-size: 0.85rem;
-            color: #4a627a;
-        }
-        .badge-header {
-            background: #eef3fc;
-            padding: 0.4rem 1rem;
-            border-radius: 60px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: #1e6fdf;
-        }
+        /* ── PROGRESS BAR ── */
+        .progress-bar-wrap { background: #fff; border-bottom: 1px solid var(--border); padding: 10px 24px; display: flex; align-items: center; gap: 16px; }
+        .progress-label { font-size: .78rem; font-weight: 600; color: var(--text); white-space: nowrap; }
+        .progress-track { flex: 1; height: 8px; background: #e2edf7; border-radius: 40px; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg,#1e6fdf,#10b981); border-radius: 40px; transition: width .4s; }
+        .progress-pct { font-size: .78rem; font-weight: 700; color: var(--blue); white-space: nowrap; }
 
-        /* two-column layout */
-        .estimator-grid {
-            display: grid;
-            grid-template-columns: 1fr 0.9fr;
-            gap: 2rem;
-            margin: 2rem 0 2rem;
-        }
+        /* ── CURRENCY SWITCH ── */
+        .currency-bar { background: #fff; border-bottom: 1px solid var(--border); padding: 10px 24px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+        .currency-bar label { font-size: .8rem; font-weight: 700; color: var(--dark); }
+        .curr-btn { padding: 5px 14px; border-radius: 30px; border: 1.5px solid var(--border); background: var(--bg); font-size: .78rem; font-weight: 600; cursor: pointer; transition: .15s; color: var(--dark); }
+        .curr-btn.active { background: var(--blue); border-color: var(--blue); color: #fff; }
+        .risk-toggle { margin-left: auto; display: flex; align-items: center; gap: 8px; font-size: .8rem; font-weight: 600; }
+        .mini-toggle { width: 36px; height: 20px; background: #cbd5e1; border-radius: 20px; position: relative; cursor: pointer; transition: .2s; flex-shrink: 0; }
+        .mini-toggle.on { background: var(--blue); }
+        .mini-toggle::after { content: ''; width: 16px; height: 16px; background: #fff; border-radius: 50%; position: absolute; top: 2px; left: 2px; transition: .2s; }
+        .mini-toggle.on::after { left: 18px; }
 
-        /* left panel: feature selectors */
-        .panel {
-            background: white;
-            border-radius: 32px;
-            box-shadow: 0 12px 30px rgba(0,0,0,0.05);
-            padding: 1.6rem 1.8rem;
-            transition: all 0.2s;
-            border: 1px solid #eef2f8;
-        }
-        .panel h2 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 0.25rem;
-        }
-        .panel-sub {
-            color: #54708f;
-            font-size: 0.85rem;
-            margin-bottom: 1.8rem;
-            border-left: 3px solid #1e6fdf;
-            padding-left: 0.8rem;
-        }
+        /* ── MAIN GRID ── */
+        .container { max-width: 1340px; margin: 0 auto; padding: 0 20px; }
+        .estimator-grid { display: grid; grid-template-columns: 1fr 380px; gap: 24px; padding: 24px 0 40px; align-items: start; }
 
-        .selector-group {
-            margin-bottom: 2rem;
-        }
-        .selector-label {
-            font-weight: 700;
-            margin-bottom: 0.8rem;
-            font-size: 1rem;
-            display: flex;
-            justify-content: space-between;
-        }
-        .radio-group, .team-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-        .radio-card {
-            background: #f9fbfe;
-            border: 1.5px solid #e2edf7;
-            border-radius: 40px;
-            padding: 0.5rem 1.2rem;
-            font-size: 0.85rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-        input[type="radio"] {
-            accent-color: #1e6fdf;
-            margin-right: 4px;
-        }
-        .radio-card.selected, .radio-card:has(input:checked) {
-            background: #eef3fc;
-            border-color: #1e6fdf;
-            color: #0f3b6f;
-        }
+        /* ── LEFT PANEL ── */
+        .panel { background: var(--white); border-radius: 24px; box-shadow: 0 8px 24px rgba(0,0,0,.06); border: 1px solid var(--border); overflow: hidden; }
+        .panel-head { padding: 22px 24px 0; }
+        .panel-head h2 { font-size: 1.25rem; font-weight: 800; margin-bottom: 4px; }
+        .panel-sub { color: var(--text); font-size: .82rem; border-left: 3px solid var(--blue); padding-left: 10px; margin: 6px 0 20px; }
+        .panel-body { padding: 0 24px 24px; }
 
-        /* features accordion style */
-        .feature-category {
-            margin-bottom: 2rem;
-            border-bottom: 1px solid #eef2fa;
-            padding-bottom: 0.8rem;
-        }
-        .category-title {
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin: 1rem 0 0.75rem;
-            background: #fafcff;
-            padding: 0.2rem 0;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .feature-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            padding: 0.65rem 0;
-            border-bottom: 1px dashed #edf2f7;
-        }
-        .feature-info {
-            flex: 2;
-        }
-        .feature-name {
-            font-weight: 600;
-            margin-bottom: 0.2rem;
-        }
-        .feature-desc {
-            font-size: 0.7rem;
-            color: #5f7d9c;
-        }
-        .feature-hours {
-            font-size: 0.7rem;
-            font-family: monospace;
-            background: #f0f4fa;
-            padding: 0.2rem 0.5rem;
-            border-radius: 18px;
-            font-weight: 500;
-        }
-        .toggle-switch {
-            width: 44px;
-            height: 24px;
-            background: #cbdde9;
-            border-radius: 40px;
-            display: inline-block;
-            position: relative;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .toggle-switch.active {
-            background: #1e6fdf;
-        }
-        .toggle-switch::after {
-            content: '';
-            width: 20px;
-            height: 20px;
-            background: white;
-            border-radius: 50%;
-            position: absolute;
-            top: 2px;
-            left: 3px;
-            transition: 0.2s;
-        }
-        .toggle-switch.active::after {
-            left: 21px;
-        }
-        input.hidden-toggle {
-            display: none;
-        }
+        /* section tabs for left panel */
+        .tab-nav { display: flex; gap: 0; border-bottom: 2px solid var(--border); margin-bottom: 20px; overflow-x: auto; }
+        .tab-btn { padding: 10px 18px; font-size: .82rem; font-weight: 700; color: var(--text); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px; white-space: nowrap; transition: .15s; background: none; border-top: none; border-left: none; border-right: none; }
+        .tab-btn.active { color: var(--blue); border-bottom-color: var(--blue); }
+        .tab-pane { display: none; }
+        .tab-pane.active { display: block; }
 
-        /* right panel summary */
-        .summary-card {
-            background: white;
-            border-radius: 32px;
-            box-shadow: 0 12px 28px rgba(0,0,0,0.08);
-            padding: 1.8rem;
-            position: sticky;
-            top: 1.5rem;
-            border: 1px solid #eef2fa;
-        }
-        .cost-big {
-            font-size: 3rem;
-            font-weight: 800;
-            color: #0f3b6f;
-            line-height: 1;
-        }
-        .cost-range {
-            font-size: 0.9rem;
-            color: #4a688a;
-            margin-top: 0.4rem;
-        }
-        .timeline-block {
-            background: #f0f6fe;
-            border-radius: 24px;
-            padding: 1rem;
-            margin: 1.5rem 0;
-        }
-        .feature-summary-list {
-            font-size: 0.85rem;
-            max-height: 200px;
-            overflow-y: auto;
-            margin: 1rem 0;
-            padding-right: 0.5rem;
-        }
-        .selected-badge {
-            background: #e9f0f9;
-            border-radius: 20px;
-            padding: 0.2rem 0.6rem;
-            font-size: 0.7rem;
-            font-weight: 500;
-            display: inline-block;
-            margin: 0.2rem 0.2rem;
-        }
-        .btn-primary {
-            background: #0f3b6f;
-            color: white;
-            border: none;
-            width: 100%;
-            padding: 1rem;
-            font-weight: 700;
-            border-radius: 48px;
-            font-size: 1rem;
-            margin-top: 1.2rem;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .btn-primary:hover {
-            background: #1e6fdf;
-            transform: scale(0.98);
-        }
-        .footnote {
-            font-size: 0.7rem;
-            text-align: center;
-            margin-top: 1.2rem;
-            color: #6580a0;
-        }
-        hr {
-            margin: 1rem 0;
-            border-color: #ecf3f9;
-        }
-        @media (max-width: 850px) {
+        /* ── SELECTOR GROUPS ── */
+        .selector-group { margin-bottom: 22px; }
+        .selector-label { font-weight: 700; font-size: .9rem; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+        .radio-wrap { display: flex; flex-wrap: wrap; gap: 8px; }
+        .radio-card { background: var(--bg); border: 1.5px solid var(--border); border-radius: 32px; padding: 6px 14px; font-size: .82rem; font-weight: 500; cursor: pointer; transition: .15s; display: inline-flex; align-items: center; gap: 6px; }
+        .radio-card input[type="radio"] { accent-color: var(--blue); }
+        .radio-card:has(input:checked) { background: #eef3fc; border-color: var(--blue); color: var(--blue2); font-weight: 700; }
+        .small-note { font-size: .7rem; color: var(--text); margin-top: 6px; }
+
+        /* ── FEATURES ── */
+        .feature-category { margin-bottom: 16px; }
+        .cat-title { font-size: 1rem; font-weight: 800; padding: 8px 0 6px; display: flex; align-items: center; gap: 6px; border-bottom: 1px solid var(--border); margin-bottom: 8px; color: var(--dark); }
+        .feature-item { display: grid; grid-template-columns: 1fr auto auto auto; align-items: center; gap: 10px; padding: 9px 0; border-bottom: 1px dashed #edf2f7; }
+        .feature-name { font-weight: 600; font-size: .85rem; }
+        .feature-desc { font-size: .7rem; color: var(--text); margin-top: 2px; }
+        .feature-hours { font-size: .7rem; font-family: monospace; background: #f0f4fa; padding: 2px 8px; border-radius: 12px; white-space: nowrap; }
+        .complexity-sel { font-size: .7rem; background: #f4f7fc; border: 1px solid var(--border); border-radius: 8px; padding: 3px 6px; cursor: pointer; color: var(--dark); font-weight: 600; }
+        .toggle-switch { width: 42px; height: 22px; background: #cbdde9; border-radius: 40px; position: relative; cursor: pointer; transition: .2s; flex-shrink: 0; }
+        .toggle-switch.active { background: var(--blue); }
+        .toggle-switch::after { content: ''; width: 18px; height: 18px; background: #fff; border-radius: 50%; position: absolute; top: 2px; left: 2px; transition: .2s; }
+        .toggle-switch.active::after { left: 22px; }
+
+        /* ── RIGHT PANEL (summary) ── */
+        .summary-card { background: var(--white); border-radius: 24px; box-shadow: 0 12px 32px rgba(0,0,0,.09); border: 1px solid var(--border); padding: 24px; position: sticky; top: 16px; }
+        .cost-big { font-size: 3rem; font-weight: 900; color: var(--blue2); line-height: 1; letter-spacing: -.03em; }
+        .cost-range { font-size: .85rem; color: var(--text); margin-top: 4px; }
+        .info-block { background: #f0f6fe; border-radius: 16px; padding: 14px 16px; margin: 14px 0; }
+        .info-block .row { display: flex; justify-content: space-between; align-items: center; font-size: .85rem; padding: 4px 0; }
+        .info-block .row .key { color: var(--text); }
+        .info-block .row .val { font-weight: 700; color: var(--dark); }
+        .phase-block { margin: 14px 0; }
+        .phase-row { display: flex; justify-content: space-between; align-items: center; font-size: .8rem; padding: 6px 10px; border-radius: 10px; margin-bottom: 4px; }
+        .phase-row.p1 { background: #eff6ff; color: #1d4ed8; }
+        .phase-row.p2 { background: #f0fdf4; color: #166534; }
+        .phase-row.p3 { background: #faf5ff; color: #6d28d9; }
+        .phase-label { font-weight: 700; }
+        .team-breakdown { margin: 14px 0; }
+        .team-row { display: flex; align-items: center; gap: 8px; font-size: .8rem; padding: 5px 0; border-bottom: 1px dashed var(--border); }
+        .team-row:last-child { border: none; }
+        .team-icon { font-size: 1rem; width: 24px; text-align: center; }
+        .team-name { flex: 1; color: var(--text); }
+        .team-val { font-weight: 700; }
+        .monthly-cost { background: linear-gradient(135deg,#f0fdf4,#ecfdf5); border: 1px solid #bbf7d0; border-radius: 14px; padding: 12px 14px; margin: 14px 0; }
+        .monthly-cost .mc-label { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: #059669; margin-bottom: 6px; }
+        .monthly-cost .mc-val { font-size: 1.5rem; font-weight: 900; color: #065f46; }
+        .monthly-cost .mc-sub { font-size: .72rem; color: #047857; margin-top: 2px; }
+        .feature-summary-list { max-height: 160px; overflow-y: auto; margin: 10px 0; }
+        .selected-badge { background: #eef3fc; border-radius: 14px; padding: 2px 8px; font-size: .7rem; font-weight: 600; display: inline-block; margin: 2px; color: var(--blue2); }
+        .btn-primary { background: var(--blue2); color: #fff; border: none; width: 100%; padding: 14px; font-weight: 800; border-radius: 40px; font-size: .95rem; margin-top: 12px; cursor: pointer; transition: .2s; }
+        .btn-primary:hover { background: var(--blue); transform: scale(.98); }
+        .btn-secondary { background: var(--bg); color: var(--blue2); border: 1.5px solid var(--border); width: 100%; padding: 10px; font-weight: 700; border-radius: 40px; font-size: .85rem; margin-top: 8px; cursor: pointer; transition: .2s; }
+        .btn-secondary:hover { border-color: var(--blue); color: var(--blue); }
+        .footnote { font-size: .68rem; text-align: center; margin-top: 10px; color: #8099b4; }
+        hr { margin: 12px 0; border-color: #ecf3f9; }
+        .section-label { font-size: .7rem; font-weight: 800; text-transform: uppercase; letter-spacing: .1em; color: var(--text); margin: 14px 0 8px; display: flex; align-items: center; gap: 6px; }
+        .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+        /* risk badge */
+        .risk-badge { display: inline-block; font-size: .68rem; font-weight: 700; padding: 2px 8px; border-radius: 20px; background: #fef9c3; color: #92400e; margin-left: 8px; }
+
+        /* ── INFO BOXES below calculator ── */
+        .info-section { padding: 40px 0; }
+        .info-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(260px,1fr)); gap: 20px; margin-top: 24px; }
+        .info-card { background: var(--white); border-radius: 20px; padding: 24px; border: 1px solid var(--border); }
+        .info-card h4 { font-size: 1rem; font-weight: 800; margin-bottom: 8px; }
+        .info-card p { font-size: .82rem; color: var(--text); line-height: 1.7; }
+        .info-card ul { font-size: .82rem; color: var(--text); line-height: 1.8; padding-left: 16px; margin-top: 8px; }
+        .sec-eyebrow { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--blue); margin-bottom: 8px; }
+        .sec-title { font-size: clamp(1.4rem,3vw,2rem); font-weight: 800; letter-spacing: -.02em; margin-bottom: 10px; }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 900px) {
             .estimator-grid { grid-template-columns: 1fr; }
-            .container { padding: 1rem; }
+            .summary-card { position: static; }
+            .topnav nav { display: none; }
         }
-        .small-note {
-            font-size: 0.7rem;
-            color: #6c8dae;
+        @media (max-width: 540px) {
+            .hero-banner { padding: 32px 16px 24px; }
         }
+        .partner-logo { filter: grayscale(20%); opacity: .8; transition: .2s; }
+        .partner-logo:hover { filter: none; opacity: 1; transform: scale(1.04); }
     </style>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
-  <style>
-    .partner-logo { filter: grayscale(20%) brightness(0.98); transition: all 0.2s; opacity: 0.8; }
-    .partner-logo:hover { filter: grayscale(0%); opacity: 1; transform: scale(1.02); }
-  </style>
 </head>
 <body>
-<div class="container">
-    <div class="brand">
-        <div class="logo">
-            <h1>⚡ BinaryQuest</h1>
-            <p>mvp cost estimator · build smarter, launch faster</p>
-        </div>
-        <div class="badge-header">📊 real-time estimate · 2026</div>
-    </div>
 
-    <div class="estimator-grid">
-        <!-- LEFT Panel: Inputs -->
-        <div class="panel">
-            <h2>🎯 MVP Builder</h2>
-            <div class="panel-sub">Select platform, team & features — get instant cost + timeline</div>
+<!-- TOP NAV -->
+<nav class="topnav">
+    <div class="logo">BINARY<span>QUEST</span></div>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="#services">Services</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+    <a href="contact.html" class="cta-btn">Get a quote →</a>
+</nav>
 
-            <!-- Platform -->
-            <div class="selector-group">
-                <div class="selector-label">📱 1. Platform</div>
-                <div class="radio-group" id="platformGroup">
-                    <label class="radio-card"><input type="radio" name="platform" value="web" checked> 🌐 Web App only</label>
-                    <label class="radio-card"><input type="radio" name="platform" value="ios"> 🍎 iOS + Web</label>
-                    <label class="radio-card"><input type="radio" name="platform" value="android"> 🤖 Android + Web</label>
-                    <label class="radio-card"><input type="radio" name="platform" value="both"> 📱📲 Both native + Web</label>
-                </div>
-                <div class="small-note">*Web only is most cost-effective, native apps add complexity.</div>
-            </div>
-
-            <!-- Design Complexity -->
-            <div class="selector-group">
-                <div class="selector-label">🎨 2. Design Complexity</div>
-                <div class="radio-group" id="designGroup">
-                    <label class="radio-card"><input type="radio" name="design" value="basic" checked> Basic / Boilerplate</label>
-                    <label class="radio-card"><input type="radio" name="design" value="custom"> Custom UI / advanced</label>
-                    <label class="radio-card"><input type="radio" name="design" value="polished"> High-end / animations</label>
-                </div>
-            </div>
-
-            <!-- Development Team -->
-            <div class="selector-group">
-                <div class="selector-label">🧑‍💻 3. Development Team</div>
-                <div class="radio-group" id="teamGroup">
-                    <label class="radio-card"><input type="radio" name="team" value="freelance" checked> Freelance ($35-55/hr)</label>
-                    <label class="radio-card"><input type="radio" name="team" value="mid"> Mid-tier Agency ($65-95/hr)</label>
-                    <label class="radio-card"><input type="radio" name="team" value="premium"> US/EU Premium ($120-200/hr)</label>
-                </div>
-            </div>
-
-            <!-- Features library -->
-            <div class="selector-label" style="margin-top: 0.5rem;">🧩 4. Features (toggle to include)</div>
-            <div id="featuresContainer"></div>
-        </div>
-
-        <!-- RIGHT Panel: Summary & Estimate -->
-        <div class="summary-card">
-            <div style="display: flex; justify-content: space-between;">
-                <span style="font-weight: 600;">💰 Estimated Total Cost</span>
-                <span style="font-size:0.75rem;">(USD)</span>
-            </div>
-            <div class="cost-big" id="totalCost">$0</div>
-            <div class="cost-range" id="costRange">Range: $0 - $0</div>
-            <div class="timeline-block">
-                <div>⏱️ Estimated Timeline</div>
-                <strong id="timelineText">—</strong> development weeks
-                <div class="small-note" id="hourDetail">0 total dev hours</div>
-            </div>
-            <div><strong>✔️ Selected features (<span id="featureCount">0</span>)</strong></div>
-            <div class="feature-summary-list" id="featureSummary"></div>
-            <button class="btn-primary" id="consultBtn">📞 Book Free Consultation →</button>
-            <div class="footnote">*Estimate based on hours × rate + team & complexity multipliers. Actual cost may vary.</div>
-        </div>
-    </div>
-    <div style="background: #eef3fa; border-radius: 28px; padding: 1.2rem 1.8rem; margin: 1rem 0 2rem; font-size: 0.85rem;">
-        ⚡ <strong>What affects MVP cost?</strong> Features, platform, team location, hidden costs (testing, PM, deployment). Start with a PWA for mobile-friendly web app to reduce budget.
+<!-- HERO -->
+<div class="hero-banner">
+    <h1>Software MVP <span>Cost Estimator</span> 2026</h1>
+    <p>Get an instant, detailed cost & timeline estimate for your software project — with team breakdown, phase planning, and maintenance costs.</p>
+    <div class="hero-pills">
+        <span class="hero-pill">⚡ Real-time calculation</span>
+        <span class="hero-pill">🌍 Multi-currency (USD · BDT · EUR)</span>
+        <span class="hero-pill">📊 Phase breakdown</span>
+        <span class="hero-pill">🧑‍💻 Team composition</span>
+        <span class="hero-pill">📄 Export estimate</span>
     </div>
 </div>
 
-<script>
-    // ---------- FEATURE DATABASE (hours estimation) --------
-    const featuresDB = [
-        { id: "auth_email", category: "Authentication", name: "Email/password login", desc: "Signup, login, password reset", hours: 12 },
-        { id: "auth_oauth", category: "Authentication", name: "Social OAuth", desc: "Google, Github, Facebook", hours: 8 },
-        { id: "auth_2fa", category: "Authentication", name: "2FA (SMS/authenticator)", desc: "Extra security layer", hours: 18 },
-        { id: "auth_profiles", category: "Authentication", name: "User profiles & settings", desc: "Avatars, edit profile", hours: 14 },
-        { id: "auth_roles", category: "Authentication", name: "Roles & permissions", desc: "Admin, user, custom roles", hours: 22 },
-        { id: "payments_stripe", category: "Payments", name: "Stripe checkout", desc: "One-time purchases", hours: 18 },
-        { id: "payments_subscriptions", category: "Payments", name: "Recurring billing", desc: "Plans, subscriptions", hours: 36 },
-        { id: "payments_split", category: "Payments", name: "Split payments", desc: "Seller payouts, marketplace", hours: 60 },
-        { id: "core_dashboard", category: "Core", name: "Dashboard / overview", desc: "Stats, activity feed", hours: 20 },
-        { id: "core_crud", category: "Core", name: "CRUD (1 resource)", desc: "Create, read, update, delete", hours: 12 },
-        { id: "core_multi_crud", category: "Core", name: "Multiple resources", desc: "Relationships, complex data", hours: 32 },
-        { id: "core_search", category: "Core", name: "Search & filters", desc: "Full-text search, sorting", hours: 14 },
-        { id: "core_upload", category: "Core", name: "File/image upload", desc: "Storage, cloud", hours: 14 },
-        { id: "comm_email", category: "Communication", name: "Transactional emails", desc: "Welcome, reset password", hours: 10 },
-        { id: "comm_newsletter", category: "Communication", name: "Newsletter campaigns", desc: "Email templates, sending", hours: 28 },
-        { id: "comm_notifications", category: "Communication", name: "Real-time notifications", desc: "In-app, push", hours: 22 },
-        { id: "comm_chat", category: "Communication", name: "Live chat support", desc: "User-to-user / support chat", hours: 56 },
-        { id: "admin_user_mgmt", category: "Admin", name: "User & content moderation", desc: "Admin panel basics", hours: 28 },
-        { id: "admin_analytics", category: "Admin", name: "Usage tracking", desc: "Stats dashboard", hours: 16 },
-        { id: "admin_exports", category: "Admin", name: "Exports & reports", desc: "CSV/PDF, custom reports", hours: 28 },
-        { id: "integrations_api", category: "Integrations", name: "REST/GraphQL API", desc: "For third-party devs", hours: 42 },
-        { id: "integrations_webhooks", category: "Integrations", name: "Webhooks / events", desc: "External services", hours: 14 },
-        { id: "integrations_zapier", category: "Integrations", name: "Zapier / Slack etc", desc: "per integration", hours: 14 },
-        { id: "ai_single", category: "AI", name: "Single AI feature", desc: "chatbot, recommendations", hours: 28 },
-        { id: "ai_multiple", category: "AI", name: "Multiple AI / custom models", desc: "advanced intelligence", hours: 70 }
-    ];
+<!-- PROGRESS BAR -->
+<div class="progress-bar-wrap">
+    <span class="progress-label">Estimate completeness:</span>
+    <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:10%"></div></div>
+    <span class="progress-pct" id="progressPct">10%</span>
+</div>
 
-    // group by category
-    const grouped = {};
-    featuresDB.forEach(f => { if (!grouped[f.category]) grouped[f.category] = []; grouped[f.category].push(f); });
+<!-- CURRENCY + RISK BAR -->
+<div class="currency-bar">
+    <label>Currency:</label>
+    <button class="curr-btn active" data-curr="USD" onclick="setCurrency('USD',this)">🇺🇸 USD</button>
+    <button class="curr-btn" data-curr="BDT" onclick="setCurrency('BDT',this)">🇧🇩 BDT</button>
+    <button class="curr-btn" data-curr="EUR" onclick="setCurrency('EUR',this)">🇪🇺 EUR</button>
+    <div class="risk-toggle">
+        <div class="mini-toggle" id="riskToggle" onclick="toggleRisk()"></div>
+        <span>+15% Risk Buffer</span>
+        <span class="risk-badge" id="riskBadge" style="display:none;">ON</span>
+    </div>
+</div>
 
-    let selectedFeatures = new Set();   // store feature ids
+<div class="container">
+<div class="estimator-grid">
 
-    // multiplier factors
-    const platformMultiplier = { web: 1.0, ios: 1.45, android: 1.45, both: 1.85 };
-    const designMultiplier = { basic: 1.0, custom: 1.25, polished: 1.5 };
-    const teamHourly = { freelance: 45, mid: 80, premium: 160 }; // avg rates
+    <!-- ════ LEFT PANEL ════ -->
+    <div class="panel">
+        <div class="panel-head">
+            <h2>🎯 Project Builder</h2>
+            <div class="panel-sub">Configure your project — select type, platform, team & features to get an accurate estimate</div>
+        </div>
 
-    // UI References
-    const totalSpan = document.getElementById("totalCost");
-    const rangeSpan = document.getElementById("costRange");
-    const timelineSpan = document.getElementById("timelineText");
-    const hourDetailSpan = document.getElementById("hourDetail");
-    const featureCountSpan = document.getElementById("featureCount");
-    const featureSummaryDiv = document.getElementById("featureSummary");
+        <!-- Tab navigation -->
+        <div style="padding: 0 24px;">
+            <div class="tab-nav">
+                <button class="tab-btn active" onclick="showTab('tab-basics',this)">⚙️ Basics</button>
+                <button class="tab-btn" onclick="showTab('tab-auth',this)">🔐 Auth</button>
+                <button class="tab-btn" onclick="showTab('tab-core',this)">🧩 Core</button>
+                <button class="tab-btn" onclick="showTab('tab-payments',this)">💳 Payments</button>
+                <button class="tab-btn" onclick="showTab('tab-comm',this)">💬 Comms</button>
+                <button class="tab-btn" onclick="showTab('tab-ai',this)">🤖 AI / ML</button>
+                <button class="tab-btn" onclick="showTab('tab-erp',this)">🏭 ERP / CRM</button>
+                <button class="tab-btn" onclick="showTab('tab-ecom',this)">🛒 E-commerce</button>
+                <button class="tab-btn" onclick="showTab('tab-infra',this)">☁️ Infra</button>
+                <button class="tab-btn" onclick="showTab('tab-admin',this)">🛠️ Admin</button>
+            </div>
+        </div>
 
-    function getSelectedPlatform() { return document.querySelector('input[name="platform"]:checked')?.value || "web"; }
-    function getSelectedDesign() { return document.querySelector('input[name="design"]:checked')?.value || "basic"; }
-    function getSelectedTeam() { return document.querySelector('input[name="team"]:checked')?.value || "mid"; }
+        <div class="panel-body">
 
-    function computeHours() {
-        let totalHours = 0;
-        for (let fid of selectedFeatures) {
-            const feat = featuresDB.find(f => f.id === fid);
-            if (feat) totalHours += feat.hours;
-        }
-        // base overhead: always add authentication/empty? minimum 20h for project setup
-        if (totalHours === 0) totalHours = 8;
-        return totalHours;
-    }
+            <!-- ── TAB: BASICS ── -->
+            <div id="tab-basics" class="tab-pane active">
 
-    function computeCostAndTimeline() {
-        let hours = computeHours();
-        const platform = getSelectedPlatform();
-        const design = getSelectedDesign();
-        const teamType = getSelectedTeam();
-
-        const platformFactor = platformMultiplier[platform] || 1;
-        const designFactor = designMultiplier[design] || 1;
-        const hourlyRate = teamHourly[teamType] || 80;
-
-        let adjustedHours = Math.round(hours * platformFactor * designFactor);
-        // add 5-10% testing/management buffer
-        adjustedHours = Math.ceil(adjustedHours * 1.08);
-        const totalCost = adjustedHours * hourlyRate;
-        const minCost = Math.round(totalCost * 0.85);
-        const maxCost = Math.round(totalCost * 1.2);
-
-        // timeline weeks: ~35-45 hrs per week roughly
-        let weeks = Math.max(1, Math.ceil(adjustedHours / 38));
-        let weeksText = `${weeks} week${weeks > 1 ? 's' : ''}`;
-        if (adjustedHours > 140) weeksText = `${weeks} weeks (${Math.floor(adjustedHours/40)} wk+)`;
-
-        return { totalCost: Math.round(totalCost), minRange: minCost, maxRange: maxCost, adjustedHours, weeksText, hoursRaw: adjustedHours };
-    }
-
-    function updateEstimates() {
-        const { totalCost, minRange, maxRange, adjustedHours, weeksText } = computeCostAndTimeline();
-        totalSpan.innerText = `$${totalCost.toLocaleString()}`;
-        rangeSpan.innerText = `Range: $${minRange.toLocaleString()} - $${maxRange.toLocaleString()}`;
-        timelineSpan.innerText = weeksText;
-        hourDetailSpan.innerText = `${adjustedHours} estimated dev hours (incl. complexity buffer)`;
-        featureCountSpan.innerText = selectedFeatures.size;
-        // display summary list
-        let summaryHtml = '';
-        if (selectedFeatures.size === 0) summaryHtml = '<span class="small-note">No features selected — add some to see cost impact.</span>';
-        else {
-            for (let fid of selectedFeatures) {
-                const feat = featuresDB.find(f => f.id === fid);
-                if (feat) summaryHtml += `<span class="selected-badge">${feat.name} (${feat.hours}h)</span> `;
-            }
-        }
-        featureSummaryDiv.innerHTML = summaryHtml;
-    }
-
-    // render feature toggles
-    function renderFeatures() {
-        const container = document.getElementById("featuresContainer");
-        container.innerHTML = "";
-        for (let [category, items] of Object.entries(grouped)) {
-            const catDiv = document.createElement("div");
-            catDiv.className = "feature-category";
-            const titleSpan = document.createElement("div");
-            titleSpan.className = "category-title";
-            titleSpan.innerHTML = `<span>📂 ${category}</span>`;
-            catDiv.appendChild(titleSpan);
-            items.forEach(feat => {
-                const row = document.createElement("div");
-                row.className = "feature-item";
-                row.innerHTML = `
-                    <div class="feature-info">
-                        <div class="feature-name">${feat.name}</div>
-                        <div class="feature-desc">${feat.desc}</div>
+                <!-- Project Type -->
+                <div class="selector-group">
+                    <div class="selector-label">📁 1. Project Type</div>
+                    <div class="radio-wrap" id="projectTypeGroup">
+                        <label class="radio-card"><input type="radio" name="projtype" value="saas" checked> SaaS Platform</label>
+                        <label class="radio-card"><input type="radio" name="projtype" value="ecom"> E-commerce</label>
+                        <label class="radio-card"><input type="radio" name="projtype" value="marketplace"> Marketplace</label>
+                        <label class="radio-card"><input type="radio" name="projtype" value="mobile"> Mobile App</label>
+                        <label class="radio-card"><input type="radio" name="projtype" value="erp"> ERP / CRM</label>
+                        <label class="radio-card"><input type="radio" name="projtype" value="api"> API / Backend</label>
+                        <label class="radio-card"><input type="radio" name="projtype" value="custom"> Custom Enterprise</label>
                     </div>
-                    <div class="feature-hours">~${feat.hours} hrs</div>
-                    <div class="toggle-switch" data-id="${feat.id}"></div>
-                `;
-                catDiv.appendChild(row);
-            });
-            container.appendChild(catDiv);
-        }
+                </div>
 
-        // attach toggle events
-        document.querySelectorAll('.toggle-switch').forEach(toggle => {
-            const fid = toggle.getAttribute('data-id');
-            if (selectedFeatures.has(fid)) toggle.classList.add('active');
-            toggle.addEventListener('click', (e) => {
-                e.stopPropagation();
-                const id = toggle.getAttribute('data-id');
-                if (selectedFeatures.has(id)) {
-                    selectedFeatures.delete(id);
-                    toggle.classList.remove('active');
-                } else {
-                    selectedFeatures.add(id);
-                    toggle.classList.add('active');
-                }
-                updateEstimates();
-            });
+                <!-- Platform -->
+                <div class="selector-group">
+                    <div class="selector-label">📱 2. Platform</div>
+                    <div class="radio-wrap" id="platformGroup">
+                        <label class="radio-card"><input type="radio" name="platform" value="web" checked> 🌐 Web only</label>
+                        <label class="radio-card"><input type="radio" name="platform" value="ios"> 🍎 iOS + Web</label>
+                        <label class="radio-card"><input type="radio" name="platform" value="android"> 🤖 Android + Web</label>
+                        <label class="radio-card"><input type="radio" name="platform" value="both"> 📱 Both Native + Web</label>
+                        <label class="radio-card"><input type="radio" name="platform" value="pwa"> ⚡ PWA (mobile-ready web)</label>
+                    </div>
+                    <div class="small-note">PWA is the most cost-effective way to support mobile without native apps.</div>
+                </div>
+
+                <!-- Design Complexity -->
+                <div class="selector-group">
+                    <div class="selector-label">🎨 3. Design Complexity</div>
+                    <div class="radio-wrap">
+                        <label class="radio-card"><input type="radio" name="design" value="basic" checked> Basic / Template</label>
+                        <label class="radio-card"><input type="radio" name="design" value="custom"> Custom UI</label>
+                        <label class="radio-card"><input type="radio" name="design" value="polished"> High-end / Branded</label>
+                        <label class="radio-card"><input type="radio" name="design" value="enterprise"> Enterprise Design System</label>
+                    </div>
+                </div>
+
+                <!-- Tech Stack -->
+                <div class="selector-group">
+                    <div class="selector-label">🛠️ 4. Tech Stack</div>
+                    <div class="radio-wrap">
+                        <label class="radio-card"><input type="radio" name="stack" value="react" checked> React / Next.js</label>
+                        <label class="radio-card"><input type="radio" name="stack" value="vue"> Vue / Nuxt</label>
+                        <label class="radio-card"><input type="radio" name="stack" value="django"> Python / Django</label>
+                        <label class="radio-card"><input type="radio" name="stack" value="laravel"> PHP / Laravel</label>
+                        <label class="radio-card"><input type="radio" name="stack" value="node"> Node / Express</label>
+                        <label class="radio-card"><input type="radio" name="stack" value="dotnet"> .NET / C#</label>
+                        <label class="radio-card"><input type="radio" name="stack" value="flutter"> Flutter (cross-platform)</label>
+                    </div>
+                </div>
+
+                <!-- Team -->
+                <div class="selector-group">
+                    <div class="selector-label">🧑‍💻 5. Development Team</div>
+                    <div class="radio-wrap">
+                        <label class="radio-card"><input type="radio" name="team" value="bq" checked> BinaryQuest ($30–55/hr)</label>
+                        <label class="radio-card"><input type="radio" name="team" value="freelance"> Freelance ($40–65/hr)</label>
+                        <label class="radio-card"><input type="radio" name="team" value="mid"> Agency – Mid ($65–95/hr)</label>
+                        <label class="radio-card"><input type="radio" name="team" value="premium"> US/EU Premium ($120–200/hr)</label>
+                    </div>
+                    <div class="small-note">BinaryQuest delivers at South Asian rates with enterprise-grade quality and project management included.</div>
+                </div>
+
+                <!-- QA Level -->
+                <div class="selector-group">
+                    <div class="selector-label">🧪 6. QA & Testing Level</div>
+                    <div class="radio-wrap">
+                        <label class="radio-card"><input type="radio" name="qa" value="basic" checked> Basic manual QA</label>
+                        <label class="radio-card"><input type="radio" name="qa" value="automated"> Automated tests</label>
+                        <label class="radio-card"><input type="radio" name="qa" value="full"> Full QA + Performance</label>
+                    </div>
+                </div>
+
+            </div><!-- /tab-basics -->
+
+            <!-- ── TAB: AUTH ── -->
+            <div id="tab-auth" class="tab-pane">
+                <div id="features-auth"></div>
+            </div>
+
+            <!-- ── TAB: CORE ── -->
+            <div id="tab-core" class="tab-pane">
+                <div id="features-core"></div>
+            </div>
+
+            <!-- ── TAB: PAYMENTS ── -->
+            <div id="tab-payments" class="tab-pane">
+                <div id="features-payments"></div>
+            </div>
+
+            <!-- ── TAB: COMMS ── -->
+            <div id="tab-comm" class="tab-pane">
+                <div id="features-comm"></div>
+            </div>
+
+            <!-- ── TAB: AI/ML ── -->
+            <div id="tab-ai" class="tab-pane">
+                <div id="features-ai"></div>
+            </div>
+
+            <!-- ── TAB: ERP/CRM ── -->
+            <div id="tab-erp" class="tab-pane">
+                <div id="features-erp"></div>
+            </div>
+
+            <!-- ── TAB: E-COMMERCE ── -->
+            <div id="tab-ecom" class="tab-pane">
+                <div id="features-ecom"></div>
+            </div>
+
+            <!-- ── TAB: INFRA ── -->
+            <div id="tab-infra" class="tab-pane">
+                <div id="features-infra"></div>
+            </div>
+
+            <!-- ── TAB: ADMIN ── -->
+            <div id="tab-admin" class="tab-pane">
+                <div id="features-admin"></div>
+            </div>
+
+        </div><!-- /panel-body -->
+    </div><!-- /panel -->
+
+    <!-- ════ RIGHT PANEL ════ -->
+    <div class="summary-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+            <span style="font-weight:700;font-size:.9rem;">💰 Estimated Total Cost</span>
+            <span style="font-size:.75rem;color:var(--text);" id="currLabel">USD</span>
+        </div>
+        <div class="cost-big" id="totalCost">$0</div>
+        <div class="cost-range" id="costRange">Range: $0 – $0</div>
+
+        <div class="info-block">
+            <div class="row"><span class="key">⏱️ Timeline</span><span class="val" id="timelineText">—</span></div>
+            <div class="row"><span class="key">🕐 Dev hours</span><span class="val" id="hourDetail">0 hrs</span></div>
+            <div class="row"><span class="key">📦 Features</span><span class="val" id="featureCount">0 selected</span></div>
+            <div class="row"><span class="key">⚡ Rate</span><span class="val" id="rateLabel">—/hr</span></div>
+        </div>
+
+        <div class="section-label">Phase Breakdown</div>
+        <div class="phase-block">
+            <div class="phase-row p1"><span class="phase-label">📌 Phase 1 — MVP Core</span><span id="phase1Cost">$0</span></div>
+            <div class="phase-row p2"><span class="phase-label">🚀 Phase 2 — Full Product</span><span id="phase2Cost">$0</span></div>
+            <div class="phase-row p3"><span class="phase-label">🏆 Phase 3 — Scale & AI</span><span id="phase3Cost">$0</span></div>
+        </div>
+
+        <div class="section-label">Team Composition</div>
+        <div class="team-breakdown" id="teamBreakdown">
+            <div class="team-row"><span class="team-icon">💻</span><span class="team-name">Frontend Dev</span><span class="team-val" id="tb-frontend">—</span></div>
+            <div class="team-row"><span class="team-icon">⚙️</span><span class="team-name">Backend Dev</span><span class="team-val" id="tb-backend">—</span></div>
+            <div class="team-row"><span class="team-icon">🎨</span><span class="team-name">UI/UX Designer</span><span class="team-val" id="tb-design">—</span></div>
+            <div class="team-row"><span class="team-icon">🧪</span><span class="team-name">QA Engineer</span><span class="team-val" id="tb-qa">—</span></div>
+            <div class="team-row"><span class="team-icon">📋</span><span class="team-name">Project Manager</span><span class="team-val" id="tb-pm">—</span></div>
+        </div>
+
+        <div class="monthly-cost">
+            <div class="mc-label">📅 Est. Monthly Maintenance Cost</div>
+            <div class="mc-val" id="monthlyCost">$0/mo</div>
+            <div class="mc-sub">Hosting + support + monitoring + minor updates</div>
+        </div>
+
+        <div class="section-label">Selected Features</div>
+        <div class="feature-summary-list" id="featureSummary">
+            <span style="font-size:.75rem;color:var(--text);">Select features to see them here.</span>
+        </div>
+
+        <button class="btn-primary" id="consultBtn">📞 Book Free Consultation →</button>
+        <button class="btn-secondary" id="exportBtn">📄 Copy Estimate to Clipboard</button>
+        <div class="footnote">*Estimate based on hours × rate + platform, design & QA multipliers. Actual cost may vary ±20%.</div>
+    </div>
+
+</div><!-- /estimator-grid -->
+
+<!-- INFO SECTION -->
+<div class="info-section">
+    <div class="sec-eyebrow">Why Use This Estimator</div>
+    <h2 class="sec-title">What Drives Software Project Cost?</h2>
+    <div class="info-grid">
+        <div class="info-card">
+            <h4>⚙️ Platform & Tech Stack</h4>
+            <p>Native mobile apps (iOS/Android) can cost 1.5–1.85× more than a web app. PWAs give you 80% of the mobile experience at web-only cost. Tech stack choice affects both hourly rate and available talent pool.</p>
+        </div>
+        <div class="info-card">
+            <h4>🧩 Feature Complexity</h4>
+            <p>Simple auth is 12 hours. A full marketplace with split payments is 200+ hours. Each feature has a "simple/medium/complex" multiplier — real-world scope always lands between standard estimates.</p>
+        </div>
+        <div class="info-card">
+            <h4>🧑‍💻 Team Location & Rate</h4>
+            <p>A US senior developer costs $150–200/hr. A BinaryQuest engineer delivers the same quality at $30–55/hr. That's a 3–5× cost difference for identical output — the core value of our South Asian delivery model.</p>
+        </div>
+        <div class="info-card">
+            <h4>🎨 Design Investment</h4>
+            <p>Basic UI adds 0% — you use a template. A custom design system can add 25–50% to total cost. For MVP, we recommend custom UI only for customer-facing screens; admin panels can use templates.</p>
+        </div>
+        <div class="info-card">
+            <h4>🤖 AI Features</h4>
+            <p>Adding a single AI feature (chatbot, recommendations) costs 28–40 hours. Custom-trained models add 70–150+ hours. But the ROI is typically 3× within 12 months — AI is rarely the wrong investment.</p>
+        </div>
+        <div class="info-card">
+            <h4>📅 Maintenance & Scaling</h4>
+            <p>Software doesn't end at launch. Budget 15–25% of build cost annually for hosting, security patches, feature updates, and support. Our estimator shows this monthly so it's never a surprise.</p>
+        </div>
+    </div>
+</div>
+
+</div><!-- /container -->
+
+<!-- PARTNER CAROUSEL -->
+<section style="padding:60px 20px; background:#f8fafc; border-top:1px solid #e2e8f0;">
+    <div style="max-width:1200px; margin:0 auto;">
+        <div style="text-align:center; margin-bottom:32px;">
+            <span style="color:#059669; font-weight:700; font-size:.78rem; text-transform:uppercase; letter-spacing:.08em;">✦ Trusted Globally</span>
+            <h3 style="font-size:clamp(1.4rem,3vw,2rem); font-weight:800; margin-top:6px; color:#0a1c2f;">Powered by Industry Leaders</h3>
+        </div>
+        <div class="swiper partner-swiper" style="overflow:hidden;">
+            <div class="swiper-wrapper" style="align-items:center;">
+                <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=TechCorp" class="partner-logo" style="max-height:48px;width:auto;" alt="TechCorp"></div>
+                <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=CloudNet" class="partner-logo" style="max-height:48px;width:auto;" alt="CloudNet"></div>
+                <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=FinSolve" class="partner-logo" style="max-height:48px;width:auto;" alt="FinSolve"></div>
+                <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=HealthIQ" class="partner-logo" style="max-height:48px;width:auto;" alt="HealthIQ"></div>
+                <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=RetailHub" class="partner-logo" style="max-height:48px;width:auto;" alt="RetailHub"></div>
+                <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=LogiX" class="partner-logo" style="max-height:48px;width:auto;" alt="LogiX"></div>
+                <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=EdWave" class="partner-logo" style="max-height:48px;width:auto;" alt="EdWave"></div>
+                <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=InsureOne" class="partner-logo" style="max-height:48px;width:auto;" alt="InsureOne"></div>
+                <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=BuildSmart" class="partner-logo" style="max-height:48px;width:auto;" alt="BuildSmart"></div>
+                <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=MediaBoost" class="partner-logo" style="max-height:48px;width:auto;" alt="MediaBoost"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer style="background:#0a1c2f;color:#64748b;text-align:center;padding:24px;font-size:.82rem;">
+    © 2026 BinaryQuest — Software Development & AI Solutions ·
+    <a href="contact.html" style="color:#60a5fa;text-decoration:none;">Contact us</a>
+</footer>
+
+<script>
+// ═══════════════════════════════════════════════════════
+//  FEATURE DATABASE
+// ═══════════════════════════════════════════════════════
+const FEATURES = [
+  // AUTH
+  { id:"auth_email",    tab:"auth",    name:"Email / password login",      desc:"Signup, login, forgot password, email verify",  hours:12 },
+  { id:"auth_oauth",    tab:"auth",    name:"Social OAuth (Google/FB)",     desc:"One-click login via 3rd party providers",       hours:10 },
+  { id:"auth_2fa",      tab:"auth",    name:"Two-factor authentication",    desc:"SMS OTP or authenticator app support",           hours:18 },
+  { id:"auth_profiles", tab:"auth",    name:"User profiles & avatars",      desc:"Edit profile, photo upload, bio",               hours:14 },
+  { id:"auth_roles",    tab:"auth",    name:"Roles & permissions (RBAC)",   desc:"Admin, manager, viewer, custom roles",          hours:24 },
+  { id:"auth_sso",      tab:"auth",    name:"SSO / SAML (enterprise)",      desc:"Azure AD, Okta, Google Workspace integration",  hours:32 },
+  { id:"auth_audit",    tab:"auth",    name:"Login audit log",              desc:"Track who logged in, when, from where",         hours:10 },
+
+  // CORE
+  { id:"core_dashboard",tab:"core",    name:"Dashboard / analytics view",   desc:"Stats, charts, activity feed",                  hours:20 },
+  { id:"core_crud",     tab:"core",    name:"CRUD — single resource",       desc:"Create, read, update, delete one data entity",  hours:12 },
+  { id:"core_multicrud",tab:"core",    name:"CRUD — multiple resources",    desc:"Related entities, complex data relationships",  hours:36 },
+  { id:"core_search",   tab:"core",    name:"Search & advanced filters",    desc:"Full-text search, sort, faceted filters",       hours:16 },
+  { id:"core_upload",   tab:"core",    name:"File / image upload",          desc:"S3 or cloud storage, previews, validation",     hours:14 },
+  { id:"core_export",   tab:"core",    name:"Data exports (CSV/Excel/PDF)", desc:"Custom report export, scheduled exports",       hours:22 },
+  { id:"core_import",   tab:"core",    name:"Bulk data import",             desc:"CSV upload with validation and error handling", hours:18 },
+  { id:"core_multitenancy",tab:"core", name:"Multi-tenancy",                desc:"Separate data per company/organisation",        hours:48 },
+  { id:"core_i18n",     tab:"core",    name:"Internationalisation (i18n)",  desc:"Multiple languages, RTL support",               hours:28 },
+  { id:"core_audit",    tab:"core",    name:"Activity / audit trail",       desc:"Who changed what and when — full log",          hours:18 },
+
+  // PAYMENTS
+  { id:"pay_stripe",    tab:"payments",name:"Stripe one-time checkout",     desc:"Single payments, card processing",              hours:18 },
+  { id:"pay_subs",      tab:"payments",name:"Recurring billing / plans",    desc:"Subscriptions, trials, plan upgrades",          hours:36 },
+  { id:"pay_marketplace",tab:"payments",name:"Marketplace / split pay",     desc:"Seller payouts, commission, escrow",            hours:64 },
+  { id:"pay_invoice",   tab:"payments",name:"Invoice generation",           desc:"Auto-generate PDF invoices, send by email",     hours:20 },
+  { id:"pay_wallet",    tab:"payments",name:"Digital wallet / credits",     desc:"In-app balance, top-up, spending",              hours:32 },
+  { id:"pay_mobile",    tab:"payments",name:"bKash / Nagad / SSLCommerz",   desc:"Bangladesh mobile payment gateway integration", hours:22 },
+  { id:"pay_refunds",   tab:"payments",name:"Refunds & disputes",           desc:"Automated refund flows, dispute management",    hours:18 },
+
+  // COMM
+  { id:"comm_email",    tab:"comm",    name:"Transactional emails",         desc:"Welcome, reset, order confirm via SendGrid",    hours:10 },
+  { id:"comm_newsletter",tab:"comm",   name:"Email campaigns",              desc:"Newsletter templates, unsubscribe, analytics",  hours:28 },
+  { id:"comm_push",     tab:"comm",    name:"Push notifications",           desc:"Web push + mobile push (FCM/APNs)",             hours:22 },
+  { id:"comm_sms",      tab:"comm",    name:"SMS notifications",            desc:"Order alerts, OTPs via Twilio or local gateway",hours:16 },
+  { id:"comm_chat",     tab:"comm",    name:"Live chat (user-to-support)",  desc:"Real-time WebSocket chat with support agents",  hours:56 },
+  { id:"comm_p2p",      tab:"comm",    name:"P2P messaging",                desc:"User-to-user direct messages, read receipts",   hours:72 },
+  { id:"comm_whatsapp", tab:"comm",    name:"WhatsApp Business API bot",    desc:"Automated responses, order updates via WA",     hours:36 },
+  { id:"comm_inapp",    tab:"comm",    name:"In-app notification centre",   desc:"Bell icon, notification list, mark-as-read",   hours:18 },
+
+  // AI / ML
+  { id:"ai_chatbot",    tab:"ai",      name:"AI chatbot (RAG-based)",       desc:"Answers from your docs/KB using LLM",           hours:40 },
+  { id:"ai_recommend",  tab:"ai",      name:"Recommendation engine",        desc:"Personalised product/content suggestions",      hours:56 },
+  { id:"ai_nlp",        tab:"ai",      name:"NLP text classification",      desc:"Sentiment, intent, categorisation",             hours:36 },
+  { id:"ai_ocr",        tab:"ai",      name:"Document OCR / extraction",    desc:"Invoice, ID, form data extraction from images", hours:44 },
+  { id:"ai_vision",     tab:"ai",      name:"Computer vision / QC",         desc:"Image recognition, defect detection",           hours:72 },
+  { id:"ai_forecast",   tab:"ai",      name:"Predictive forecasting",       desc:"Demand, sales, or churn prediction models",     hours:64 },
+  { id:"ai_voice",      tab:"ai",      name:"Voice AI / speech-to-text",    desc:"Transcription, voice commands",                 hours:48 },
+  { id:"ai_search",     tab:"ai",      name:"AI semantic search",           desc:"Vector search, embeddings, similarity ranking", hours:40 },
+  { id:"ai_agent",      tab:"ai",      name:"Autonomous AI agent",          desc:"Multi-step task planning & execution with LLM", hours:80 },
+
+  // ERP / CRM
+  { id:"erp_contacts",  tab:"erp",     name:"CRM contacts & pipeline",      desc:"Lead stages, deal tracking, contact history",   hours:36 },
+  { id:"erp_inventory", tab:"erp",     name:"Inventory management",         desc:"Stock levels, reorder alerts, warehouses",      hours:44 },
+  { id:"erp_purchase",  tab:"erp",     name:"Purchase orders / procurement",desc:"PO creation, supplier management, 3-way match", hours:48 },
+  { id:"erp_hr",        tab:"erp",     name:"HR & leave management",        desc:"Employee records, attendance, leave approval",  hours:40 },
+  { id:"erp_payroll",   tab:"erp",     name:"Payroll processing",           desc:"Salary calc, tax, slip generation",             hours:56 },
+  { id:"erp_accounting",tab:"erp",     name:"Accounting / ledger",          desc:"Chart of accounts, journal entries, P&L",      hours:72 },
+  { id:"erp_reports",   tab:"erp",     name:"Business intelligence reports",desc:"KPI dashboards, drill-down analytics",          hours:36 },
+  { id:"erp_workflow",  tab:"erp",     name:"Approval workflows",           desc:"Multi-step approval chains with notifications", hours:28 },
+
+  // E-COMMERCE
+  { id:"ecom_catalog",  tab:"ecom",    name:"Product catalogue",            desc:"Categories, attributes, variants, images",      hours:28 },
+  { id:"ecom_cart",     tab:"ecom",    name:"Shopping cart & checkout",     desc:"Add to cart, coupon codes, checkout flow",      hours:32 },
+  { id:"ecom_shipping", tab:"ecom",    name:"Shipping & delivery zones",    desc:"Rate calc, courier integration, tracking",      hours:36 },
+  { id:"ecom_reviews",  tab:"ecom",    name:"Reviews & ratings",            desc:"Star ratings, moderation, verified purchase",   hours:20 },
+  { id:"ecom_wishlist", tab:"ecom",    name:"Wishlist & compare",           desc:"Save items, compare products side-by-side",     hours:14 },
+  { id:"ecom_promo",    tab:"ecom",    name:"Promotions & flash sales",     desc:"Discount codes, BOGO, limited-time offers",     hours:28 },
+  { id:"ecom_multi",    tab:"ecom",    name:"Multi-vendor / seller portal", desc:"Seller onboarding, product listing, payouts",   hours:80 },
+  { id:"ecom_subscription",tab:"ecom", name:"Subscription boxes",           desc:"Recurring product delivery, pause/cancel",      hours:40 },
+
+  // INFRA
+  { id:"infra_ci",      tab:"infra",   name:"CI/CD pipeline",               desc:"Auto-deploy on push, staging & production",     hours:18 },
+  { id:"infra_docker",  tab:"infra",   name:"Docker / containerisation",    desc:"Consistent environments, easier scaling",       hours:16 },
+  { id:"infra_k8s",     tab:"infra",   name:"Kubernetes / auto-scaling",    desc:"Pod orchestration, horizontal scaling",         hours:48 },
+  { id:"infra_monitoring",tab:"infra", name:"Monitoring & alerting",        desc:"Uptime, error rate, Sentry / Datadog",          hours:16 },
+  { id:"infra_logs",    tab:"infra",   name:"Centralised logging",          desc:"ELK / CloudWatch log aggregation",              hours:14 },
+  { id:"infra_cdn",     tab:"infra",   name:"CDN & performance tuning",     desc:"CloudFront, caching, image optimisation",       hours:12 },
+  { id:"infra_security",tab:"infra",   name:"Security hardening",           desc:"OWASP, pen-test readiness, WAF rules",          hours:24 },
+  { id:"infra_backup",  tab:"infra",   name:"Automated backups & DR",       desc:"Daily backups, restore testing, RTO/RPO plan",  hours:16 },
+
+  // ADMIN
+  { id:"admin_panel",   tab:"admin",   name:"Admin dashboard",              desc:"User management, stats, config panel",          hours:28 },
+  { id:"admin_moderation",tab:"admin", name:"Content moderation",           desc:"Flag, review, remove user-generated content",   hours:20 },
+  { id:"admin_analytics",tab:"admin",  name:"Usage analytics",              desc:"Sessions, events, funnel tracking",             hours:18 },
+  { id:"admin_api",     tab:"admin",   name:"Public REST/GraphQL API",      desc:"For 3rd party integrations and mobile apps",    hours:44 },
+  { id:"admin_webhooks",tab:"admin",   name:"Webhooks",                     desc:"Send events to external systems",               hours:14 },
+  { id:"admin_zapier",  tab:"admin",   name:"Zapier / Make integration",    desc:"No-code automation with 3rd party apps",        hours:14 },
+  { id:"admin_featureflags",tab:"admin",name:"Feature flags",               desc:"Toggle features per user/org without deploy",   hours:14 },
+];
+
+// ═══════════════════════════════════════════════════════
+//  STATE
+// ═══════════════════════════════════════════════════════
+const selectedFeatures = new Set();
+const complexityMap = {};      // featureId → 1.0 | 1.5 | 2.0
+let currency = 'USD';
+let riskBuffer = false;
+
+const EXCHANGE = { USD: 1, BDT: 110, EUR: 0.92 };
+const SYMBOL   = { USD: '$', BDT: '৳', EUR: '€' };
+
+const PLATFORM_MUL = { web:1.0, pwa:1.05, ios:1.45, android:1.45, both:1.85 };
+const DESIGN_MUL   = { basic:1.0, custom:1.25, polished:1.5, enterprise:1.8 };
+const QA_MUL       = { basic:1.05, automated:1.15, full:1.25 };
+const TEAM_RATE    = { bq:42, freelance:52, mid:80, premium:160 };
+const TEAM_LABEL   = { bq:'$30–55/hr', freelance:'$40–65/hr', mid:'$65–95/hr', premium:'$120–200/hr' };
+
+// ═══════════════════════════════════════════════════════
+//  RENDER FEATURES INTO TABS
+// ═══════════════════════════════════════════════════════
+const TAB_NAMES = {
+    auth:'Authentication', core:'Core Features', payments:'Payments',
+    comm:'Communication', ai:'AI & Machine Learning', erp:'ERP / CRM',
+    ecom:'E-commerce', infra:'Infrastructure & DevOps', admin:'Admin & Integrations'
+};
+
+function renderAllFeatureTabs() {
+    Object.keys(TAB_NAMES).forEach(tab => {
+        const container = document.getElementById('features-' + tab);
+        if (!container) return;
+        const items = FEATURES.filter(f => f.tab === tab);
+        container.innerHTML = `<div class="cat-title">${TAB_NAMES[tab]}</div>` +
+            items.map(f => `
+            <div class="feature-item">
+                <div class="feature-info">
+                    <div class="feature-name">${f.name}</div>
+                    <div class="feature-desc">${f.desc}</div>
+                </div>
+                <div class="feature-hours">~${f.hours}h</div>
+                <select class="complexity-sel" data-id="${f.id}" onchange="setComplexity('${f.id}',this.value)">
+                    <option value="1">Simple</option>
+                    <option value="1.5">Medium</option>
+                    <option value="2">Complex</option>
+                </select>
+                <div class="toggle-switch${selectedFeatures.has(f.id) ? ' active' : ''}" data-id="${f.id}" onclick="toggleFeature('${f.id}',this)"></div>
+            </div>`).join('');
+    });
+}
+
+function toggleFeature(id, el) {
+    if (selectedFeatures.has(id)) { selectedFeatures.delete(id); el.classList.remove('active'); }
+    else { selectedFeatures.add(id); el.classList.add('active'); }
+    updateAll();
+}
+
+function setComplexity(id, val) {
+    complexityMap[id] = parseFloat(val);
+    updateAll();
+}
+
+// ═══════════════════════════════════════════════════════
+//  TAB SWITCHING
+// ═══════════════════════════════════════════════════════
+function showTab(tabId, btn) {
+    document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(tabId).classList.add('active');
+    btn.classList.add('active');
+}
+
+// ═══════════════════════════════════════════════════════
+//  CURRENCY
+// ═══════════════════════════════════════════════════════
+function setCurrency(curr, btn) {
+    currency = curr;
+    document.querySelectorAll('.curr-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('currLabel').innerText = curr;
+    updateAll();
+}
+
+function fmt(usd) {
+    const val = Math.round(usd * EXCHANGE[currency]);
+    return SYMBOL[currency] + val.toLocaleString();
+}
+
+// ═══════════════════════════════════════════════════════
+//  RISK BUFFER
+// ═══════════════════════════════════════════════════════
+function toggleRisk() {
+    riskBuffer = !riskBuffer;
+    const t = document.getElementById('riskToggle');
+    const b = document.getElementById('riskBadge');
+    t.classList.toggle('on', riskBuffer);
+    b.style.display = riskBuffer ? 'inline-block' : 'none';
+    updateAll();
+}
+
+// ═══════════════════════════════════════════════════════
+//  COMPUTE
+// ═══════════════════════════════════════════════════════
+function getVal(name) { return document.querySelector(`input[name="${name}"]:checked`)?.value; }
+
+function computeTotalHours() {
+    let h = 0;
+    selectedFeatures.forEach(id => {
+        const feat = FEATURES.find(f => f.id === id);
+        if (!feat) return;
+        const cx = complexityMap[id] || 1;
+        h += feat.hours * cx;
+    });
+    if (h === 0) h = 8;
+    return h;
+}
+
+function updateAll() {
+    const platform = getVal('platform') || 'web';
+    const design   = getVal('design')   || 'basic';
+    const qa       = getVal('qa')       || 'basic';
+    const team     = getVal('team')     || 'bq';
+
+    let hours = computeTotalHours();
+    hours = Math.round(hours * PLATFORM_MUL[platform] * DESIGN_MUL[design] * QA_MUL[qa]);
+    hours = Math.ceil(hours * 1.08); // pm overhead
+    if (riskBuffer) hours = Math.ceil(hours * 1.15);
+
+    const rate = TEAM_RATE[team];
+    const total = hours * rate;
+    const min   = Math.round(total * 0.85);
+    const max   = Math.round(total * 1.25);
+    const weeks = Math.max(2, Math.ceil(hours / 38));
+
+    // Phase split: 50% MVP, 30% full, 20% scale
+    const p1 = total * 0.50;
+    const p2 = total * 0.30;
+    const p3 = total * 0.20;
+
+    // Monthly maintenance: 2% of total per month
+    const monthly = total * 0.02;
+
+    // Team composition (rough hours per role)
+    const feh  = Math.round(hours * 0.30);
+    const beh  = Math.round(hours * 0.35);
+    const desh = Math.round(hours * 0.15);
+    const qah  = Math.round(hours * 0.12);
+    const pmh  = Math.round(hours * 0.08);
+
+    // Progress: features selected / 10 = rough completeness
+    const pct = Math.min(95, 10 + selectedFeatures.size * 5 +
+        (platform !== 'web' ? 5 : 0) + (getVal('projtype') ? 5 : 0));
+
+    // ── UPDATE DOM ──
+    document.getElementById('totalCost').innerText   = fmt(total);
+    document.getElementById('costRange').innerText   = `Range: ${fmt(min)} – ${fmt(max)}`;
+    document.getElementById('timelineText').innerText= `${weeks} week${weeks>1?'s':''}`;
+    document.getElementById('hourDetail').innerText  = `${hours} est. dev hours`;
+    document.getElementById('featureCount').innerText= `${selectedFeatures.size} selected`;
+    document.getElementById('rateLabel').innerText   = TEAM_LABEL[team];
+
+    document.getElementById('phase1Cost').innerText = fmt(p1);
+    document.getElementById('phase2Cost').innerText = fmt(p2);
+    document.getElementById('phase3Cost').innerText = fmt(p3);
+
+    document.getElementById('monthlyCost').innerText = fmt(monthly) + '/mo';
+
+    document.getElementById('tb-frontend').innerText = `${feh} hrs`;
+    document.getElementById('tb-backend').innerText  = `${beh} hrs`;
+    document.getElementById('tb-design').innerText   = `${desh} hrs`;
+    document.getElementById('tb-qa').innerText       = `${qah} hrs`;
+    document.getElementById('tb-pm').innerText       = `${pmh} hrs`;
+
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressPct').innerText    = pct + '%';
+
+    // Selected feature badges
+    let html = '';
+    if (selectedFeatures.size === 0) {
+        html = '<span style="font-size:.75rem;color:var(--text);">No features selected — toggle features to see cost impact.</span>';
+    } else {
+        selectedFeatures.forEach(id => {
+            const f = FEATURES.find(x => x.id === id);
+            const cx = complexityMap[id] || 1;
+            const cxLabel = cx === 2 ? ' ⚡' : cx === 1.5 ? ' ~' : '';
+            if (f) html += `<span class="selected-badge">${f.name}${cxLabel} (${Math.round(f.hours*cx)}h)</span>`;
         });
     }
+    document.getElementById('featureSummary').innerHTML = html;
+}
 
-    // event listeners for radio changes
-    function bindRadioListeners() {
-        const radios = document.querySelectorAll('input[type="radio"]');
-        radios.forEach(radio => {
-            radio.addEventListener('change', () => updateEstimates());
+// ═══════════════════════════════════════════════════════
+//  EXPORT / COPY
+// ═══════════════════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('exportBtn').addEventListener('click', () => {
+        const cost  = document.getElementById('totalCost').innerText;
+        const range = document.getElementById('costRange').innerText;
+        const time  = document.getElementById('timelineText').innerText;
+        const count = document.getElementById('featureCount').innerText;
+        const monthly = document.getElementById('monthlyCost').innerText;
+
+        let featureList = '';
+        selectedFeatures.forEach(id => {
+            const f = FEATURES.find(x => x.id === id);
+            const cx = complexityMap[id] || 1;
+            if (f) featureList += `  • ${f.name} (${Math.round(f.hours*cx)}h)\n`;
         });
-    }
 
-    // pre-set some features as example? I'll leave none pre-selected so user explores, but add hint.
-    function initDefaultSelected() {
-        // optional: select basic core features to show example? but better 0, but useful to suggest one: core_crud maybe
-        // but we can leave empty but user-friendly - I'll add small note and preselected "core_crud" + "auth_email" as common MVP baseline.
-        if(selectedFeatures.size === 0){
-            selectedFeatures.add("auth_email");
-            selectedFeatures.add("core_crud");
-            // also add dashboard nice to have
-            selectedFeatures.add("core_dashboard");
-        }
-        renderFeatures();  // re-render after setting
-        updateEstimates();
-    }
+        const text = `BinaryQuest – Software MVP Estimate\n${'='.repeat(40)}\n\nTotal Cost: ${cost}\n${range}\nTimeline: ${time}\nMonthly Maintenance: ${monthly}\nFeatures: ${count}\n\nSelected Features:\n${featureList || '  None selected'}\n\n─────────────────────────────\nGenerated by BinaryQuest MVP Estimator\nContact: https://binaryquest.com/contact`;
 
-    // consultation button
-    document.getElementById("consultBtn").addEventListener("click", () => {
-        alert("📅 Book a free consultation: schedule a call with BinaryQuest experts to refine your MVP scope & get accurate quote.");
-        // you can replace with actual Calendly link
+        navigator.clipboard.writeText(text).then(() => {
+            const btn = document.getElementById('exportBtn');
+            btn.innerText = '✅ Copied to clipboard!';
+            setTimeout(() => { btn.innerText = '📄 Copy Estimate to Clipboard'; }, 2500);
+        }).catch(() => alert('Copy failed — please use Ctrl+C'));
     });
 
-    // start everything
-    renderFeatures();
-    bindRadioListeners();
-    initDefaultSelected();  // set some sensible MVP must-haves
-    updateEstimates();
+    document.getElementById('consultBtn').addEventListener('click', () => {
+        window.location.href = 'contact.html';
+    });
+
+    // Radio change listeners
+    document.querySelectorAll('input[type="radio"]').forEach(r => {
+        r.addEventListener('change', updateAll);
+    });
+
+    // Pre-select sensible MVP defaults
+    ['auth_email','core_dashboard','core_crud','comm_email','pay_stripe'].forEach(id => selectedFeatures.add(id));
+
+    renderAllFeatureTabs();
+    updateAll();
+});
+
+// Swiper
+window.addEventListener('load', () => {
+    if (typeof Swiper !== 'undefined') {
+        new Swiper('.partner-swiper', {
+            slidesPerView: 2, spaceBetween: 24, loop: true,
+            autoplay: { delay: 0, disableOnInteraction: false, pauseOnMouseEnter: true },
+            speed: 4000,
+            breakpoints: {
+                640: { slidesPerView: 3 },
+                768: { slidesPerView: 4 },
+                1024: { slidesPerView: 5, spaceBetween: 40 }
+            },
+            allowTouchMove: true
+        });
+    }
+});
 </script>
-
-  <!-- TRUSTED PARTNERS CAROUSEL -->
-  <section style="padding:60px 20px; background:#f8fafc; border-top:1px solid #e2e8f0; border-bottom:1px solid #e2e8f0;">
-    <div style="max-width:1200px; margin:0 auto;">
-      <div style="text-align:center; margin-bottom:36px;">
-        <span style="color:#059669; font-weight:600; font-size:13px; text-transform:uppercase; letter-spacing:.05em;">✦ Trusted Globally</span>
-        <h3 style="font-size:clamp(1.4rem,3vw,2rem); font-weight:700; margin-top:6px; color:#1a202c;">Powered by Industry Leaders</h3>
-      </div>
-      <div class="swiper partner-swiper" style="overflow:hidden; width:100%;">
-        <div class="swiper-wrapper" style="align-items:center;">
-          <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=TechCorp" class="partner-logo" style="max-height:48px;width:auto;" alt="TechCorp"></div>
-          <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=CloudNet" class="partner-logo" style="max-height:48px;width:auto;" alt="CloudNet"></div>
-          <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=FinSolve" class="partner-logo" style="max-height:48px;width:auto;" alt="FinSolve"></div>
-          <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=HealthIQ" class="partner-logo" style="max-height:48px;width:auto;" alt="HealthIQ"></div>
-          <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=RetailHub" class="partner-logo" style="max-height:48px;width:auto;" alt="RetailHub"></div>
-          <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=LogiX" class="partner-logo" style="max-height:48px;width:auto;" alt="LogiX"></div>
-          <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=EdWave" class="partner-logo" style="max-height:48px;width:auto;" alt="EdWave"></div>
-          <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=InsureOne" class="partner-logo" style="max-height:48px;width:auto;" alt="InsureOne"></div>
-          <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=BuildSmart" class="partner-logo" style="max-height:48px;width:auto;" alt="BuildSmart"></div>
-          <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=MediaBoost" class="partner-logo" style="max-height:48px;width:auto;" alt="MediaBoost"></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <script>
-    (function() {
-      if (typeof Swiper === 'undefined') return;
-      new Swiper('.partner-swiper', {
-        slidesPerView: 2,
-        spaceBetween: 24,
-        loop: true,
-        autoplay: { delay: 0, disableOnInteraction: false, pauseOnMouseEnter: true },
-        speed: 4000,
-        breakpoints: {
-          640: { slidesPerView: 3, spaceBetween: 30 },
-          768: { slidesPerView: 4, spaceBetween: 30 },
-          1024: { slidesPerView: 5, spaceBetween: 40 }
-        },
-        allowTouchMove: true
-      });
-    })();
-  </script>
 </body>
 </html>
