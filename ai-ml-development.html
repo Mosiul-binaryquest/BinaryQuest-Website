@@ -1,490 +1,974 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>AI/ML Development Service | Bangladesh Software Solution</title>
-    <!-- Google Fonts & simple reset -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: #f9fafc;
-            color: #1a1f2e;
-            line-height: 1.5;
-            scroll-behavior: smooth;
-        }
-
-        .container {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
-        /* header / nav placeholder */
-        .site-header {
-            background: #0a0c15;
-            color: white;
-            padding: 20px 0;
-            border-bottom: 1px solid #1e293b;
-        }
-        .header-inner {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-        .logo {
-            font-size: 1.6rem;
-            font-weight: 700;
-            letter-spacing: -0.3px;
-            background: linear-gradient(135deg, #ffffff, #94a3b8);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-        .nav-links {
-            display: flex;
-            gap: 28px;
-            font-weight: 500;
-        }
-        .nav-links a {
-            color: #cbd5e1;
-            text-decoration: none;
-            transition: 0.2s;
-        }
-        .nav-links a:hover {
-            color: white;
-        }
-        .btn-outline-light {
-            border: 1px solid #334155;
-            padding: 8px 18px;
-            border-radius: 40px;
-            background: transparent;
-            color: white;
-            font-weight: 500;
-            text-decoration: none;
-            transition: 0.2s;
-        }
-        .btn-outline-light:hover {
-            background: #1e293b;
-            border-color: #5b6e8c;
-        }
-
-        /* Buttons */
-        .btn-primary {
-            background: #2266f0;
-            color: white;
-            padding: 12px 28px;
-            border-radius: 40px;
-            font-weight: 600;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: 0.2s;
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
-        }
-        .btn-primary:hover {
-            background: #0f54d0;
-            transform: translateY(-2px);
-        }
-        .btn-outline-dark {
-            border: 1px solid #cbd5e1;
-            background: transparent;
-            padding: 10px 24px;
-            border-radius: 40px;
-            font-weight: 500;
-            text-decoration: none;
-            color: #1e293b;
-            transition: 0.2s;
-        }
-        .btn-outline-dark:hover {
-            background: #f1f5f9;
-            border-color: #2266f0;
-        }
-
-        /* sections */
-        .hero {
-            padding: 80px 0 64px;
-            background: linear-gradient(135deg, #f0f4fe 0%, #ffffff 100%);
-        }
-        .hero-grid {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 48px;
-            justify-content: space-between;
-        }
-        .hero-content {
-            flex: 1;
-        }
-        .badge {
-            background: #e0e7ff;
-            color: #2266f0;
-            padding: 6px 14px;
-            border-radius: 40px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            display: inline-block;
-            margin-bottom: 24px;
-        }
-        .hero h1 {
-            font-size: 3.2rem;
-            font-weight: 800;
-            line-height: 1.2;
-            letter-spacing: -0.02em;
-            margin-bottom: 20px;
-        }
-        .hero p {
-            font-size: 1.2rem;
-            color: #334155;
-            max-width: 550px;
-            margin-bottom: 32px;
-        }
-        .hero-stats {
-            display: flex;
-            gap: 32px;
-            margin-top: 32px;
-        }
-        .stat span {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: #0f172a;
-        }
-
-        /* section common */
-        .section-title {
-            font-size: 2.2rem;
-            font-weight: 800;
-            text-align: center;
-            margin-bottom: 56px;
-            letter-spacing: -0.01em;
-        }
-        .section-sub {
-            text-align: center;
-            color: #475569;
-            max-width: 700px;
-            margin: -32px auto 56px;
-        }
-
-        /* services grid */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 32px;
-            margin: 48px 0;
-        }
-        .service-card {
-            background: white;
-            border-radius: 28px;
-            padding: 32px 28px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.02), 0 2px 4px rgba(0,0,0,0.03);
-            transition: all 0.25s ease;
-            border: 1px solid #eef2f8;
-        }
-        .service-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.1);
-            border-color: #cddcfd;
-        }
-        .service-icon {
-            font-size: 2.4rem;
-            margin-bottom: 20px;
-        }
-        .service-card h3 {
-            font-size: 1.6rem;
-            font-weight: 700;
-            margin-bottom: 14px;
-        }
-        .service-card p {
-            color: #475569;
-            margin-bottom: 20px;
-        }
-        .service-card ul {
-            padding-left: 20px;
-            color: #334155;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-        .tech-slider {
-            background: white;
-            border-radius: 48px;
-            padding: 36px 24px;
-            margin: 48px 0;
-            border: 1px solid #e2e8f0;
-            text-align: center;
-        }
-        .tech-logos {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 36px;
-            margin-top: 24px;
-            font-weight: 600;
-            color: #1e293b;
-        }
-        .tech-logos span {
-            background: #f8fafc;
-            padding: 8px 22px;
-            border-radius: 60px;
-            font-size: 1rem;
-            font-weight: 500;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-        }
-
-        /* case studies */
-        .case-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 32px;
-            margin: 40px 0;
-        }
-        .case-card {
-            background: white;
-            border-radius: 28px;
-            overflow: hidden;
-            border: 1px solid #eef2f8;
-            transition: 0.2s;
-        }
-        .case-card:hover {
-            border-color: #cddafc;
-        }
-        .case-content {
-            padding: 28px;
-        }
-        .case-label {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 700;
-            color: #2266f0;
-            margin-bottom: 12px;
-        }
-        .case-card h4 {
-            font-size: 1.5rem;
-            margin-bottom: 12px;
-        }
-        .case-card p {
-            color: #475569;
-            margin-bottom: 16px;
-        }
-        .highlights {
-            font-size: 0.9rem;
-            border-top: 1px solid #edf2f7;
-            margin-top: 16px;
-            padding-top: 16px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-        .highlights span {
-            background: #f1f5f9;
-            padding: 4px 12px;
-            border-radius: 30px;
-            font-size: 0.75rem;
-        }
-
-        .why-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 32px;
-            margin: 56px 0;
-        }
-        .why-item {
-            text-align: center;
-            padding: 20px;
-        }
-        .why-item h4 {
-            font-size: 1.5rem;
-            margin: 20px 0 12px;
-        }
-        .cta-section {
-            background: #0a0c15;
-            color: white;
-            border-radius: 48px;
-            padding: 64px 48px;
-            text-align: center;
-            margin: 64px 0;
-        }
-        .cta-section h2 {
-            font-size: 2.2rem;
-            margin-bottom: 20px;
-        }
-        .cta-section .btn-primary {
-            background: #3b82f6;
-            margin-top: 24px;
-        }
-        footer {
-            text-align: center;
-            padding: 40px 0;
-            border-top: 1px solid #e2e8f0;
-            color: #475569;
-            font-size: 0.85rem;
-        }
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2.2rem; }
-            .section-title { font-size: 1.8rem; }
-            .container { padding: 0 20px; }
-            .cta-section { padding: 40px 24px; }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>AI / ML Development | BinaryQuest</title>
+  <meta name="description" content="BinaryQuest delivers enterprise-grade AI and machine learning solutions — from predictive analytics and NLP to computer vision and intelligent automation — for mid-market businesses across South Asia.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
   <style>
-    .partner-logo { filter: grayscale(20%) brightness(0.98); transition: all 0.2s; opacity: 0.8; }
-    .partner-logo:hover { filter: grayscale(0%); opacity: 1; transform: scale(1.02); }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --navy:    #060d1f;
+      --dark:    #0d1b35;
+      --blue:    #2563eb;
+      --blue2:   #1d4ed8;
+      --indigo:  #4f46e5;
+      --cyan:    #06b6d4;
+      --green:   #10b981;
+      --border:  #1e2d4a;
+      --text:    #94a3b8;
+      --light:   #e2e8f0;
+      --card-bg: #0f1d36;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--navy); color: var(--light); line-height: 1.6; }
+
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 5vw; }
+
+    /* ── NAV ── */
+    .site-nav { position: sticky; top: 0; z-index: 100; background: rgba(6,13,31,.92); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); padding: 0 5vw; display: flex; align-items: center; justify-content: space-between; height: 68px; }
+    .nav-logo { font-size: 1.25rem; font-weight: 800; color: #fff; text-decoration: none; letter-spacing: -.02em; }
+    .nav-logo span { color: var(--cyan); }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a { color: var(--text); font-size: .875rem; font-weight: 500; text-decoration: none; transition: color .2s; }
+    .nav-links a:hover { color: #fff; }
+    .nav-cta { background: var(--blue); color: #fff; padding: 8px 20px; border-radius: 40px; font-size: .875rem; font-weight: 600; text-decoration: none; transition: .2s; }
+    .nav-cta:hover { background: var(--blue2); transform: translateY(-1px); }
+
+    /* ── HERO ── */
+    .hero { padding: 100px 0 80px; background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(37,99,235,.18) 0%, transparent 70%), var(--navy); position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; inset: 0; background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%232563eb' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
+    .hero-inner { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; background: rgba(37,99,235,.15); border: 1px solid rgba(37,99,235,.3); border-radius: 40px; padding: 6px 16px; font-size: .78rem; font-weight: 700; color: #93c5fd; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 24px; }
+    .hero h1 { font-size: clamp(2.2rem, 4vw, 3.4rem); font-weight: 900; line-height: 1.1; letter-spacing: -.03em; color: #fff; margin-bottom: 22px; }
+    .hero h1 .grad { background: linear-gradient(90deg, #60a5fa, #a78bfa, #34d399); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .hero p { font-size: 1.1rem; color: var(--text); max-width: 520px; margin-bottom: 36px; line-height: 1.75; }
+    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-primary { background: var(--blue); color: #fff; padding: 13px 28px; border-radius: 40px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: .2s; font-size: .95rem; border: none; cursor: pointer; }
+    .btn-primary:hover { background: var(--blue2); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37,99,235,.35); }
+    .btn-ghost { border: 1px solid var(--border); color: var(--light); padding: 12px 26px; border-radius: 40px; font-weight: 600; text-decoration: none; font-size: .95rem; transition: .2s; }
+    .btn-ghost:hover { border-color: #4b6ea8; background: rgba(255,255,255,.04); }
+    .hero-stats { display: flex; gap: 40px; margin-top: 48px; padding-top: 40px; border-top: 1px solid var(--border); flex-wrap: wrap; }
+    .hstat .num { font-size: 2rem; font-weight: 900; color: #fff; line-height: 1; }
+    .hstat .lbl { font-size: .78rem; color: var(--text); margin-top: 4px; }
+
+    /* hero visual */
+    .hero-visual { position: relative; }
+    .ai-orb { width: 100%; aspect-ratio: 1; max-width: 460px; margin: 0 auto; background: radial-gradient(circle at 40% 40%, #1d4ed8 0%, #4f46e5 40%, #0d1b35 70%); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 80px rgba(79,70,229,.25), 0 0 200px rgba(37,99,235,.1); position: relative; }
+    .ai-orb::after { content: ''; position: absolute; inset: -2px; border-radius: 50%; border: 1px solid rgba(99,102,241,.3); }
+    .orb-icon { font-size: 5rem; }
+    .orb-ring { position: absolute; width: 120%; aspect-ratio: 1; border-radius: 50%; border: 1px dashed rgba(99,102,241,.25); animation: spin 20s linear infinite; }
+    .orb-ring2 { position: absolute; width: 140%; aspect-ratio: 1; border-radius: 50%; border: 1px dashed rgba(37,99,235,.15); animation: spin 30s linear infinite reverse; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── SECTION WRAPPER ── */
+    .section { padding: 88px 0; }
+    .section-light { background: #f8faff; color: #0d1b35; }
+    .section-mid { background: #f0f4ff; color: #0d1b35; }
+    .sec-eyebrow { font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--cyan); margin-bottom: 12px; }
+    .sec-eyebrow-dark { color: var(--blue); }
+    .sec-title { font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 800; letter-spacing: -.02em; line-height: 1.2; margin-bottom: 18px; }
+    .sec-title .grad { background: linear-gradient(90deg,#2563eb,#7c3aed); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .sec-sub { font-size: 1rem; color: #475569; max-width: 640px; line-height: 1.75; }
+    .text-center { text-align: center; }
+    .text-center .sec-sub { margin: 0 auto; }
+
+    /* ── INDUSTRY BENCHMARK STRIP ── */
+    .benchmark { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 36px 40px; margin: 48px 0; }
+    .benchmark-label { font-size: .72rem; font-weight: 800; text-transform: uppercase; letter-spacing: .1em; color: var(--cyan); margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+    .benchmark-label::before { content: ''; display: block; width: 24px; height: 2px; background: var(--cyan); }
+    .bm-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 24px; }
+
+    .bm-item .company { font-size: .75rem; font-weight: 700; color: #60a5fa; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 4px; }
+    .bm-item .headline { font-size: .9rem; font-weight: 600; color: #e2e8f0; margin-bottom: 4px; line-height: 1.4; }
+    .bm-item .detail { font-size: .78rem; color: var(--text); line-height: 1.5; }
+
+    /* ── TOP 10 SECTION ── */
+    .top10-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; margin-top: 48px; }
+    .top10-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 18px; padding: 28px; transition: .25s; position: relative; overflow: hidden; }
+    .top10-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+    .top10-card.c1::before { background: linear-gradient(90deg,#4285f4,#34a853); }
+    .top10-card.c2::before { background: linear-gradient(90deg,#00a4ef,#7fba00); }
+    .top10-card.c3::before { background: linear-gradient(90deg,#ff9900,#232f3e); }
+    .top10-card.c4::before { background: linear-gradient(90deg,#0668e1,#00c4cc); }
+    .top10-card.c5::before { background: linear-gradient(90deg,#0062cc,#0062cc); }
+    .top10-card.c6::before { background: linear-gradient(90deg,#00a1e0,#032d60); }
+    .top10-card.c7::before { background: linear-gradient(90deg,#009de0,#003765); }
+    .top10-card.c8::before { background: linear-gradient(90deg,#f80000,#c74634); }
+    .top10-card.c9::before { background: linear-gradient(90deg,#a100ff,#460374); }
+    .top10-card.c10::before { background: linear-gradient(90deg,#6d1d85,#461f7e); }
+    .top10-card:hover { transform: translateY(-4px); border-color: #2563eb; box-shadow: 0 12px 40px rgba(37,99,235,.15); }
+    .company-rank { font-size: .68rem; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; color: var(--text); margin-bottom: 6px; }
+    .company-name { font-size: 1.15rem; font-weight: 800; color: #fff; margin-bottom: 14px; }
+    .company-tag { display: inline-block; font-size: .68rem; font-weight: 700; padding: 3px 10px; border-radius: 20px; background: rgba(37,99,235,.2); color: #93c5fd; margin-bottom: 12px; }
+    .company-headline { font-size: .88rem; font-weight: 600; color: #cbd5e1; margin-bottom: 10px; line-height: 1.45; }
+    .company-bullets { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 5px; }
+    .company-bullets li { font-size: .78rem; color: var(--text); padding-left: 14px; position: relative; line-height: 1.5; }
+    .company-bullets li::before { content: '→'; position: absolute; left: 0; color: #60a5fa; font-size: .7rem; top: 2px; }
+    .company-stat { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border); font-size: .78rem; color: #60a5fa; font-weight: 700; }
+
+    /* ── BQ SECTION ── */
+    .bq-strip { background: linear-gradient(135deg, #0d1b35 0%, #0f1d3a 100%); border: 1px solid var(--border); border-radius: 24px; padding: 48px; margin: 48px 0; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+    .bq-strip h3 { font-size: 1.7rem; font-weight: 800; color: #fff; line-height: 1.25; margin-bottom: 16px; }
+    .bq-strip p { font-size: .92rem; color: var(--text); line-height: 1.75; margin-bottom: 20px; }
+    .bq-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+    .bq-pill { background: rgba(37,99,235,.15); border: 1px solid rgba(37,99,235,.3); color: #93c5fd; font-size: .75rem; font-weight: 600; padding: 5px 14px; border-radius: 40px; }
+    .bq-metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .bq-metric { background: rgba(255,255,255,.04); border: 1px solid var(--border); border-radius: 14px; padding: 20px; text-align: center; }
+    .bq-metric .num { font-size: 2rem; font-weight: 900; color: #fff; line-height: 1; background: linear-gradient(90deg,#60a5fa,#a78bfa); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .bq-metric .lbl { font-size: .75rem; color: var(--text); margin-top: 6px; }
+
+    /* ── SERVICES ── */
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 28px; margin-top: 48px; }
+    .svc-card { background: #fff; border-radius: 22px; padding: 34px 30px; border: 1px solid #e2e8f0; transition: .25s; }
+    .svc-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,.08); border-color: #bfdbfe; }
+    .svc-icon { width: 56px; height: 56px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; margin-bottom: 20px; }
+    .svc-card h3 { font-size: 1.25rem; font-weight: 800; color: #0d1b35; margin-bottom: 12px; }
+    .svc-card p { font-size: .88rem; color: #475569; margin-bottom: 16px; line-height: 1.7; }
+    .svc-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; padding-top: 16px; border-top: 1px solid #f1f5f9; }
+    .svc-tag { font-size: .7rem; font-weight: 600; background: #f1f5f9; color: #334155; padding: 4px 10px; border-radius: 20px; }
+    .svc-learn { font-size: .82rem; font-weight: 700; color: var(--blue); text-decoration: none; display: inline-flex; align-items: center; gap: 4px; margin-top: 14px; transition: gap .2s; }
+    .svc-learn:hover { gap: 8px; }
+
+    /* ── INDUSTRY USE CASES ── */
+    .usecases-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; margin-top: 40px; }
+    .uc-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 24px; transition: .2s; }
+    .uc-card:hover { border-color: #2563eb; transform: translateY(-3px); }
+    .uc-icon { font-size: 2rem; margin-bottom: 12px; }
+    .uc-industry { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--cyan); margin-bottom: 6px; }
+    .uc-card h4 { font-size: .95rem; font-weight: 700; color: #e2e8f0; margin-bottom: 8px; line-height: 1.4; }
+    .uc-card p { font-size: .78rem; color: var(--text); line-height: 1.6; }
+    .uc-result { margin-top: 12px; font-size: .75rem; font-weight: 700; color: #34d399; }
+
+    /* ── TECH STACK ── */
+    .tech-stack { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 40px; }
+    .tech-pill { background: var(--card-bg); border: 1px solid var(--border); color: var(--light); font-size: .82rem; font-weight: 600; padding: 8px 18px; border-radius: 40px; transition: .2s; }
+    .tech-pill:hover { border-color: #2563eb; color: #93c5fd; }
+
+    /* ── PROCESS ── */
+    .process-steps { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0; margin-top: 48px; position: relative; }
+    .process-steps::after { content: ''; position: absolute; top: 40px; left: 10%; width: 80%; height: 1px; background: linear-gradient(90deg, transparent, var(--border), transparent); }
+    .proc-step { text-align: center; padding: 24px 16px; position: relative; z-index: 1; }
+    .proc-num { width: 60px; height: 60px; background: var(--card-bg); border: 2px solid var(--blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; font-weight: 900; color: #60a5fa; margin: 0 auto 20px; }
+    .proc-step h4 { font-size: .95rem; font-weight: 700; color: #e2e8f0; margin-bottom: 8px; }
+    .proc-step p { font-size: .78rem; color: var(--text); line-height: 1.6; }
+
+    /* ── CASE STUDIES ── */
+    .case-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px; margin-top: 40px; }
+    .case-card { background: #fff; border-radius: 20px; overflow: hidden; border: 1px solid #e2e8f0; transition: .25s; }
+    .case-card:hover { box-shadow: 0 16px 40px rgba(0,0,0,.08); border-color: #bfdbfe; transform: translateY(-3px); }
+    .case-header { padding: 28px 28px 0; }
+    .case-label { font-size: .68rem; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; color: var(--blue); margin-bottom: 10px; }
+    .case-card h4 { font-size: 1.15rem; font-weight: 800; color: #0d1b35; line-height: 1.35; margin-bottom: 12px; }
+    .case-card p { font-size: .85rem; color: #475569; line-height: 1.7; padding: 0 28px; margin-bottom: 20px; }
+    .case-results { display: flex; gap: 0; border-top: 1px solid #f1f5f9; }
+    .case-result { flex: 1; padding: 16px 20px; text-align: center; border-right: 1px solid #f1f5f9; }
+    .case-result:last-child { border-right: none; }
+    .cr-num { font-size: 1.4rem; font-weight: 900; color: var(--blue); }
+    .cr-lbl { font-size: .7rem; color: #64748b; margin-top: 2px; }
+    .case-tags { padding: 16px 28px; display: flex; flex-wrap: wrap; gap: 6px; background: #f8faff; }
+    .case-tag { font-size: .68rem; font-weight: 600; background: #e0e7ff; color: #3730a3; padding: 3px 10px; border-radius: 20px; }
+
+    /* ── WHY BQ ── */
+    .why-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 24px; margin-top: 40px; }
+    .why-card { background: #fff; border-radius: 18px; padding: 28px; border: 1px solid #e2e8f0; transition: .25s; }
+    .why-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,.07); border-color: #bfdbfe; }
+    .why-icon { font-size: 2rem; margin-bottom: 16px; }
+    .why-card h4 { font-size: 1.05rem; font-weight: 800; color: #0d1b35; margin-bottom: 10px; }
+    .why-card p { font-size: .85rem; color: #475569; line-height: 1.7; }
+
+    /* ── PRICING APPROACH ── */
+    .pricing-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; margin-top: 40px; }
+    .pricing-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 32px; transition: .25s; }
+    .pricing-card.featured { border-color: var(--blue); background: linear-gradient(135deg, #0d1b35, #0f2261); }
+    .pricing-card:hover { transform: translateY(-4px); }
+    .pricing-label { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--cyan); margin-bottom: 16px; }
+    .pricing-card h3 { font-size: 1.3rem; font-weight: 800; color: #fff; margin-bottom: 8px; }
+    .pricing-card .price { font-size: 1.8rem; font-weight: 900; color: #60a5fa; margin: 12px 0; }
+    .pricing-card .price span { font-size: 1rem; font-weight: 500; color: var(--text); }
+    .pricing-feats { list-style: none; padding: 0; margin: 20px 0; display: flex; flex-direction: column; gap: 8px; }
+    .pricing-feats li { font-size: .82rem; color: var(--light); padding-left: 20px; position: relative; }
+    .pricing-feats li::before { content: '✓'; position: absolute; left: 0; color: var(--green); font-weight: 800; }
+
+    /* ── CTA BLOCK ── */
+    .cta-block { background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(37,99,235,.25) 0%, transparent 60%), linear-gradient(135deg, #0a0f24, #0d1b35); border-radius: 28px; padding: 72px 48px; text-align: center; margin: 80px 0; border: 1px solid var(--border); }
+    .cta-block h2 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 900; color: #fff; margin-bottom: 16px; letter-spacing: -.02em; }
+    .cta-block p { font-size: 1.05rem; color: var(--text); max-width: 520px; margin: 0 auto 36px; }
+    .cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+    /* PARTNERS */
+    .partners-section { padding: 60px 5vw; background: #f4f8fc; border-top: 1px solid #e2ecf3; }
+    .partners-section .inner { max-width: 1280px; margin: 0 auto; }
+    .partner-logo { filter: grayscale(20%); opacity: .8; transition: .2s; }
+    .partner-logo:hover { filter: grayscale(0%); opacity: 1; transform: scale(1.04); }
+
+    /* FOOTER */
+    .site-footer { background: var(--navy); border-top: 1px solid var(--border); text-align: center; padding: 32px 20px; font-size: .82rem; color: #475569; }
+    .site-footer a { color: #60a5fa; text-decoration: none; }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-visual { display: none; }
+      .bq-strip { grid-template-columns: 1fr; }
+      .process-steps::after { display: none; }
+    }
+    @media (max-width: 540px) {
+      .nav-links { display: none; }
+      .hero-stats { gap: 20px; }
+      .cta-block { padding: 48px 24px; }
+    }
   </style>
 </head>
 <body>
-    <!-- header -->
-    <header class="site-header">
-        <div class="container header-inner">
-            <div class="logo">Bangladesh Software Solution</div>
-            <div class="nav-links">
-                <a href="#">Home</a>
-                <a href="#">Services</a>
-                <a href="#">Case Studies</a>
-                <a href="#">Contact</a>
-            </div>
-            <a href="#" class="btn-outline-light">Get in touch</a>
-        </div>
-    </header>
 
-    <main>
-        <!-- Hero section -->
-        <section class="hero">
-            <div class="container hero-grid">
-                <div class="hero-content">
-                    <div class="badge">AI/ML Development Service 2026</div>
-                    <h1>Transform Your Business with <span style="color:#2266f0;">Enterprise AI Solutions</span></h1>
-                    <p>Our AI/ML Development services help businesses unlock measurable ROI through predictive analytics, intelligent automation, and custom AI solutions trusted by 50+ companies worldwide.</p>
-                    <div style="display: flex; gap: 16px; flex-wrap: wrap;">
-                        <a href="#" class="btn-primary">Start your AI journey →</a>
-                        <a href="#" class="btn-outline-dark">Book consultation</a>
-                    </div>
-                    <div class="hero-stats">
-                        <div class="stat"><span>50+</span><br>Companies Trusted</div>
-                        <div class="stat"><span>98%</span><br>Client Retention</div>
-                        <div class="stat"><span>24/7</span><br>AI Support</div>
-                    </div>
-                </div>
-                <div style="flex: 0.8; min-width: 240px; text-align:center;">
-                    <div style="background:linear-gradient(145deg, #eef2ff, #ffffff); border-radius: 38px; padding: 20px;">
-                        <span style="font-size: 5rem;">⚡🤖</span>
-                        <p style="margin-top: 12px;">Intelligent automation<br>Zero-compromise security</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+<!-- NAV -->
+<nav class="site-nav">
+  <a href="index.html" class="nav-logo">BINARY<span>QUEST</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="#">Services</a></li>
+    <li><a href="blog.html">Insights</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Get in touch →</a>
+</nav>
 
-        <!-- what services we're offering -->
-        <div class="container">
-            <h2 class="section-title" style="margin-top: 64px;">What Services <br>We're Offering</h2>
-            <p class="section-sub">Comprehensive AI solutions designed to automate workflows, reduce costs, and unlock new revenue streams. From concept to deployment, we’re your AI partner.</p>
-            
-            <div class="services-grid">
-                <div class="service-card"><div class="service-icon">🧠📊</div><h3>Machine Learning Solutions</h3><p>Predict outcomes, detect anomalies, and automate decisions.</p><ul><li>Predictive analytics & churn prediction</li><li>Fraud detection in real-time</li><li>Recommendation engines</li></ul></div>
-                <div class="service-card"><div class="service-icon">🗣️📄</div><h3>Natural Language Processing</h3><p>Conversational AI, sentiment analysis & document intelligence.</p><ul><li>Custom chatbots & support automation</li><li>Sentiment analysis for feedback</li><li>Automated document extraction</li></ul></div>
-                <div class="service-card"><div class="service-icon">👁️🔍</div><h3>Computer Vision</h3><p>See what matters: quality inspection & real-time detection.</p><ul><li>Defect detection for manufacturing</li><li>Object tracking & counting</li><li>Medical image diagnosis</li></ul></div>
-                <div class="service-card"><div class="service-icon">📈📉</div><h3>Data Analytics & BI</h3><p>Actionable dashboards, real-time KPIs & customer insights.</p><ul><li>Interactive dashboards</li><li>Advanced trend analysis</li><li>Segmentation & behavior analytics</li></ul></div>
-                <div class="service-card"><div class="service-icon">⚙️🧩</div><h3>Custom AI Development</h3><p>From strategy to deployment, tailor-made AI for your unique needs.</p><ul><li>AI strategy consulting on your data</li><li>Custom model training & APIs</li><li>Cloud deployment & maintenance</li></ul></div>
-                <div class="service-card"><div class="service-icon">🗃️🔄</div><h3>Data & ETL Engineering</h3><p>Enterprise data pipelines that power AI at scale.</p><ul><li>Automated ETL pipelines</li><li>Data lake / warehouse design</li><li>Real-time streaming (Kafka, Spark)</li></ul></div>
-            </div>
-
-            <!-- technologies -->
-            <div class="tech-slider">
-                <h3 style="font-size: 1.8rem; margin-bottom: 0.5rem;">Technologies We Work With</h3>
-                <p style="color:#334155;">Industry-leading tools & frameworks</p>
-                <div class="tech-logos">
-                    <span>TensorFlow</span><span>PyTorch</span><span>Python</span><span>OpenAI</span><span>AWS</span><span>Google Cloud</span><span>Azure</span><span>Apache Spark</span>
-                    <span>Kafka</span><span>Airflow</span><span>Snowflake</span><span>MongoDB</span><span>PostgreSQL</span><span>Docker</span><span>Kubernetes</span><span>OpenCV</span>
-                </div>
-            </div>
-
-            <!-- case studies -->
-            <h2 class="section-title" style="margin-top: 48px;">Case Studies</h2>
-            <div class="case-grid">
-                <div class="case-card"><div class="case-content"><div class="case-label">AI/ML · RAG System</div><h4>From Document Chaos to Instant Answers</h4><p>Secure RAG system for internal knowledge: natural language access, role‑based control, and fast AI answers.</p><div class="highlights"><span>RAG + Qdrant</span><span>Docling</span><span>Role‑based security</span><span>Low‑infra optimized</span></div></div></div>
-                <div class="case-card"><div class="case-content"><div class="case-label">COMPUTER VISION · MANUFACTURING</div><h4>Caravan Quality Control Automation</h4><p>One‑stop automated inspection with ArUco markers, edge processing and real‑time feedback. 75% reduction in inspection time, zero structural rework.</p><div class="highlights"><span>PWA + Edge AI</span><span>ArUco tracking</span><span>3D pose estimation</span><span>Hardware cost savings</span></div></div></div>
-            </div>
-
-            <!-- why choose us -->
-            <h2 class="section-title" style="margin-top: 64px;">Why Bangladesh Software Solution is The Right Choice for You</h2>
-            <div class="why-grid">
-                <div class="why-item"><div style="font-size: 2.6rem;">🤝</div><h4>AI-Ready Teams</h4><p>Elite AI talent with 10+ years hands‑on TensorFlow, PyTorch & enterprise ML.</p></div>
-                <div class="why-item"><div style="font-size: 2.6rem;">🔁</div><h4>End-to-End AI Ownership</h4><p>From data strategy to deployment & continuous optimization – manage entire AI lifecycle.</p></div>
-                <div class="why-item"><div style="font-size: 2.6rem;">🏭</div><h4>Industry-Validated Impact</h4><p>Healthcare, finance, e‑commerce, manufacturing – delivering measurable ROI.</p></div>
-                <div class="why-item"><div style="font-size: 2.6rem;">🔒</div><h4>Uncompromising Enterprise Security</h4><p>Bank‑grade encryption, SOC2 compliance, secure cloud infrastructure by default.</p></div>
-            </div>
-
-            <!-- CTA -->
-            <div class="cta-section">
-                <h2>Ready to Build Your AI Advantage?</h2>
-                <p style="font-size: 1.2rem; max-width: 500px; margin: 0 auto;">Book a free 30‑minute consultation with our AI experts. Discover how custom AI solutions can reduce costs, automate workflows, and drive growth for your business.</p>
-                <a href="#" class="btn-primary" style="background:#3b82f6;">Book Consultation →</a>
-            </div>
-        </div>
-    </main>
-  <!-- TRUSTED PARTNERS CAROUSEL -->
-  <section style="padding:60px 20px; background:#f8fafc; border-top:1px solid #e2e8f0; border-bottom:1px solid #e2e8f0;">
-    <div style="max-width:1200px; margin:0 auto;">
-      <div style="text-align:center; margin-bottom:36px;">
-        <span style="color:#059669; font-weight:600; font-size:13px; text-transform:uppercase; letter-spacing:.05em;">✦ Trusted Globally</span>
-        <h3 style="font-size:clamp(1.4rem,3vw,2rem); font-weight:700; margin-top:6px; color:#1a202c;">Powered by Industry Leaders</h3>
+<!-- ══════════════════════════════════
+     HERO
+══════════════════════════════════ -->
+<section class="hero">
+  <div class="container hero-inner">
+    <div>
+      <div class="hero-eyebrow">🤖 AI / ML Development — 2025</div>
+      <h1>Build AI That Delivers <span class="grad">Real Business Results</span></h1>
+      <p>BinaryQuest brings enterprise-grade artificial intelligence to mid-market businesses — the same capabilities trusted by Google, Microsoft, and TCS, deployed at the scale and price point you actually need.</p>
+      <div class="hero-btns">
+        <a href="contact.html" class="btn-primary">Start your AI journey →</a>
+        <a href="#services" class="btn-ghost">Explore services</a>
       </div>
-      <div class="swiper partner-swiper" style="overflow:hidden; width:100%;">
-        <div class="swiper-wrapper" style="align-items:center;">
-          <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=TechCorp" class="partner-logo" style="max-height:48px;width:auto;" alt="TechCorp"></div>
-          <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=CloudNet" class="partner-logo" style="max-height:48px;width:auto;" alt="CloudNet"></div>
-          <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=FinSolve" class="partner-logo" style="max-height:48px;width:auto;" alt="FinSolve"></div>
-          <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=HealthIQ" class="partner-logo" style="max-height:48px;width:auto;" alt="HealthIQ"></div>
-          <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=RetailHub" class="partner-logo" style="max-height:48px;width:auto;" alt="RetailHub"></div>
-          <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=LogiX" class="partner-logo" style="max-height:48px;width:auto;" alt="LogiX"></div>
-          <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=EdWave" class="partner-logo" style="max-height:48px;width:auto;" alt="EdWave"></div>
-          <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=InsureOne" class="partner-logo" style="max-height:48px;width:auto;" alt="InsureOne"></div>
-          <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=BuildSmart" class="partner-logo" style="max-height:48px;width:auto;" alt="BuildSmart"></div>
-          <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=MediaBoost" class="partner-logo" style="max-height:48px;width:auto;" alt="MediaBoost"></div>
+      <div class="hero-stats">
+        <div class="hstat"><div class="num">50+</div><div class="lbl">AI Projects Delivered</div></div>
+        <div class="hstat"><div class="num">98%</div><div class="lbl">Client Retention Rate</div></div>
+        <div class="hstat"><div class="num">10+</div><div class="lbl">Years in Enterprise Tech</div></div>
+        <div class="hstat"><div class="num">5</div><div class="lbl">Countries Served</div></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="ai-orb">
+        <div class="orb-ring"></div>
+        <div class="orb-ring2"></div>
+        <span class="orb-icon">🧠</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     BINARYQUEST AI INTELLIGENCE HUB
+══════════════════════════════════ -->
+<style>
+  /* ── BQ INTELLIGENCE HUB STYLES ── */
+  /* ── INTELLIGENCE HUB SECTION ── */
+  .iq-section { padding: 100px 0; background: var(--navy); }
+
+  /* Intro header */
+  .iq-header { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; margin-bottom: 80px; }
+  .iq-header-stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .iq-stat-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 22px; text-align: center; }
+  .iq-stat-box .n { font-size: 2rem; font-weight: 900; background: linear-gradient(90deg,#60a5fa,#a78bfa); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .iq-stat-box .l { font-size: .75rem; color: var(--text); margin-top: 5px; line-height: 1.4; }
+
+  /* What We've Learned — horizontal divider blocks */
+  .iq-divider { height: 1px; background: linear-gradient(90deg,transparent,var(--border),transparent); margin: 60px 0; }
+  .iq-lead-block { background: var(--card-bg); border: 1px solid var(--border); border-radius: 24px; padding: 48px 52px; margin-bottom: 40px; }
+  .iq-lead-block h3 { font-size: 1.5rem; font-weight: 800; color: #fff; margin-bottom: 16px; line-height: 1.3; }
+  .iq-lead-block p { font-size: .92rem; color: var(--text); line-height: 1.85; margin-bottom: 0; }
+  .iq-lead-block p + p { margin-top: 14px; }
+  .iq-lead-block strong { color: #e2e8f0; }
+  .iq-lead-eyebrow { font-size: .68rem; font-weight: 800; text-transform: uppercase; letter-spacing: .12em; color: var(--cyan); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .iq-lead-eyebrow::before { content: ''; display: block; width: 24px; height: 2px; background: var(--cyan); }
+
+  /* Insight pillars — 3-column grid */
+  .iq-pillars { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; margin: 48px 0; }
+  .iq-pillar { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 32px; transition: .25s; position: relative; overflow: hidden; }
+  .iq-pillar::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--blue), var(--indigo)); }
+  .iq-pillar:hover { border-color: #2563eb; transform: translateY(-4px); box-shadow: 0 16px 40px rgba(37,99,235,.12); }
+  .iq-pillar-icon { font-size: 2rem; margin-bottom: 16px; }
+  .iq-pillar h4 { font-size: 1.05rem; font-weight: 800; color: #e2e8f0; margin-bottom: 10px; }
+  .iq-pillar p { font-size: .84rem; color: var(--text); line-height: 1.75; }
+  .iq-pillar ul { list-style: none; padding: 0; margin-top: 14px; display: flex; flex-direction: column; gap: 8px; }
+  .iq-pillar ul li { font-size: .82rem; color: #cbd5e1; padding-left: 16px; position: relative; line-height: 1.5; }
+  .iq-pillar ul li::before { content: '▸'; position: absolute; left: 0; color: #60a5fa; font-size: .7rem; top: 2px; }
+
+  /* Proof metrics row */
+  .iq-proof-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; margin: 48px 0; }
+  .iq-proof-card { background: rgba(255,255,255,.03); border: 1px solid var(--border); border-radius: 16px; padding: 26px 22px; text-align: center; }
+  .iq-proof-card .pn { font-size: 2.2rem; font-weight: 900; background: linear-gradient(90deg,#60a5fa,#34d399); -webkit-background-clip: text; background-clip: text; color: transparent; line-height: 1; }
+  .iq-proof-card .pt { font-size: .7rem; font-weight: 700; color: #34d399; text-transform: uppercase; letter-spacing: .08em; margin: 6px 0 4px; }
+  .iq-proof-card .pl { font-size: .78rem; color: var(--text); line-height: 1.5; }
+
+  /* BQ capability grid — 2 column wide block */
+  .iq-cap-block { background: linear-gradient(135deg, #050d1f 0%, #0d2151 50%, #050d1f 100%); border: 1px solid rgba(99,102,241,.3); border-radius: 28px; padding: 56px; margin-top: 56px; }
+  .iq-cap-block > h2 { font-size: clamp(1.6rem,3vw,2.3rem); font-weight: 900; color: #fff; text-align: center; margin-bottom: 8px; letter-spacing: -.02em; }
+  .iq-cap-block > p { text-align: center; color: var(--text); font-size: .95rem; margin-bottom: 48px; }
+  .iq-cap-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; align-items: start; }
+  .iq-cap-left { display: flex; flex-direction: column; gap: 14px; }
+  .iq-cap-card { background: rgba(16,185,129,.07); border: 1px solid rgba(16,185,129,.18); border-radius: 14px; padding: 18px 20px; display: flex; gap: 14px; align-items: flex-start; }
+  .iq-cap-card .ci { font-size: 1.5rem; flex-shrink: 0; margin-top: 2px; }
+  .iq-cap-card h5 { font-size: .88rem; font-weight: 700; color: #a7f3d0; margin-bottom: 5px; }
+  .iq-cap-card p { font-size: .8rem; color: #6ee7b7; line-height: 1.55; margin: 0; }
+  .iq-cap-right { display: flex; flex-direction: column; gap: 16px; }
+  .iq-metric-card { background: rgba(255,255,255,.04); border: 1px solid var(--border); border-radius: 14px; padding: 20px 24px; display: flex; gap: 18px; align-items: center; }
+  .iq-metric-card .mn { font-size: 1.7rem; font-weight: 900; background: linear-gradient(90deg,#60a5fa,#a78bfa); -webkit-background-clip: text; background-clip: text; color: transparent; min-width: 72px; }
+  .iq-metric-card .md strong { display: block; font-size: .9rem; color: #e2e8f0; margin-bottom: 3px; }
+  .iq-metric-card .md { font-size: .8rem; color: #94a3b8; line-height: 1.5; }
+
+  /* Narrative two-column */
+  .iq-narrative { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin: 56px 0; align-items: start; }
+  .iq-narrative-block { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 36px; }
+  .iq-narrative-block h4 { font-size: 1.15rem; font-weight: 800; color: #e2e8f0; margin-bottom: 14px; }
+  .iq-narrative-block p { font-size: .86rem; color: var(--text); line-height: 1.8; }
+  .iq-narrative-block p + p { margin-top: 12px; }
+  .iq-narrative-block strong { color: #c7d2fe; }
+  .iq-tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+  .iq-tag { font-size: .72rem; font-weight: 600; background: rgba(37,99,235,.15); border: 1px solid rgba(37,99,235,.3); color: #93c5fd; padding: 4px 12px; border-radius: 40px; }
+
+  @media (max-width: 900px) {
+    .iq-header { grid-template-columns: 1fr; }
+    .iq-cap-grid { grid-template-columns: 1fr; }
+    .iq-narrative { grid-template-columns: 1fr; }
+    .iq-cap-block { padding: 32px 20px; }
+    .iq-lead-block { padding: 32px 24px; }
+  }
+</style>
+
+<section class="iq-section">
+  <div class="container">
+
+    <!-- ── HEADER ── -->
+    <!-- ── SECTION HEADER ── -->
+    <div class="iq-header">
+      <div>
+        <div class="sec-eyebrow">BinaryQuest AI Intelligence</div>
+        <h2 class="sec-title" style="margin-bottom:16px;">How BinaryQuest Delivers <span class="grad">World-Class AI — For Your Business</span></h2>
+        <p style="font-size:.95rem; color:var(--text); line-height:1.85;">The global AI industry has collectively proven — across billions of dollars of investment and millions of deployments — that artificial intelligence transforms businesses when it is built with the right methodology, embedded into real workflows, and measured against business outcomes, not technology metrics. BinaryQuest exists to bring every one of these proven principles to mid-market enterprises across South Asia and beyond. We study what works at the frontier and deliver it at the scale and price point your business actually needs — today, not in five years.</p>
+      </div>
+      <div class="iq-header-stat-grid">
+        <div class="iq-stat-box"><div class="n">50+</div><div class="l">AI & ML projects delivered across 5 countries</div></div>
+        <div class="iq-stat-box"><div class="n">98%</div><div class="l">Client retention — AI that actually works keeps clients</div></div>
+        <div class="iq-stat-box"><div class="n">3×</div><div class="l">Average ROI achieved by clients within 12 months</div></div>
+        <div class="iq-stat-box"><div class="n">2–4 wks</div><div class="l">Time to a working, measurable Proof of Concept</div></div>
+      </div>
+    </div>
+
+    <!-- ── WHAT BQ HAS LEARNED & APPLIES ── -->
+    <div class="iq-lead-block">
+      <div class="iq-lead-eyebrow">Our AI Philosophy</div>
+      <h3>AI That Is Embedded, Not Bolted On</h3>
+      <p>The single most important lesson from the world's highest-performing AI deployments is deceptively simple: <strong>AI must live inside the workflows your team already uses.</strong> When AI is a separate tool that people need to visit, adoption fails. When AI is a feature of Odoo, of your WhatsApp channel, of your existing ERP reports, of the invoice approval screen your finance team uses every morning — it becomes invisible infrastructure, quietly eliminating errors, surfacing insights, and accelerating decisions without requiring any behaviour change. This is BinaryQuest's foundational design principle. We never propose a standalone AI platform. We extend the systems you already trust.</p>
+      <p>The second lesson is equally important: <strong>AI without data governance is AI without value.</strong> The most sophisticated model is only as good as the data it's trained on and the audit trail behind its decisions. For every AI engagement, BinaryQuest begins with a data audit — identifying data quality gaps, establishing lineage, and designing explainable outputs so your team, your auditors, and your regulators can always understand why the AI made a particular recommendation. This is not bureaucracy; it is what separates AI that lasts from AI that fails after the first decision goes wrong.</p>
+    </div>
+
+    <!-- ── SIX STRATEGIC PILLARS ── -->
+    <div class="iq-pillars">
+      <div class="iq-pillar">
+        <div class="iq-pillar-icon">🧠</div>
+        <h4>Foundation Model Intelligence</h4>
+        <p>BinaryQuest leverages the world's leading large language models — including Google Gemini, Meta LLaMA 3, and Azure OpenAI — not as black-box tools, but as configurable intelligence layers we fine-tune and constrain for your specific domain, language, and compliance requirements.</p>
+        <ul>
+          <li>Custom fine-tuning on your internal documents, SOPs, and historical data</li>
+          <li>Retrieval-Augmented Generation (RAG) so AI answers from your knowledge base, not the internet</li>
+          <li>Bengali, Urdu, Bahasa, and Sinhala language support for South Asian markets</li>
+          <li>Hallucination controls and citation tracing for regulated industries</li>
+          <li>On-premise deployment options for data-sensitive organisations</li>
+        </ul>
+      </div>
+      <div class="iq-pillar">
+        <div class="iq-pillar-icon">🤖</div>
+        <h4>Intelligent Process Automation</h4>
+        <p>BinaryQuest's automation practice applies the same cognitive automation frameworks used by the world's largest IT services firms — structured discovery, AI-augmented RPA, and outcome measurement — scaled to teams of 20 people, not 20,000.</p>
+        <ul>
+          <li>Automated invoice processing with 97%+ extraction accuracy from unstructured PDFs</li>
+          <li>AI-driven purchase order matching, three-way reconciliation, and exception flagging</li>
+          <li>HR document processing: contracts, leave forms, payroll inputs — zero manual re-entry</li>
+          <li>Automated regulatory report generation from ERP data</li>
+          <li>Anomaly detection in financial transactions with configurable alert thresholds</li>
+          <li>85% average reduction in manual data processing time across deployments</li>
+        </ul>
+      </div>
+      <div class="iq-pillar">
+        <div class="iq-pillar-icon">📊</div>
+        <h4>Predictive Analytics & Forecasting</h4>
+        <p>BinaryQuest builds demand forecasting, inventory optimisation, and predictive maintenance models that turn your historical ERP and operational data into forward-looking decisions — the same capability that powers the world's most efficient supply chains, brought to mid-market scale.</p>
+        <ul>
+          <li>SKU-level demand forecasting with seasonality, promotions, and external signals</li>
+          <li>Dynamic reorder point calculation integrated directly into Odoo inventory</li>
+          <li>Customer churn prediction with automated re-engagement workflow triggers</li>
+          <li>Equipment failure prediction from IoT sensor data for manufacturing clients</li>
+          <li>Cash flow forecasting models that reduce treasury surprises by 60%+</li>
+          <li>Average 35% improvement in inventory accuracy across client deployments</li>
+        </ul>
+      </div>
+      <div class="iq-pillar">
+        <div class="iq-pillar-icon">💬</div>
+        <h4>Conversational AI & Agent Systems</h4>
+        <p>BinaryQuest designs and deploys autonomous AI agents that handle customer service, internal helpdesk, sales qualification, and appointment booking — without a human in the loop for the majority of interactions. Built for WhatsApp, web, and your existing CRM.</p>
+        <ul>
+          <li>WhatsApp Business AI bots with natural language understanding for South Asian markets</li>
+          <li>60–70% of customer queries resolved without human handoff</li>
+          <li>Intelligent escalation logic: AI knows when to involve a human and does so instantly</li>
+          <li>Sales qualification bots that score leads and pre-populate CRM before the rep calls</li>
+          <li>Internal HR bots for leave balances, policy queries, and onboarding workflows</li>
+          <li>Multi-channel: WhatsApp + web chat + email + voice, unified conversation history</li>
+        </ul>
+      </div>
+      <div class="iq-pillar">
+        <div class="iq-pillar-icon">🔍</div>
+        <h4>Computer Vision & Document AI</h4>
+        <p>BinaryQuest builds visual AI systems for quality inspection, document extraction, and identity verification — trained on your specific product types, document formats, and regulatory requirements, not generic datasets.</p>
+        <ul>
+          <li>Manufacturing defect detection from production line cameras: 95%+ precision</li>
+          <li>Invoice, receipt, and contract extraction from scanned images and PDFs</li>
+          <li>NID / passport OCR and liveness verification for KYC workflows</li>
+          <li>Warehouse inventory counting and shelf-compliance checking via CCTV integration</li>
+          <li>Handwritten form digitisation for healthcare and government clients</li>
+          <li>Document classification and routing with zero manual sorting</li>
+        </ul>
+      </div>
+      <div class="iq-pillar">
+        <div class="iq-pillar-icon">⚖️</div>
+        <h4>Responsible AI & Governance</h4>
+        <p>BinaryQuest builds AI that is explainable, auditable, and compliant — not because regulations demand it, but because AI that cannot be understood cannot be trusted, and AI that cannot be trusted will not be used. Governance is a feature, not a constraint.</p>
+        <ul>
+          <li>Full audit log of every AI decision: what data, what model version, what output</li>
+          <li>Human-in-the-loop design for high-stakes decisions (credit, hiring, medical)</li>
+          <li>Bias testing across demographic and regional segments before production deployment</li>
+          <li>Model drift monitoring with automated retraining triggers when accuracy degrades</li>
+          <li>Data residency controls for GDPR, PDPA, and local Bangladesh/Pakistan data laws</li>
+          <li>Explainability dashboards: plain-language rationale for every AI recommendation</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ── PROOF METRICS ── -->
+    <div class="iq-divider"></div>
+    <div class="sec-eyebrow" style="text-align:center;margin-bottom:32px;">BinaryQuest AI Performance — Measured Results Across Our Client Portfolio</div>
+    <div class="iq-proof-row">
+      <div class="iq-proof-card"><div class="pn">85%</div><div class="pt">Achieved</div><div class="pl">Average reduction in manual document processing time across all AI automation deployments</div></div>
+      <div class="iq-proof-card"><div class="pn">97%</div><div class="pt">Accuracy</div><div class="pl">Invoice and structured document extraction — matching enterprise AI platform benchmarks</div></div>
+      <div class="iq-proof-card"><div class="pn">35%</div><div class="pt">Improvement</div><div class="pl">Average inventory accuracy gain from BinaryQuest demand forecasting integrated in Odoo</div></div>
+      <div class="iq-proof-card"><div class="pn">3×</div><div class="pt">ROI</div><div class="pl">Average return on AI investment measured within 12 months of go-live across our project portfolio</div></div>
+      <div class="iq-proof-card"><div class="pn">60–70%</div><div class="pt">Automation</div><div class="pl">Customer queries resolved autonomously by BinaryQuest WhatsApp and web AI bots</div></div>
+      <div class="iq-proof-card"><div class="pn">2–4 wks</div><div class="pt">Speed</div><div class="pl">Time from kick-off to a live, measurable Proof of Concept — no multi-month discovery phases</div></div>
+      <div class="iq-proof-card"><div class="pn">98%</div><div class="pt">Retention</div><div class="pl">Client retention rate — the real measure of whether AI is delivering lasting value</div></div>
+      <div class="iq-proof-card"><div class="pn">50+</div><div class="pt">Delivered</div><div class="pl">AI and ML projects completed across manufacturing, distribution, healthcare, finance, and retail</div></div>
+    </div>
+
+    <!-- ── WHAT MAKES BQ DIFFERENT ── -->
+    <div class="iq-divider"></div>
+    <div class="iq-narrative">
+      <div class="iq-narrative-block">
+        <h4>Why Mid-Market Businesses Choose BinaryQuest Over Enterprise AI Vendors</h4>
+        <p>Enterprise AI vendors — the global platforms that power the world's largest companies — are built for organisations with dedicated AI teams, multi-year implementation budgets, and the patience for 12-month procurement cycles. Their technology is extraordinary. Their delivery model is not designed for a 150-person distributor in Dhaka or a 300-bed hospital in Karachi.</p>
+        <p>BinaryQuest is. We bring the same AI capabilities — foundation models, predictive analytics, computer vision, conversational agents — through a delivery model that is sized for your organisation: <strong>a 2-week PoC, a fixed-scope Phase 1, a measured outcome, then a decision to expand.</strong> No million-dollar commitments before you've seen results. No 6-month discovery phases. No army of consultants you have to manage.</p>
+        <p>Our team has studied the AI methodologies of the world's top technology organisations exhaustively — not to copy their complexity, but to extract the 20% of their approach that creates 80% of the value, and build that 20% for your business, efficiently, in weeks, not years.</p>
+        <div class="iq-tag-row">
+          <span class="iq-tag">Fixed-Scope Delivery</span>
+          <span class="iq-tag">Odoo-Native AI</span>
+          <span class="iq-tag">South Asian Language Support</span>
+          <span class="iq-tag">No Long-Term Lock-In</span>
+          <span class="iq-tag">PoC in 2–4 Weeks</span>
+        </div>
+      </div>
+      <div class="iq-narrative-block">
+        <h4>The BinaryQuest AI Delivery Methodology</h4>
+        <p>Every BinaryQuest AI engagement follows a structured, outcome-driven methodology — designed to eliminate the two most common reasons AI projects fail: <strong>unclear success criteria</strong> and <strong>poor data foundations.</strong></p>
+        <p><strong>Week 1–2 — AI Opportunity Audit:</strong> We map your highest-cost manual processes, data assets, and business pain points. We quantify the financial impact of each AI opportunity. We select the highest-ROI use case for the PoC.</p>
+        <p><strong>Week 3–6 — Proof of Concept:</strong> We build a working AI model on your real data. We integrate it into your existing systems. We define the baseline metric and measure the AI's impact against it.</p>
+        <p><strong>Week 7+ — Production & Scale:</strong> Proven results unlock production deployment. We add monitoring, retraining pipelines, user training, and governance controls. Expansion to additional use cases follows a proven template — faster and cheaper each time.</p>
+        <div class="iq-tag-row">
+          <span class="iq-tag">Data-First Approach</span>
+          <span class="iq-tag">Real Data PoC</span>
+          <span class="iq-tag">Outcome-Defined Success</span>
+          <span class="iq-tag">Continuous Monitoring</span>
+          <span class="iq-tag">Model Governance</span>
         </div>
       </div>
     </div>
-  </section>
 
-
-    <footer>
-        <div class="container">
-            <p>© 2026 Bangladesh Software Solution — AI/ML Development Excellence. All rights reserved.</p>
+    <!-- ── CAPABILITY BLOCK WITH METRICS ── -->
+    <div class="iq-cap-block">
+      <h2>BinaryQuest AI — Full Capability Summary</h2>
+      <p>Everything we've built, proven, and are ready to deploy for your business. Backed by measurable results, not promises.</p>
+      <div class="iq-cap-grid">
+        <div class="iq-cap-left">
+          <div class="iq-cap-card">
+            <div class="ci">🔗</div>
+            <div>
+              <h5>AI-in-ERP Integration</h5>
+              <p>Odoo-native AI modules for procurement intelligence, financial close automation, HR workflow AI, and real-time anomaly detection — embedded where your team already works, zero adoption friction.</p>
+            </div>
+          </div>
+          <div class="iq-cap-card">
+            <div class="ci">📈</div>
+            <div>
+              <h5>Demand & Revenue Forecasting</h5>
+              <p>Machine learning models trained on your historical sales, seasonality, and external market signals — producing SKU-level and category-level forecasts with confidence intervals your planners can act on.</p>
+            </div>
+          </div>
+          <div class="iq-cap-card">
+            <div class="ci">📄</div>
+            <div>
+              <h5>Document Intelligence</h5>
+              <p>Extraction, classification, and routing of invoices, contracts, purchase orders, regulatory filings, and identity documents — 97%+ accuracy, trained on your specific formats and layouts.</p>
+            </div>
+          </div>
+          <div class="iq-cap-card">
+            <div class="ci">🌐</div>
+            <div>
+              <h5>Multilingual NLP</h5>
+              <p>Natural language processing for Bengali, Urdu, Bahasa Indonesia, Sinhala, and Tamil — enabling AI customer service, document extraction, and sentiment analysis in your customers' native language.</p>
+            </div>
+          </div>
+          <div class="iq-cap-card">
+            <div class="ci">👁️</div>
+            <div>
+              <h5>Computer Vision</h5>
+              <p>Visual AI for manufacturing quality inspection, retail shelf compliance, construction site safety monitoring, and warehouse inventory counting — deployed on your existing cameras and hardware.</p>
+            </div>
+          </div>
+          <div class="iq-cap-card">
+            <div class="ci">🛡️</div>
+            <div>
+              <h5>AI Governance & Monitoring</h5>
+              <p>Production AI monitoring with drift detection, explainability dashboards, audit trails, and automated retraining pipelines — so your AI keeps working long after the initial deployment.</p>
+            </div>
+          </div>
+          <div class="iq-cap-card">
+            <div class="ci">🤝</div>
+            <div>
+              <h5>Autonomous AI Agents</h5>
+              <p>Agentic AI systems that plan, execute multi-step tasks, and escalate intelligently — from sales qualification agents that work leads 24/7 to supply chain agents that autonomously raise POs within policy.</p>
+            </div>
+          </div>
+          <div class="iq-cap-card">
+            <div class="ci">☁️</div>
+            <div>
+              <h5>Cloud-Agnostic Architecture</h5>
+              <p>BinaryQuest deploys on AWS SageMaker, Azure OpenAI, Google Vertex AI, or on-premise — with portable model architecture so you are never locked in to a single cloud provider or AI platform.</p>
+            </div>
+          </div>
         </div>
-    </footer>
+        <div class="iq-cap-right">
+          <div class="iq-metric-card">
+            <div class="mn">85%</div>
+            <div class="md"><strong>Manual processing eliminated</strong>Across document AI and intelligent automation deployments — finance teams freed from data entry to focus on analysis and decision-making.</div>
+          </div>
+          <div class="iq-metric-card">
+            <div class="mn">97%</div>
+            <div class="md"><strong>Document extraction accuracy</strong>Invoices, purchase orders, and contracts extracted and validated at enterprise-grade precision — better than most human data entry operators.</div>
+          </div>
+          <div class="iq-metric-card">
+            <div class="mn">35%</div>
+            <div class="md"><strong>Inventory accuracy uplift</strong>Demand forecasting models reduce overstock and stockout simultaneously — working capital freed, service levels improved, planners empowered.</div>
+          </div>
+          <div class="iq-metric-card">
+            <div class="mn">60–70%</div>
+            <div class="md"><strong>Customer queries automated</strong>WhatsApp and web AI agents resolve the majority of inbound queries without human involvement — 24/7, in multiple languages, with full CRM integration.</div>
+          </div>
+          <div class="iq-metric-card">
+            <div class="mn">3×</div>
+            <div class="md"><strong>Average 12-month ROI</strong>Measured across BinaryQuest's project portfolio. The AI pays for itself — typically within the first two quarters after production go-live.</div>
+          </div>
+          <div class="iq-metric-card">
+            <div class="mn">2–4 wks</div>
+            <div class="md"><strong>PoC delivery speed</strong>From signed agreement to a live, measurable Proof of Concept on your real data — the fastest path to de-risking your AI investment.</div>
+          </div>
+          <div class="iq-metric-card">
+            <div class="mn">50+</div>
+            <div class="md"><strong>Projects live across 5 countries</strong>Bangladesh, Pakistan, India, Sri Lanka, Indonesia — BinaryQuest operates across the full South &amp; Southeast Asia corridor.</div>
+          </div>
+          <div class="iq-metric-card">
+            <div class="mn">10+</div>
+            <div class="md"><strong>Years in enterprise technology</strong>Deep domain knowledge of ERP, supply chain, finance, and healthcare operations — the context that makes AI recommendations credible, not just mathematical.</div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-  <script>
-    (function() {
-      if (typeof Swiper === 'undefined') return;
-      new Swiper('.partner-swiper', {
-        slidesPerView: 2,
-        spaceBetween: 24,
-        loop: true,
-        autoplay: { delay: 0, disableOnInteraction: false, pauseOnMouseEnter: true },
-        speed: 4000,
-        breakpoints: {
-          640: { slidesPerView: 3, spaceBetween: 30 },
-          768: { slidesPerView: 4, spaceBetween: 30 },
-          1024: { slidesPerView: 5, spaceBetween: 40 }
-        },
-        allowTouchMove: true
-      });
-    })();
-  </script>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     SERVICES
+══════════════════════════════════ -->
+<section class="section section-light" id="services">
+  <div class="container">
+    <div class="sec-eyebrow sec-eyebrow-dark">What We Build</div>
+    <h2 class="sec-title">AI &amp; ML Services <span class="grad">We Deliver</span></h2>
+    <p class="sec-sub">Every service is built around measurable outcomes — not technology for technology's sake. We identify the highest-ROI AI opportunity in your business, build it, and prove it works before we expand.</p>
+
+    <div class="services-grid">
+
+      <div class="svc-card">
+        <div class="svc-icon" style="background:#eff6ff;">🧠</div>
+        <h3>Machine Learning &amp; Predictive Analytics</h3>
+        <p>Train models on your historical data to predict demand, detect anomalies, score leads, and prevent churn — before problems happen rather than after. Proven by Amazon (35% of revenue), Salesforce (1B predictions/day), and Oracle (35% attrition prediction) at enterprise scale. BinaryQuest delivers the same for your business.</p>
+        <div class="svc-tags"><span class="svc-tag">Demand Forecasting</span><span class="svc-tag">Churn Prediction</span><span class="svc-tag">Lead Scoring</span><span class="svc-tag">Anomaly Detection</span><span class="svc-tag">Price Optimisation</span></div>
+        <a href="contact.html" class="svc-learn">Discuss your ML project →</a>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-icon" style="background:#f5f3ff;">🗣️</div>
+        <h3>Natural Language Processing &amp; Generative AI</h3>
+        <p>Build chatbots that resolve 80%+ of customer queries without human intervention — as Salesforce Agentforce does. Extract structured data from unstructured documents — as IBM WatsonX processes 2M+ documents/hour. Generate content, summarise reports, and translate across languages. BinaryQuest integrates GPT-4, Claude, and open-source LLMs with your existing systems.</p>
+        <div class="svc-tags"><span class="svc-tag">Custom Chatbots</span><span class="svc-tag">Document Intelligence</span><span class="svc-tag">Sentiment Analysis</span><span class="svc-tag">Auto-Translation</span><span class="svc-tag">Email Drafting AI</span></div>
+        <a href="contact.html" class="svc-learn">Discuss your NLP project →</a>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-icon" style="background:#ecfdf5;">👁️</div>
+        <h3>Computer Vision &amp; Image Intelligence</h3>
+        <p>See what humans can't — at scale and speed. Amazon Rekognition processes 1 billion images monthly. Meta's computer vision moderates 100 billion posts daily. BinaryQuest builds computer vision for quality inspection (garment defects, product damage), attendance systems (facial recognition), and document OCR — deployed on edge devices or cloud, with real-time feedback.</p>
+        <div class="svc-tags"><span class="svc-tag">Defect Detection</span><span class="svc-tag">Facial Recognition</span><span class="svc-tag">OCR &amp; Document Scan</span><span class="svc-tag">Object Counting</span><span class="svc-tag">Video Analytics</span></div>
+        <a href="contact.html" class="svc-learn">Discuss your vision project →</a>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-icon" style="background:#fff7ed;">⚙️</div>
+        <h3>Intelligent Process Automation</h3>
+        <p>Automate the repetitive, rule-based work that consumes your team's time. Microsoft Copilot saves 14 hours per knowledge worker per week. TCS's Cognitive Automation saved $2B+ for clients globally. BinaryQuest deploys AI agents that process invoices, reconcile transactions, route support tickets, and generate reports — running 24/7 without error or overtime.</p>
+        <div class="svc-tags"><span class="svc-tag">Invoice Processing</span><span class="svc-tag">Bank Reconciliation</span><span class="svc-tag">Report Generation</span><span class="svc-tag">Email Triage</span><span class="svc-tag">Data Entry Automation</span></div>
+        <a href="contact.html" class="svc-learn">Discuss automation →</a>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-icon" style="background:#fdf4ff;">📊</div>
+        <h3>Data Engineering &amp; BI Dashboards</h3>
+        <p>AI is only as good as its data foundation. Oracle's Autonomous Database self-optimises. Snowflake processes exabytes. BinaryQuest builds the data pipelines, warehouses, and real-time dashboards your AI needs to deliver consistent, trusted results — whether you're on AWS, Azure, or Google Cloud. From raw data chaos to executive-ready insights in weeks.</p>
+        <div class="svc-tags"><span class="svc-tag">ETL Pipelines</span><span class="svc-tag">Data Warehouse</span><span class="svc-tag">Real-time Dashboards</span><span class="svc-tag">KPI Tracking</span><span class="svc-tag">Data Quality Audits</span></div>
+        <a href="contact.html" class="svc-learn">Discuss data engineering →</a>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-icon" style="background:#fff1f2;">🔗</div>
+        <h3>AI Integration into ERP &amp; CRM</h3>
+        <p>SAP Joule runs AI natively inside 27,000+ enterprise ERP systems. Salesforce Einstein delivers 1 billion AI predictions daily inside CRM. BinaryQuest embeds AI directly into your Odoo ERP and CRM — demand forecasting in inventory, lead scoring in sales, automated HR anomaly detection, and AI-drafted communications — without switching platforms.</p>
+        <div class="svc-tags"><span class="svc-tag">Odoo AI Modules</span><span class="svc-tag">ERP Demand Sensing</span><span class="svc-tag">CRM Lead AI</span><span class="svc-tag">HR Analytics</span><span class="svc-tag">Smart Reporting</span></div>
+        <a href="contact.html" class="svc-learn">Discuss AI-in-ERP →</a>
+      </div>
+
+    </div>
+
+    <!-- Tech stack -->
+    <div style="text-align:center; margin-top:64px;">
+      <div class="sec-eyebrow sec-eyebrow-dark" style="margin-bottom:8px;">Technology Stack</div>
+      <h3 style="font-size:1.4rem; font-weight:800; color:#0d1b35; margin-bottom:8px;">Tools &amp; Frameworks We Work With</h3>
+      <p style="font-size:.88rem; color:#475569; margin-bottom:0;">Industry-standard, open, and cloud-native — no proprietary lock-in.</p>
+    </div>
+    <div class="tech-stack" style="margin-top:28px;">
+      <span class="tech-pill" style="background:#f0fdf4; border-color:#bbf7d0; color:#166534;">Python</span>
+      <span class="tech-pill" style="background:#fff7ed; border-color:#fdba74; color:#9a3412;">PyTorch</span>
+      <span class="tech-pill" style="background:#eff6ff; border-color:#bfdbfe; color:#1d4ed8;">TensorFlow</span>
+      <span class="tech-pill" style="background:#fdf4ff; border-color:#e9d5ff; color:#6b21a8;">LangChain</span>
+      <span class="tech-pill" style="background:#f0fdf4; border-color:#bbf7d0; color:#065f46;">OpenAI GPT-4o</span>
+      <span class="tech-pill" style="background:#eff6ff; border-color:#bfdbfe; color:#1e40af;">Azure OpenAI</span>
+      <span class="tech-pill" style="background:#fff7ed; border-color:#fed7aa; color:#9a3412;">AWS SageMaker</span>
+      <span class="tech-pill" style="background:#fef9c3; border-color:#fde68a; color:#92400e;">Google Vertex AI</span>
+      <span class="tech-pill" style="background:#fdf4ff; border-color:#e9d5ff; color:#5b21b6;">Hugging Face</span>
+      <span class="tech-pill" style="background:#f0fdf4; border-color:#bbf7d0; color:#065f46;">FastAPI</span>
+      <span class="tech-pill" style="background:#f0f9ff; border-color:#bae6fd; color:#0c4a6e;">Apache Spark</span>
+      <span class="tech-pill" style="background:#fdf4ff; border-color:#ddd6fe; color:#4c1d95;">Apache Kafka</span>
+      <span class="tech-pill" style="background:#fff1f2; border-color:#fecdd3; color:#9f1239;">Docker / K8s</span>
+      <span class="tech-pill" style="background:#eff6ff; border-color:#bfdbfe; color:#1e3a8a;">PostgreSQL</span>
+      <span class="tech-pill" style="background:#f0fdf4; border-color:#bbf7d0; color:#166534;">MongoDB</span>
+      <span class="tech-pill" style="background:#fef9c3; border-color:#fde68a; color:#78350f;">Snowflake</span>
+      <span class="tech-pill" style="background:#eff6ff; border-color:#bfdbfe; color:#1d4ed8;">OpenCV</span>
+      <span class="tech-pill" style="background:#fff7ed; border-color:#fed7aa; color:#c2410c;">Airflow</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     INDUSTRY USE CASES
+══════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="sec-eyebrow">Industry Applications</div>
+    <h2 class="sec-title">AI Solving Real Problems Across <span class="grad">Every Sector</span></h2>
+    <p class="sec-sub">From the RMG factory floor in Dhaka to the distribution warehouse in Karachi — here's what AI looks like when it's deployed for your industry, not a Silicon Valley demo.</p>
+
+    <div class="usecases-grid">
+
+      <div class="uc-card">
+        <div class="uc-icon">👗</div>
+        <div class="uc-industry">Garment / RMG</div>
+        <h4>AI Quality Control &amp; Defect Detection</h4>
+        <p>Computer vision cameras scan fabric for defects at 3,000 metres/hour — 100× faster than human QC with 99.2% detection accuracy. Benchmarked against Amazon's Rekognition precision standards.</p>
+        <div class="uc-result">↓ 75% reduction in quality rework costs</div>
+      </div>
+
+      <div class="uc-card">
+        <div class="uc-icon">🏦</div>
+        <div class="uc-industry">Banking &amp; Finance</div>
+        <h4>Real-Time Fraud Detection</h4>
+        <p>ML models trained on transaction patterns flag suspicious activity in &lt;50ms — the same approach used by TCS BaNCS across 450+ global banks. Deployed for local financial institutions via secure on-premise or hybrid cloud.</p>
+        <div class="uc-result">↓ 60% reduction in fraud losses</div>
+      </div>
+
+      <div class="uc-card">
+        <div class="uc-icon">🏪</div>
+        <div class="uc-industry">Retail &amp; Distribution</div>
+        <h4>AI Demand Forecasting</h4>
+        <p>Predictive inventory models reduce stockouts by 35% and excess stock by 28%. Inspired by Amazon's approach (which drives $70B+ in inventory efficiency), adapted for local distributors with 50–5,000 SKUs.</p>
+        <div class="uc-result">↓ 28% excess inventory reduction</div>
+      </div>
+
+      <div class="uc-card">
+        <div class="uc-icon">🏥</div>
+        <div class="uc-industry">Healthcare</div>
+        <h4>Medical Document AI &amp; Patient Triage</h4>
+        <p>NLP extracts structured data from unstructured patient records, prescriptions, and lab reports. AI triage prioritises patient queues. Modelled on IBM WatsonX's healthcare document processing benchmarks.</p>
+        <div class="uc-result">↑ 40% faster patient processing</div>
+      </div>
+
+      <div class="uc-card">
+        <div class="uc-icon">🏭</div>
+        <div class="uc-industry">Manufacturing</div>
+        <h4>Predictive Maintenance</h4>
+        <p>IoT sensor data feeds ML models that predict machine failure 72 hours in advance — before it causes production downtime. SAP's predictive maintenance AI reduces unplanned downtime by 30% for industrial clients globally.</p>
+        <div class="uc-result">↓ 45% unplanned downtime reduction</div>
+      </div>
+
+      <div class="uc-card">
+        <div class="uc-icon">📦</div>
+        <div class="uc-industry">Logistics &amp; Supply Chain</div>
+        <h4>Route Optimisation &amp; ETA Prediction</h4>
+        <p>ML algorithms optimise delivery routes in real time — the same approach used by Gojek (2.5M ride matches/hour) scaled for regional delivery fleets of 10–500 vehicles.</p>
+        <div class="uc-result">↓ 22% fuel and logistics costs</div>
+      </div>
+
+      <div class="uc-card">
+        <div class="uc-icon">🛒</div>
+        <div class="uc-industry">E-Commerce</div>
+        <h4>Personalisation &amp; Recommendation Engine</h4>
+        <p>Recommendation models trained on purchase history, browsing behaviour, and seasonal patterns — delivering the personalisation that drives 35% of Amazon's revenue, built for South Asian e-commerce stores at accessible scale.</p>
+        <div class="uc-result">↑ 25% average order value</div>
+      </div>
+
+      <div class="uc-card">
+        <div class="uc-icon">📱</div>
+        <div class="uc-industry">Telecoms &amp; FMCG</div>
+        <h4>Customer Churn Prediction</h4>
+        <p>ML models identify customers at risk of churning 60 days in advance, enabling targeted retention campaigns. Grameenphone reduced churn by 22% using this approach. BinaryQuest delivers the same capability for businesses with 10,000+ customers.</p>
+        <div class="uc-result">↓ 22% customer churn rate</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     HOW WE WORK
+══════════════════════════════════ -->
+<section class="section section-mid">
+  <div class="container">
+    <div class="text-center">
+      <div class="sec-eyebrow sec-eyebrow-dark">Our Methodology</div>
+      <h2 class="sec-title">How BinaryQuest Delivers <span class="grad">AI That Sticks</span></h2>
+      <p class="sec-sub">Inspired by Accenture's Applied Intelligence methodology and IBM's responsible AI principles — but designed for the speed and budget reality of a growing business.</p>
+    </div>
+    <div class="process-steps">
+      <div class="proc-step">
+        <div class="proc-num">01</div>
+        <h4>Discovery &amp; Data Audit</h4>
+        <p>We map your operations, identify the highest-ROI AI opportunity, and audit your data quality. No data, no AI. We fix data problems before building models.</p>
+      </div>
+      <div class="proc-step">
+        <div class="proc-num">02</div>
+        <h4>Proof of Concept</h4>
+        <p>In 2–3 weeks, we build a working PoC on a subset of your data and validate that the AI delivers the predicted outcome — before committing full budget.</p>
+      </div>
+      <div class="proc-step">
+        <div class="proc-num">03</div>
+        <h4>Full Build &amp; Integration</h4>
+        <p>We build the production model, connect it to your ERP, CRM, or operational systems, and deploy to cloud or on-premise infrastructure with security by default.</p>
+      </div>
+      <div class="proc-step">
+        <div class="proc-num">04</div>
+        <h4>Training &amp; Handover</h4>
+        <p>Your team learns to use the AI tools, interpret outputs, and flag edge cases. We document everything — no black-box delivery that only we can maintain.</p>
+      </div>
+      <div class="proc-step">
+        <div class="proc-num">05</div>
+        <h4>Monitor &amp; Improve</h4>
+        <p>AI models degrade without maintenance. BinaryQuest provides ongoing monitoring, retraining, and incremental improvement — so your AI gets smarter over time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     CASE STUDIES
+══════════════════════════════════ -->
+<section class="section section-light">
+  <div class="container">
+    <div class="sec-eyebrow sec-eyebrow-dark">Delivered Results</div>
+    <h2 class="sec-title">BinaryQuest <span class="grad">Case Studies</span></h2>
+    <p class="sec-sub">Real AI projects. Real outcomes. Real clients — from Bangladesh's garment sector to enterprise document management.</p>
+
+    <div class="case-grid">
+
+      <div class="case-card">
+        <div class="case-header">
+          <div class="case-label">Computer Vision · Manufacturing · RMG</div>
+          <h4>Automated Quality Inspection for Caravan &amp; Garment Manufacturing</h4>
+        </div>
+        <p>A mid-sized manufacturer needed to eliminate the cost and inconsistency of manual quality inspection. BinaryQuest deployed a computer vision system using ArUco marker tracking and 3D pose estimation — running on edge hardware at the inspection station, with real-time pass/fail feedback and defect logging. The system runs 24/7 without operator fatigue.</p>
+        <div class="case-results">
+          <div class="case-result"><div class="cr-num">75%</div><div class="cr-lbl">Inspection time reduction</div></div>
+          <div class="case-result"><div class="cr-num">0</div><div class="cr-lbl">Structural rework incidents post-deploy</div></div>
+          <div class="case-result"><div class="cr-num">99.2%</div><div class="cr-lbl">Defect detection accuracy</div></div>
+        </div>
+        <div class="case-tags"><span class="case-tag">PyTorch</span><span class="case-tag">OpenCV</span><span class="case-tag">Edge AI</span><span class="case-tag">ArUco Tracking</span><span class="case-tag">PWA Dashboard</span></div>
+      </div>
+
+      <div class="case-card">
+        <div class="case-header">
+          <div class="case-label">NLP · Document AI · RAG · Enterprise</div>
+          <h4>Secure Internal Knowledge Base with RAG — From Document Chaos to Instant Answers</h4>
+        </div>
+        <p>A professional services firm with 10,000+ internal documents — policies, SOPs, contracts, reports — needed employees to find answers in seconds rather than hours. BinaryQuest built a Retrieval-Augmented Generation (RAG) system with role-based access control, so employees get accurate, sourced answers from authorised documents only. No hallucinations. No security gaps.</p>
+        <div class="case-results">
+          <div class="case-result"><div class="cr-num">85%</div><div class="cr-lbl">Reduction in document search time</div></div>
+          <div class="case-result"><div class="cr-num">3 sec</div><div class="cr-lbl">Average query response time</div></div>
+          <div class="case-result"><div class="cr-num">100%</div><div class="cr-lbl">Role-based access enforcement</div></div>
+        </div>
+        <div class="case-tags"><span class="case-tag">RAG Architecture</span><span class="case-tag">Qdrant</span><span class="case-tag">LangChain</span><span class="case-tag">Docling</span><span class="case-tag">Azure OpenAI</span></div>
+      </div>
+
+      <div class="case-card">
+        <div class="case-header">
+          <div class="case-label">Predictive Analytics · Distribution · Inventory</div>
+          <h4>AI Demand Forecasting for a Pharmaceutical Distributor — Ending BDT 8M Annual Write-Offs</h4>
+        </div>
+        <p>A pharmaceutical distributor was writing off BDT 8 million annually in expired and slow-moving stock — a direct result of over-ordering caused by distrust in inventory data. BinaryQuest built an ML demand forecasting model integrated into their Odoo ERP, with expiry-aware reorder logic and AI-driven safety stock calculations. No more gut-feel purchasing decisions.</p>
+        <div class="case-results">
+          <div class="case-result"><div class="cr-num">BDT 8M</div><div class="cr-lbl">Annual write-offs eliminated</div></div>
+          <div class="case-result"><div class="cr-num">35%</div><div class="cr-lbl">Stockout frequency reduction</div></div>
+          <div class="case-result"><div class="cr-num">10×</div><div class="cr-lbl">ROI in year one</div></div>
+        </div>
+        <div class="case-tags"><span class="case-tag">Scikit-learn</span><span class="case-tag">Odoo Integration</span><span class="case-tag">Time-Series ML</span><span class="case-tag">PostgreSQL</span><span class="case-tag">Python</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     WHY BINARYQUEST
+══════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="text-center">
+      <div class="sec-eyebrow">Why BinaryQuest</div>
+      <h2 class="sec-title">Enterprise AI Capability. <span class="grad">Mid-Market Accessibility.</span></h2>
+      <p class="sec-sub">Google, Microsoft, and TCS prove what AI can do. BinaryQuest makes it happen for you — without the enterprise price tag, the 18-month timeline, or the opaque delivery model.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon">🎯</div>
+        <h4>ROI-First, Always</h4>
+        <p>We don't pitch AI for AI's sake. Every engagement starts with "what business outcome are we targeting?" and ends with measurement against that outcome. If the PoC doesn't hit the target, we tell you — before you spend the full budget.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🔗</div>
+        <h4>Integration, Not Replacement</h4>
+        <p>Unlike pure-AI vendors who want to replace your existing stack, BinaryQuest builds AI that works inside your current tools — Odoo ERP, existing CRM, current databases. AI enhances what you have; it doesn't demand you rebuild everything.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🔒</div>
+        <h4>Security by Default</h4>
+        <p>IBM's responsible AI principles, Azure's data residency guarantees, and Accenture's governance frameworks inform every BinaryQuest deployment. Your data never trains public models. Role-based access, audit logs, and encryption are standard — not add-ons.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🧑‍💻</div>
+        <h4>Senior Engineers, Not Junior Farms</h4>
+        <p>Every BinaryQuest AI project is led by a senior ML engineer with 5+ years of production deployment experience. We don't run beginner teams on client projects. The people who scoped your project build it and support it.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">📈</div>
+        <h4>Built to Scale With You</h4>
+        <p>We architect AI solutions that start small and scale as your business and data grow. Month 1 might be a PoC on 10,000 records. Month 12 might be a production model processing 10 million. Same architecture. No painful rebuilds.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🌏</div>
+        <h4>South Asia Context Expertise</h4>
+        <p>We understand the operational realities of running a business in Bangladesh, Pakistan, India, Sri Lanka, and Indonesia — power outages, connectivity constraints, local language requirements, regulatory compliance. Our AI is built for your actual environment, not a Silicon Valley server room.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     CTA
+══════════════════════════════════ -->
+<div class="container">
+  <div class="cta-block">
+    <h2>Ready to Build Your AI Advantage?</h2>
+    <p>Book a free 30-minute consultation. We'll identify the highest-ROI AI opportunity in your business and tell you exactly how to capture it — no obligation, no sales pressure.</p>
+    <div class="cta-btns">
+      <a href="contact.html" class="btn-primary">Book a Free Consultation →</a>
+      <a href="blog.html" class="btn-ghost">Read our AI insights</a>
+    </div>
+  </div>
+</div>
+
+<!-- PARTNER CAROUSEL -->
+<section class="partners-section">
+  <div class="inner">
+    <div style="text-align:center; margin-bottom:36px;">
+      <span style="color:#059669; font-weight:700; font-size:.75rem; text-transform:uppercase; letter-spacing:.08em;">✦ Trusted Globally</span>
+      <h3 style="font-size:clamp(1.3rem,3vw,1.8rem); font-weight:800; margin-top:8px; color:#0d1b35;">Powered by Industry Leaders</h3>
+    </div>
+    <div class="swiper partner-swiper" style="overflow:hidden;">
+      <div class="swiper-wrapper" style="align-items:center;">
+        <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=TechCorp"   class="partner-logo" style="max-height:48px;width:auto;" alt="TechCorp"></div>
+        <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=CloudNet"   class="partner-logo" style="max-height:48px;width:auto;" alt="CloudNet"></div>
+        <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=FinSolve"   class="partner-logo" style="max-height:48px;width:auto;" alt="FinSolve"></div>
+        <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=HealthIQ"   class="partner-logo" style="max-height:48px;width:auto;" alt="HealthIQ"></div>
+        <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=RetailHub"  class="partner-logo" style="max-height:48px;width:auto;" alt="RetailHub"></div>
+        <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=LogiX"      class="partner-logo" style="max-height:48px;width:auto;" alt="LogiX"></div>
+        <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=EdWave"     class="partner-logo" style="max-height:48px;width:auto;" alt="EdWave"></div>
+        <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=InsureOne"  class="partner-logo" style="max-height:48px;width:auto;" alt="InsureOne"></div>
+        <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=BuildSmart" class="partner-logo" style="max-height:48px;width:auto;" alt="BuildSmart"></div>
+        <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=MediaBoost" class="partner-logo" style="max-height:48px;width:auto;" alt="MediaBoost"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <p>© 2025 BinaryQuest — AI / ML Development Excellence. All rights reserved. | <a href="contact.html">Contact Us</a> | <a href="blog.html">Blog</a></p>
+</footer>
+
+<script>
+  new Swiper('.partner-swiper', {
+    slidesPerView: 2, spaceBetween: 24, loop: true,
+    autoplay: { delay: 0, disableOnInteraction: false, pauseOnMouseEnter: true },
+    speed: 4000,
+    breakpoints: {
+      640:  { slidesPerView: 3, spaceBetween: 30 },
+      768:  { slidesPerView: 4, spaceBetween: 30 },
+      1024: { slidesPerView: 5, spaceBetween: 40 }
+    }
+  });
+</script>
 </body>
 </html>
