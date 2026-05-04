@@ -290,6 +290,13 @@
       .nav-links { gap: 20px; }
     }
   </style>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <style>
+    .partner-logo { filter: grayscale(20%) brightness(0.98); transition: all 0.2s; opacity: 0.8; }
+    .partner-logo:hover { filter: grayscale(0%); opacity: 1; transform: scale(1.02); }
+  </style>
 </head>
 <body>
 
@@ -447,6 +454,30 @@
 </section>
 
 <!-- Footer -->
+  <!-- TRUSTED PARTNERS CAROUSEL -->
+  <section style="padding:60px 20px; background:#f8fafc; border-top:1px solid #e2e8f0; border-bottom:1px solid #e2e8f0;">
+    <div style="max-width:1200px; margin:0 auto;">
+      <div style="text-align:center; margin-bottom:36px;">
+        <span style="color:#059669; font-weight:600; font-size:13px; text-transform:uppercase; letter-spacing:.05em;">✦ Trusted Globally</span>
+        <h3 style="font-size:clamp(1.4rem,3vw,2rem); font-weight:700; margin-top:6px; color:#1a202c;">Powered by Industry Leaders</h3>
+      </div>
+      <div class="swiper partner-swiper" style="overflow:hidden; width:100%;">
+        <div class="swiper-wrapper" style="align-items:center;">
+          <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=TechCorp" class="partner-logo" style="max-height:48px;width:auto;" alt="TechCorp"></div>
+          <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=CloudNet" class="partner-logo" style="max-height:48px;width:auto;" alt="CloudNet"></div>
+          <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=FinSolve" class="partner-logo" style="max-height:48px;width:auto;" alt="FinSolve"></div>
+          <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=HealthIQ" class="partner-logo" style="max-height:48px;width:auto;" alt="HealthIQ"></div>
+          <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=RetailHub" class="partner-logo" style="max-height:48px;width:auto;" alt="RetailHub"></div>
+          <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=LogiX" class="partner-logo" style="max-height:48px;width:auto;" alt="LogiX"></div>
+          <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=EdWave" class="partner-logo" style="max-height:48px;width:auto;" alt="EdWave"></div>
+          <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=InsureOne" class="partner-logo" style="max-height:48px;width:auto;" alt="InsureOne"></div>
+          <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=BuildSmart" class="partner-logo" style="max-height:48px;width:auto;" alt="BuildSmart"></div>
+          <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=MediaBoost" class="partner-logo" style="max-height:48px;width:auto;" alt="MediaBoost"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
 <footer class="footer">
   <div class="container">
     <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 32px;">
@@ -456,5 +487,24 @@
   </div>
 </footer>
 
+
+  <script>
+    (function() {
+      if (typeof Swiper === 'undefined') return;
+      new Swiper('.partner-swiper', {
+        slidesPerView: 2,
+        spaceBetween: 24,
+        loop: true,
+        autoplay: { delay: 0, disableOnInteraction: false, pauseOnMouseEnter: true },
+        speed: 4000,
+        breakpoints: {
+          640: { slidesPerView: 3, spaceBetween: 30 },
+          768: { slidesPerView: 4, spaceBetween: 30 },
+          1024: { slidesPerView: 5, spaceBetween: 40 }
+        },
+        allowTouchMove: true
+      });
+    })();
+  </script>
 </body>
 </html>
