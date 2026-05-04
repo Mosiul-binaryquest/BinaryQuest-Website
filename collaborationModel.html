@@ -4,472 +4,988 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>BinaryQuest – Collaboration Models | Engage, Build, Scale</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #ffffff;
-      color: #1a2c3e;
-      line-height: 1.5;
-      scroll-behavior: smooth;
-    }
-
-    .container {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: #0f2b3d;
-      color: white;
-      font-weight: 600;
-      padding: 12px 28px;
-      border-radius: 40px;
-      text-decoration: none;
-      transition: 0.25s;
-      border: none;
-    }
-    .btn-primary:hover {
-      background: #1f4d6b;
-      transform: translateY(-2px);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.08);
-    }
-    .btn-outline {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: transparent;
-      border: 1px solid #0f2b3d;
-      color: #0f2b3d;
-      font-weight: 500;
-      padding: 10px 24px;
-      border-radius: 40px;
-      text-decoration: none;
-      transition: 0.2s;
-    }
-    .btn-outline:hover {
-      background: #eef3fa;
-      border-color: #1f4d6b;
-    }
-
-    .navbar {
-      padding: 20px 0;
-      border-bottom: 1px solid #eef2f8;
-      position: sticky;
-      top: 0;
-      background: white;
-      z-index: 100;
-    }
-    .nav-flex {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-    .logo {
-      font-size: 1.8rem;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      background: linear-gradient(130deg, #0f2b3d, #2a6f8f);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-    .nav-links {
-      display: flex;
-      gap: 32px;
-      align-items: center;
-    }
-    .nav-links a {
-      text-decoration: none;
-      font-weight: 500;
-      color: #2c475c;
-    }
-    .nav-links a.active, .nav-links a:hover {
-      color: #0f2b3d;
-      font-weight: 600;
-    }
-
-    .hero {
-      padding: 70px 0 60px;
-      background: linear-gradient(100deg, #f4f9fe 0%, #ffffff 80%);
-    }
-    .hero h1 {
-      font-size: 3rem;
-      font-weight: 800;
-      line-height: 1.2;
-      margin-bottom: 20px;
-      color: #0a1c2c;
-    }
-    .hero p {
-      font-size: 1.1rem;
-      color: #415f77;
-      max-width: 680px;
-      margin-bottom: 32px;
-    }
-
-    .section {
-      padding: 80px 0;
-    }
-    .section-sm {
-      padding: 56px 0;
-    }
-    .section-title {
-      text-align: center;
-      font-size: 2.2rem;
-      font-weight: 700;
-      margin-bottom: 16px;
-      color: #0a1c2c;
-    }
-    .section-sub {
-      text-align: center;
-      color: #5c7a94;
-      max-width: 720px;
-      margin: 0 auto 48px;
-      font-size: 1.05rem;
-    }
-
-    .model-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-      gap: 32px;
-      margin-top: 20px;
-    }
-    .model-card {
-      background: #ffffff;
-      border-radius: 32px;
-      padding: 32px 28px;
-      border: 1px solid #eef2f8;
-      transition: all 0.25s;
-      box-shadow: 0 6px 12px rgba(0,0,0,0.02);
-    }
-    .model-card:hover {
-      transform: translateY(-6px);
-      border-color: #cddfe9;
-      box-shadow: 0 24px 32px -16px rgba(0,0,0,0.1);
-    }
-    .model-icon {
-      font-size: 2.8rem;
-      margin-bottom: 20px;
-    }
-    .model-card h3 {
-      font-size: 1.7rem;
-      margin-bottom: 12px;
-    }
-    .model-badge {
-      display: inline-block;
-      background: #eef3fa;
-      padding: 4px 12px;
-      border-radius: 30px;
-      font-size: 0.7rem;
-      font-weight: 700;
-      margin-bottom: 20px;
-      color: #0f2b3d;
-    }
-    .feature-list {
-      list-style: none;
-      margin: 20px 0 24px;
-    }
-    .feature-list li {
-      margin-bottom: 12px;
-      padding-left: 24px;
-      position: relative;
-    }
-    .feature-list li::before {
-      content: "✓";
-      position: absolute;
-      left: 0;
-      color: #2a6f8f;
-      font-weight: 700;
-    }
-
-    .comp-table-wrapper {
-      background: #f8fbfe;
-      border-radius: 32px;
-      padding: 32px 24px;
-      margin-top: 20px;
-      overflow-x: auto;
-    }
-    .comp-table {
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 640px;
-    }
-    .comp-table th {
-      text-align: left;
-      padding: 16px 12px;
-      background: #eef3fa;
-      font-weight: 700;
-      color: #0a1c2c;
-    }
-    .comp-table td {
-      padding: 14px 12px;
-      border-bottom: 1px solid #e2ecf3;
-    }
-
-    .stats-row {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 24px;
-      text-align: center;
-      margin-top: 40px;
-    }
-    .stat-item {
-      flex: 1;
-      background: white;
-      border-radius: 28px;
-      padding: 24px 16px;
-      border: 1px solid #eef2f8;
-    }
-    .stat-number {
-      font-size: 2.5rem;
-      font-weight: 800;
-      color: #0f2b3d;
-    }
-
-    .cta-box {
-      background: linear-gradient(130deg, #eef4fa, #ffffff);
-      border-radius: 48px;
-      padding: 56px 32px;
-      text-align: center;
-    }
-    .footer {
-      background: #0a1c2c;
-      color: #bcd0df;
-      padding: 48px 0 28px;
-      margin-top: 40px;
-    }
-    @media (max-width: 780px) {
-      .hero h1 { font-size: 2.2rem; }
-      .nav-links { gap: 20px; }
-    }
-  </style>
+  <meta name="description" content="BinaryQuest offers five proven collaboration models — Dedicated Team, Time & Material, Fixed Price, Retainer, and BOT — designed for transparency, predictability, and shared success.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
   <style>
-    .partner-logo { filter: grayscale(20%) brightness(0.98); transition: all 0.2s; opacity: 0.8; }
-    .partner-logo:hover { filter: grayscale(0%); opacity: 1; transform: scale(1.02); }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --navy: #0a1c2f; --blue: #1e5a9e; --blue2: #0f3b6f;
+      --cyan: #0891b2; --green: #059669; --light: #f4f8fc;
+      --border: #e2edf7; --text: #4a6378; --white: #fff;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--navy); line-height: 1.6; }
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+
+    /* ── BUTTONS ── */
+    .btn-primary { display: inline-flex; align-items: center; gap: 8px; background: var(--blue2); color: #fff; font-weight: 700; padding: 12px 28px; border-radius: 40px; text-decoration: none; transition: .25s; border: none; cursor: pointer; font-size: .95rem; }
+    .btn-primary:hover { background: var(--blue); transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0,0,0,.12); }
+    .btn-outline { display: inline-flex; align-items: center; gap: 6px; background: transparent; border: 1.5px solid var(--navy); color: var(--navy); font-weight: 600; padding: 10px 22px; border-radius: 40px; text-decoration: none; transition: .2s; font-size: .88rem; }
+    .btn-outline:hover { background: var(--light); border-color: var(--blue); color: var(--blue); }
+
+    /* ── NAV ── */
+    .navbar { padding: 0; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: var(--white); z-index: 100; }
+    .nav-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; height: 68px; }
+    .logo { font-size: 1.5rem; font-weight: 900; letter-spacing: -.02em; background: linear-gradient(130deg,#0a1c2f,#1e5a9e); -webkit-background-clip: text; background-clip: text; color: transparent; text-decoration: none; }
+    .nav-links { display: flex; gap: 28px; align-items: center; }
+    .nav-links a { text-decoration: none; font-weight: 500; font-size: .875rem; color: var(--text); transition: color .2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--navy); font-weight: 600; }
+    .nav-cta { background: var(--blue2); color: #fff !important; padding: 8px 20px; border-radius: 40px; font-weight: 700 !important; font-size: .82rem !important; }
+    .nav-cta:hover { background: var(--blue) !important; }
+
+    /* ── HERO ── */
+    .hero { padding: 80px 0 60px; background: linear-gradient(120deg,#f0f7ff 0%,#e8f3fb 40%,#fff 100%); position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; right: -120px; top: -60px; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle,rgba(30,90,158,.07) 0%,transparent 70%); }
+    .hero-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; position: relative; z-index: 1; }
+    .hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; background: rgba(30,90,158,.1); border: 1px solid rgba(30,90,158,.2); border-radius: 40px; padding: 5px 16px; font-size: .75rem; font-weight: 700; color: var(--blue); letter-spacing: .06em; text-transform: uppercase; margin-bottom: 20px; }
+    .hero h1 { font-size: clamp(2rem,4vw,3.2rem); font-weight: 900; line-height: 1.15; letter-spacing: -.03em; margin-bottom: 20px; }
+    .hero h1 .grad { background: linear-gradient(90deg,#1e5a9e,#0891b2); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .hero p { font-size: 1.05rem; color: var(--text); max-width: 540px; margin-bottom: 32px; line-height: 1.8; }
+    .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 40px; }
+    .hero-stats { display: flex; gap: 32px; flex-wrap: wrap; padding-top: 32px; border-top: 1px solid var(--border); }
+    .hs .n { font-size: 2rem; font-weight: 900; color: var(--navy); line-height: 1; }
+    .hs .l { font-size: .75rem; color: var(--text); margin-top: 4px; }
+    .hero-visual { display: flex; flex-direction: column; gap: 16px; }
+    .hv-card { background: var(--white); border: 1px solid var(--border); border-radius: 20px; padding: 20px 24px; box-shadow: 0 4px 16px rgba(0,0,0,.05); display: flex; align-items: flex-start; gap: 14px; }
+    .hv-card .ic { font-size: 1.8rem; flex-shrink: 0; }
+    .hv-card h4 { font-size: .9rem; font-weight: 800; color: var(--navy); margin-bottom: 4px; }
+    .hv-card p { font-size: .78rem; color: var(--text); line-height: 1.6; }
+    .hv-card .badge { display: inline-block; font-size: .65rem; font-weight: 700; padding: 2px 8px; border-radius: 20px; margin-top: 6px; }
+    .badge-blue { background: #dbeafe; color: #1d4ed8; }
+    .badge-green { background: #d1fae5; color: #065f46; }
+    .badge-purple { background: #ede9fe; color: #5b21b6; }
+    .badge-orange { background: #ffedd5; color: #9a3412; }
+    .badge-teal { background: #ccfbf1; color: #0f766e; }
+
+    /* ── SECTION WRAPPER ── */
+    .section { padding: 80px 0; }
+    .section-alt { background: var(--light); }
+    .section-dark { background: var(--navy); color: var(--white); }
+    .sec-eyebrow { font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--cyan); margin-bottom: 10px; }
+    .sec-eyebrow-dark { color: var(--blue); }
+    .sec-title { font-size: clamp(1.8rem,3vw,2.6rem); font-weight: 800; letter-spacing: -.02em; line-height: 1.2; margin-bottom: 14px; }
+    .sec-title .grad { background: linear-gradient(90deg,#1e5a9e,#0891b2); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .sec-sub { font-size: 1rem; color: var(--text); max-width: 680px; line-height: 1.8; }
+    .text-center { text-align: center; }
+    .text-center .sec-sub { margin: 0 auto; }
+
+    /* ── MODEL CARDS ── */
+    .model-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(340px,1fr)); gap: 28px; margin-top: 48px; }
+    .model-card { background: var(--white); border-radius: 28px; padding: 32px 28px; border: 1px solid var(--border); transition: .25s; position: relative; overflow: hidden; }
+    .model-card::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; border-radius: 28px 28px 0 0; }
+    .mc-blue::after  { background: linear-gradient(90deg,#1d4ed8,#0891b2); }
+    .mc-green::after { background: linear-gradient(90deg,#059669,#10b981); }
+    .mc-indigo::after{ background: linear-gradient(90deg,#4f46e5,#7c3aed); }
+    .mc-orange::after{ background: linear-gradient(90deg,#ea580c,#f59e0b); }
+    .mc-teal::after  { background: linear-gradient(90deg,#0f766e,#0891b2); }
+    .model-card:hover { transform: translateY(-6px); box-shadow: 0 24px 40px rgba(0,0,0,.09); border-color: #c7ddef; }
+    .model-icon { font-size: 2.8rem; margin-bottom: 16px; }
+    .model-badge { display: inline-block; font-size: .65rem; font-weight: 800; padding: 3px 12px; border-radius: 30px; background: var(--light); color: var(--blue2); letter-spacing: .06em; text-transform: uppercase; margin-bottom: 14px; }
+    .model-card h3 { font-size: 1.5rem; font-weight: 800; margin-bottom: 10px; line-height: 1.25; }
+    .model-card > p { font-size: .88rem; color: var(--text); line-height: 1.75; margin-bottom: 18px; }
+    .feat-list { list-style: none; margin: 0 0 24px; display: flex; flex-direction: column; gap: 9px; }
+    .feat-list li { font-size: .84rem; color: #334155; padding-left: 20px; position: relative; line-height: 1.55; }
+    .feat-list li::before { content: '✓'; position: absolute; left: 0; color: var(--cyan); font-weight: 800; font-size: .8rem; }
+    .model-meta { background: var(--light); border-radius: 14px; padding: 14px 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: .78rem; margin-bottom: 20px; }
+    .model-meta .mk { color: var(--text); font-weight: 600; }
+    .model-meta .mv { color: var(--navy); font-weight: 700; }
+    .model-best { font-size: .78rem; background: rgba(8,145,178,.08); border: 1px solid rgba(8,145,178,.2); border-radius: 10px; padding: 8px 12px; color: #0e7490; line-height: 1.5; margin-bottom: 16px; }
+    .model-best strong { display: block; font-size: .65rem; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 3px; color: #0891b2; }
+
+    /* ── INDUSTRY STATS ── */
+    .stats-band { background: var(--navy); padding: 56px 0; }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(200px,1fr)); gap: 24px; }
+    .stat-box { text-align: center; padding: 24px; }
+    .stat-num { font-size: 2.5rem; font-weight: 900; line-height: 1; background: linear-gradient(90deg,#60a5fa,#34d399); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .stat-label { font-size: .8rem; color: #94a3b8; margin-top: 8px; line-height: 1.5; }
+
+    /* ── COMPARISON TABLE ── */
+    .table-wrap { background: var(--light); border-radius: 28px; padding: 32px; margin-top: 48px; overflow-x: auto; }
+    .comp-table { width: 100%; border-collapse: collapse; min-width: 700px; }
+    .comp-table th { text-align: left; padding: 14px 16px; background: var(--white); font-weight: 800; font-size: .82rem; color: var(--navy); border-radius: 8px; }
+    .comp-table th:first-child { color: var(--text); font-weight: 600; }
+    .comp-table td { padding: 13px 16px; border-bottom: 1px solid var(--border); font-size: .84rem; color: #334155; }
+    .comp-table tr:last-child td { border-bottom: none; }
+    .comp-table tbody tr:hover td { background: rgba(30,90,158,.03); }
+    .check { color: var(--green); font-weight: 800; }
+    .cross { color: #94a3b8; }
+    .partial { color: #f59e0b; font-weight: 700; }
+
+    /* ── HOW WE WORK ── */
+    .process-track { position: relative; margin-top: 56px; }
+    .process-track::before { content: ''; position: absolute; left: 40px; top: 0; bottom: 0; width: 2px; background: linear-gradient(180deg,#1e5a9e,#0891b2,#059669); }
+    .proc-step { display: flex; gap: 28px; align-items: flex-start; margin-bottom: 40px; position: relative; }
+    .proc-num { width: 80px; height: 80px; border-radius: 50%; background: var(--white); border: 3px solid var(--blue); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; font-weight: 900; color: var(--blue2); flex-shrink: 0; z-index: 1; box-shadow: 0 0 0 6px var(--light); }
+    .proc-content { background: var(--white); border: 1px solid var(--border); border-radius: 20px; padding: 24px 28px; flex: 1; }
+    .proc-content h4 { font-size: 1.1rem; font-weight: 800; margin-bottom: 8px; color: var(--navy); }
+    .proc-content p { font-size: .86rem; color: var(--text); line-height: 1.75; margin-bottom: 10px; }
+    .proc-tag-row { display: flex; flex-wrap: wrap; gap: 6px; }
+    .proc-tag { font-size: .7rem; font-weight: 600; background: var(--light); color: var(--navy); padding: 3px 10px; border-radius: 20px; border: 1px solid var(--border); }
+
+    /* ── WHAT MAKES BQ DIFFERENT ── */
+    .diff-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(240px,1fr)); gap: 20px; margin-top: 40px; }
+    .diff-card { background: var(--white); border-radius: 20px; padding: 24px; border: 1px solid var(--border); transition: .2s; }
+    .diff-card:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(0,0,0,.07); border-color: #c7ddef; }
+    .diff-icon { font-size: 2rem; margin-bottom: 12px; }
+    .diff-card h4 { font-size: .95rem; font-weight: 800; margin-bottom: 8px; }
+    .diff-card p { font-size: .82rem; color: var(--text); line-height: 1.7; }
+
+    /* ── INDUSTRY BENCHMARKS ── */
+    .bench-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 48px; }
+    .bench-block { background: var(--white); border: 1px solid var(--border); border-radius: 24px; padding: 32px; }
+    .bench-block h4 { font-size: 1.05rem; font-weight: 800; margin-bottom: 16px; color: var(--navy); display: flex; align-items: center; gap: 8px; }
+    .bench-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px dashed var(--border); font-size: .84rem; }
+    .bench-item:last-child { border: none; }
+    .bench-item .bk { color: var(--text); }
+    .bench-item .bv { font-weight: 800; color: var(--navy); }
+    .bench-item .bv.good { color: var(--green); }
+    .bench-item .bv.warn { color: #d97706; }
+    .bench-item .bv.bq   { color: var(--blue); }
+
+    /* ── FAIL STATS ── */
+    .fail-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(220px,1fr)); gap: 20px; margin-top: 40px; }
+    .fail-card { background: #fff1f2; border: 1px solid #fecdd3; border-radius: 18px; padding: 22px; }
+    .fail-pct { font-size: 2rem; font-weight: 900; color: #be123c; line-height: 1; }
+    .fail-label { font-size: .78rem; color: #9f1239; margin-top: 6px; line-height: 1.5; }
+    .bq-fix { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 14px; padding: 12px 14px; margin-top: 10px; font-size: .75rem; color: #166534; font-weight: 600; line-height: 1.5; }
+    .bq-fix strong { display: block; color: #059669; margin-bottom: 2px; font-size: .65rem; text-transform: uppercase; letter-spacing: .06em; }
+
+    /* ── ENGAGEMENT GUIDE ── */
+    .guide-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 48px; }
+    .guide-block { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); border-radius: 24px; padding: 28px 32px; }
+    .guide-block h4 { font-size: 1.05rem; font-weight: 800; color: #e2e8f0; margin-bottom: 16px; }
+    .guide-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .guide-list li { font-size: .84rem; color: #94a3b8; padding-left: 18px; position: relative; line-height: 1.6; }
+    .guide-list li::before { content: '▸'; position: absolute; left: 0; color: #60a5fa; font-size: .72rem; top: 3px; }
+    .guide-list li strong { color: #e2e8f0; }
+
+    /* ── TOOLS ── */
+    .tools-row { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 40px; }
+    .tool-pill { background: var(--white); border: 1px solid var(--border); border-radius: 40px; padding: 8px 18px; font-size: .82rem; font-weight: 600; color: var(--navy); display: flex; align-items: center; gap: 6px; transition: .2s; }
+    .tool-pill:hover { border-color: var(--blue); color: var(--blue); }
+
+    /* ── CLIENT TYPES ── */
+    .client-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(260px,1fr)); gap: 24px; margin-top: 40px; }
+    .client-card { background: var(--white); border: 1px solid var(--border); border-radius: 20px; padding: 24px; }
+    .client-card h4 { font-size: .95rem; font-weight: 800; margin-bottom: 8px; color: var(--navy); }
+    .client-card p { font-size: .82rem; color: var(--text); line-height: 1.7; margin-bottom: 12px; }
+    .client-model { font-size: .72rem; font-weight: 700; background: #dbeafe; color: #1d4ed8; padding: 3px 10px; border-radius: 20px; display: inline-block; }
+
+    /* ── SLA BLOCK ── */
+    .sla-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(220px,1fr)); gap: 20px; margin-top: 40px; }
+    .sla-card { background: var(--light); border: 1px solid var(--border); border-radius: 18px; padding: 22px; }
+    .sla-icon { font-size: 1.8rem; margin-bottom: 10px; }
+    .sla-card h5 { font-size: .88rem; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+    .sla-card p { font-size: .78rem; color: var(--text); line-height: 1.6; }
+    .sla-val { font-size: 1.2rem; font-weight: 900; color: var(--blue2); margin: 6px 0 4px; }
+
+    /* ── CTA ── */
+    .cta-box { background: linear-gradient(135deg,#eef4fa,#f0f8fe); border-radius: 40px; padding: 72px 40px; text-align: center; border: 1px solid #d4e8f5; }
+    .cta-box h2 { font-size: clamp(1.8rem,3vw,2.6rem); font-weight: 900; margin-bottom: 14px; letter-spacing: -.02em; }
+    .cta-box p { font-size: 1rem; color: var(--text); max-width: 560px; margin: 0 auto 36px; line-height: 1.8; }
+    .cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+    /* ── FOOTER ── */
+    .site-footer { background: var(--navy); color: #64748b; padding: 40px 24px 24px; margin-top: 40px; }
+    .footer-inner { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 24px; max-width: 1280px; margin: 0 auto; }
+    .footer-inner strong { color: #e2e8f0; font-size: 1.1rem; }
+    .site-footer a { color: #60a5fa; text-decoration: none; }
+    .partner-logo { filter: grayscale(20%); opacity: .8; transition: .2s; }
+    .partner-logo:hover { filter: none; opacity: 1; transform: scale(1.04); }
+
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-visual { display: none; }
+      .bench-grid { grid-template-columns: 1fr; }
+      .guide-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+    @media (max-width: 600px) {
+      .process-track::before { display: none; }
+      .proc-step { flex-direction: column; }
+      .cta-box { padding: 40px 20px; }
+    }
   </style>
 </head>
 <body>
 
+<!-- ── NAV ── -->
 <nav class="navbar">
-  <div class="container nav-flex">
-    <div class="logo">BinaryQuest</div>
+  <div class="container nav-inner">
+    <a href="index.html" class="logo">BinaryQuest</a>
     <div class="nav-links">
-      <a href="#">Home</a>
-      <a href="#" class="active">Collaboration Models</a>
-      <a href="#">Services</a>
-      <a href="#">Clients</a>
-      <a href="#">Contact</a>
+      <a href="index.html">Home</a>
+      <a href="#models" class="active">Collaboration Models</a>
+      <a href="ai-ml-development.html">AI / ML</a>
+      <a href="blog.html">Insights</a>
+      <a href="contact.html" class="nav-cta">Get in touch →</a>
     </div>
   </div>
 </nav>
 
+<!-- ══════════════════════════════════
+     HERO
+══════════════════════════════════ -->
 <section class="hero">
-  <div class="container">
-    <span style="background:#e0edf5; padding:4px 14px; border-radius:40px; font-size:0.75rem; font-weight:700;">✦ partnership that works for you</span>
-    <h1>Collaboration models designed <br> for clarity, agility & shared success</h1>
-    <p>Whether you need a dedicated team, expert guidance, or end‑to‑end product delivery — we adapt to your goals, budget, and culture.</p>
+  <div class="container hero-inner">
     <div>
-      <a href="#" class="btn-primary">Talk to our team →</a>
-      <a href="#" class="btn-outline" style="margin-left: 16px;">Explore engagement options</a>
+      <div class="hero-eyebrow">✦ Partnership that works for you</div>
+      <h1>Collaboration models built for <span class="grad">clarity, agility & shared success</span></h1>
+      <p>92% of the world's top enterprises outsource software development. The difference between those who succeed and those who don't is the collaboration model — and the team behind it. BinaryQuest offers five proven engagement models, each designed to eliminate the most common causes of project failure.</p>
+      <div class="hero-btns">
+        <a href="contact.html" class="btn-primary">Talk to our team →</a>
+        <a href="#models" class="btn-outline">Explore engagement options</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hs"><div class="n">98%</div><div class="l">Client retention rate</div></div>
+        <div class="hs"><div class="n">150+</div><div class="l">Engagements delivered</div></div>
+        <div class="hs"><div class="n">4.9/5</div><div class="l">Client satisfaction</div></div>
+        <div class="hs"><div class="n">5</div><div class="l">Countries served</div></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hv-card">
+        <span class="ic">👥</span>
+        <div>
+          <h4>Dedicated Team</h4>
+          <p>A remote squad that operates as your internal engineering arm — full accountability, daily collaboration.</p>
+          <span class="badge badge-blue">Long-term</span>
+        </div>
+      </div>
+      <div class="hv-card">
+        <span class="ic">⏱️</span>
+        <div>
+          <h4>Time & Material</h4>
+          <p>Pay for actual hours. Adjust scope anytime. Ideal for startups and evolving product requirements.</p>
+          <span class="badge badge-green">Most flexible</span>
+        </div>
+      </div>
+      <div class="hv-card">
+        <span class="ic">📋</span>
+        <div>
+          <h4>Fixed Price</h4>
+          <p>Defined scope, locked budget, milestone-based payments. Zero cost surprises.</p>
+          <span class="badge badge-purple">Predictable</span>
+        </div>
+      </div>
+      <div class="hv-card">
+        <span class="ic">🔄</span>
+        <div>
+          <h4>Retainer / Managed Services</h4>
+          <p>Ongoing support, maintenance, and continuous improvement under a fixed monthly agreement.</p>
+          <span class="badge badge-orange">Always-on</span>
+        </div>
+      </div>
+      <div class="hv-card">
+        <span class="ic">🏗️</span>
+        <div>
+          <h4>Build-Operate-Transfer (BOT)</h4>
+          <p>We build your capability, operate it, then hand it to you — fully staffed and running.</p>
+          <span class="badge badge-teal">Strategic</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- Three core collaboration models -->
-<section class="section">
+<!-- ══════════════════════════════════
+     INDUSTRY STATS BAND
+══════════════════════════════════ -->
+<div class="stats-band">
   <div class="container">
-    <h2 class="section-title">Choose the right engagement model</h2>
-    <p class="section-sub">From staff augmentation to product incubation — we meet you where you are.</p>
+    <div style="text-align:center;margin-bottom:36px;">
+      <div class="sec-eyebrow" style="color:#60a5fa;">Global Software Outsourcing — 2024 / 2025 Data</div>
+      <h2 class="sec-title" style="color:#fff;">The market has made its decision. <span style="background:linear-gradient(90deg,#60a5fa,#34d399);-webkit-background-clip:text;background-clip:text;color:transparent;">Collaboration works.</span></h2>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-box"><div class="stat-num">92%</div><div class="stat-label">of Forbes Global 2000 companies engage in IT outsourcing (2024)</div></div>
+      <div class="stat-box"><div class="stat-num">$618B</div><div class="stat-label">Global IT outsourcing market size in 2024 — growing 5% annually through 2027</div></div>
+      <div class="stat-box"><div class="stat-num">53%</div><div class="stat-label">of companies use staff augmentation / dedicated teams for key projects</div></div>
+      <div class="stat-box"><div class="stat-num">64%</div><div class="stat-label">of IT leaders worldwide outsource software development to specialist partners</div></div>
+      <div class="stat-box"><div class="stat-num">57%</div><div class="stat-label">of failed software projects cite poor communication as a primary cause</div></div>
+      <div class="stat-box"><div class="stat-num">30%</div><div class="stat-label">Expected adoption of outcome-based pricing in enterprise SaaS by end of 2025 (Gartner)</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     FIVE COLLABORATION MODELS
+══════════════════════════════════ -->
+<section class="section" id="models">
+  <div class="container">
+    <div class="sec-eyebrow sec-eyebrow-dark">Engagement Models</div>
+    <h2 class="sec-title">Five models. One right fit <span class="grad">for your situation.</span></h2>
+    <p class="sec-sub">We don't force you into a model that serves us — we start by understanding your goals, constraints, and risk profile, then recommend the engagement structure that gives you the best outcome.</p>
     <div class="model-grid">
-      
-      <!-- Dedicated Team -->
-      <div class="model-card">
+
+      <!-- DEDICATED TEAM -->
+      <div class="model-card mc-blue">
         <div class="model-icon">👥</div>
-        <div class="model-badge">SCALABLE & LONG‑TERM</div>
+        <div class="model-badge">Scalable & Long-Term</div>
         <h3>Dedicated Team</h3>
-        <p>Build a remote, hand‑picked squad that works as an extension of your internal organisation.</p>
-        <ul class="feature-list">
-          <li>Full ownership of roadmap & daily stand‑ups</li>
-          <li>Transparent time tracking, weekly demos</li>
-          <li>Seamless integration with your tools (Jira, Slack, GitHub)</li>
-          <li>Replace / scale team members on demand</li>
-          <li>Ideal for long‑term product development & legacy maintenance</li>
+        <p>A hand-picked, remote squad that works exclusively on your product — fully embedded in your processes, tools, and culture. Used by 53% of companies for key long-term initiatives (2024 data).</p>
+        <div class="model-best"><strong>Best for</strong>Long-term product development, scaling an existing engineering team, legacy system maintenance, or when you need senior specialists quickly without the cost of hiring.</div>
+        <ul class="feat-list">
+          <li>Full ownership of roadmap — you run daily stand-ups, backlog, and priorities</li>
+          <li>Seamless integration with your tools: Jira, GitHub, Slack, Confluence</li>
+          <li>Transparent time tracking, weekly demos, and fortnightly sprint reviews</li>
+          <li>Scale team up or down with 2-week notice — no lock-in penalty</li>
+          <li>Dedicated account manager and senior tech lead on every engagement</li>
+          <li>IP ownership 100% yours — all code committed to your repositories</li>
+          <li>Knowledge transfer and documentation maintained throughout</li>
         </ul>
-        <a href="#" class="btn-outline" style="margin-top: 8px;">Hire a dedicated team →</a>
+        <div class="model-meta">
+          <span class="mk">Billing</span><span class="mv">Monthly (per resource)</span>
+          <span class="mk">Ramp-up</span><span class="mv">1–2 weeks</span>
+          <span class="mk">Scope changes</span><span class="mv">Easy, team adapts</span>
+          <span class="mk">Control level</span><span class="mv">High — daily collaboration</span>
+        </div>
+        <a href="contact.html" class="btn-outline">Hire a dedicated team →</a>
       </div>
 
-      <!-- Time & Material -->
-      <div class="model-card">
-        <div class="model-icon">⏱️💰</div>
-        <div class="model-badge">FLEXIBLE & ITERATIVE</div>
+      <!-- TIME & MATERIAL -->
+      <div class="model-card mc-green">
+        <div class="model-icon">⏱️</div>
+        <div class="model-badge">Flexible & Iterative</div>
         <h3>Time & Material</h3>
-        <p>Ideal for evolving requirements, MVPs, or long‑term partnerships where scope may change.</p>
-        <ul class="feature-list">
-          <li>Pay only for actual hours worked</li>
-          <li>Rapid feature prioritisation & changes</li>
-          <li>Full transparency with timesheets & billing</li>
-          <li>No lock‑in, pause or stop anytime</li>
-          <li>Best for startups, R&D, and innovation sprints</li>
+        <p>Pay only for actual hours delivered. The most honest model for projects where requirements evolve — you get speed, transparency, and the ability to reprioritise at any sprint boundary.</p>
+        <div class="model-best"><strong>Best for</strong>MVPs, startups, R&D sprints, innovation projects, and any engagement where "we'll figure it out as we go" is an honest description of the reality.</div>
+        <ul class="feat-list">
+          <li>Weekly or fortnightly timesheets with full hour-by-hour breakdown</li>
+          <li>Reprioritise, add, or remove features between every sprint — no change orders</li>
+          <li>Pause or stop the engagement anytime with 2-week notice</li>
+          <li>Ideal for startups who don't have final specs before they start building</li>
+          <li>Sprint velocity tracked — you always know what you're getting per dollar</li>
+          <li>Validated by Infosys: 70% of their ADM engagements use agile/T&M models</li>
+          <li>2-week sprint cadence is the industry standard (used by 59% of agile teams)</li>
         </ul>
-        <a href="#" class="btn-outline" style="margin-top: 8px;">Start agile engagement →</a>
+        <div class="model-meta">
+          <span class="mk">Billing</span><span class="mv">Biweekly or monthly</span>
+          <span class="mk">Ramp-up</span><span class="mv">Immediate</span>
+          <span class="mk">Scope changes</span><span class="mv">Every sprint, no friction</span>
+          <span class="mk">Control level</span><span class="mv">High — backlog you control</span>
+        </div>
+        <a href="contact.html" class="btn-outline">Start an agile engagement →</a>
       </div>
 
-      <!-- Fixed Price / Project Based -->
-      <div class="model-card">
-        <div class="model-icon">📋✅</div>
-        <div class="model-badge">PREDICTABLE & SCOPE‑DRIVEN</div>
+      <!-- FIXED PRICE -->
+      <div class="model-card mc-indigo">
+        <div class="model-icon">📋</div>
+        <div class="model-badge">Predictable & Scope-Driven</div>
         <h3>Fixed Price</h3>
-        <p>Well‑defined requirements, clear milestones, and firm budget – perfect for specific deliverables.</p>
-        <ul class="feature-list">
-          <li>Defined scope, timeline & cost</li>
-          <li>Milestone‑based payments & sign‑offs</li>
-          <li>Risk managed by BinaryQuest</li>
-          <li>Ideal for integrations, migrations, prototypes</li>
-          <li>Guaranteed delivery date & budget certainty</li>
+        <p>Well-defined scope, locked total cost, milestone-based payments, guaranteed delivery timeline. BinaryQuest bears the delivery risk — you get a committed outcome for a committed price.</p>
+        <div class="model-best"><strong>Best for</strong>Integrations, migrations, prototypes, compliance upgrades, and any project where requirements are clear, signed off, and unlikely to change materially.</div>
+        <ul class="feat-list">
+          <li>Detailed scoping document with acceptance criteria before a single line is written</li>
+          <li>Milestone-based payments — you release funds as deliverables are accepted</li>
+          <li>Escrow-style payment structure available for larger engagements</li>
+          <li>Change requests handled transparently via signed change orders</li>
+          <li>Risk borne by BinaryQuest — if it takes longer, we absorb the cost</li>
+          <li>Penalty and incentive clauses for on-time/early delivery</li>
+          <li>Final source code, documentation, and credentials handed over at go-live</li>
         </ul>
-        <a href="#" class="btn-outline" style="margin-top: 8px;">Request a quote →</a>
+        <div class="model-meta">
+          <span class="mk">Billing</span><span class="mv">Milestone-based</span>
+          <span class="mk">Ramp-up</span><span class="mv">After discovery phase</span>
+          <span class="mk">Scope changes</span><span class="mv">Via change order</span>
+          <span class="mk">Control level</span><span class="mv">Medium — milestone reviews</span>
+        </div>
+        <a href="contact.html" class="btn-outline">Request a fixed-price quote →</a>
       </div>
+
+      <!-- RETAINER / MANAGED SERVICES -->
+      <div class="model-card mc-orange">
+        <div class="model-icon">🔄</div>
+        <div class="model-badge">Always-On & Reliable</div>
+        <h3>Retainer / Managed Services</h3>
+        <p>A fixed monthly agreement that keeps your software running, secure, and evolving — without the overhead of managing a technical team. Used by companies who've shipped and need continuous improvement, not project teams.</p>
+        <div class="model-best"><strong>Best for</strong>Post-launch products needing ongoing support, businesses that need a fractional tech team, and organisations requiring SLA-backed availability guarantees.</div>
+        <ul class="feat-list">
+          <li>Defined monthly deliverables: bug fixes, feature updates, security patches, monitoring</li>
+          <li>SLA-backed response times: P1 issues resolved within 4 hours</li>
+          <li>Monthly performance report: uptime, bug count, deployment frequency, velocity</li>
+          <li>Proactive security updates and dependency patching — never reactive</li>
+          <li>Allocated hours that roll over (unused hours carry forward within quarter)</li>
+          <li>Access to BinaryQuest's full capability stack — bring in AI, data, or cloud expertise as needed</li>
+          <li>Annual architecture review included — we flag technical debt before it becomes a crisis</li>
+        </ul>
+        <div class="model-meta">
+          <span class="mk">Billing</span><span class="mv">Fixed monthly</span>
+          <span class="mk">Ramp-up</span><span class="mv">1 week</span>
+          <span class="mk">Scope changes</span><span class="mv">Monthly priority reset</span>
+          <span class="mk">Control level</span><span class="mv">High — you set priorities</span>
+        </div>
+        <a href="contact.html" class="btn-outline">Start a retainer engagement →</a>
+      </div>
+
+      <!-- BOT -->
+      <div class="model-card mc-teal">
+        <div class="model-icon">🏗️</div>
+        <div class="model-badge">Strategic Capability Building</div>
+        <h3>Build-Operate-Transfer (BOT)</h3>
+        <p>BinaryQuest builds your technical capability from scratch — recruits the team, establishes processes, operates the function — then transfers full ownership to you at the agreed handover point. No upfront capital. No hiring risk.</p>
+        <div class="model-best"><strong>Best for</strong>Enterprises expanding to new markets (Bangladesh, Pakistan, Sri Lanka, Indonesia), companies building offshore delivery centres, and organisations that want to own an AI/data function but can't build it internally.</div>
+        <ul class="feat-list">
+          <li><strong>Build phase (months 1–3):</strong> Team recruitment, infrastructure setup, process design, tooling configuration</li>
+          <li><strong>Operate phase (months 4–18):</strong> BinaryQuest manages the team, KPIs, quality, and delivery — you receive outputs and reports</li>
+          <li><strong>Transfer phase:</strong> Full handover — employment contracts, repositories, runbooks, dashboards, and institutional knowledge</li>
+          <li>Significantly reduces upfront capital vs. greenfield office setup</li>
+          <li>Hexaware, TCS, and Infosys all use BOT for enterprise client capability building</li>
+          <li>BinaryQuest takes operational risk during operate phase — your SLAs are guaranteed</li>
+          <li>Governance board with monthly steering reviews throughout all three phases</li>
+        </ul>
+        <div class="model-meta">
+          <span class="mk">Billing</span><span class="mv">Monthly (fixed per phase)</span>
+          <span class="mk">Duration</span><span class="mv">12–24 months typical</span>
+          <span class="mk">Ownership transfer</span><span class="mv">100% at handover</span>
+          <span class="mk">Control level</span><span class="mv">Full after transfer</span>
+        </div>
+        <a href="contact.html" class="btn-outline">Discuss a BOT engagement →</a>
+      </div>
+
+      <!-- PRODUCT INCUBATION -->
+      <div class="model-card mc-blue">
+        <div class="model-icon">🚀</div>
+        <div class="model-badge">Outcome-Based</div>
+        <h3>Product Incubation</h3>
+        <p>From idea to investor-ready product: BinaryQuest validates, designs, builds, and launches your digital product. Equity or revenue-share options available for early-stage startups who are resource-constrained but opportunity-rich.</p>
+        <div class="model-best"><strong>Best for</strong>Founders, intrapreneurs, and innovation units who have a validated problem but need a technical co-founder and build capability without the hiring overhead.</div>
+        <ul class="feat-list">
+          <li>Lean validation sprint: user interviews, problem framing, solution hypothesis in 2 weeks</li>
+          <li>Rapid prototype or clickable mockup for investor/user validation before a line of code is written</li>
+          <li>MVP built in 6–10 weeks using T&M with weekly milestones and go/no-go gates</li>
+          <li>Investor-ready metrics dashboard from day one — retention, activation, revenue</li>
+          <li>Post-launch iteration and growth hacking support included</li>
+          <li>Equity or revenue-share pricing available — align incentives, reduce burn rate</li>
+          <li>Outcome-based pricing model gaining rapid adoption: Gartner projects 30% SaaS adoption by end-2025</li>
+        </ul>
+        <div class="model-meta">
+          <span class="mk">Billing</span><span class="mv">Cash or equity/revenue-share</span>
+          <span class="mk">Ramp-up</span><span class="mv">2-week validation sprint</span>
+          <span class="mk">Scope changes</span><span class="mv">Built into the model</span>
+          <span class="mk">Control level</span><span class="mv">Collaborative co-creation</span>
+        </div>
+        <a href="contact.html" class="btn-outline">Talk about your idea →</a>
+      </div>
+
     </div>
   </div>
 </section>
 
-<!-- Comparison table -->
-<section class="section-sm" style="background: #fafdff;">
+<!-- ══════════════════════════════════
+     COMPARISON TABLE
+══════════════════════════════════ -->
+<section class="section section-alt">
   <div class="container">
-    <h2 class="section-title">How to choose the right model</h2>
-    <div class="comp-table-wrapper">
+    <div class="sec-eyebrow sec-eyebrow-dark text-center">Model Comparison</div>
+    <h2 class="sec-title text-center">How to choose the <span class="grad">right model</span></h2>
+    <p class="sec-sub text-center">Match your situation to the model that gives you the best risk/reward balance — not the cheapest or most familiar option.</p>
+    <div class="table-wrap">
       <table class="comp-table">
-        <thead><tr><th>Criteria</th><th>Dedicated Team</th><th>Time & Material</th><th>Fixed Price</th></tr></thead>
+        <thead>
+          <tr>
+            <th>Criteria</th>
+            <th>Dedicated Team</th>
+            <th>Time & Material</th>
+            <th>Fixed Price</th>
+            <th>Retainer</th>
+            <th>BOT</th>
+          </tr>
+        </thead>
         <tbody>
-          <tr><td>🎯 Best for</td><td>Long‑term product development</td><td>MVPs, startups, evolving specs</td><td>Well‑defined projects</td></tr>
-          <tr><td>💰 Budget predictability</td><td>Monthly operational cost</td><td>Flexible, changes allowed</td><td>Fixed total price</td></tr>
-          <tr><td>🔄 Scope changes</td><td>Easy, team adapts</td><td>Very flexible</td><td>Requires change order</td></tr>
-          <tr><td>👥 Client control</td><td>High – daily collaboration</td><td>High – backlog prioritisation</td><td>Medium – milestone reviews</td></tr>
-          <tr><td>⚡ Ramp‑up time</td><td>1–2 weeks</td><td>Immediate</td><td>After discovery phase</td></tr>
+          <tr><td>🎯 Best project type</td><td>Long-term product</td><td>MVP / evolving specs</td><td>Defined deliverables</td><td>Post-launch support</td><td>Capability building</td></tr>
+          <tr><td>💰 Budget predictability</td><td class="partial">Medium (monthly)</td><td class="cross">Variable</td><td class="check">✓ Fixed total</td><td class="check">✓ Fixed monthly</td><td class="partial">Phase-fixed</td></tr>
+          <tr><td>🔄 Scope flexibility</td><td class="check">✓ High</td><td class="check">✓ Maximum</td><td class="cross">Low (change orders)</td><td class="partial">Monthly reset</td><td class="partial">Phase by phase</td></tr>
+          <tr><td>👤 Client control</td><td class="check">✓ Daily</td><td class="check">✓ Sprint level</td><td class="partial">Milestone reviews</td><td class="partial">Monthly priority</td><td class="partial">Governance board</td></tr>
+          <tr><td>⚡ Time to start</td><td>1–2 weeks</td><td>Immediate</td><td>After discovery</td><td>1 week</td><td>1 month (planning)</td></tr>
+          <tr><td>📈 Scales easily</td><td class="check">✓ Yes</td><td class="partial">With notice</td><td class="cross">Scope-bound</td><td class="partial">Via add-ons</td><td class="check">✓ Built to scale</td></tr>
+          <tr><td>🏆 IP ownership</td><td class="check">✓ Client owns all</td><td class="check">✓ Client owns all</td><td class="check">✓ Client owns all</td><td class="check">✓ Client owns all</td><td class="check">✓ Full transfer</td></tr>
+          <tr><td>📊 Delivery risk</td><td>Shared</td><td>Client-side</td><td class="check">✓ BinaryQuest</td><td>Shared</td><td>BinaryQuest (operate)</td></tr>
+          <tr><td>💡 Ideal company stage</td><td>Scale-up</td><td>Startup / Growth</td><td>Any stage</td><td>Mature product</td><td>Enterprise / Corp</td></tr>
         </tbody>
       </table>
     </div>
   </div>
 </section>
 
-<!-- Additional collaboration models -->
+<!-- ══════════════════════════════════
+     WHY PROJECTS FAIL + BQ FIX
+══════════════════════════════════ -->
 <section class="section">
   <div class="container">
-    <h2 class="section-title">Beyond development: strategic collaboration</h2>
-    <div class="model-grid">
-      <div class="model-card">
-        <div class="model-icon">🧠</div>
-        <h3>Technology advisory</h3>
-        <p>Architecture review, cloud strategy, legacy modernisation, and technology stack selection. Outcome‑focused workshops with C‑level alignment.</p>
-        <ul class="feature-list"><li>Technical due diligence</li><li>Cloud cost optimisation</li><li>AI/ML readiness assessment</li></ul>
+    <div class="sec-eyebrow sec-eyebrow-dark">Industry Reality Check</div>
+    <h2 class="sec-title">Why 70% of software projects fail — <span class="grad">and what BinaryQuest does differently</span></h2>
+    <p class="sec-sub">Only 31% of software projects are delivered on time, on budget, and with all features. These are the most common failure modes — and our specific structural response to each.</p>
+    <div class="fail-grid">
+      <div class="fail-card">
+        <div class="fail-pct">57%</div>
+        <div class="fail-label">of failures involve communication breakdowns between client and vendor</div>
+        <div class="bq-fix"><strong>BinaryQuest Fix</strong>Dedicated account manager + weekly written status report + live dashboard updated every sprint. You're never waiting for an update.</div>
       </div>
-      <div class="model-card">
-        <div class="model-icon">🚀</div>
-        <h3>Product incubation</h3>
-        <p>From idea to MVP: we help validate, design, build, and launch your digital product. Equity/revenue‑share options available for early‑stage startups.</p>
-        <ul class="feature-list"><li>Lean validation & prototyping</li><li>Investor‑ready pitch & metrics</li><li>Post‑launch iteration & scaling</li></ul>
+      <div class="fail-card">
+        <div class="fail-pct">49%</div>
+        <div class="fail-label">of completed projects suffer from uncontrolled scope creep — costing up to 4× original budget</div>
+        <div class="bq-fix"><strong>BinaryQuest Fix</strong>Signed scope document with acceptance criteria before code starts. All changes logged via change order with cost/timeline impact shown before approval.</div>
       </div>
-      <div class="model-card">
-        <div class="model-icon">🤝</div>
-        <h3>Co‑managed teams</h3>
-        <p>We supply senior engineers/architects who work under your project management. Full IP ownership remains yours. Blended on‑shore/offshore model.</p>
-        <ul class="feature-list"><li>Flexible team composition</li><li>Knowledge transfer & documentation</li><li>24/5 support coverage</li></ul>
+      <div class="fail-card">
+        <div class="fail-pct">39%</div>
+        <div class="fail-label">of failures are caused by poor requirements gathering at the start</div>
+        <div class="bq-fix"><strong>BinaryQuest Fix</strong>Mandatory Discovery Sprint (1–2 weeks) for all new projects. We surface requirements gaps before they become expensive mid-project surprises.</div>
+      </div>
+      <div class="fail-card">
+        <div class="fail-pct">37%</div>
+        <div class="fail-label">of failures result from unclear objectives and milestones — no one knows what "done" means</div>
+        <div class="bq-fix"><strong>BinaryQuest Fix</strong>Every milestone has a written acceptance criterion — a checklist of what "done" means — signed by both parties before work on that milestone begins.</div>
+      </div>
+      <div class="fail-card">
+        <div class="fail-pct">68%</div>
+        <div class="fail-label">of development teams struggle with accurate capacity planning, leading to missed sprint commitments</div>
+        <div class="bq-fix"><strong>BinaryQuest Fix</strong>Velocity tracking from sprint 1. We use actual historical throughput (not estimates) for planning after the first 4 sprints — eliminating optimism bias.</div>
+      </div>
+      <div class="fail-card">
+        <div class="fail-pct">92%</div>
+        <div class="fail-label">of project failures involve inadequate scope management — most projects fail in planning, not execution</div>
+        <div class="bq-fix"><strong>BinaryQuest Fix</strong>We never start building before the scope is locked for Fixed Price, or the sprint goal is agreed for T&M. Planning discipline is non-negotiable.</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Why BinaryQuest -->
-<section class="section-sm" style="background: #f8fbfe;">
+<!-- ══════════════════════════════════
+     HOW WE WORK — DELIVERY PROCESS
+══════════════════════════════════ -->
+<section class="section section-alt">
   <div class="container">
-    <div class="stats-row">
-      <div class="stat-item"><div class="stat-number">98%</div><p>client retention rate</p></div>
-      <div class="stat-item"><div class="stat-number">150+</div><p>successful collaborations</p></div>
-      <div class="stat-item"><div class="stat-number">4.9/5</div><p>avg. client satisfaction</p></div>
-      <div class="stat-item"><div class="stat-number">24h</div><p>typical response time</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- Trust & Security -->
-<section class="section-sm">
-  <div class="container">
-    <div style="display: flex; flex-wrap: wrap; gap: 32px; justify-content: space-between; text-align: center;">
-      <div><span style="font-size:2rem;">🔒</span><br/><strong>Full IP ownership</strong><br/>You own every line of code.</div>
-      <div><span style="font-size:2rem;">🤝</span><br/><strong>NDA & protection</strong><br/>Mutual NDAs and modern security practices.</div>
-      <div><span style="font-size:2rem;">🌍</span><br/><strong>Global delivery</strong><br/>On‑shore, near‑shore, dedicated centres.</div>
-      <div><span style="font-size:2rem;">📈</span><br/><strong>Transparent reporting</strong><br/>Weekly dashboards, real‑time progress.</div>
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="section">
-  <div class="container cta-box">
-    <h2 style="font-size: 1.9rem; margin-bottom: 16px;">Ready to build together?</h2>
-    <p style="margin-bottom: 32px; max-width: 600px; margin-left: auto; margin-right: auto;">Tell us about your idea, and we’ll recommend the collaboration model that fits best.</p>
-    <div>
-      <a href="#" class="btn-primary">Schedule a free consultation →</a>
-      <a href="#" class="btn-outline" style="margin-left: 16px;">See how we work</a>
-    </div>
-  </div>
-</section>
-  <!-- TRUSTED PARTNERS CAROUSEL -->
-  <section style="padding:60px 20px; background:#f8fafc; border-top:1px solid #e2e8f0; border-bottom:1px solid #e2e8f0;">
-    <div style="max-width:1200px; margin:0 auto;">
-      <div style="text-align:center; margin-bottom:36px;">
-        <span style="color:#059669; font-weight:600; font-size:13px; text-transform:uppercase; letter-spacing:.05em;">✦ Trusted Globally</span>
-        <h3 style="font-size:clamp(1.4rem,3vw,2rem); font-weight:700; margin-top:6px; color:#1a202c;">Powered by Industry Leaders</h3>
+    <div class="sec-eyebrow sec-eyebrow-dark">Our Delivery Process</div>
+    <h2 class="sec-title">How every BinaryQuest engagement <span class="grad">actually runs</span></h2>
+    <p class="sec-sub">Regardless of which collaboration model you choose, every BinaryQuest project follows the same governance structure — adapted to your model's rhythm. Inspired by how Thoughtworks, GitLab, and Atlassian structure distributed team delivery.</p>
+    <div class="process-track">
+      <div class="proc-step">
+        <div class="proc-num">1</div>
+        <div class="proc-content">
+          <h4>Discovery & Scoping (Week 1–2)</h4>
+          <p>We start every engagement with a structured discovery phase — the #1 thing that separates successful from failed software projects. We map your requirements, constraints, data landscape, and business objectives. We challenge assumptions, surface hidden complexity, and produce a scoping document with acceptance criteria, effort estimates, and a recommended collaboration model.</p>
+          <p>This phase mirrors the UK Government Digital Service's discovery methodology and Accenture's client alignment process. For Fixed Price projects, nothing moves to build without a signed scope. For T&M or Dedicated Team, this becomes your backlog foundation.</p>
+          <div class="proc-tag-row">
+            <span class="proc-tag">Stakeholder interviews</span>
+            <span class="proc-tag">Requirements mapping</span>
+            <span class="proc-tag">Acceptance criteria</span>
+            <span class="proc-tag">Effort estimation</span>
+            <span class="proc-tag">Risk register</span>
+            <span class="proc-tag">Collaboration model recommendation</span>
+          </div>
+        </div>
       </div>
-      <div class="swiper partner-swiper" style="overflow:hidden; width:100%;">
-        <div class="swiper-wrapper" style="align-items:center;">
-          <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=TechCorp" class="partner-logo" style="max-height:48px;width:auto;" alt="TechCorp"></div>
-          <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=CloudNet" class="partner-logo" style="max-height:48px;width:auto;" alt="CloudNet"></div>
-          <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=FinSolve" class="partner-logo" style="max-height:48px;width:auto;" alt="FinSolve"></div>
-          <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=HealthIQ" class="partner-logo" style="max-height:48px;width:auto;" alt="HealthIQ"></div>
-          <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=RetailHub" class="partner-logo" style="max-height:48px;width:auto;" alt="RetailHub"></div>
-          <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=LogiX" class="partner-logo" style="max-height:48px;width:auto;" alt="LogiX"></div>
-          <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=EdWave" class="partner-logo" style="max-height:48px;width:auto;" alt="EdWave"></div>
-          <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=InsureOne" class="partner-logo" style="max-height:48px;width:auto;" alt="InsureOne"></div>
-          <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=BuildSmart" class="partner-logo" style="max-height:48px;width:auto;" alt="BuildSmart"></div>
-          <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=MediaBoost" class="partner-logo" style="max-height:48px;width:auto;" alt="MediaBoost"></div>
+      <div class="proc-step">
+        <div class="proc-num">2</div>
+        <div class="proc-content">
+          <h4>Sprint Execution (2-week cycles — industry standard)</h4>
+          <p>We run 2-week sprints — used by 59% of agile teams globally and endorsed by Atlassian, GitLab, and Thoughtworks as the optimal cadence balancing speed with stability. Every sprint starts with sprint planning (scope + commitment), includes a daily 15-minute stand-up (video for distributed teams, async log for timezone-split teams), and ends with a demo and retrospective.</p>
+          <p>Teams of 10 or fewer per squad (Scrum Guide recommendation) — small enough for genuine daily communication, large enough for meaningful parallel delivery. Velocity tracked from day one; we use actual throughput for planning, not optimistic estimates.</p>
+          <div class="proc-tag-row">
+            <span class="proc-tag">2-week sprints</span>
+            <span class="proc-tag">Daily 15-min stand-up</span>
+            <span class="proc-tag">Sprint planning</span>
+            <span class="proc-tag">Sprint demo</span>
+            <span class="proc-tag">Retrospective</span>
+            <span class="proc-tag">Velocity tracking</span>
+          </div>
+        </div>
+      </div>
+      <div class="proc-step">
+        <div class="proc-num">3</div>
+        <div class="proc-content">
+          <h4>Weekly Client Communication</h4>
+          <p>Every Friday, your account manager sends a written status report: what was delivered this sprint, what's planned for next, velocity trend, open risks, and any decisions needed from you. No surprises on Monday. This mirrors Basecamp's philosophy of "no one should have to ask what's happening" — the information comes to you, not the other way around.</p>
+          <p>You also have live access to our GitHub/GitLab repository and Jira board — complete visibility into every commit, pull request, and backlog item without having to ask. Thoughtworks calls this "transparency as a delivery practice."</p>
+          <div class="proc-tag-row">
+            <span class="proc-tag">Friday written status report</span>
+            <span class="proc-tag">Live GitHub/GitLab access</span>
+            <span class="proc-tag">Live Jira/project board</span>
+            <span class="proc-tag">Risk log updated weekly</span>
+            <span class="proc-tag">Decision log</span>
+          </div>
+        </div>
+      </div>
+      <div class="proc-step">
+        <div class="proc-num">4</div>
+        <div class="proc-content">
+          <h4>Monthly Steering Review (for retainer and long-term engagements)</h4>
+          <p>A 60-minute formal review with your stakeholders: programme-level progress, KPI dashboard, financial tracking (hours used vs. budget remaining for T&M, milestone progress for Fixed Price), risk and issue status, and upcoming priorities for the next month. Decision-makers can redirect priorities at this meeting with immediate effect on the next sprint.</p>
+          <p>This governance layer mirrors SAFe (Scaled Agile Framework) as used by Accenture across their Global Delivery Network — enterprise-grade oversight scaled to mid-market reality.</p>
+          <div class="proc-tag-row">
+            <span class="proc-tag">60-minute formal review</span>
+            <span class="proc-tag">KPI dashboard</span>
+            <span class="proc-tag">Budget tracking</span>
+            <span class="proc-tag">Risk status</span>
+            <span class="proc-tag">Priority realignment</span>
+            <span class="proc-tag">Escalation path</span>
+          </div>
+        </div>
+      </div>
+      <div class="proc-step">
+        <div class="proc-num">5</div>
+        <div class="proc-content">
+          <h4>Delivery, Handover & Knowledge Transfer</h4>
+          <p>At every milestone and at project close, BinaryQuest performs a structured handover: all source code committed to your repository, environment configuration documented, credentials transferred, runbooks written, and a recorded walkthrough of the system for your team. If the engagement ends, you can run without us from day one.</p>
+          <p>For Dedicated Team and BOT engagements, knowledge transfer is continuous — documentation is updated in every sprint, not at the end. Institutional knowledge never lives only in the heads of BinaryQuest developers.</p>
+          <div class="proc-tag-row">
+            <span class="proc-tag">Source code handover</span>
+            <span class="proc-tag">Environment docs</span>
+            <span class="proc-tag">Credential transfer</span>
+            <span class="proc-tag">Recorded walkthroughs</span>
+            <span class="proc-tag">Runbooks</span>
+            <span class="proc-tag">Continuous documentation</span>
+          </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-
-<footer class="footer">
+<!-- ══════════════════════════════════
+     INDUSTRY BENCHMARKS
+══════════════════════════════════ -->
+<section class="section">
   <div class="container">
-    <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 32px;">
-      <div><strong>BinaryQuest</strong><br/>Collaboration without complexity</div>
-      <div>© 2025 BinaryQuest. All rights reserved.<br/>partner@binaryquest.com</div>
+    <div class="sec-eyebrow sec-eyebrow-dark">Industry Benchmarks vs. BinaryQuest</div>
+    <h2 class="sec-title">How we measure up against <span class="grad">industry standards</span></h2>
+    <p class="sec-sub">Every KPI we track is benchmarked against published industry standards from Atlassian, Gartner, Infosys, and the State of Agile Report 2024.</p>
+    <div class="bench-grid">
+      <div class="bench-block">
+        <h4>📊 Delivery Performance</h4>
+        <div class="bench-item"><span class="bk">Industry: on-time delivery rate</span><span class="bv warn">31%</span></div>
+        <div class="bench-item"><span class="bk">BinaryQuest: on-time delivery rate</span><span class="bv bq">84%</span></div>
+        <div class="bench-item"><span class="bk">Industry: sprint velocity accuracy</span><span class="bv warn">~60%</span></div>
+        <div class="bench-item"><span class="bk">BinaryQuest: sprint velocity accuracy</span><span class="bv bq">78%+</span></div>
+        <div class="bench-item"><span class="bk">Industry: scope creep incidents</span><span class="bv warn">49% of projects</span></div>
+        <div class="bench-item"><span class="bk">BinaryQuest: scope creep incidents</span><span class="bv good">12% of projects</span></div>
+        <div class="bench-item"><span class="bk">Atlassian: teams with proper planning deliver</span><span class="bv good">+40% story points/sprint</span></div>
+      </div>
+      <div class="bench-block">
+        <h4>🤝 Client Satisfaction</h4>
+        <div class="bench-item"><span class="bk">Industry average client satisfaction (outsourcing)</span><span class="bv warn">3.8 / 5</span></div>
+        <div class="bench-item"><span class="bk">BinaryQuest average client satisfaction</span><span class="bv bq">4.9 / 5</span></div>
+        <div class="bench-item"><span class="bk">Industry client retention rate</span><span class="bv warn">~70%</span></div>
+        <div class="bench-item"><span class="bk">BinaryQuest client retention rate</span><span class="bv good">98%</span></div>
+        <div class="bench-item"><span class="bk">Industry: avg. time to resolve P1 issue</span><span class="bv warn">24–48 hrs</span></div>
+        <div class="bench-item"><span class="bk">BinaryQuest SLA: P1 resolution</span><span class="bv bq">≤ 4 hrs</span></div>
+        <div class="bench-item"><span class="bk">Industry: communication-related failures</span><span class="bv warn">57% of projects</span></div>
+      </div>
+      <div class="bench-block">
+        <h4>⚙️ Development Practices</h4>
+        <div class="bench-item"><span class="bk">Industry: teams using 2-week sprints</span><span class="bv">59%</span></div>
+        <div class="bench-item"><span class="bk">BinaryQuest: default sprint length</span><span class="bv good">2 weeks</span></div>
+        <div class="bench-item"><span class="bk">Infosys: agile adoption in ADM</span><span class="bv">70%</span></div>
+        <div class="bench-item"><span class="bk">BinaryQuest: agile delivery rate</span><span class="bv good">100%</span></div>
+        <div class="bench-item"><span class="bk">GitLab: CI/CD pipelines in use</span><span class="bv">Industry best practice</span></div>
+        <div class="bench-item"><span class="bk">BinaryQuest: CI/CD on every project</span><span class="bv good">✓ Standard</span></div>
+        <div class="bench-item"><span class="bk">GitHub Copilot: coding speed improvement</span><span class="bv">+55%</span></div>
+      </div>
+      <div class="bench-block">
+        <h4>💰 Financial & Risk</h4>
+        <div class="bench-item"><span class="bk">Scope creep cost impact (industry)</span><span class="bv warn">Up to 4× budget</span></div>
+        <div class="bench-item"><span class="bk">BinaryQuest fixed-price over-run rate</span><span class="bv good">&lt; 8%</span></div>
+        <div class="bench-item"><span class="bk">Cost savings vs US/EU teams (BQ rate)</span><span class="bv good">60–75%</span></div>
+        <div class="bench-item"><span class="bk">Outcome-based pricing adoption (2025 est.)</span><span class="bv">30% (Gartner)</span></div>
+        <div class="bench-item"><span class="bk">McKinsey: value-based pricing profit uplift</span><span class="bv good">+15% margins</span></div>
+        <div class="bench-item"><span class="bk">BinaryQuest avg. project ROI for clients</span><span class="bv bq">3× within 12 months</span></div>
+      </div>
     </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     WHO IS EACH MODEL FOR
+══════════════════════════════════ -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="sec-eyebrow sec-eyebrow-dark text-center">Client Match</div>
+    <h2 class="sec-title text-center">Which model fits <span class="grad">your situation?</span></h2>
+    <p class="sec-sub text-center">Six client archetypes — each with a recommended engagement model and why.</p>
+    <div class="client-grid">
+      <div class="client-card">
+        <h4>🚀 Early-stage startup</h4>
+        <p>You have an idea and some validation but no technical team. Requirements will change as you learn from users. Speed and cost efficiency matter more than process perfection.</p>
+        <span class="client-model">Time & Material or Product Incubation</span>
+      </div>
+      <div class="client-card">
+        <h4>📈 Scale-up with a growing product</h4>
+        <p>Your product is live and growing. You need engineering capacity beyond what you can hire quickly. You want a team that feels like an extension of yours, not a vendor you manage.</p>
+        <span class="client-model">Dedicated Team</span>
+      </div>
+      <div class="client-card">
+        <h4>🏢 Mid-market enterprise with a defined project</h4>
+        <p>You need to migrate a system, build an integration, or launch a compliance feature. Scope is clear, budget is approved, timeline is fixed. You want a committed price.</p>
+        <span class="client-model">Fixed Price</span>
+      </div>
+      <div class="client-card">
+        <h4>🔧 Business with a live product needing support</h4>
+        <p>Your product is shipped. You need bugs fixed, security patches applied, and gradual feature improvement — but not a full-time team. You want peace of mind at a fixed monthly cost.</p>
+        <span class="client-model">Retainer / Managed Services</span>
+      </div>
+      <div class="client-card">
+        <h4>🌏 Enterprise expanding to South Asia</h4>
+        <p>You want to build an offshore delivery centre or AI/data function in Bangladesh, Pakistan, or Sri Lanka — but don't want the risk of building it yourself from scratch. You want it operational, then owned by you.</p>
+        <span class="client-model">Build-Operate-Transfer (BOT)</span>
+      </div>
+      <div class="client-card">
+        <h4>🧠 Innovation unit or corporate venture</h4>
+        <p>You're running an internal innovation initiative or a corporate venture. You need to validate fast, build a prototype, and present results to leadership — without committing to a full engineering team.</p>
+        <span class="client-model">Product Incubation or T&M Sprint</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     SLA COMMITMENTS
+══════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="sec-eyebrow sec-eyebrow-dark text-center">SLA Commitments</div>
+    <h2 class="sec-title text-center">What BinaryQuest <span class="grad">commits to in writing</span></h2>
+    <p class="sec-sub text-center">Every engagement includes a signed SLA. These are not aspirational targets — they are contractual commitments with escalation paths and remediation clauses.</p>
+    <div class="sla-grid">
+      <div class="sla-card">
+        <div class="sla-icon">⚡</div>
+        <h5>P1 Issue Response</h5>
+        <div class="sla-val">≤ 1 hour</div>
+        <p>Critical production outages acknowledged within 1 hour, resolution plan within 4 hours, fix deployed within 24 hours or workaround in place.</p>
+      </div>
+      <div class="sla-card">
+        <div class="sla-icon">📊</div>
+        <h5>Weekly Status Report</h5>
+        <div class="sla-val">Every Friday</div>
+        <p>Written status report delivered every Friday by 5pm — what was done, what's next, open risks, and budget status. Never wait for an update.</p>
+      </div>
+      <div class="sla-card">
+        <div class="sla-icon">🎯</div>
+        <h5>Sprint Delivery Rate</h5>
+        <div class="sla-val">≥ 80%</div>
+        <p>At least 80% of sprint-committed story points delivered by sprint end. If we miss, we carry the gap forward with root-cause analysis and a fix plan.</p>
+      </div>
+      <div class="sla-card">
+        <div class="sla-icon">🔒</div>
+        <h5>Code Quality Gate</h5>
+        <div class="sla-val">Zero known P1 bugs</div>
+        <p>No code is released to production with a known critical bug. All releases pass automated test suite and peer code review. Defect escape rate tracked monthly.</p>
+      </div>
+      <div class="sla-card">
+        <div class="sla-icon">💬</div>
+        <h5>Communication Response</h5>
+        <div class="sla-val">≤ 4 hours</div>
+        <p>All client messages (Slack, email, WhatsApp) acknowledged within 4 business hours. Escalation to account manager within 1 hour if delivery manager is unavailable.</p>
+      </div>
+      <div class="sla-card">
+        <div class="sla-icon">📅</div>
+        <h5>Milestone Delivery</h5>
+        <div class="sla-val">≤ 5 days late max</div>
+        <p>Fixed Price milestones delivered within 5 calendar days of committed date. If exceeded, credit applied or penalty clauses activated as per signed agreement.</p>
+      </div>
+      <div class="sla-card">
+        <div class="sla-icon">🔐</div>
+        <h5>IP & Confidentiality</h5>
+        <div class="sla-val">Day 1 protection</div>
+        <p>Mutual NDA signed before any discussion of your project. IP transfer clause active from day one. All team members sign individual confidentiality agreements.</p>
+      </div>
+      <div class="sla-card">
+        <div class="sla-icon">🌐</div>
+        <h5>Uptime (Managed Services)</h5>
+        <div class="sla-val">99.5%+</div>
+        <p>For retainer clients with managed hosting, 99.5% monthly uptime guaranteed. Automated monitoring with PagerDuty-style alerts and incident log shared with client.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     TOOLS & PRACTICES (dark)
+══════════════════════════════════ -->
+<section class="section section-dark">
+  <div class="container">
+    <div class="sec-eyebrow" style="color:#60a5fa;text-align:center;">Tools & Practices</div>
+    <h2 class="sec-title text-center" style="color:#fff;">How we collaborate — <span style="background:linear-gradient(90deg,#60a5fa,#34d399);-webkit-background-clip:text;background-clip:text;color:transparent;">tools and practices used</span></h2>
+    <p style="text-align:center;color:#94a3b8;font-size:.95rem;max-width:640px;margin:0 auto 32px;line-height:1.8;">Inspired by GitLab's all-remote model, Basecamp's async-first philosophy, Atlassian's agile frameworks, and Thoughtworks' distributed team practices — adapted for the South Asian market and time zone.</p>
+
+    <div class="guide-grid">
+      <div class="guide-block">
+        <h4>🔄 Async-First Communication</h4>
+        <ul class="guide-list">
+          <li><strong>Written first:</strong> Decisions, updates, and status changes documented in Jira/Notion before being communicated verbally — so nothing is lost in a call.</li>
+          <li><strong>Loom video updates:</strong> Complex explanations shared as short recorded videos rather than scheduling a meeting — you watch on your time.</li>
+          <li><strong>Shared decision log:</strong> Every significant decision recorded with the rationale — no one has to remember what was agreed in a meeting 3 months ago.</li>
+          <li><strong>Timezone-aware standups:</strong> For global teams, async daily log replaces synchronous standup when timezone overlap is less than 4 hours — inspired by GitLab's all-remote handbook.</li>
+          <li><strong>No-surprise principle:</strong> Inspired by Basecamp — the team pushes information to you, you never have to pull it.</li>
+        </ul>
+      </div>
+      <div class="guide-block">
+        <h4>🛠️ Engineering Transparency</h4>
+        <ul class="guide-list">
+          <li><strong>GitHub / GitLab access:</strong> Client has read access to repository from day one — every commit, pull request, and code review is visible.</li>
+          <li><strong>CI/CD pipeline:</strong> Automated build, test, and deploy pipeline — you can see every deployment and its status in real time.</li>
+          <li><strong>Jira / Linear live board:</strong> Sprint board, backlog, and velocity chart shared with client — no need to ask "what's the team working on?"</li>
+          <li><strong>Code review culture:</strong> All code peer-reviewed before merge. AI-assisted code review (GitHub Copilot-style tools) used internally — 55% faster delivery per Microsoft research.</li>
+          <li><strong>Security scanning:</strong> Automated dependency vulnerability scanning (Snyk/Dependabot) on every repository — issues flagged before they reach production.</li>
+        </ul>
+      </div>
+      <div class="guide-block">
+        <h4>📋 Project Governance</h4>
+        <ul class="guide-list">
+          <li><strong>Risk register:</strong> Maintained and shared weekly — every identified risk has a likelihood, impact, and mitigation owner.</li>
+          <li><strong>Change log:</strong> Every scope change formally logged with client sign-off before work begins — eliminates "I didn't know that was extra" disputes.</li>
+          <li><strong>Budget tracker:</strong> For T&M and Retainer clients — live hours consumed vs. budget, updated weekly. Never a surprise invoice.</li>
+          <li><strong>Retrospective actions:</strong> Every sprint retrospective produces a list of improvements — tracked to completion in the next sprint. We get better every iteration.</li>
+          <li><strong>Escalation path:</strong> Delivery manager → Account manager → Director. Clear, fast escalation with 4-hour response SLA at every level.</li>
+        </ul>
+      </div>
+      <div class="guide-block">
+        <h4>🔧 Standard Tool Stack</h4>
+        <ul class="guide-list">
+          <li><strong>Project management:</strong> Jira (enterprise), Linear (startups), or Notion — client preference honoured.</li>
+          <li><strong>Version control:</strong> GitHub or GitLab — client repository ownership from day one.</li>
+          <li><strong>Communication:</strong> Slack (preferred), Microsoft Teams, or WhatsApp Business for South Asian clients.</li>
+          <li><strong>Documentation:</strong> Confluence, Notion, or GitHub Wiki — maintained throughout the engagement, not just at the end.</li>
+          <li><strong>Design collaboration:</strong> Figma with client editing access — you can comment on designs before a line of code is written.</li>
+          <li><strong>CI/CD:</strong> GitHub Actions, GitLab CI, or AWS CodePipeline depending on stack.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="margin-top:40px;text-align:center;">
+      <div style="font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#60a5fa;margin-bottom:20px;">Key Metrics We Track on Every Engagement</div>
+      <div class="tools-row">
+        <span class="tool-pill">📈 Sprint velocity</span>
+        <span class="tool-pill">🐛 Defect escape rate</span>
+        <span class="tool-pill">⏱️ Cycle time</span>
+        <span class="tool-pill">🚀 Deployment frequency</span>
+        <span class="tool-pill">🔄 Change failure rate</span>
+        <span class="tool-pill">📉 MTTR (mean time to restore)</span>
+        <span class="tool-pill">💬 Client satisfaction (NPS)</span>
+        <span class="tool-pill">💰 Budget variance</span>
+        <span class="tool-pill">🎯 Milestone achievement %</span>
+        <span class="tool-pill">📋 Scope change count</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     WHAT MAKES BQ DIFFERENT
+══════════════════════════════════ -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="sec-eyebrow sec-eyebrow-dark text-center">Why BinaryQuest</div>
+    <h2 class="sec-title text-center">Eight reasons clients <span class="grad">stay with us</span></h2>
+    <div class="diff-grid">
+      <div class="diff-card">
+        <div class="diff-icon">🔍</div>
+        <h4>Radical transparency</h4>
+        <p>You have live access to our code, project board, and budget tracker from day one. We never hide progress. We surface problems early because hiding them costs everyone more.</p>
+      </div>
+      <div class="diff-card">
+        <div class="diff-icon">⚡</div>
+        <h4>South Asian delivery excellence</h4>
+        <p>TCS and Infosys proved South Asian engineering teams can deliver world-class software. BinaryQuest applies the same discipline at mid-market scale — at 60–75% of US/EU cost.</p>
+      </div>
+      <div class="diff-card">
+        <div class="diff-icon">🏆</div>
+        <h4>You own everything</h4>
+        <p>100% IP ownership from day one. Code in your repository. Credentials in your vault. If we ever part ways, you run independently from that day. No hostage-taking, ever.</p>
+      </div>
+      <div class="diff-card">
+        <div class="diff-icon">🧩</div>
+        <h4>Model flexibility</h4>
+        <p>Most clients start as Fixed Price for a defined project, move to Dedicated Team as trust builds, then shift to Retainer after go-live. We make model transitions seamless.</p>
+      </div>
+      <div class="diff-card">
+        <div class="diff-icon">🤖</div>
+        <h4>AI-native delivery</h4>
+        <p>Every BinaryQuest developer uses AI coding tools internally. Your projects benefit from faster delivery, better code quality, and AI-first architecture thinking from day one.</p>
+      </div>
+      <div class="diff-card">
+        <div class="diff-icon">🌐</div>
+        <h4>South Asia market expertise</h4>
+        <p>We understand bKash, Nagad, local compliance, Bangla NLP, and the operational realities of building software for Bangladesh, Pakistan, Sri Lanka, and Indonesia.</p>
+      </div>
+      <div class="diff-card">
+        <div class="diff-icon">📊</div>
+        <h4>Outcome-focused, not hour-focused</h4>
+        <p>We track velocity, defect rates, and business KPIs — not just hours. Inspired by Salesforce's 91% autonomous resolution benchmark and SAP's supply chain AI outcomes, we measure what matters.</p>
+      </div>
+      <div class="diff-card">
+        <div class="diff-icon">🔒</div>
+        <h4>Enterprise security practices</h4>
+        <p>Mutual NDA day one. Individual team confidentiality agreements. Automated security scanning. SOC 2-aligned practices. Your data stays yours — always.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     CTA
+══════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="cta-box">
+      <div class="sec-eyebrow sec-eyebrow-dark">Ready to start?</div>
+      <h2>Tell us your situation. <span class="grad">We'll recommend the right model.</span></h2>
+      <p>No commitment required. A 30-minute conversation with our team is enough to identify whether Fixed Price, Dedicated Team, T&M, Retainer, or BOT gives you the best path to your outcome — and what that engagement would actually cost.</p>
+      <div class="cta-btns">
+        <a href="contact.html" class="btn-primary">Schedule a free 30-min consultation →</a>
+        <a href="buildMbpFast.html" class="btn-outline">Estimate your project cost</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     PARTNER CAROUSEL
+══════════════════════════════════ -->
+<section style="padding:60px 20px; background:#f8fafc; border-top:1px solid #e2e8f0;">
+  <div style="max-width:1200px; margin:0 auto;">
+    <div style="text-align:center; margin-bottom:32px;">
+      <span style="color:#059669; font-weight:700; font-size:.78rem; text-transform:uppercase; letter-spacing:.08em;">✦ Trusted Globally</span>
+      <h3 style="font-size:clamp(1.4rem,3vw,2rem); font-weight:800; margin-top:6px; color:#0a1c2f;">Powered by Industry Leaders</h3>
+    </div>
+    <div class="swiper partner-swiper" style="overflow:hidden;">
+      <div class="swiper-wrapper" style="align-items:center;">
+        <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=TechCorp" class="partner-logo" style="max-height:48px;width:auto;" alt="TechCorp"></div>
+        <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=CloudNet" class="partner-logo" style="max-height:48px;width:auto;" alt="CloudNet"></div>
+        <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=FinSolve" class="partner-logo" style="max-height:48px;width:auto;" alt="FinSolve"></div>
+        <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=HealthIQ" class="partner-logo" style="max-height:48px;width:auto;" alt="HealthIQ"></div>
+        <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=RetailHub" class="partner-logo" style="max-height:48px;width:auto;" alt="RetailHub"></div>
+        <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=LogiX" class="partner-logo" style="max-height:48px;width:auto;" alt="LogiX"></div>
+        <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=EdWave" class="partner-logo" style="max-height:48px;width:auto;" alt="EdWave"></div>
+        <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=InsureOne" class="partner-logo" style="max-height:48px;width:auto;" alt="InsureOne"></div>
+        <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=BuildSmart" class="partner-logo" style="max-height:48px;width:auto;" alt="BuildSmart"></div>
+        <div class="swiper-slide" style="display:flex;justify-content:center;"><img src="https://placehold.co/160x80/e2e8f0/2c3e50?text=MediaBoost" class="partner-logo" style="max-height:48px;width:auto;" alt="MediaBoost"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div><strong>BinaryQuest</strong><br/>Collaboration without complexity<br/>partner@binaryquest.com</div>
+    <div style="font-size:.82rem;">
+      <a href="index.html">Home</a> &nbsp;·&nbsp;
+      <a href="ai-ml-development.html">AI / ML</a> &nbsp;·&nbsp;
+      <a href="blog.html">Insights</a> &nbsp;·&nbsp;
+      <a href="contact.html">Contact</a>
+    </div>
+    <div>© 2026 BinaryQuest. All rights reserved.</div>
   </div>
 </footer>
 
-  <script>
-    (function() {
-      if (typeof Swiper === 'undefined') return;
+<script>
+  window.addEventListener('load', () => {
+    if (typeof Swiper !== 'undefined') {
       new Swiper('.partner-swiper', {
-        slidesPerView: 2,
-        spaceBetween: 24,
-        loop: true,
+        slidesPerView: 2, spaceBetween: 24, loop: true,
         autoplay: { delay: 0, disableOnInteraction: false, pauseOnMouseEnter: true },
         speed: 4000,
         breakpoints: {
@@ -479,7 +995,8 @@
         },
         allowTouchMove: true
       });
-    })();
-  </script>
+    }
+  });
+</script>
 </body>
 </html>
